@@ -12,16 +12,16 @@ export default function SolidGreenButton() {
     <TouchableOpacity
       style={{
         borderRadius: 2,
-        width: "83%",
-        height: "08%",
+        width: "87%",
+        height: "40%",
         backgroundColor: "#26AE60ed",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        borderTopStartRadius: 25,
-        borderBottomEndRadius: 25,
-        borderBottomLeftRadius: 25,
-        borderTopRightRadius: 25,
+        borderTopStartRadius: 24,
+        borderBottomEndRadius: 24,
+        borderBottomLeftRadius: 24,
+        borderTopRightRadius: 24,
       }}
     >
       <Text
@@ -30,7 +30,9 @@ export default function SolidGreenButton() {
           color: "white",
           fontWeight: "700",
         }}
-      ></Text>
+      >
+        Sign up with email
+      </Text>
     </TouchableOpacity>
   );
 }

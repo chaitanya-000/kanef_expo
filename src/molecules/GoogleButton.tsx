@@ -7,7 +7,7 @@ export default function GoogleButton() {
       style={{
         borderRadius: 2,
         width: "42%",
-        height: "41%",
+        height: "37%",
         backgroundColor: "#EE3A43",
         display: "flex",
         flexDirection: "row",

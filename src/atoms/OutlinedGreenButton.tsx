@@ -5,19 +5,18 @@ export default function OutlinedGreenButton() {
   return (
     <TouchableOpacity
       style={{
-        borderRadius: 2,
-        width: "83%",
-        height: "08%",
-        borderWidth: 3,
+        width: "87%",
+        height: "40%",
+        borderWidth: 2.2,
         borderColor: "#26AE60ed",
         // backgroundColor: "#26AE60ed",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        borderTopStartRadius: 25,
-        borderBottomEndRadius: 25,
-        borderBottomLeftRadius: 25,
-        borderTopRightRadius: 25,
+        borderTopStartRadius: 27,
+        borderBottomEndRadius: 27,
+        borderBottomLeftRadius: 27,
+        borderTopRightRadius: 27,
       }}
     >
       <Text

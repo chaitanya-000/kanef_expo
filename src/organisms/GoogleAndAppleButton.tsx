@@ -1,9 +1,8 @@
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
-import React from "react";
 import GoogleButton from "../molecules/GoogleButton";
 import AppleButton from "../molecules/AppleButton";
 
-export default function SignUpAndLoginButton() {
+export default function GoogleAndAppleButton() {
   return (
     <View style={styles.container}>
       <GoogleButton />

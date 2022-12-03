@@ -7,7 +7,7 @@ export default function AppleButton() {
       style={{
         borderRadius: 2,
         width: "42%",
-        height: "41%",
+        height: "37%",
         backgroundColor: "#121F27",
         display: "flex",
         flexDirection: "row",
