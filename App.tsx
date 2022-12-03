@@ -13,16 +13,8 @@ export default function App() {
   const deviceHeight = Dimensions.get("window").height;
   const deviceWidth = Dimensions.get("window").width;
   return (
-    <SafeAreaView
-      style={{
-        width: deviceWidth,
-        height: deviceHeight,
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <LineDivider />
-    </SafeAreaView>
+    <View>
+      <LoginPage />
+    </View>
   );
 }

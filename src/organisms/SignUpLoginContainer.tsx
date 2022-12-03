@@ -13,12 +13,14 @@ export default function SignUpLoginContainer() {
 }
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: "blue",
-    height: "21.5%",
+    width: "100%",
+    height: "17.5%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
+    marginTop: "2%",
   },
 });

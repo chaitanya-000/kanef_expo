@@ -13,22 +13,22 @@ export default function SolidGreenButton() {
       style={{
         borderRadius: 2,
         width: "87%",
-        height: "40%",
+        height: "39%",
         backgroundColor: "#26AE60ed",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        borderTopStartRadius: 24,
-        borderBottomEndRadius: 24,
-        borderBottomLeftRadius: 24,
-        borderTopRightRadius: 24,
+        borderTopStartRadius: 15,
+        borderBottomEndRadius: 15,
+        borderBottomLeftRadius: 15,
+        borderTopRightRadius: 15,
       }}
     >
       <Text
         style={{
           fontSize: 19,
           color: "white",
-          fontWeight: "700",
+          fontWeight: "900",
         }}
       >
         Sign up with email

@@ -1,5 +1,15 @@
-import { View, Text, Dimensions, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import React from "react";
+import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
+import LineDivider from "../organisms/LineDivider";
+import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
 
 export default function LoginPage() {
   return (
@@ -8,18 +18,22 @@ export default function LoginPage() {
         source={require("../../assets/images/myLoginImage.png")}
         style={styles.image}
       />
+      <SignUpLoginContainer />
+      <LineDivider />
+      <GoogleAndAppleButton />
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 2,
     borderColor: "red",
     height: "100%",
     width: "100%",
+    display: "flex",
+    alignItems: "center",
   },
   image: {
     width: "100%",
-    height: "55%",
+    height: "54%",
   },
 });

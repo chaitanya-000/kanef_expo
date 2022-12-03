@@ -13,10 +13,10 @@ export default function GoogleButton() {
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        borderTopStartRadius: 19,
-        borderBottomEndRadius: 19,
-        borderBottomLeftRadius: 19,
-        borderTopRightRadius: 19,
+        borderTopStartRadius: 15,
+        borderBottomEndRadius: 15,
+        borderBottomLeftRadius: 15,
+        borderTopRightRadius: 15,
       }}
     >
       <Image source={require("../../assets/images/GoogleDesign.png")} />

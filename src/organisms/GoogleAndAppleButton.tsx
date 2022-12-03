@@ -12,12 +12,14 @@ export default function GoogleAndAppleButton() {
 }
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: "blue",
-    height: "19.5%",
+    height: "17%",
+    width: "90%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
+    justifyContent: "space-around",
+    alignItems: "flex-start",
+    marginTop: "2%",
   },
 });

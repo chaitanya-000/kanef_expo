@@ -12,7 +12,7 @@ export default function LineDivider() {
 }
 const styles = StyleSheet.create({
   container: {
-    width: "95%",
+    width: "90%",
     height: "6%",
     display: "flex",
     flexDirection: "row",
@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   line: {
-    width: "30%",
+    width: "25%",
     height: "1%",
-    backgroundColor: "gray",
-    borderWidth: 0.5,
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
   },
   text: {
     color: "gray",
