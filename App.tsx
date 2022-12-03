@@ -7,13 +7,22 @@ import SolidGreenButton from "./src/atoms/SolidGreenButton";
 import LoginPage from "./src/Pages/LoginPage";
 import GoogleAndAppleButton from "./src/organisms/GoogleAndAppleButton";
 import SignUpLoginContainer from "./src/organisms/SignUpLoginContainer";
+import LineDivider from "./src/organisms/LineDivider";
 
 export default function App() {
   const deviceHeight = Dimensions.get("window").height;
   const deviceWidth = Dimensions.get("window").width;
   return (
-    <SafeAreaView style={{ width: deviceWidth, height: deviceHeight }}>
-      <SignUpLoginContainer />
+    <SafeAreaView
+      style={{
+        width: deviceWidth,
+        height: deviceHeight,
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <LineDivider />
     </SafeAreaView>
   );
 }
