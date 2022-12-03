@@ -1,25 +1,25 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 
-export default function GoogleButton() {
+export default function AppleButton() {
   return (
     <TouchableOpacity
       style={{
         borderRadius: 2,
-        width: "46%",
-        height: "07%",
-        backgroundColor: "#EE3A43",
+        width: "42%",
+        height: "41%",
+        backgroundColor: "#121F27",
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        borderTopStartRadius: 23,
-        borderBottomEndRadius: 23,
-        borderBottomLeftRadius: 23,
-        borderTopRightRadius: 23,
+        borderTopStartRadius: 19,
+        borderBottomEndRadius: 19,
+        borderBottomLeftRadius: 19,
+        borderTopRightRadius: 19,
       }}
     >
-      <Image source={require("../../../assets/images/GoogleDesign.png")} />
+      <Image source={require("../../assets/images/AppleLogo.png")} />
 
       <Text
         style={{
@@ -29,7 +29,7 @@ export default function GoogleButton() {
           marginLeft: "6%",
         }}
       >
-        Google
+        Apple
       </Text>
     </TouchableOpacity>
   );

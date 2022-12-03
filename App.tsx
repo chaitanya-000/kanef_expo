@@ -1,22 +1,18 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import GoogleButton from "./src/atoms/molecules/GoogleButton";
-import OutlinedGreenButton from "./src/atoms/molecules/OutlinedGreenButton";
-import SolidGreenButton from "./src/atoms/molecules/SolidGreenButton";
+import { Dimensions, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import AppleButton from "./src/molecules/AppleButton";
+import GoogleButton from "./src/molecules/GoogleButton";
+import OutlinedGreenButton from "./src/molecules/OutlinedGreenButton";
+import SolidGreenButton from "./src/molecules/SolidGreenButton";
+import SignUpAndLoginButton from "./src/organisms/SignUpAndLoginButton";
+import LoginPage from "./src/Pages/LoginPage";
 
 export default function App() {
+  const deviceHeight = Dimensions.get("window").height;
+  const deviceWidth = Dimensions.get("window").width;
   return (
-    <View style={styles.container}>
-      <GoogleButton />
-    </View>
+    <SafeAreaView style={{ width: deviceWidth, height: deviceHeight }}>
+      <SignUpAndLoginButton />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-});
