@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import SolidGreenButton from "./src/atoms/SolidGreenButton";
+import GoogleButton from "./src/atoms/molecules/GoogleButton";
+import OutlinedGreenButton from "./src/atoms/molecules/OutlinedGreenButton";
+import SolidGreenButton from "./src/atoms/molecules/SolidGreenButton";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <SolidGreenButton />
+      <GoogleButton />
     </View>
   );
 }
@@ -15,6 +17,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
   },
 });

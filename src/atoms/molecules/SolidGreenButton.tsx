@@ -6,7 +6,6 @@ import {
   Button,
 } from "react-native";
 import React from "react";
-import { TextInsideButtons, Typography } from "./Typography";
 
 export default function SolidGreenButton() {
   return (
@@ -25,7 +24,13 @@ export default function SolidGreenButton() {
         borderTopRightRadius: 25,
       }}
     >
-      {/* <TextInsideButtons /> */}
+      <Text
+        style={{
+          fontSize: 19,
+          color: "white",
+          fontWeight: "700",
+        }}
+      ></Text>
     </TouchableOpacity>
   );
 }
