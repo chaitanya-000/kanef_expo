@@ -28,7 +28,7 @@ export default function SolidGreenButton() {
         style={{
           fontSize: 19,
           color: "white",
-          fontWeight: "900",
+          fontWeight: "600",
         }}
       >
         Sign up with email

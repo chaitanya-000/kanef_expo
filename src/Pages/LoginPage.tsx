@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   SafeAreaView,
+  ImageBackground,
 } from "react-native";
 import React from "react";
 import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
@@ -34,6 +35,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: "54%",
+    height: "56%",
   },
 });
