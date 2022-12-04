@@ -12,19 +12,20 @@ import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
 import LineDivider from "../organisms/LineDivider";
 import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
 
-export default function LoginPage() {
+const LoginPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
         source={require("../../assets/images/myLoginImage.png")}
         style={styles.image}
       />
-      <SignUpLoginContainer />
+      <SignUpLoginContainer navigation={navigation} />
       <LineDivider />
       <GoogleAndAppleButton />
     </View>
   );
-}
+};
+export default LoginPage;
 const styles = StyleSheet.create({
   container: {
     borderColor: "red",

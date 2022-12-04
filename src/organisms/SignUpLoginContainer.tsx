@@ -3,10 +3,10 @@ import React from "react";
 import SolidGreenButton from "../atoms/SolidGreenButton";
 import OutlinedGreenButton from "../atoms/OutlinedGreenButton";
 
-export default function SignUpLoginContainer() {
+export default function SignUpLoginContainer({ navigation }: any) {
   return (
     <View style={styles.container}>
-      <SolidGreenButton />
+      <SolidGreenButton navigation={navigation} />
       <OutlinedGreenButton />
     </View>
   );

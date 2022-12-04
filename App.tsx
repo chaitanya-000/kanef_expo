@@ -1,20 +1,29 @@
 import { StatusBar } from "expo-status-bar";
 import { Dimensions, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import AppleButton from "./src/molecules/AppleButton";
-import GoogleButton from "./src/molecules/GoogleButton";
-import OutlinedGreenButton from "./src/atoms/OutlinedGreenButton";
-import SolidGreenButton from "./src/atoms/SolidGreenButton";
+
 import LoginPage from "./src/Pages/LoginPage";
-import GoogleAndAppleButton from "./src/organisms/GoogleAndAppleButton";
-import SignUpLoginContainer from "./src/organisms/SignUpLoginContainer";
-import LineDivider from "./src/organisms/LineDivider";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Register from "./src/Pages/Register";
 
 export default function App() {
   const deviceHeight = Dimensions.get("window").height;
   const deviceWidth = Dimensions.get("window").width;
+
+  const Stack = createNativeStackNavigator();
   return (
-    <View>
-      <LoginPage />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="LoginPage">
+        <Stack.Screen name="LoginPage" component={LoginPage} />
+        <Stack.Screen name="RegisterPage" component={Register} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
+}
+
+{
+  /* <View>
+  <LoginPage />
+</View> */
 }

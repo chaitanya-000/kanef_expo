@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 
-export default function SolidGreenButton() {
+export default function SolidGreenButton({ navigation }) {
   return (
     <TouchableOpacity
       style={{
@@ -23,6 +23,7 @@ export default function SolidGreenButton() {
         borderBottomLeftRadius: 15,
         borderTopRightRadius: 15,
       }}
+      onPress={() => navigation.navigate("RegisterPage")}
     >
       <Text
         style={{
