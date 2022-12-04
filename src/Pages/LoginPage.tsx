@@ -12,7 +12,7 @@ import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
 import LineDivider from "../organisms/LineDivider";
 import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
 
-const LoginPage = ({ navigation }) => {
+const LoginPage = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <Image

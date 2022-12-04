@@ -8,9 +8,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Register from "./src/Pages/Register";
 
 export default function App() {
-  const deviceHeight = Dimensions.get("window").height;
-  const deviceWidth = Dimensions.get("window").width;
-
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>

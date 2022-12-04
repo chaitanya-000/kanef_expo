@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 
-export default function SolidGreenButton({ navigation }) {
+export default function SolidGreenButton({ navigation }: any) {
   return (
     <TouchableOpacity
       style={{
