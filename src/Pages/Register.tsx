@@ -19,6 +19,7 @@ import {
   FullWidthTextInputBox,
 } from "../molecules/FullWidthInputContainer";
 import EmailAddress from "../organisms/EmailAddress";
+import Password from "../organisms/Password";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("window").height;
@@ -29,6 +30,7 @@ const Register = () => {
         <H3Header>Register</H3Header>
         <FirstNameLastNameContainer />
         <EmailAddress />
+        <Password />
       </View>
     </ScrollView>
   );

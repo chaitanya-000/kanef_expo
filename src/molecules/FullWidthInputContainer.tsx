@@ -1,8 +1,8 @@
 import styled from "styled-components/native";
 
 export const FullWidthContainer = styled.View`
-margin-top : 7%
-  height: 11.4%;
+margin-top : 5%
+  height: 10%;
   width: 100%;
   display: flex;
   /* border: 2px solid red; */
@@ -14,7 +14,7 @@ export const FullWidthTextInputBox = styled.TextInput`
   width: 100%;
   height: 70%;
   background-color: #f6f8fa;
-  border-radius: 16px;
+  border-radius: 12px;
   font-size: 17px;
   padding-left: 5%
   font-color: black;

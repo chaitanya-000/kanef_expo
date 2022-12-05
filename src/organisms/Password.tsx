@@ -5,15 +5,13 @@ import {
 } from "../molecules/FullWidthInputContainer";
 import { Label } from "../molecules/TextInputWithLabel";
 
-const EmailAddress = () => {
+const Password = () => {
   return (
     <FullWidthContainer>
-      <Label>EMAIL ADDRESS</Label>
-      <FullWidthTextInputBox textContentType="emailAddress">
-        amanda@mail.com
-      </FullWidthTextInputBox>
+      <Label>PASSWORD</Label>
+      <FullWidthTextInputBox secureTextEntry>password</FullWidthTextInputBox>
     </FullWidthContainer>
   );
 };
 
-export default EmailAddress;
+export default Password;
