@@ -18,6 +18,7 @@ import {
   FullWidthContainer,
   FullWidthTextInputBox,
 } from "../molecules/FullWidthInputContainer";
+import EmailAddress from "../organisms/EmailAddress";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("window").height;
@@ -27,10 +28,7 @@ const Register = () => {
       <View style={styles.container}>
         <H3Header>Register</H3Header>
         <FirstNameLastNameContainer />
-        <FullWidthContainer>
-          <Label>EMAIL ADDRESS</Label>
-          <FullWidthTextInputBox />
-        </FullWidthContainer>
+        <EmailAddress />
       </View>
     </ScrollView>
   );
