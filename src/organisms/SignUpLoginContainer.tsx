@@ -7,7 +7,7 @@ export default function SignUpLoginContainer({ navigation }: any) {
   return (
     <View style={styles.container}>
       <SolidGreenButton navigation={navigation} />
-      <OutlinedGreenButton />
+      <OutlinedGreenButton navigation={navigation} />
     </View>
   );
 }

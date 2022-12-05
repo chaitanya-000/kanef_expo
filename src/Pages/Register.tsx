@@ -27,12 +27,13 @@ import City from "../organisms/City";
 import SolidGreenButton from "../atoms/SolidGreenButton";
 import Country from "../organisms/Country";
 import EirCode from "../organisms/EirCode";
+import SelectGender from "../atoms/SelectGender";
 
 const Register = () => {
-  const deviceHeight = Dimensions.get("window").height;
+  const deviceHeight = Dimensions.get("screen").height;
   const deviceWidth = Dimensions.get("window").width;
   return (
-    <ScrollView style={{ display: "flex", flex: 1 }}>
+    <ScrollView style={{ display: "flex", flex: 1, height: deviceHeight }}>
       <View style={styles.container}>
         <H3Header>Register</H3Header>
         <FirstNameLastNameContainer />
@@ -44,6 +45,7 @@ const Register = () => {
         <City />
         <Country />
         <EirCode />
+        {/* <SelectGender /> */}
       </View>
     </ScrollView>
   );

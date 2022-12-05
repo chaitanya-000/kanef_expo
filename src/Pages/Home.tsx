@@ -12,7 +12,7 @@ import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
 import LineDivider from "../organisms/LineDivider";
 import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
 
-const LoginPage = ({ navigation }: any) => {
+const Home = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <Image
@@ -25,7 +25,7 @@ const LoginPage = ({ navigation }: any) => {
     </View>
   );
 };
-export default LoginPage;
+export default Home;
 const styles = StyleSheet.create({
   container: {
     borderColor: "red",

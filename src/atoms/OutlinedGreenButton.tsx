@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 
-export default function OutlinedGreenButton() {
+export default function OutlinedGreenButton({ navigation }: any) {
   return (
     <TouchableOpacity
       style={{
@@ -18,6 +18,7 @@ export default function OutlinedGreenButton() {
         borderBottomLeftRadius: 15,
         borderTopRightRadius: 15,
       }}
+      onPress={() => navigation.navigate("Login")}
     >
       <Text
         style={{
