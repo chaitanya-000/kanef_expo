@@ -1,7 +1,7 @@
 import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 
-export const Container = styled.View`
+export const SplitContainer = styled.View`
   height: 10%;
   width: 100%;
   display: flex;
@@ -9,5 +9,5 @@ export const Container = styled.View`
   justify-content: space-between;
   align-items: center;
   margin-top: 7%;
-  /* border: 2px solid red; */
+  /* border: 2px dotted red; */
 `;

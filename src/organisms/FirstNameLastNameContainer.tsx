@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { Container } from "../atoms/InputContainer";
+import { SplitContainer } from "../atoms/InputContainer";
 import {
   InputContainerWithLabel,
   Label,
@@ -9,7 +9,7 @@ import {
 
 const FirstNameLastNameContainer = () => {
   return (
-    <Container>
+    <SplitContainer>
       <InputContainerWithLabel>
         <Label>FIRST NAME</Label>
         <TextInputBox>Amanda</TextInputBox>
@@ -18,7 +18,7 @@ const FirstNameLastNameContainer = () => {
         <Label>LAST NAME</Label>
         <TextInputBox>Parker</TextInputBox>
       </InputContainerWithLabel>
-    </Container>
+    </SplitContainer>
   );
 };
 
