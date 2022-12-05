@@ -14,6 +14,10 @@ import {
 } from "../molecules/TextInputWithLabel";
 import FirstNameLastNameContainer from "../organisms/FirstNameLastNameContainer";
 import { H3Header } from "../atoms/H3Tag";
+import {
+  FullWidthContainer,
+  FullWidthTextInputBox,
+} from "../molecules/FullWidthInputContainer";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("window").height;
@@ -23,6 +27,10 @@ const Register = () => {
       <View style={styles.container}>
         <H3Header>Register</H3Header>
         <FirstNameLastNameContainer />
+        <FullWidthContainer>
+          <Label>EMAIL ADDRESS</Label>
+          <FullWidthTextInputBox />
+        </FullWidthContainer>
       </View>
     </ScrollView>
   );

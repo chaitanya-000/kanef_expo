@@ -7,7 +7,7 @@ export const InputContainerWithLabel = styled.View`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* border: 2px dotted red; */
+  /* border: 2px dotted green; */
 `;
 export const TextInputBox = styled.TextInput`
   width: 100%;
