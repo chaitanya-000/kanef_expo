@@ -12,6 +12,9 @@ import {
   Label,
   TextInputBox,
 } from "../molecules/TextInputWithLabel";
+import FirstNameLastNameContainer from "../organisms/FirstNameLastNameContainer";
+import { Container } from "../atoms/InputContainer";
+import { H3Header } from "../atoms/H3Tag";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("window").height;
@@ -19,10 +22,10 @@ const Register = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <InputContainerWithLabel>
-          <Label>FIRST NAME</Label>
-          <TextInputBox placeholder="Your name"></TextInputBox>
-        </InputContainerWithLabel>
+        <View style={styles.H3Container}>
+          <H3Header>Register</H3Header>
+        </View>
+        <FirstNameLastNameContainer />
       </View>
     </ScrollView>
   );
@@ -35,9 +38,20 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "orange",
     backgroundColor: "#FFFFFF",
+    paddingVertical: "10%",
+    paddingHorizontal: "5%",
+    borderRadius: 40,
     display: "flex",
+    // justifyContent: "space-evenly",
     alignItems: "center",
-    justifyContent: "center",
+  },
+  H3Container: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    // borderWidth: 1,
+    width: "100%",
   },
 });
 export default Register;

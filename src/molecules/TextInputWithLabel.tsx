@@ -2,18 +2,19 @@ import styled from "styled-components/native";
 import { View, TextInput } from "react-native";
 
 export const InputContainerWithLabel = styled.View`
-  width: 50%;
-  height: 10%;
+  width: 48%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* border: 2px dotted red; */
 `;
 export const TextInputBox = styled.TextInput`
   width: 100%;
   height: 70%;
   background-color: #f6f8fa;
   border-radius: 16px;
-  font-size: 18px;
+  font-size: 17px;
   padding: 10%;
   font-color: #828282;
   border: 1px solid #dee8ef;
