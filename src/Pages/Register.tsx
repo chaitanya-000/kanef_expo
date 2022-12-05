@@ -1,7 +1,17 @@
-import { View, Text, Dimensions, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+} from "react-native";
 import React from "react";
-import LoginImageWithLogo from "../molecules/LoginImageWithLogo";
-import { H3Header } from "../molecules/InputWithLabel";
+import {
+  InputContainerWithLabel,
+  Label,
+  TextInputBox,
+} from "../molecules/TextInputWithLabel";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("window").height;
@@ -9,7 +19,10 @@ const Register = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <H3Header>Register</H3Header>
+        <InputContainerWithLabel>
+          <Label>FIRST NAME</Label>
+          <TextInputBox placeholder="Your name"></TextInputBox>
+        </InputContainerWithLabel>
       </View>
     </ScrollView>
   );
@@ -21,7 +34,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height,
     borderWidth: 2,
     borderColor: "orange",
-    backgroundColor: "#26AE60",
+    backgroundColor: "#FFFFFF",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
