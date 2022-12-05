@@ -20,6 +20,9 @@ import {
 } from "../molecules/FullWidthInputContainer";
 import EmailAddress from "../organisms/EmailAddress";
 import Password from "../organisms/Password";
+import DateOfBirth from "../organisms/DateOfBirth";
+import Gender from "../organisms/Gender";
+import Address from "../organisms/Address";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("window").height;
@@ -31,6 +34,9 @@ const Register = () => {
         <FirstNameLastNameContainer />
         <EmailAddress />
         <Password />
+        <DateOfBirth />
+        <Gender />
+        <Address />
       </View>
     </ScrollView>
   );
