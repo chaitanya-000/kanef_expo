@@ -24,12 +24,15 @@ import DateOfBirth from "../organisms/DateOfBirth";
 import Gender from "../organisms/Gender";
 import Address from "../organisms/Address";
 import City from "../organisms/City";
+import SolidGreenButton from "../atoms/SolidGreenButton";
+import Country from "../organisms/Country";
+import EirCode from "../organisms/EirCode";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("window").height;
   const deviceWidth = Dimensions.get("window").width;
   return (
-    <ScrollView>
+    <ScrollView style={{ display: "flex", flex: 1 }}>
       <View style={styles.container}>
         <H3Header>Register</H3Header>
         <FirstNameLastNameContainer />
@@ -39,6 +42,8 @@ const Register = () => {
         <Gender />
         <Address />
         <City />
+        <Country />
+        <EirCode />
       </View>
     </ScrollView>
   );
@@ -48,15 +53,17 @@ const styles = StyleSheet.create({
   container: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
-    borderWidth: 2,
+    borderWidth: 1,
     // borderColor: "orange",
     backgroundColor: "#FFFFFF",
-    paddingVertical: "10%",
+    paddingVertical: "12%",
     paddingHorizontal: "5%",
     borderRadius: 40,
     display: "flex",
     // justifyContent: "space-evenly",
     alignItems: "center",
+
+    // flex: 2,
   },
 });
 export default Register;

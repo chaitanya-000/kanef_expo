@@ -5,15 +5,15 @@ import {
 } from "../molecules/FullWidthInputContainer";
 import { Label } from "../molecules/TextInputWithLabel";
 
-const City = () => {
+const EirCode = () => {
   return (
     <FullWidthContainer>
-      <Label>CITY</Label>
-      <FullWidthTextInputBox textContentType="addressCity">
-        Maica
+      <Label>EIRCODE</Label>
+      <FullWidthTextInputBox textContentType="postalCode">
+        4324234
       </FullWidthTextInputBox>
     </FullWidthContainer>
   );
 };
 
-export default City;
+export default EirCode;
