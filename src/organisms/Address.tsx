@@ -10,13 +10,15 @@ const Address = () => {
     <>
       <FullWidthContainer>
         <Label>ADDRESS LINE 1</Label>
-        <FullWidthTextInputBox>
+        <FullWidthTextInputBox textContentType="streetAddressLine1">
           8502 Preston Rd. Inglewood,
         </FullWidthTextInputBox>
       </FullWidthContainer>
       <FullWidthContainer>
         <Label>ADDRESS LINE 2</Label>
-        <FullWidthTextInputBox>ADD SELECT (DROPDOWN)</FullWidthTextInputBox>
+        <FullWidthTextInputBox textContentType="streetAddressLine2">
+          Maine 98380
+        </FullWidthTextInputBox>
       </FullWidthContainer>
     </>
   );

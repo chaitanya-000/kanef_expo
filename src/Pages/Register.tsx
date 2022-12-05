@@ -23,6 +23,7 @@ import Password from "../organisms/Password";
 import DateOfBirth from "../organisms/DateOfBirth";
 import Gender from "../organisms/Gender";
 import Address from "../organisms/Address";
+import City from "../organisms/City";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("window").height;
@@ -37,6 +38,7 @@ const Register = () => {
         <DateOfBirth />
         <Gender />
         <Address />
+        <City />
       </View>
     </ScrollView>
   );
