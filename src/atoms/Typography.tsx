@@ -54,6 +54,6 @@ export const Body5 = styled.Text`
   font-weight: 500;
 `;
 export const Body6 = styled.Text`
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 400;
 `;
