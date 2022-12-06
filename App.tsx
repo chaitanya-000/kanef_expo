@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Register from "./src/Pages/Register";
 import Home from "./src/Pages/Home";
 import Login from "./src/Pages/Login";
+import FooterToolBar from "./src/organisms/FootertoolBar";
 import Settings from "./src/Pages/Settings";
 
 export default function App() {
