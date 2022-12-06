@@ -6,34 +6,20 @@ import {
   Button,
 } from "react-native";
 import React from "react";
+import { GreenButton } from "./GreenButton";
+import { BoldWhiteText } from "./Typography";
 
 export default function SolidGreenButton({ navigation }: any) {
   return (
-    <TouchableOpacity
-      style={{
-        borderRadius: 2,
-        width: "87%",
-        height: "39%",
-        backgroundColor: "#26AE60ed",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        borderTopStartRadius: 15,
-        borderBottomEndRadius: 15,
-        borderBottomLeftRadius: 15,
-        borderTopRightRadius: 15,
-      }}
+    <GreenButton
+      height={"40%"}
+      width={"86%"}
+      marginTop={"0"}
       onPress={() => navigation.navigate("RegisterPage")}
     >
-      <Text
-        style={{
-          fontSize: 19,
-          color: "white",
-          fontWeight: "600",
-        }}
-      >
-        Sign up with email
-      </Text>
-    </TouchableOpacity>
+      <BoldWhiteText>Sign up</BoldWhiteText>
+    </GreenButton>
   );
 }
+
+// onPress={() => navigation.navigate("RegisterPage")}

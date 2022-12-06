@@ -13,7 +13,7 @@ import {
   TextInputBox,
 } from "../molecules/TextInputWithLabel";
 import FirstNameLastNameContainer from "../organisms/FirstNameLastNameContainer";
-import { H3Header } from "../atoms/H3Tag";
+import { H3Tag } from "../atoms/Typography";
 import {
   FullWidthContainer,
   FullWidthTextInputBox,
@@ -33,18 +33,24 @@ const Register = () => {
   const deviceHeight = Dimensions.get("screen").height;
   const deviceWidth = Dimensions.get("window").width;
   return (
-    <ScrollView style={{ display: "flex", flex: 1, height: deviceHeight }}>
+    <ScrollView
+      style={{
+        display: "flex",
+        flex: 1,
+        height: deviceHeight,
+      }}
+    >
       <View style={styles.container}>
-        <H3Header>Register</H3Header>
+        <H3Tag>Register</H3Tag>
         <FirstNameLastNameContainer />
         <EmailAddress />
         <Password />
         <DateOfBirth />
         <Gender />
         <Address />
+        <EirCode />
         <City />
         <Country />
-        <EirCode />
         {/* <SelectGender /> */}
       </View>
     </ScrollView>
@@ -58,6 +64,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     // borderColor: "orange",
     backgroundColor: "#FFFFFF",
+    // backgroundColor: "red",
     paddingVertical: "12%",
     paddingHorizontal: "5%",
     borderRadius: 40,

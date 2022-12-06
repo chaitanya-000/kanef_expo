@@ -11,6 +11,7 @@ import React from "react";
 import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
 import LineDivider from "../organisms/LineDivider";
 import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
+import Gender from "../organisms/Gender";
 
 const Home = ({ navigation }: any) => {
   return (
