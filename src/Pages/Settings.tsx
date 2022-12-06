@@ -7,6 +7,7 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
+import SettingsOptions from "../molecules/SettingsOptions";
 
 export default function Settings() {
   return (
@@ -18,7 +19,7 @@ export default function Settings() {
         height: responsiveScreenHeight(100),
       }}
     >
-      <HorizontalDividerLine />
+      <SettingsOptions />
     </View>
   );
 }
