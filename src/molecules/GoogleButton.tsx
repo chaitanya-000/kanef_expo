@@ -1,5 +1,13 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
+import {
+  Body1,
+  Body2,
+  Body3,
+  Body6,
+  Heading4,
+  Heading6,
+} from "../atoms/Typography";
 
 export default function GoogleButton() {
   return (
@@ -20,17 +28,7 @@ export default function GoogleButton() {
       }}
     >
       <Image source={require("../../assets/images/GoogleDesign.png")} />
-
-      <Text
-        style={{
-          fontSize: 19,
-          color: "white",
-          fontWeight: "600",
-          marginLeft: "6%",
-        }}
-      >
-        Google
-      </Text>
+      <Body1 style={{ color: "white", marginLeft: "6%" }}>Google</Body1>
     </TouchableOpacity>
   );
 }

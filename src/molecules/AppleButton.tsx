@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
+import { Body1 } from "../atoms/Typography";
 
 export default function AppleButton() {
   return (
@@ -21,16 +22,7 @@ export default function AppleButton() {
     >
       <Image source={require("../../assets/images/AppleLogo.png")} />
 
-      <Text
-        style={{
-          fontSize: 19,
-          color: "white",
-          fontWeight: "600",
-          marginLeft: "6%",
-        }}
-      >
-        Apple
-      </Text>
+      <Body1 style={{ color: "white", marginLeft: "6%" }}>Apple</Body1>
     </TouchableOpacity>
   );
 }

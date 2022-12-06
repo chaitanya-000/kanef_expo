@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
+import { Body1 } from "./Typography";
 
 export default function OutlinedGreenButton({ navigation }: any) {
   return (
@@ -20,15 +21,7 @@ export default function OutlinedGreenButton({ navigation }: any) {
       }}
       onPress={() => navigation.navigate("Login")}
     >
-      <Text
-        style={{
-          fontSize: 19,
-          color: "green",
-          fontWeight: "700",
-        }}
-      >
-        Login
-      </Text>
+      <Body1 style={{ color: "#26AE60" }}>Login</Body1>
     </TouchableOpacity>
   );
 }

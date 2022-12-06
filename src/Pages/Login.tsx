@@ -1,7 +1,6 @@
 import React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
-import { BoldWhiteText, H3Tag } from "../atoms/Typography";
-import SolidGreenButton from "../atoms/SolidGreenButton";
+import { Body1, Heading3, Heading5 } from "../atoms/Typography";
 import EmailAddress from "../organisms/EmailAddress";
 import Password from "../organisms/Password";
 import { useNavigation } from "@react-navigation/native";
@@ -10,11 +9,11 @@ import { GreenButton } from "../atoms/GreenButton";
 const Login = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
-      <H3Tag>Login</H3Tag>
+      <Heading5 style={{ alignSelf: "flex-start" }}>Login</Heading5>
       <EmailAddress />
       <Password />
       <GreenButton height={"8%"} marginTop={"7%"} width={"100%"}>
-        <BoldWhiteText>Login</BoldWhiteText>
+        <Body1>Login</Body1>
       </GreenButton>
     </View>
   );

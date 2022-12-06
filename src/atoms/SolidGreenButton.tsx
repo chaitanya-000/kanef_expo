@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import { GreenButton } from "./GreenButton";
-import { BoldWhiteText } from "./Typography";
+import { Body1, BoldWhiteText } from "./Typography";
 
 export default function SolidGreenButton({ navigation }: any) {
   return (
@@ -17,7 +17,7 @@ export default function SolidGreenButton({ navigation }: any) {
       marginTop={"0"}
       onPress={() => navigation.navigate("RegisterPage")}
     >
-      <BoldWhiteText>Sign up</BoldWhiteText>
+      <Body1 style={{ color: "white" }}>Sign up with email</Body1>
     </GreenButton>
   );
 }

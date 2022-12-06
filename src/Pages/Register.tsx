@@ -13,7 +13,13 @@ import {
   TextInputBox,
 } from "../molecules/TextInputWithLabel";
 import FirstNameLastNameContainer from "../organisms/FirstNameLastNameContainer";
-import { H3Tag } from "../atoms/Typography";
+import {
+  H3Tag,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+} from "../atoms/Typography";
 import {
   FullWidthContainer,
   FullWidthTextInputBox,
@@ -41,7 +47,7 @@ const Register = () => {
       }}
     >
       <View style={styles.container}>
-        <H3Tag>Register</H3Tag>
+        <Heading5 style={{ alignSelf: "flex-start" }}>Register</Heading5>
         <FirstNameLastNameContainer />
         <EmailAddress />
         <Password />
