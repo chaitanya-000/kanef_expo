@@ -13,13 +13,7 @@ import {
   TextInputBox,
 } from "../molecules/TextInputWithLabel";
 import FirstNameLastNameContainer from "../organisms/FirstNameLastNameContainer";
-import {
-  H3Tag,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-} from "../atoms/Typography";
+import { Heading2, Heading3, Heading4, Heading5 } from "../atoms/Typography";
 import {
   FullWidthContainer,
   FullWidthTextInputBox,

@@ -10,17 +10,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="LoginPage">
-        {<Stack.Screen name="Home" component={Home} />}
-        <Stack.Screen name="RegisterPage" component={Register} />
-        <Stack.Screen name="Login" component={Login} />
+        {/* {<Stack.Screen name="Home" component={Home} />} */}
+        {/* <Stack.Screen name="RegisterPage" component={Register} /> */}
+        {/* <Stack.Screen name="Login" component={Login} /> */}
         <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
-
-{
-  /* <View>
-  <LoginPage />
-</View> */
 }

@@ -13,7 +13,7 @@ const Login = ({ navigation }: any) => {
       <EmailAddress />
       <Password />
       <GreenButton height={"8%"} marginTop={"7%"} width={"100%"}>
-        <Body1>Login</Body1>
+        <Body1 style={{ color: "white" }}>Login</Body1>
       </GreenButton>
     </View>
   );
