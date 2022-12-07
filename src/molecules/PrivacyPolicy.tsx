@@ -6,16 +6,29 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
-import { Entypo, Ionicons } from "@expo/vector-icons";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
+import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function SettingsOptions() {
+export default function PrivacyPolicy() {
   return (
-    <View style={styles.container}>
-      <View style={styles.IconAndName}>
-        <Ionicons name="settings-outline" size={26} />
-        <Body2 style={{ fontWeight: "00" }}>Account Settings</Body2>
-      </View>
-      <Entypo name="chevron-right" size={30} color="gray" />
+    <View
+      style={{
+        // borderWidth: 0.2,
+        height: responsiveScreenHeight(7),
+        width: responsiveScreenWidth(87),
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <TouchableOpacity style={styles.container}>
+        <View style={styles.IconAndName}>
+          <MaterialIcons name="policy" size={26} />
+          <Body2>Privacy Policy</Body2>
+        </View>
+        <Entypo name="chevron-right" size={30} color="gray" />
+      </TouchableOpacity>
+      <HorizontalDividerLine />
     </View>
   );
 }

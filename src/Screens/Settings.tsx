@@ -7,7 +7,9 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
-import SettingsOptions from "../molecules/SettingsOptions";
+import AccountSettings from "../molecules/AccountSettings";
+import Help from "../molecules/Help";
+import SettingsOptionContainer from "../organisms/SettingsOptionContainer";
 
 export default function Settings() {
   return (
@@ -17,9 +19,10 @@ export default function Settings() {
         justifyContent: "center",
         width: responsiveScreenWidth(100),
         height: responsiveScreenHeight(100),
+        borderWidth: 2,
       }}
     >
-      <SettingsOptions />
+      <SettingsOptionContainer />
     </View>
   );
 }

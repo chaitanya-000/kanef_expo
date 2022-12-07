@@ -12,7 +12,7 @@ const HorizontalDividerLine = () => {
 export default HorizontalDividerLine;
 const styles = StyleSheet.create({
   container: {
-    width: responsiveScreenWidth(90),
+    width: "95%",
     height: responsiveScreenHeight(0.2),
     backgroundColor: "#E0E0E0",
   },

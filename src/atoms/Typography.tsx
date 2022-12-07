@@ -39,7 +39,7 @@ export const Body1 = styled.Text`
 `;
 export const Body2 = styled.Text`
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 600;
 `;
 export const Body3 = styled.Text`
   font-size: 16px;
