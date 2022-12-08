@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import {
   responsiveFontSize,
@@ -8,7 +8,6 @@ import {
 import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function ContactUs() {
   return (
@@ -23,7 +22,11 @@ export default function ContactUs() {
     >
       <TouchableOpacity style={styles.container}>
         <View style={styles.IconAndName}>
-          <Ionicons name="settings-outline" size={26} />
+          <Ionicons
+            name="settings-outline"
+            size={26}
+            style={{ marginRight: "9%" }}
+          />
           <Body2>Contact Us</Body2>
         </View>
         <Entypo name="chevron-right" size={30} color="gray" />
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    // justifyContent: "space-around",
     alignItems: "center",
   },
 });

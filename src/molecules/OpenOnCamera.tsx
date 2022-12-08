@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import {
   responsiveFontSize,
@@ -8,7 +8,6 @@ import {
 import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
 import { Entypo, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function OpenOnCamera() {
   return (
@@ -23,10 +22,17 @@ export default function OpenOnCamera() {
     >
       <TouchableOpacity style={styles.container}>
         <View style={styles.IconAndName}>
-          <SimpleLineIcons name="camera" size={26} />
+          <SimpleLineIcons
+            name="camera"
+            size={26}
+            style={{ marginRight: "9%" }}
+          />
           <Body2>Open on Camera</Body2>
         </View>
-        <Entypo name="chevron-right" size={30} color="gray" />
+        <Image
+          source={require("../../assets/images/OpenOnCameraToggle.png")}
+          style={styles.toggleLogo}
+        />
       </TouchableOpacity>
       <HorizontalDividerLine />
     </View>
@@ -52,7 +58,11 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    // justifyContent: "space-around",
     alignItems: "center",
+  },
+  toggleLogo: {
+    width: "13.5%",
+    height: "50%",
   },
 });

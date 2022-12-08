@@ -10,7 +10,7 @@ import PrivacyPolicy from "../molecules/PrivacyPolicy";
 
 const SettingsOptionContainer = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <AccountSettings />
       <Help />
       <ContactUs />
@@ -24,4 +24,8 @@ const SettingsOptionContainer = () => {
 
 export default SettingsOptionContainer;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    borderWidth: 1,
+  },
+});

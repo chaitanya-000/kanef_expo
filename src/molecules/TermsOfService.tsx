@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import {
   responsiveFontSize,
@@ -8,7 +8,6 @@ import {
 import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function TermsOfService() {
   return (
@@ -23,7 +22,7 @@ export default function TermsOfService() {
     >
       <TouchableOpacity style={styles.container}>
         <View style={styles.IconAndName}>
-          <AntDesign name="book" size={26} />
+          <AntDesign name="book" size={26} style={{ marginRight: "9%" }} />
           <Body2>Terms of Service</Body2>
         </View>
         <Entypo name="chevron-right" size={30} color="gray" />
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    // justifyContent: "space-around",
     alignItems: "center",
   },
 });
