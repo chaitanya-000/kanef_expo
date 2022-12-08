@@ -22,10 +22,9 @@ export default function ContactUs() {
     >
       <TouchableOpacity style={styles.container}>
         <View style={styles.IconAndName}>
-          <Ionicons
-            name="settings-outline"
-            size={26}
-            style={{ marginRight: "9%" }}
+          <Image
+            source={require("../../assets/images/ContactUsLogo.png")}
+            style={{ marginRight: "9%", marginLeft: "1.1%" }}
           />
           <Body2>Contact Us</Body2>
         </View>

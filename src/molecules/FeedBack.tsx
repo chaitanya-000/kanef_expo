@@ -22,9 +22,8 @@ export default function Feedback() {
     >
       <TouchableOpacity style={styles.container}>
         <View style={styles.IconAndName}>
-          <MaterialIcons
-            name="feedback"
-            size={26}
+          <Image
+            source={require("../../assets/images/FeedbackLogo.png")}
             style={{ marginRight: "9%" }}
           />
           <Body2>Feedback</Body2>

@@ -26,6 +26,10 @@ export default SettingsOptionContainer;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
+    // borderWidth: 1,
+    // borderColor: "orange",
+    // marginTop: "16%",
+    position: "relative",
+    bottom: "8%",
   },
 });

@@ -1,5 +1,10 @@
 import styled from "styled-components/native";
 import { Text } from "react-native";
+import {
+  responsiveFontSize,
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from "react-native-responsive-dimensions";
 
 export const Display1 = styled.Text`
   font-size: 56px;
