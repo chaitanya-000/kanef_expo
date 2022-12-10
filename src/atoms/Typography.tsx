@@ -39,12 +39,12 @@ export const Heading6 = styled.Text`
   font-weight: 500;
 `;
 export const Body1 = styled.Text`
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 700;
 `;
 export const Body2 = styled.Text`
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
 `;
 export const Body3 = styled.Text`
   font-size: 16px;
