@@ -12,12 +12,16 @@ import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
 import LineDivider from "../organisms/LineDivider";
 import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
 import Gender from "../organisms/Gender";
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from "react-native-responsive-dimensions";
 
 const Home = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../assets/images/myLoginImage.png")}
+        source={require("../../assets/images/LoginPageImage.png")}
         style={styles.image}
       />
       <SignUpLoginContainer navigation={navigation} />
@@ -36,7 +40,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: "100%",
-    height: "56%",
+    // width: ",
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(50),
   },
 });

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   toggleLogo: {
-    width: "13.5%",
-    height: "50%",
+    width: "14%",
+    height: "70%",
   },
 });
