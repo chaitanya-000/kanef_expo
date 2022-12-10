@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     backgroundColor: "#121F27",
     borderWidth: 1,
-    borderColor: "blue",
+    // borderColor: "blue",
   },
   // headerColorSection: {
   //   width: "100%",

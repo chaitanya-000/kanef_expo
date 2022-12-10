@@ -13,7 +13,7 @@ export default function GoogleAndAppleButton() {
 const styles = StyleSheet.create({
   container: {
     // borderWidth: 1,
-    borderColor: "blue",
+    // borderColor: "blue",
     height: "17%",
     width: "90%",
     display: "flex",

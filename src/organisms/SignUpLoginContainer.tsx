@@ -14,7 +14,7 @@ export default function SignUpLoginContainer({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     // borderWidth: 1,
-    borderColor: "blue",
+    // borderColor: "blue",
     width: "100%",
     height: "17.5%",
     display: "flex",

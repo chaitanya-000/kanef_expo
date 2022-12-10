@@ -1,5 +1,12 @@
 import React from "react";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { Body1, Heading3, Heading5 } from "../atoms/Typography";
 import EmailAddress from "../organisms/EmailAddress";
 import Password from "../organisms/Password";
@@ -13,7 +20,8 @@ import {
 const Login = ({ navigation }: any) => {
   return (
     <>
-      <Image
+      <ImageBackground
+        resizeMode="cover"
         source={require("../../assets/images/LoginImage2x.png")}
         style={styles.image}
       />
