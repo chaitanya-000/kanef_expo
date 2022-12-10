@@ -5,6 +5,8 @@ import {
   StyleSheet,
   ScrollView,
   TextInput,
+  Image,
+  FlatList,
 } from "react-native";
 import React from "react";
 import {
@@ -13,7 +15,16 @@ import {
   TextInputBox,
 } from "../molecules/TextInputWithLabel";
 import FirstNameLastNameContainer from "../organisms/FirstNameLastNameContainer";
-import { Heading2, Heading3, Heading4, Heading5 } from "../atoms/Typography";
+import {
+  Body1,
+  Body3,
+  Body2,
+  Body4,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+} from "../atoms/Typography";
 import {
   FullWidthContainer,
   FullWidthTextInputBox,
@@ -28,51 +39,69 @@ import SolidGreenButton from "../atoms/SolidGreenButton";
 import Country from "../organisms/Country";
 import EirCode from "../organisms/EirCode";
 import SelectGender from "../atoms/SelectGender";
+import ConfirmPassword from "../organisms/ConfirmPassword";
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from "react-native-responsive-dimensions";
+import { GreenButton } from "../atoms/GreenButton";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("screen").height;
   const deviceWidth = Dimensions.get("window").width;
   return (
-    <ScrollView
-      style={{
-        display: "flex",
-        flex: 1,
-        height: deviceHeight,
-      }}
-    >
+    // style={{
+    //   display: "flex",
+    //   flex: 1,
+    //   height: deviceHeight,
+    // }}
+    // <View style={{ borderWidth: 2, borderColor: "red" }}>
+    <ScrollView>
+      <Image
+        source={require("../../assets/images/RegisterScreenImage.png")}
+        style={styles.image}
+      />
       <View style={styles.container}>
         <Heading5 style={{ alignSelf: "flex-start" }}>Register</Heading5>
         <FirstNameLastNameContainer />
         <EmailAddress />
         <Password />
-        <DateOfBirth />
-        <Gender />
-        <Address />
-        <EirCode />
-        <City />
-        <Country />
-        {/* <SelectGender /> */}
+        <ConfirmPassword />
+        <GreenButton
+          width={Dimensions.get("window").width - 40}
+          height={Dimensions.get("window").height / 15}
+          marginTop={50}
+        >
+          <Body1 style={{ color: "white" }}>Sign up with email</Body1>
+        </GreenButton>
       </View>
     </ScrollView>
+    // </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-    borderWidth: 1,
-    // borderColor: "orange",
+    height: responsiveScreenHeight(83),
+    // borderWidth: 1,
     backgroundColor: "#FFFFFF",
-    // backgroundColor: "red",
     paddingVertical: "12%",
     paddingHorizontal: "5%",
     borderRadius: 40,
     display: "flex",
-    // justifyContent: "space-evenly",
     alignItems: "center",
-
-    // flex: 2,
+    position: "relative",
+    bottom: "26%",
+    // borderColor: "orange",
+    // justifyContent: "space-evenly",
+    // flex: 1,
+  },
+  image: {
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(70),
+    position: "relative",
+    bottom: "3%",
   },
 });
 export default Register;

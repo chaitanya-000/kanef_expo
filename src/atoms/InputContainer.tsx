@@ -2,12 +2,12 @@ import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 
 export const SplitContainer = styled.View`
-  height: 10%;
+  height: 14%;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 7%;
+  margin-top: 10%;
   /* border: 2px dotted red; */
 `;
