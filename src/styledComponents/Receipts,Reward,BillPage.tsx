@@ -24,7 +24,7 @@ export const OptionsContainer = styled.View`
   width: ${responsiveScreenWidth(87)};
   height: ${responsiveScreenHeight(70)};
   /* border-color: #dee8ef; */
-  /* border:1px solid black; */
+  border:1px solid black;
   margin-top:10%
   border-radius:20px;
   align-items:center;
