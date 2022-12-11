@@ -24,21 +24,21 @@ import {
 import ReceiptRewardContainer from "../molecules/ReceiptRewardContainer";
 import { Feather } from "@expo/vector-icons";
 
-const MyReceipts = () => {
+const RewardList = () => {
   return (
     <ScreenContainer>
-      <Body1 style={styles.ScreenName}>My Receipts</Body1>
+      <Body1 style={styles.ScreenName}>Reward List</Body1>
       <WhiteRoundedContainer>
         <OptionsContainer>
-          <Heading5 style={styles.ContentHeader}>Receipts</Heading5>
+          <Heading5 style={styles.ContentHeader}>Rewards</Heading5>
           <TouchableOpacity style={styles.container}>
             <Image
-              source={require("../../assets/images/WalmartLogo.jpg")}
+              source={require("../../assets/images/KingFisherLogo.png")}
               style={styles.StoreImage}
             />
             <View style={styles.NameAndDate}>
-              <Body2>Walmart</Body2>
-              <Body5 style={{ color: "gray" }}>23 July 2022</Body5>
+              <Body2>Kingfisher</Body2>
+              <Body5 style={{ color: "gray" }}>Whole Foods Market</Body5>
             </View>
             <Feather
               name="chevron-right"
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyReceipts;
+export default RewardList;

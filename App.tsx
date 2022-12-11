@@ -4,6 +4,7 @@ import Home from "./src/Screens/Home";
 import Login from "./src/Screens/Login";
 import MyReceipts from "./src/Screens/MyReceipts";
 import Register from "./src/Screens/Register";
+import RewardList from "./src/Screens/RewardList";
 import Settings from "./src/Screens/Settings";
 
 export default function App() {
@@ -18,7 +19,8 @@ export default function App() {
         {/* <Stack.Screen name="RegisterPage" component={Register} /> */}
         {/* <Stack.Screen name="Login" component={Login} /> */}
         {/* <Stack.Screen name="Settings" component={Settings} /> */}
-        <Stack.Screen name="My Receipts" component={MyReceipts} />
+        {/* <Stack.Screen name="My Receipts" component={MyReceipts} /> */}
+        <Stack.Screen name="My Receipts" component={RewardList} />
       </Stack.Navigator>
     </NavigationContainer>
   );
