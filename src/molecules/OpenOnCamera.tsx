@@ -25,7 +25,7 @@ export default function OpenOnCamera() {
           <SimpleLineIcons
             name="camera"
             size={26}
-            style={{ marginRight: "9%" }}
+            style={{ marginRight: "8.8%" }}
           />
           <Body2>Open on Camera</Body2>
         </View>

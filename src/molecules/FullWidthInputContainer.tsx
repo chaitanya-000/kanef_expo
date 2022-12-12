@@ -20,5 +20,6 @@ export const FullWidthTextInputBox = styled.TextInput`
   padding-left: 5%
   font-color: black;
   border: 1px solid #dee8ef;
+  margin-top:1.5%
   /* border: 1px solid blue; */
 `;

@@ -48,14 +48,14 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     position: "relative",
-    bottom: "17%",
+    bottom: "15%",
     // justifyContent: "space-evenly",
 
     // flex: 2,
   },
   image: {
     width: responsiveScreenWidth(100),
-    height: responsiveScreenHeight(46),
+    height: responsiveScreenHeight(55),
   },
 });
 export default Login;

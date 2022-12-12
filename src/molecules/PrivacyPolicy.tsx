@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
             size={26}
             style={{ marginRight: "9%" }}
           />
-          <Body2>Privacy Policy</Body2>
+          <Body2 style={{ flex: 1 }}>Privacy Policy</Body2>
         </View>
         <Entypo name="chevron-right" size={30} color="gray" />
       </TouchableOpacity>

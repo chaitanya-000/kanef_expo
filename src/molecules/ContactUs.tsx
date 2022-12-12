@@ -24,7 +24,7 @@ export default function ContactUs() {
         <View style={styles.IconAndName}>
           <Image
             source={require("../../assets/images/ContactUsLogo.png")}
-            style={{ marginRight: "9%", marginLeft: "1.1%" }}
+            style={{ marginRight: "10%", marginLeft: "1.1%" }}
           />
           <Body2>Contact Us</Body2>
         </View>

@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     borderColor: "orange",
     width: "40%",
     flex: 1,
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     height: "95%",
     marginLeft: "3.5%",
   },

@@ -36,7 +36,7 @@ const RewardList = () => {
               source={require("../../assets/images/KingFisherLogo.png")}
               style={styles.StoreImage}
             />
-            <View style={styles.NameAndDate}>
+            <View style={styles.NameAndType}>
               <Body2>Kingfisher</Body2>
               <Body5 style={{ color: "gray" }}>Whole Foods Market</Body5>
             </View>
@@ -81,13 +81,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: "100%",
   },
-  NameAndDate: {
+  NameAndType: {
     // borderWidth: 1,
     alignSelf: "flex-end",
     borderColor: "orange",
     width: "40%",
     flex: 1,
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     height: "95%",
     marginLeft: "3.5%",
   },

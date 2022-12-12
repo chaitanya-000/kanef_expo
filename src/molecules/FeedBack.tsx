@@ -24,9 +24,9 @@ export default function Feedback() {
         <View style={styles.IconAndName}>
           <Image
             source={require("../../assets/images/FeedbackLogo.png")}
-            style={{ marginRight: "9%" }}
+            style={{ marginRight: "10%", marginLeft: "2%" }}
           />
-          <Body2>Feedback</Body2>
+          <Body2 style={{ flex: 1 }}>Feedback</Body2>
         </View>
         <Entypo name="chevron-right" size={30} color="gray" />
       </TouchableOpacity>
@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
   container: {
     width: responsiveScreenWidth(85),
     height: responsiveScreenHeight(7),
-    // borderWidth: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    // borderWidth: 1,
   },
   logo: {
     // borderWidth: 2,
@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
     height: responsiveScreenHeight(6),
   },
   IconAndName: {
-    // borderWidth: 1,
     width: "65%",
     height: "100%",
     display: "flex",
     flexDirection: "row",
     // justifyContent: "space-around",
     alignItems: "center",
+    // borderWidth: 1,
   },
 });

@@ -50,13 +50,8 @@ const Register = () => {
   const deviceHeight = Dimensions.get("screen").height;
   const deviceWidth = Dimensions.get("window").width;
   return (
-    // style={{
-    //   display: "flex",
-    //   flex: 1,
-    //   height: deviceHeight,
-    // }}
-    // <View style={{ borderWidth: 2, borderColor: "red" }}>
-    <ScrollView>
+    // <View style={{ borderWidth: 2, borderColor: "red", flex: 1 }}>
+    <ScrollView contentContainerStyle={styles.ScrollView}>
       <Image
         source={require("../../assets/images/RegisterScreenImage.png")}
         style={styles.image}
@@ -81,21 +76,38 @@ const Register = () => {
 };
 
 const styles = StyleSheet.create({
+  ScrollView: {
+    // borderWidth: 1,
+    borderColor: "blue",
+    height: "115%",
+    // justifyContent: "flex-start",
+  },
   container: {
     width: Dimensions.get("window").width,
-    height: responsiveScreenHeight(83),
-    // borderWidth: 1,
+    height: responsiveScreenHeight(80),
     backgroundColor: "#FFFFFF",
     paddingVertical: "12%",
     paddingHorizontal: "5%",
-    borderRadius: 40,
     display: "flex",
     alignItems: "center",
     position: "relative",
-    bottom: "26%",
+    bottom: "32%",
+    borderRadius: 25,
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+    shadowColor: "gray",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 1.25,
+    shadowRadius: 3.84,
+
+    elevation: 15,
     // borderColor: "orange",
     // justifyContent: "space-evenly",
     // flex: 1,
+    // borderWidth: 1,
   },
   image: {
     width: responsiveScreenWidth(100),

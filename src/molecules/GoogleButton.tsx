@@ -27,7 +27,7 @@ export default function GoogleButton() {
         borderTopRightRadius: 15,
       }}
     >
-      <Image source={require("../../assets/images/GoogleDesign.png")} />
+      <Image source={require("../../assets/images/GoogleLogo.png")} />
       <Body1 style={{ color: "white", marginLeft: "6%" }}>Google</Body1>
     </TouchableOpacity>
   );

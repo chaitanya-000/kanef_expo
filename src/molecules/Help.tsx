@@ -25,7 +25,7 @@ export default function Help() {
           <MaterialIcons
             name="error-outline"
             size={26}
-            style={{ marginRight: "10%" }}
+            style={{ marginRight: "9%" }}
           />
           <Body2>Help</Body2>
         </View>

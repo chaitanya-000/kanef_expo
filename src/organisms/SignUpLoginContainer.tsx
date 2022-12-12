@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",
+    position: "relative",
+    // bottom: "2%",
     // marginTop: "1%",
   },
 });
