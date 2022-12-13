@@ -22,7 +22,7 @@ const Login = ({ navigation }: any) => {
     <>
       <ImageBackground
         resizeMode="cover"
-        source={require("../../assets/images/LoginImage2x.png")}
+        source={require("../../assets/images/LoginScreenImage.png")}
         style={styles.image}
       />
       <View style={styles.container}>
