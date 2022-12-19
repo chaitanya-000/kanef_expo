@@ -16,9 +16,9 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={{ headerShown: false }}
       >
-        <Stack.Screen name="Home" component={Home} />
+        {/* <Stack.Screen name="Home" component={Home} /> */}
         {/* <Stack.Screen name="RegisterPage" component={Register} /> */}
-        {/* <Stack.Screen name="Login" component={Login} /> */}
+        <Stack.Screen name="Login" component={Login} />
         {/* <Stack.Screen name="Settings" component={Settings} /> */}
         {/* <Stack.Screen name="My Receipts" component={MyReceipts} /> */}
         {/* <Stack.Screen name="RewardLists" component={RewardList} /> */}

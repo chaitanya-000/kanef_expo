@@ -16,8 +16,27 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
+import { useState } from "react";
+import axios from "axios";
 
 const Login = ({ navigation }: any) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const sendLoginData = () => {
+    axios
+      .post("http://kenaf.ie/applogincheckusers/", {
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <ImageBackground
@@ -27,9 +46,14 @@ const Login = ({ navigation }: any) => {
       />
       <View style={styles.container}>
         <Heading5 style={{ alignSelf: "flex-start" }}>Login</Heading5>
-        <EmailAddress />
-        <Password />
-        <GreenButton height={"8%"} marginTop={"7%"} width={"100%"}>
+        <EmailAddress email={email} setEmail={setEmail} />
+        <Password password={password} setPassword={setPassword} />
+        <GreenButton
+          height={"8%"}
+          marginTop={"7%"}
+          width={"100%"}
+          onPress={() => sendLoginData()}
+        >
           <Body1 style={{ color: "white" }}>Login</Body1>
         </GreenButton>
       </View>

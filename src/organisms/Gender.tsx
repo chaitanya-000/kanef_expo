@@ -26,7 +26,7 @@ export default function Gender() {
           setGenderOpen(!genderOpen);
         }}
         onSelectItem={() => {
-          console.log("Item selected");
+          // console.log("Item selected");
           setGenderOpen(false);
         }}
         closeAfterSelecting={true}

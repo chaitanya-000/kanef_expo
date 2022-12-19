@@ -5,11 +5,20 @@ import {
 } from "../molecules/FullWidthInputContainer";
 import { Label } from "../molecules/TextInputWithLabel";
 
-const Password = () => {
+const Password = ({
+  password,
+  setPassword,
+}: {
+  password: string;
+  setPassword: any;
+}) => {
   return (
     <FullWidthContainer>
       <Label>PASSWORD</Label>
-      <FullWidthTextInputBox secureTextEntry>password</FullWidthTextInputBox>
+      <FullWidthTextInputBox
+        secureTextEntry
+        onChangeText={(enteredValue) => setPassword(enteredValue)}
+      ></FullWidthTextInputBox>
     </FullWidthContainer>
   );
 };
