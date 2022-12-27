@@ -7,16 +7,34 @@ import {
   TextInputBox,
 } from "../molecules/TextInputWithLabel";
 
-const FirstNameLastNameContainer = () => {
+const FirstNameLastNameContainer = ({
+  firstName,
+  setFirstName,
+  lastName,
+  setLastName,
+}: {
+  firstName: string;
+  setFirstName: any;
+  lastName: string;
+  setLastName: any;
+}) => {
   return (
     <SplitContainer>
       <InputContainerWithLabel>
         <Label>FIRST NAME</Label>
-        <TextInputBox>Amanda</TextInputBox>
+        <TextInputBox
+          onChangeText={(enteredValue) => setFirstName(enteredValue)}
+        >
+          {firstName}
+        </TextInputBox>
       </InputContainerWithLabel>
       <InputContainerWithLabel>
         <Label>LAST NAME</Label>
-        <TextInputBox>Parker</TextInputBox>
+        <TextInputBox
+          onChangeText={(enteredValue) => setLastName(enteredValue)}
+        >
+          {lastName}
+        </TextInputBox>
       </InputContainerWithLabel>
     </SplitContainer>
   );

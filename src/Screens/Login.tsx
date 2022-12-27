@@ -25,7 +25,7 @@ const Login = ({ navigation }: any) => {
 
   const sendLoginData = () => {
     axios
-      .post("http://kenaf.ie/applogincheckusers/", {
+      .post("http://127.0.0.1:8000/applogincheckusers/", {
         email: email,
         password: password,
       })
@@ -36,7 +36,9 @@ const Login = ({ navigation }: any) => {
         console.log(error);
       });
   };
-
+  // const sendLoginData = () => {
+  //   console.log("login clicked");
+  // };
   return (
     <>
       <ImageBackground

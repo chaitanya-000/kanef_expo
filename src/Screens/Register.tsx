@@ -8,7 +8,7 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {
   InputContainerWithLabel,
   Label,
@@ -45,12 +45,37 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import { GreenButton } from "../atoms/GreenButton";
+import axios from "axios";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("screen").height;
   const deviceWidth = Dimensions.get("window").width;
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const sendLoginData = () => {
+    axios
+      .post("http://127.0.0.1:8000/appuserregister/", {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  // const sendLoginData = () => {
+  //   console.log("login clicked");
+  // };
+
   return (
-    // <View style={{ borderWidth: 2, borderColor: "red", flex: 1 }}>
     <ScrollView contentContainerStyle={styles.ScrollView}>
       <Image
         source={require("../../assets/images/RegisterScreenImage.png")}
@@ -58,14 +83,20 @@ const Register = () => {
       />
       <View style={styles.container}>
         <Heading5 style={{ alignSelf: "flex-start" }}>Register</Heading5>
-        <FirstNameLastNameContainer />
-        <EmailAddress />
-        <Password />
-        <ConfirmPassword />
+        <FirstNameLastNameContainer
+          firstName={firstName}
+          setFirstName={setFirstName}
+          lastName={lastName}
+          setLastName={setLastName}
+        />
+        <EmailAddress email={email} setEmail={setEmail} />
+        <Password password={password} setPassword={setPassword} />
+        <ConfirmPassword password={password} />
         <GreenButton
           width={Dimensions.get("window").width - 40}
           height={Dimensions.get("window").height / 15}
           marginTop={50}
+          onPress={() => sendLoginData()}
         >
           <Body1 style={{ color: "white" }}>Sign up with email</Body1>
         </GreenButton>

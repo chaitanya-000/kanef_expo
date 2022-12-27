@@ -18,7 +18,9 @@ const Password = ({
       <FullWidthTextInputBox
         secureTextEntry
         onChangeText={(enteredValue) => setPassword(enteredValue)}
-      ></FullWidthTextInputBox>
+      >
+        {password}
+      </FullWidthTextInputBox>
     </FullWidthContainer>
   );
 };

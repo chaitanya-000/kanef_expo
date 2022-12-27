@@ -7,23 +7,37 @@ import Register from "./src/Screens/Register";
 import RewardCard from "./src/Screens/RewardCard";
 import RewardList from "./src/Screens/RewardList";
 import Settings from "./src/Screens/Settings";
+import TabsNavigator from "./src/organisms/TabsNavigator";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{ headerShown: false }}
       >
-        {/* <Stack.Screen name="Home" component={Home} /> */}
-        {/* <Stack.Screen name="RegisterPage" component={Register} /> */}
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="RegisterPage" component={Register} />
         <Stack.Screen name="Login" component={Login} />
-        {/* <Stack.Screen name="Settings" component={Settings} /> */}
-        {/* <Stack.Screen name="My Receipts" component={MyReceipts} /> */}
-        {/* <Stack.Screen name="RewardLists" component={RewardList} /> */}
-        {/* <Stack.Screen name="RewardCard" component={RewardCard} /> */}
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="My Receipts" component={MyReceipts} />
+        <Stack.Screen name="RewardLists" component={RewardList} />
+        <Stack.Screen name="RewardCard" component={RewardCard} />
+        <Stack.Screen name="TabsNavigator" component={TabsNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
+}
+
+{
+  /* <Tab.Navigator>
+        <Tab.Screen name="RewardCard" component={RewardCard} />
+        <Tab.Screen name="MyReceipts" component={MyReceipts} />
+        <Tab.Screen name="Settings" component={Settings} />
+        <Tab.Screen name="RewardList" component={RewardList} />
+      </Tab.Navigator> */
 }

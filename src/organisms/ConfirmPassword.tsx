@@ -5,7 +5,7 @@ import {
 } from "../molecules/FullWidthInputContainer";
 import { Label } from "../molecules/TextInputWithLabel";
 
-const ConfirmPassword = () => {
+const ConfirmPassword = ({ password }: { password: any }) => {
   return (
     <FullWidthContainer>
       <Label>CONFIRM PASSWORD</Label>
