@@ -15,7 +15,7 @@ export default function SolidGreenButton({ navigation }: any) {
       height={"40%"}
       width={"86%"}
       marginTop={"0"}
-      // onPress={() => navigation.navigate("RegisterPage")}
+      onPress={() => navigation.navigate("RegisterPage")}
     >
       <Body1 style={{ color: "white" }}>Sign up with email</Body1>
     </GreenButton>

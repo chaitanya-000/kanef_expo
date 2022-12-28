@@ -19,7 +19,7 @@ export default function OutlinedGreenButton({ navigation }: any) {
         borderBottomLeftRadius: 15,
         borderTopRightRadius: 15,
       }}
-      // onPress={() => navigation.navigate("Login")}
+      onPress={() => navigation.navigate("Login")}
     >
       <Body1 style={{ color: "#26AE60" }}>Login</Body1>
     </TouchableOpacity>

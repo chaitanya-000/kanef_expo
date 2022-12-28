@@ -23,19 +23,23 @@ const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const sendLoginData = () => {
-    axios
-      .post("http://127.0.0.1:8000/applogincheckusers/", {
-        email: email,
-        password: password,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // const sendLoginData = ({ navigation }: any) => {
+  // axios
+  //   .post("http://127.0.0.1:8000/applogincheckusers/", {
+  //     email: email,
+  //     password: password,
+  //   })
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .then(() => {
+  //     navigation.navigate("Settings");
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // navigation.navigate("Settings");
+  // };
   // const sendLoginData = () => {
   //   console.log("login clicked");
   // };
@@ -54,7 +58,7 @@ const Login = ({ navigation }: any) => {
           height={"8%"}
           marginTop={"7%"}
           width={"100%"}
-          onPress={() => sendLoginData()}
+          onPress={() => navigation.navigate("Settings")}
         >
           <Body1 style={{ color: "white" }}>Login</Body1>
         </GreenButton>

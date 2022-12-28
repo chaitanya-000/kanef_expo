@@ -56,20 +56,21 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const sendLoginData = () => {
-    axios
-      .post("http://127.0.0.1:8000/appuserregister/", {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const sendLoginData = ({ navigation }: any) => {
+    // axios
+    //   .post("http://127.0.0.1:8000/appuserregister/", {
+    //     firstName: firstName,
+    //     lastName: lastName,
+    //     email: email,
+    //     password: password,
+    //   })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    navigation.navigate("Settings");
   };
   // const sendLoginData = () => {
   //   console.log("login clicked");

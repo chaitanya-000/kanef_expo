@@ -16,18 +16,14 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{ headerShown: false }}
-      >
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="RegisterPage" component={Register} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="My Receipts" component={MyReceipts} />
-        <Stack.Screen name="RewardLists" component={RewardList} />
-        <Stack.Screen name="RewardCard" component={RewardCard} />
-        <Stack.Screen name="TabsNavigator" component={TabsNavigator} />
+        <Stack.Screen name="Settings" component={TabsNavigator} />
+        <Stack.Screen name="My Receipts" component={TabsNavigator} />
+        <Stack.Screen name="RewardLists" component={TabsNavigator} />
+        <Stack.Screen name="RewardCard" component={TabsNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
