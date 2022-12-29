@@ -12,7 +12,7 @@ import Settings from "../Screens/Settings";
 import MyReceipts from "../Screens/MyReceipts";
 import RewardList from "../Screens/RewardList";
 import RewardCard from "../Screens/RewardCard";
-import Camera from "../Screens/Camera";
+import CameraScreen from "../Screens/CameraScreen";
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -84,7 +84,7 @@ const TabsNavigator = () => {
       />
       <Tab.Screen
         name="Camera"
-        component={Camera}
+        component={CameraScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Image
