@@ -18,62 +18,67 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{
-            headerShown: false,
-          }}
+          // options={{
+          //   headerShown: false,
+          // }}
         />
         <Stack.Screen
           name="RegisterPage"
           component={Register}
-          options={{
-            headerShown: false,
-          }}
+          // options={{
+          //   headerShown: false,
+          // }}
         />
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{
-            headerShown: false,
-          }}
+          // options={{
+          //   headerShown: false,
+          // }}
         />
         <Stack.Screen
           name="Settings"
           component={TabsNavigator}
-          options={{
-            headerShown: false,
-          }}
+          // options={{
+          //   headerShown: false,
+          // }}
         />
         <Stack.Screen
           name="My Receipts"
           component={TabsNavigator}
-          options={{
-            headerShown: false,
-          }}
+          // options={{
+          //   headerShown: false,
+          // }}
         />
         <Stack.Screen
           name="RewardLists"
           component={TabsNavigator}
-          options={{
-            headerShown: false,
-          }}
+          // options={{
+          //   headerShown: false,
+          // }}
         />
         <Stack.Screen
           name="RewardCard"
           component={TabsNavigator}
-          options={{
-            headerShown: false,
-          }}
+          // options={{
+          //   headerShown: false,
+          // }}
         />
         <Stack.Screen
           name="Camera"
           component={TabsNavigator}
-          options={{
-            headerShown: false,
-          }}
+          // options={{
+          //   headerShown: false,
+          // }}
         />
       </Stack.Navigator>
     </NavigationContainer>
