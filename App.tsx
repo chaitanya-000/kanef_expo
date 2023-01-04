@@ -11,6 +11,7 @@ import TabsNavigator from "./src/organisms/TabsNavigator";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Image } from "react-native";
+import { useState } from "react";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -24,62 +25,14 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          // options={{
-          //   headerShown: false,
-          // }}
-        />
-        <Stack.Screen
-          name="RegisterPage"
-          component={Register}
-          // options={{
-          //   headerShown: false,
-          // }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          // options={{
-          //   headerShown: false,
-          // }}
-        />
-        <Stack.Screen
-          name="Settings"
-          component={TabsNavigator}
-          // options={{
-          //   headerShown: false,
-          // }}
-        />
-        <Stack.Screen
-          name="My Receipts"
-          component={TabsNavigator}
-          // options={{
-          //   headerShown: false,
-          // }}
-        />
-        <Stack.Screen
-          name="RewardLists"
-          component={TabsNavigator}
-          // options={{
-          //   headerShown: false,
-          // }}
-        />
-        <Stack.Screen
-          name="RewardCard"
-          component={TabsNavigator}
-          // options={{
-          //   headerShown: false,
-          // }}
-        />
-        <Stack.Screen
-          name="Camera"
-          component={TabsNavigator}
-          // options={{
-          //   headerShown: false,
-          // }}
-        />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="RegisterPage" component={Register} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Settings" component={TabsNavigator} />
+        <Stack.Screen name="My Receipts" component={TabsNavigator} />
+        <Stack.Screen name="RewardLists" component={TabsNavigator} />
+        <Stack.Screen name="RewardCard" component={TabsNavigator} />
+        <Stack.Screen name="Camera" component={TabsNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

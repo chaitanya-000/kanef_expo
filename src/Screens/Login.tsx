@@ -18,31 +18,27 @@ import {
 } from "react-native-responsive-dimensions";
 import { useState } from "react";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
 
-  // const sendLoginData = ({ navigation }: any) => {
-  // axios
-  //   .post("http://127.0.0.1:8000/applogincheckusers/", {
-  //     email: email,
-  //     password: password,
-  //   })
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .then(() => {
-  //     navigation.navigate("Settings");
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  // navigation.navigate("Settings");
-  // };
-  // const sendLoginData = () => {
-  //   console.log("login clicked");
-  // };
+  const sendLoginData = ({ navigation }: any) => {
+    axios
+      .post("http://127.0.0.1:8000/applogincheckusers", {
+        email: email,
+        password: password,
+      })
+      .then((response: any) => {
+        const token = response.data.token;
+        setToken(token);
+        AsyncStorage.setItem("token", JSON.stringify(token));
+      })
+      .catch((error: any) => console.log(error));
+  };
+
   return (
     <>
       <ImageBackground
@@ -51,14 +47,19 @@ const Login = ({ navigation }: any) => {
         style={styles.image}
       />
       <View style={styles.container}>
-        <Heading5 style={{ alignSelf: "flex-start" }}>Login</Heading5>
+        <Heading5
+          onPress={() => console.log(token)}
+          style={{ alignSelf: "flex-start" }}
+        >
+          Login
+        </Heading5>
         <EmailAddress email={email} setEmail={setEmail} />
         <Password password={password} setPassword={setPassword} />
         <GreenButton
           height={"8%"}
           marginTop={"7%"}
           width={"100%"}
-          onPress={() => navigation.navigate("Settings")}
+          onPress={sendLoginData}
         >
           <Body1 style={{ color: "white" }}>Login</Body1>
         </GreenButton>

@@ -1,11 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import axios from "axios";
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from "react-native-responsive-dimensions";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState("Not yet scanned");
+  const [text, setText] = useState("");
+
+  text &&
+    axios
+      .post("http://127.0.0.1:8000/qrcheck/", {
+        QR_ID: text,
+        uId: "appUser_683930",
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+
+      .catch(function (error) {
+        console.log(error);
+      });
 
   const askForCameraPermission = () => {
     (async () => {
@@ -23,7 +42,7 @@ export default function App() {
   const handleBarCodeScanned = ({ type, data }: any) => {
     setScanned(true);
     setText(data);
-    console.log("Type: " + type + "\nData: " + data);
+    console.log(text);
   };
 
   // Check permissions and return the screens
@@ -52,7 +71,7 @@ export default function App() {
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
+          style={{ height: 400, width: 500 }}
         />
       </View>
       <Text style={styles.maintext}>{text}</Text>
@@ -81,11 +100,12 @@ const styles = StyleSheet.create({
   },
   barcodebox: {
     alignItems: "center",
-    justifyContent: "center",
-    height: 300,
-    width: 300,
+    // justifyContent: "center",
+    height: responsiveScreenHeight(42),
+    width: responsiveScreenWidth(80),
     overflow: "hidden",
     borderRadius: 30,
-    backgroundColor: "tomato",
+    borderColor: "red",
+    borderWidth: 2,
   },
 });
