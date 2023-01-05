@@ -23,7 +23,7 @@ const Tab = createBottomTabNavigator();
 const TabsNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Rewards"
+      initialRouteName="Camera"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: "#26AE60",

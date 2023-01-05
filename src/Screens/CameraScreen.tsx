@@ -14,14 +14,13 @@ export default function App() {
 
   text &&
     axios
-      .post("http://127.0.0.1:8000/qrcheck/", {
+      .post("http://127.0.0.1:8000/qrcheck", {
         QR_ID: text,
         uId: "appUser_683930",
       })
       .then(function (response) {
         console.log(response);
       })
-
       .catch(function (error) {
         console.log(error);
       });
