@@ -25,21 +25,22 @@ const Login = ({ navigation }: any) => {
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
 
-  // const sendLoginData = ({ navigation }: any) => {
-  //   axios
-  //     .post("http://127.0.0.1:8000/applogincheckusers", {
-  //       email: email,
-  //       password: password,
-  //     })
-  //     .then((response: any) => {
-  //       const token = response.data.token;
-  //       setToken(token);
-  //       AsyncStorage.setItem("token", JSON.stringify(token));
-  //       console.log(token);
-  //     })
-  //     .catch((error: any) => console.log(error));
-  // };
-  //    token && navigation.navigate("Settings");
+  const sendLoginData = ({ navigation }: any) => {
+    axios
+      .post("http://127.0.0.1:8000/applogincheckusers", {
+        email: email,
+        password: password,
+      })
+      .then((response: any) => {
+        const token = response.data.token;
+
+        setToken(token);
+        AsyncStorage.setItem("token", JSON.stringify(token));
+        console.log(response.request);
+      })
+      .catch((error: any) => console.log(error));
+  };
+  navigation.navigate("Settings");
   return (
     <>
       <ImageBackground
@@ -60,7 +61,7 @@ const Login = ({ navigation }: any) => {
           height={"8%"}
           marginTop={"7%"}
           width={"100%"}
-          onPress={() => navigation.navigate("Settings")}
+          onPress={sendLoginData}
         >
           <Body1 style={{ color: "white" }}>Login</Body1>
         </GreenButton>

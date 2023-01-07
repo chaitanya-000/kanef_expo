@@ -11,8 +11,7 @@ import TabsNavigator from "./src/organisms/TabsNavigator";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Image } from "react-native";
-import { useState } from "react";
-
+import { lazy, useState } from "react";
 export default function App() {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -21,9 +20,9 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Home"
-        screenOptions={{
-          headerShown: false,
-        }}
+        // screenOptions={{
+        //   headerShown: false,
+        // }}
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="RegisterPage" component={Register} />

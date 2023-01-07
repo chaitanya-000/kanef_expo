@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
-import { BarCodeScanner } from "expo-barcode-scanner";
+import { BarCodeScanner, BarCodeSize } from "expo-barcode-scanner";
 import axios from "axios";
 import {
   responsiveScreenHeight,
@@ -11,19 +11,6 @@ export default function App() {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("");
-
-  text &&
-    axios
-      .post("http://127.0.0.1:8000/qrcheck", {
-        QR_ID: text,
-        uId: "appUser_683930",
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
 
   const askForCameraPermission = () => {
     (async () => {
@@ -41,32 +28,32 @@ export default function App() {
   const handleBarCodeScanned = ({ type, data }: any) => {
     setScanned(true);
     setText(data);
-    console.log(text);
   };
 
   // Check permissions and return the screens
   if (hasPermission === null) {
-    return (
-      <View style={styles.container}>
-        <Text>Requesting for camera permission</Text>
-      </View>
-    );
+    return <Text>Requesting for camera permission</Text>;
   }
   if (hasPermission === false) {
-    return (
-      <View style={styles.container}>
-        <Text style={{ margin: 10 }}>No access to camera</Text>
-        <Button
-          title={"Allow Camera"}
-          onPress={() => askForCameraPermission()}
-        />
-      </View>
-    );
+    return <Text style={{ margin: 10 }}>No access to camera</Text>;
   }
 
-  // Return the View
+  const handlePost = () => {
+    axios
+      .post("http://localhost:8000/qrcheck", {
+        QR_ID: "QR_11151",
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error.request);
+      });
+  };
+
   return (
     <View style={styles.container}>
+      <Text onPress={handlePost}>click</Text>
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -76,11 +63,7 @@ export default function App() {
       <Text style={styles.maintext}>{text}</Text>
 
       {scanned && (
-        <Button
-          title={"Scan again?"}
-          onPress={() => setScanned(false)}
-          color="tomato"
-        />
+        <Button title={"Scan again?"} onPress={handlePost} color="tomato" />
       )}
     </View>
   );
@@ -88,13 +71,15 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(100),
+    // backgroundColor: "orange",
     alignItems: "center",
     justifyContent: "center",
+    // borderWidth: 2,
   },
   maintext: {
-    fontSize: 16,
+    fontSize: 30,
     margin: 20,
   },
   barcodebox: {
@@ -106,5 +91,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderColor: "red",
     borderWidth: 2,
+    // backgroundColor: "red",
   },
 });

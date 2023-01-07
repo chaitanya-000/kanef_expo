@@ -57,25 +57,21 @@ const Register = () => {
   const [password, setPassword] = useState("");
 
   const sendLoginData = ({ navigation }: any) => {
-    // axios
-    //   .post("http://127.0.0.1:8000/appuserregister/", {
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     email: email,
-    //     password: password,
-    //   })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-    navigation.navigate("Settings");
+    axios
+      .post("http://127.0.0.1:8000/appuserregister", {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // navigation.navigate("Settings");
   };
-  // const sendLoginData = () => {
-  //   console.log("login clicked");
-  // };
-
   return (
     <ScrollView contentContainerStyle={styles.ScrollView}>
       <Image
@@ -83,7 +79,9 @@ const Register = () => {
         style={styles.image}
       />
       <View style={styles.container}>
-        <Heading5 style={{ alignSelf: "flex-start" }}>Register</Heading5>
+        <Heading5 onPress={sendLoginData} style={{ alignSelf: "flex-start" }}>
+          Register
+        </Heading5>
         <FirstNameLastNameContainer
           firstName={firstName}
           setFirstName={setFirstName}
@@ -97,13 +95,11 @@ const Register = () => {
           width={Dimensions.get("window").width - 40}
           height={Dimensions.get("window").height / 15}
           marginTop={50}
-          onPress={() => sendLoginData()}
         >
           <Body1 style={{ color: "white" }}>Sign up with email</Body1>
         </GreenButton>
       </View>
     </ScrollView>
-    // </View>
   );
 };
 
