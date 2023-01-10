@@ -40,8 +40,9 @@ export default function App() {
 
   const handlePost = () => {
     axios
-      .post("http://localhost:8000/qrcheck", {
-        QR_ID: "QR_11151",
+      .post("https://kenaf.000webhostapp.com/qrcheck", {
+        QR_ID: "QR_11153",
+        uId: "appUser_",
       })
       .then(function (response) {
         console.log(response);

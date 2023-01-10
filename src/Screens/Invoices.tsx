@@ -21,27 +21,25 @@ import {
   ScreenContainer,
   WhiteRoundedContainer,
 } from "../styledComponents/Receipts,Reward,BillPage";
-import ReceiptRewardContainer from "../molecules/ReceiptRewardContainer";
 import { Feather } from "@expo/vector-icons";
 
-const MyReceipts = ({ navigation }: any) => {
+const Invoices = () => {
   return (
     <ScreenContainer>
       <Body1 style={styles.ScreenName}>My Receipts</Body1>
       <WhiteRoundedContainer>
         <OptionsContainer>
-          <Heading5 style={styles.ContentHeader}>Receipts</Heading5>
-          <TouchableOpacity
-            style={styles.container}
-            onPress={() => navigation.navigate("Invoices")}
-          >
+          <Heading5 style={styles.ContentHeader}>Walmart</Heading5>
+          <TouchableOpacity style={styles.container}>
             <Image
               source={require("../../assets/images/WalmartLogo.jpg")}
               style={styles.StoreImage}
             />
             <View style={styles.NameAndDate}>
-              <Body2>Walmart</Body2>
-              <Body5 style={{ color: "gray" }}>23 July 2022</Body5>
+              <Body2>23 july 2022</Body2>
+              <Body5 style={{ color: "gray" }}>
+                Click here to download bill
+              </Body5>
             </View>
             <Feather
               name="chevron-right"
@@ -102,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyReceipts;
+export default Invoices;

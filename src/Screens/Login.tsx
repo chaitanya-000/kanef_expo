@@ -19,28 +19,36 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
 
-  const sendLoginData = ({ navigation }: any) => {
+  const sendLoginData = async ({ navigation }: any) => {
     axios
       .post("http://127.0.0.1:8000/applogincheckusers", {
         email: email,
         password: password,
       })
-      .then((response: any) => {
-        const token = response.data.token;
-
-        setToken(token);
-        AsyncStorage.setItem("token", JSON.stringify(token));
-        console.log(response.request);
+      .then(async (response: any) => {
+        console.log("incomming token", response.data.token);
+        await AsyncStorage.setItem("token", response.data.token);
       })
       .catch((error: any) => console.log(error));
   };
-  navigation.navigate("Settings");
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("token");
+      if (value !== null) {
+        console.log("saved token", value);
+      }
+    } catch (e: any) {
+      console.log(e.message);
+    }
+  };
+
   return (
     <>
       <ImageBackground
@@ -49,10 +57,7 @@ const Login = ({ navigation }: any) => {
         style={styles.image}
       />
       <View style={styles.container}>
-        <Heading5
-          onPress={() => console.log(token)}
-          style={{ alignSelf: "flex-start" }}
-        >
+        <Heading5 onPress={getData} style={{ alignSelf: "flex-start" }}>
           Login
         </Heading5>
         <EmailAddress email={email} setEmail={setEmail} />

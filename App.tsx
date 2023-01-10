@@ -12,6 +12,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Image } from "react-native";
 import { lazy, useState } from "react";
+import Invoices from "./src/Screens/Invoices";
 export default function App() {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -32,6 +33,7 @@ export default function App() {
         <Stack.Screen name="RewardLists" component={TabsNavigator} />
         <Stack.Screen name="RewardCard" component={TabsNavigator} />
         <Stack.Screen name="Camera" component={TabsNavigator} />
+        <Stack.Screen name="Invoices" component={Invoices} />
       </Stack.Navigator>
     </NavigationContainer>
   );

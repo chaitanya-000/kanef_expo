@@ -1,15 +1,6 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
-import {
-  Body1,
-  Body2,
-  Body5,
-  Heading1,
-  Heading3,
-  Heading4,
-  Heading5,
-  Heading6,
-} from "../atoms/Typography";
+import React, { useState } from "react";
+import { Body1, Body2, Body5, Heading4, Heading5 } from "../atoms/Typography";
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
@@ -21,17 +12,22 @@ import {
   ScreenContainer,
   WhiteRoundedContainer,
 } from "../styledComponents/Receipts,Reward,BillPage";
-import ReceiptRewardContainer from "../molecules/ReceiptRewardContainer";
 import { Feather } from "@expo/vector-icons";
+import RewardScreenModal from "../organisms/RewardScreenModal";
 
 const RewardList = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <ScreenContainer>
       <Body1 style={styles.ScreenName}>Reward List</Body1>
+
       <WhiteRoundedContainer>
         <OptionsContainer>
           <Heading5 style={styles.ContentHeader}>Rewards</Heading5>
-          <TouchableOpacity style={styles.container}>
+          <TouchableOpacity
+            style={styles.container}
+            onPress={() => setShowModal(!showModal)}
+          >
             <Image
               source={require("../../assets/images/KingFisherLogo.png")}
               style={styles.StoreImage}
@@ -49,6 +45,9 @@ const RewardList = () => {
           </TouchableOpacity>
         </OptionsContainer>
       </WhiteRoundedContainer>
+      {showModal && (
+        <RewardScreenModal showModal={showModal} setShowModal={setShowModal} />
+      )}
     </ScreenContainer>
   );
 };
