@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     position: "relative",
-    bottom: "15%",
+    bottom: "25%",
     // justifyContent: "space-evenly",
 
     // flex: 2,
