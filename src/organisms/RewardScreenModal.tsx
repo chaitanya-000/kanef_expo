@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   modal: {
     width: responsiveScreenWidth(90),
     height: responsiveScreenHeight(34),
-    borderWidth: 2,
+    borderWidth: 0.2,
     marginTop: responsiveScreenHeight(20),
     alignItems: "center",
     justifyContent: "space-between",

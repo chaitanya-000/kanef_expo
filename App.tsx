@@ -11,20 +11,30 @@ import TabsNavigator from "./src/organisms/TabsNavigator";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Image } from "react-native";
-import { lazy, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import Invoices from "./src/Screens/Invoices";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function App() {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
 
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("token");
+      if (value !== null) {
+        console.log(value);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  });
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        // screenOptions={{
-        //   headerShown: false,
-        // }}
-      >
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="RegisterPage" component={Register} />
         <Stack.Screen name="Login" component={Login} />
