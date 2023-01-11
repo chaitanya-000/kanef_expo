@@ -18,11 +18,14 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
 
+  const [loggedIn, setLoggedIn] = useState<any>(false);
+
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("token");
       if (value !== null) {
         console.log(value);
+        setLoggedIn(true);
       }
     } catch (e) {
       // error reading value
@@ -31,20 +34,27 @@ export default function App() {
 
   useEffect(() => {
     getData();
+    console.log(loggedIn);
   });
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="RegisterPage" component={Register} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Settings" component={TabsNavigator} />
-        <Stack.Screen name="My Receipts" component={TabsNavigator} />
-        <Stack.Screen name="RewardLists" component={TabsNavigator} />
-        <Stack.Screen name="RewardCard" component={TabsNavigator} />
-        <Stack.Screen name="Camera" component={TabsNavigator} />
-        <Stack.Screen name="Invoices" component={Invoices} />
-      </Stack.Navigator>
+      {loggedIn === true ? (
+        <>
+          <Stack.Screen name="Settings" component={TabsNavigator} />
+          <Stack.Screen name="My Receipts" component={TabsNavigator} />
+          <Stack.Screen name="RewardLists" component={TabsNavigator} />
+          <Stack.Screen name="RewardCard" component={TabsNavigator} />
+          <Stack.Screen name="Camera" component={TabsNavigator} />
+          <Stack.Screen name="Invoices" component={Invoices} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="RegisterPage" component={Register} />
+          <Stack.Screen name="Login" component={Login} />
+        </>
+      )}
+      {/* <Stack.Navigator initialRouteName="Home"></Stack.Navigator> */}
     </NavigationContainer>
   );
 }

@@ -36,7 +36,7 @@ const Login = ({ navigation }: any) => {
         console.log(response.data.token);
         // console.log("incomming token", response.data.token);
         await AsyncStorage.setItem("token", response.data.token);
-        // await AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true));
+        await AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true));
       })
       .catch((error: any) => console.log(error));
   };
