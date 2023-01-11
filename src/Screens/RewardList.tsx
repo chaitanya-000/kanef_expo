@@ -18,37 +18,41 @@ import RewardScreenModal from "../organisms/RewardScreenModal";
 const RewardList = () => {
   const [showModal, setShowModal] = useState(false);
   return (
-    <ScreenContainer>
-      <Body1 style={styles.ScreenName}>Reward List</Body1>
+    <>
+      <ScreenContainer>
+        <Body1 style={styles.ScreenName}>Reward List</Body1>
 
-      <WhiteRoundedContainer>
-        <OptionsContainer>
-          <Heading5 style={styles.ContentHeader}>Rewards</Heading5>
-          <TouchableOpacity
-            style={styles.container}
-            onPress={() => setShowModal(!showModal)}
-          >
-            <Image
-              source={require("../../assets/images/KingFisherLogo.png")}
-              style={styles.StoreImage}
-            />
-            <View style={styles.NameAndType}>
-              <Body2>Kingfisher</Body2>
-              <Body5 style={{ color: "gray" }}>Whole Foods Market</Body5>
-            </View>
-            <Feather
-              name="chevron-right"
-              size={25}
-              color="gray"
-              style={styles.rightArrow}
-            />
-          </TouchableOpacity>
-        </OptionsContainer>
-      </WhiteRoundedContainer>
+        <WhiteRoundedContainer
+          style={showModal ? { opacity: 0.8 } : { opacity: 1 }}
+        >
+          <OptionsContainer>
+            <Heading5 style={styles.ContentHeader}>Rewards</Heading5>
+            <TouchableOpacity
+              style={styles.container}
+              onPress={() => setShowModal(!showModal)}
+            >
+              <Image
+                source={require("../../assets/images/KingFisherLogo.png")}
+                style={styles.StoreImage}
+              />
+              <View style={styles.NameAndType}>
+                <Body2>Kingfisher</Body2>
+                <Body5 style={{ color: "gray" }}>Whole Foods Market</Body5>
+              </View>
+              <Feather
+                name="chevron-right"
+                size={25}
+                color="gray"
+                style={styles.rightArrow}
+              />
+            </TouchableOpacity>
+          </OptionsContainer>
+        </WhiteRoundedContainer>
+      </ScreenContainer>
       {showModal && (
         <RewardScreenModal showModal={showModal} setShowModal={setShowModal} />
       )}
-    </ScreenContainer>
+    </>
   );
 };
 

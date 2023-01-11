@@ -34,10 +34,10 @@ const Login = ({ navigation }: any) => {
       .then(async (response: any) => {
         console.log("incomming token", response.data.token);
         await AsyncStorage.setItem("token", response.data.token);
+        await AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true));
       })
       .catch((error: any) => console.log(error));
   };
-
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("token");
@@ -66,7 +66,8 @@ const Login = ({ navigation }: any) => {
           height={"8%"}
           marginTop={"7%"}
           width={"100%"}
-          onPress={sendLoginData}
+          onPress={() => navigation.navigate("Settings")}
+          // onPress={sendLoginData}
         >
           <Body1 style={{ color: "white" }}>Login</Body1>
         </GreenButton>

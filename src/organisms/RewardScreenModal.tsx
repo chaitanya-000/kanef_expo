@@ -1,24 +1,48 @@
-import { Modal, StyleSheet, Text, View, SafeAreaView } from "react-native";
-import React from "react";
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
+import React, { useEffect } from "react";
 import {
   responsiveFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
-import { Body1, Heading6 } from "../atoms/Typography";
+import { Body1, Body2, Heading6 } from "../atoms/Typography";
 import { GreenButton } from "../atoms/GreenButton";
+import { AntDesign } from "@expo/vector-icons";
+import OutsideClickHandler from "react-outside-click-handler";
+import Animated from "react-native-reanimated";
 
 const RewardScreenModal = ({ showModal, setShowModal }: any) => {
+  useEffect(() => {
+    console.log("component re-rendered");
+  }, []);
   return (
-    <View style={styles.container}>
-      <View style={styles.modal}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => setShowModal(false)}
+    >
+      <Pressable style={styles.modal} onPress={() => setShowModal(true)}>
         <View style={styles.modal_BrandName}>
           <Text
             style={{ fontSize: responsiveFontSize(2.6), fontWeight: "700" }}
-            onPress={() => setShowModal(false)}
           >
-            Brand Name X
+            Brand Name
           </Text>
+          <View>
+            <AntDesign
+              name="close"
+              size={35}
+              color="black"
+              onPress={() => setShowModal(false)}
+            />
+          </View>
         </View>
         <View style={styles.modal_worthAndBalanceContainer}>
           <View style={styles.modal_worthAndBalanceContainer_pointsWorth}>
@@ -88,14 +112,16 @@ const RewardScreenModal = ({ showModal, setShowModal }: any) => {
         </View>
         <View style={styles.modal_balanceIpdated}>
           <Text style={{ fontWeight: "500", color: "#828282" }}>
-            Balance Updated
+            Balance Updated : HR:MM DD/MM/YYYY
           </Text>
         </View>
-        <GreenButton height={"20%"} marginTop={"0%"} width={"100%"}>
-          <Body1 style={{ color: "white" }}>Login</Body1>
+        <GreenButton height={"25%"} marginTop={"0%"} width={"100%"}>
+          <Body2 style={{ color: "white", fontWeight: "800" }}>
+            Activate points to Reward Card
+          </Body2>
         </GreenButton>
-      </View>
-    </View>
+      </Pressable>
+    </TouchableOpacity>
   );
 };
 
@@ -107,23 +133,28 @@ const styles = StyleSheet.create({
     height: responsiveScreenHeight(100),
     display: "flex",
     alignItems: "center",
+    position: "absolute",
     // justifyContent: "center",
     // backgroundColor: "red",
   },
   modal: {
     width: responsiveScreenWidth(90),
     height: responsiveScreenHeight(34),
-    // borderWidth: 2,
-    marginTop: responsiveScreenHeight(15),
+    borderWidth: 2,
+    marginTop: responsiveScreenHeight(20),
     alignItems: "center",
     justifyContent: "space-between",
     borderRadius: 15,
     padding: "4%",
     backgroundColor: "#fff",
+    borderColor: "green",
   },
   modal_BrandName: {
     width: "100%",
-    height: "8%",
+    height: "15%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+
     // borderWidth: 2,
   },
   modal_worthAndBalanceContainer: {
