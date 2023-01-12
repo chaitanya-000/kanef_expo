@@ -34,27 +34,27 @@ export default function App() {
 
   useEffect(() => {
     getData();
-    console.log(loggedIn);
   });
   return (
     <NavigationContainer>
-      {loggedIn === true ? (
-        <>
-          <Stack.Screen name="Settings" component={TabsNavigator} />
-          <Stack.Screen name="My Receipts" component={TabsNavigator} />
-          <Stack.Screen name="RewardLists" component={TabsNavigator} />
-          <Stack.Screen name="RewardCard" component={TabsNavigator} />
-          <Stack.Screen name="Camera" component={TabsNavigator} />
-          <Stack.Screen name="Invoices" component={Invoices} />
-        </>
-      ) : (
-        <>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="RegisterPage" component={Register} />
-          <Stack.Screen name="Login" component={Login} />
-        </>
-      )}
-      {/* <Stack.Navigator initialRouteName="Home"></Stack.Navigator> */}
+      <Stack.Navigator>
+        {loggedIn ? (
+          <>
+            <Stack.Screen name="Settings" component={TabsNavigator} />
+            <Stack.Screen name="My Receipts" component={TabsNavigator} />
+            <Stack.Screen name="RewardLists" component={TabsNavigator} />
+            <Stack.Screen name="RewardCard" component={TabsNavigator} />
+            <Stack.Screen name="Camera" component={TabsNavigator} />
+            <Stack.Screen name="Invoices" component={Invoices} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="RegisterPage" component={Register} />
+            <Stack.Screen name="Login" component={Login} />
+          </>
+        )}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

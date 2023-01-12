@@ -19,7 +19,6 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ScrollView } from "react-native-gesture-handler";
 
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
@@ -33,22 +32,11 @@ const Login = ({ navigation }: any) => {
         password: password,
       })
       .then(async (response: any) => {
-        console.log(response.data.token);
-        // console.log("incomming token", response.data.token);
+        console.log(response.data.user.uId);
         await AsyncStorage.setItem("token", response.data.token);
-        await AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true));
+        await AsyncStorage.setItem("uId", response.data.user.uId);
       })
       .catch((error: any) => console.log(error));
-  };
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("token");
-      if (value !== null) {
-        console.log("saved token", value);
-      }
-    } catch (e: any) {
-      console.log(e.message);
-    }
   };
 
   return (
@@ -59,9 +47,7 @@ const Login = ({ navigation }: any) => {
         style={styles.image}
       />
       <View style={styles.container}>
-        <Heading5 onPress={getData} style={{ alignSelf: "flex-start" }}>
-          Login
-        </Heading5>
+        <Heading5 style={{ alignSelf: "flex-start" }}>Login</Heading5>
         <EmailAddress email={email} setEmail={setEmail} />
         <Password password={password} setPassword={setPassword} />
         <GreenButton
