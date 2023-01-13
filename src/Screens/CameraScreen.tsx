@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner, BarCodeSize } from "expo-barcode-scanner";
 import axios from "axios";
@@ -7,11 +7,13 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../store";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("");
+  const { handleLogout } = useContext(AuthContext);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -53,19 +55,10 @@ export default function App() {
       });
   };
 
-  const logout = async () => {
-    try {
-      await AsyncStorage.removeItem("token");
-    } catch (e) {
-      // remove error
-    }
-    console.log("this is the log from the logout func");
-  };
-
   return (
     <View style={styles.container}>
-      <Text onPress={handlePost}>LogOut</Text>
-      <Text onPress={logout}>Click to log out</Text>
+      {/* <Text onPress={handlePost}>LogOut</Text> */}
+
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -77,6 +70,7 @@ export default function App() {
       {scanned && (
         <Button title={"Scan again?"} onPress={handlePost} color="tomato" />
       )}
+      <Button title="Logout" onPress={handleLogout} />
     </View>
   );
 }

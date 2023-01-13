@@ -5,39 +5,37 @@ import React, { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext<any>(null);
 export const AuthProvider = ({ children }: any) => {
-  const [userInfo, setUserInfo] = useState<any>({});
-  const [isLoading, setIsLoading] = useState(false);
-  const register = (
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string | number
-  ) => {
-    setIsLoading(true);
+  const [hasLoggedInBefore, setHasLoggedInBefore] = useState(false);
+  const handleLogin = (email: string, password: string) => {
     axios
-      .post("http://127.0.0.1:8000/appuserregister", {
-        firstName: firstName,
-        lastName: lastName,
+      .post("http://127.0.0.1:8000/applogincheckusers", {
         email: email,
         password: password,
       })
       .then((response) => {
-        console.log(response);
-        let receivedResponse = response.data;
-        setUserInfo(receivedResponse);
-        AsyncStorage.setItem("userInfo", userInfo);
-        setIsLoading(false);
-        console.log(receivedResponse);
+        if (response.data.token) {
+          AsyncStorage.setItem("token", JSON.stringify(response.data.token));
+          AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true));
+        }
       })
       .catch((error) => {
         console.log(error);
-        setIsLoading(false);
       });
-    console.log("clicked");
+  };
+  const handleLogout = async () => {
+    AsyncStorage.setItem("token", "");
+    AsyncStorage.setItem("keepLoggedIn", "");
   };
 
   return (
-    <AuthContext.Provider value={{ register, isLoading, userInfo }}>
+    <AuthContext.Provider
+      value={{
+        handleLogin,
+        hasLoggedInBefore,
+        setHasLoggedInBefore,
+        handleLogout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

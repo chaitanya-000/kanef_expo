@@ -30,6 +30,7 @@ const Home = ({ navigation }: any) => {
         style={styles.SignUpAndLoginContainer}
       />
       <LineDivider />
+
       <GoogleAndAppleButton />
     </View>
   );

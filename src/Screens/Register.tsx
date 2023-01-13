@@ -56,11 +56,9 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoading, register, userInfo } = useContext(AuthContext);
 
   return (
     <ScrollView contentContainerStyle={styles.ScrollView}>
-      <Spinner visible={isLoading} />
       <Image
         source={require("../../assets/images/RegisterScreenImage.png")}
         style={styles.image}
@@ -80,7 +78,6 @@ const Register = () => {
           width={Dimensions.get("window").width - 40}
           height={Dimensions.get("window").height / 15}
           marginTop={50}
-          onPress={() => register(firstName, lastName, email, password)}
         >
           <Body1 style={{ color: "white" }}>Sign up with email</Body1>
         </GreenButton>

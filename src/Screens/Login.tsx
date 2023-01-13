@@ -20,11 +20,26 @@ import { useState } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../store";
+import { useEvent } from "react-native-reanimated";
 
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const value = useContext(AuthContext);
+  const { handleLogin } = useContext(AuthContext);
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("token");
+      if (value !== null) {
+        console.log(value);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  // useEvent(() => {
+  //   getData();
+  // }, []);
   return (
     <>
       <ImageBackground
@@ -33,17 +48,17 @@ const Login = ({ navigation }: any) => {
         style={styles.image}
       />
       <View style={styles.container}>
-        <Heading5 style={{ alignSelf: "flex-start" }}>Login</Heading5>
+        <Heading5 style={{ alignSelf: "flex-start" }} onPress={getData}>
+          Login
+        </Heading5>
         <EmailAddress email={email} setEmail={setEmail} />
         <Password password={password} setPassword={setPassword} />
         <GreenButton
           height={"8%"}
           marginTop={"7%"}
           width={"100%"}
-          // onPress={() => navigation.navigate("Settings")}
-          // onPress={() => handleLogin(email, password)}
+          onPress={() => handleLogin(email, password)}
         >
-          {/* <Body1 style={{ color: "white" }}>Login</Body1> */}
           <Body1 style={{ color: "white" }}>Login</Body1>
         </GreenButton>
       </View>
