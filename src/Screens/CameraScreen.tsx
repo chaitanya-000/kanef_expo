@@ -6,6 +6,7 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState<any>(null);
@@ -52,9 +53,19 @@ export default function App() {
       });
   };
 
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem("token");
+    } catch (e) {
+      // remove error
+    }
+    console.log("this is the log from the logout func");
+  };
+
   return (
     <View style={styles.container}>
-      <Text onPress={handlePost}>click</Text>
+      <Text onPress={handlePost}>LogOut</Text>
+      <Text onPress={logout}>Click to log out</Text>
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}

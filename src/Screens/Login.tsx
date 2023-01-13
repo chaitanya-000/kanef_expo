@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Dimensions,
   Image,
@@ -19,26 +19,12 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../store";
 
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const sendLoginData = async ({ navigation }: any) => {
-    axios
-      .post("http://127.0.0.1:8000/applogincheckusers", {
-        // .post("http://127.0.0.1:8000/applogincheckusers", {
-        email: email,
-        password: password,
-      })
-      .then(async (response: any) => {
-        console.log(response.data.user.uId);
-        await AsyncStorage.setItem("token", response.data.token);
-        await AsyncStorage.setItem("uId", response.data.user.uId);
-      })
-      .catch((error: any) => console.log(error));
-  };
-
+  const value = useContext(AuthContext);
   return (
     <>
       <ImageBackground
@@ -55,9 +41,10 @@ const Login = ({ navigation }: any) => {
           marginTop={"7%"}
           width={"100%"}
           // onPress={() => navigation.navigate("Settings")}
-          onPress={sendLoginData}
+          // onPress={() => handleLogin(email, password)}
         >
-          <Body1 style={{ color: "white" }}>Login</Body1>
+          {/* <Body1 style={{ color: "white" }}>Login</Body1> */}
+          <Body1 style={{ color: "white" }}>{value}</Body1>
         </GreenButton>
       </View>
     </>

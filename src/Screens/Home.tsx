@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   ImageBackground,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
 import LineDivider from "../organisms/LineDivider";
 import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
@@ -16,8 +16,10 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
+import { AuthContext } from "../store";
 
 const Home = ({ navigation }: any) => {
+  const value = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <Image
@@ -29,6 +31,7 @@ const Home = ({ navigation }: any) => {
         style={styles.SignUpAndLoginContainer}
       />
       <LineDivider />
+      <Text>{value}</Text>
       <GoogleAndAppleButton />
     </View>
   );
