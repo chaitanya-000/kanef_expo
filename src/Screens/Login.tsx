@@ -44,7 +44,7 @@ const Login = ({ navigation }: any) => {
           // onPress={() => handleLogin(email, password)}
         >
           {/* <Body1 style={{ color: "white" }}>Login</Body1> */}
-          <Body1 style={{ color: "white" }}>{value}</Body1>
+          <Body1 style={{ color: "white" }}>Login</Body1>
         </GreenButton>
       </View>
     </>

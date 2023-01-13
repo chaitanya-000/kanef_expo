@@ -8,7 +8,7 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   InputContainerWithLabel,
   Label,
@@ -46,42 +46,27 @@ import {
 } from "react-native-responsive-dimensions";
 import { GreenButton } from "../atoms/GreenButton";
 import axios from "axios";
+import { AuthContext } from "../store";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const Register = () => {
   const deviceHeight = Dimensions.get("screen").height;
   const deviceWidth = Dimensions.get("window").width;
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { isLoading, register, userInfo } = useContext(AuthContext);
 
-  const sendLoginData = ({ navigation }: any) => {
-    axios
-      .post("http://127.0.0.1:8000/appuserregister", {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // navigation.navigate("Settings");
-  };
   return (
     <ScrollView contentContainerStyle={styles.ScrollView}>
+      <Spinner visible={isLoading} />
       <Image
         source={require("../../assets/images/RegisterScreenImage.png")}
         style={styles.image}
       />
       <View style={styles.container}>
-        <Heading5 onPress={sendLoginData} style={{ alignSelf: "flex-start" }}>
-          Register
-        </Heading5>
+        <Heading5 style={{ alignSelf: "flex-start" }}>Register</Heading5>
         <FirstNameLastNameContainer
           firstName={firstName}
           setFirstName={setFirstName}
@@ -95,6 +80,7 @@ const Register = () => {
           width={Dimensions.get("window").width - 40}
           height={Dimensions.get("window").height / 15}
           marginTop={50}
+          onPress={() => register(firstName, lastName, email, password)}
         >
           <Body1 style={{ color: "white" }}>Sign up with email</Body1>
         </GreenButton>
@@ -107,7 +93,7 @@ const styles = StyleSheet.create({
   ScrollView: {
     // borderWidth: 1,
     borderColor: "blue",
-    height: "115%",
+    height: "215%",
     // justifyContent: "flex-start",
   },
   container: {

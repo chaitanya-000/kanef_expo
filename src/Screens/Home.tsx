@@ -19,7 +19,6 @@ import {
 import { AuthContext } from "../store";
 
 const Home = ({ navigation }: any) => {
-  const value = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <Image
@@ -31,7 +30,6 @@ const Home = ({ navigation }: any) => {
         style={styles.SignUpAndLoginContainer}
       />
       <LineDivider />
-      <Text>{value}</Text>
       <GoogleAndAppleButton />
     </View>
   );
