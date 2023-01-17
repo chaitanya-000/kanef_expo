@@ -20,9 +20,6 @@ import OutsideClickHandler from "react-outside-click-handler";
 import Animated from "react-native-reanimated";
 
 const RewardScreenModal = ({ showModal, setShowModal }: any) => {
-  useEffect(() => {
-    console.log("component re-rendered");
-  }, []);
   return (
     <TouchableOpacity
       style={styles.container}

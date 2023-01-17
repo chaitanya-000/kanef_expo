@@ -31,7 +31,6 @@ const Login = ({ navigation }: any) => {
     try {
       const value = await AsyncStorage.getItem("token");
       if (value !== null) {
-        console.log(value);
       }
     } catch (e) {
       console.log(e);

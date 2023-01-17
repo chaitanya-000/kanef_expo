@@ -14,6 +14,7 @@ export default function App() {
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("");
   const { handleLogout } = useContext(AuthContext);
+  const [uId, setUid] = useState("");
 
   const askForCameraPermission = () => {
     (async () => {
@@ -22,15 +23,39 @@ export default function App() {
     })();
   };
 
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uId");
+      if (value !== null) {
+        console.log(value);
+        setUid(value);
+      }
+    } catch (e) {
+      // error reading value
+    }
+    console.log(uId);
+  };
+
   // Request Camera Permission
   useEffect(() => {
     askForCameraPermission();
+    getData();
   }, []);
 
   // What happens when we scan the bar code
-  const handleBarCodeScanned = ({ type, data }: any) => {
+  const handleBarCodeScanned = async ({ type, data }: any) => {
     setScanned(true);
-    setText(data);
+    axios
+      .post("https://kenaf.ie/qrcheck", {
+        QR_ID: data,
+        uId: uId,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error.request);
+      });
   };
 
   // Check permissions and return the screens
@@ -41,11 +66,11 @@ export default function App() {
     return <Text style={{ margin: 10 }}>No access to camera</Text>;
   }
 
-  const handlePost = () => {
+  const handlePost = async () => {
     axios
-      .post("https://kenaf.000webhostapp.com/qrcheck", {
+      .post("https://kenaf.ie/qrcheck", {
         QR_ID: "QR_11153",
-        uId: "appUser_",
+        uId: "appUser_683930",
       })
       .then(function (response) {
         console.log(response);

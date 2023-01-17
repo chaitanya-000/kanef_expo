@@ -27,7 +27,11 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         {isLoggedIn ? (
           <>
             <Stack.Screen name="Settings" component={TabsNavigator} />

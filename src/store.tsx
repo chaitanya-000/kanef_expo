@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }: any) => {
       const value = await AsyncStorage.getItem("token");
       if (value !== null) {
         setIsLoggedIn(true);
-        console.log(value);
       }
     } catch (e) {
       // error reading value
@@ -27,9 +26,10 @@ export const AuthProvider = ({ children }: any) => {
         password: password,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.token) {
+          console.log(response.data.user.uId);
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
+          AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
           setIsLoggedIn(true);
         }
       })
@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }: any) => {
   const handleLogout = () => {
     AsyncStorage.removeItem("token");
     setIsLoggedIn(false);
-    console.log("clicked on logout function");
   };
 
   return (
