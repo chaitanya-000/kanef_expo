@@ -12,22 +12,23 @@ import { AuthContext } from "./store";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
-  const { hasLoggedInBefore, setHasLoggedInBefore } = useContext(AuthContext);
 
-  const checkIfLoggedIn = async () => {
-    try {
-      const value = await AsyncStorage.getItem("keepLoggedIn");
-      setHasLoggedInBefore(value);
-    } catch (error) {}
-  };
+  const {
+    hasLoggedInBefore,
+    setHasLoggedInBefore,
+    userInfo,
+    getData,
+    isLoggedIn,
+  } = useContext(AuthContext);
+
   useEffect(() => {
-    checkIfLoggedIn();
-    console.log(hasLoggedInBefore);
+    getData();
   }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {hasLoggedInBefore ? (
+        {isLoggedIn ? (
           <>
             <Stack.Screen name="Settings" component={TabsNavigator} />
             <Stack.Screen name="My Receipts" component={TabsNavigator} />

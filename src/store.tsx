@@ -5,34 +5,51 @@ import React, { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext<any>(null);
 export const AuthProvider = ({ children }: any) => {
-  const [hasLoggedInBefore, setHasLoggedInBefore] = useState(false);
+  const BASE_URL = `https://kenaf.ie`;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("token");
+      if (value !== null) {
+        setIsLoggedIn(true);
+        console.log(value);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
   const handleLogin = (email: string, password: string) => {
     axios
-      .post("http://127.0.0.1:8000/applogincheckusers", {
+      .post(`${BASE_URL}/applogincheckusers`, {
         email: email,
         password: password,
       })
       .then((response) => {
+        console.log(response);
         if (response.data.token) {
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
-          AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true));
+          setIsLoggedIn(true);
         }
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  const handleLogout = async () => {
-    AsyncStorage.setItem("token", "");
-    AsyncStorage.setItem("keepLoggedIn", "");
+
+  const handleLogout = () => {
+    AsyncStorage.removeItem("token");
+    setIsLoggedIn(false);
+    console.log("clicked on logout function");
   };
 
   return (
     <AuthContext.Provider
       value={{
         handleLogin,
-        hasLoggedInBefore,
-        setHasLoggedInBefore,
+        getData,
+        isLoggedIn,
         handleLogout,
       }}
     >

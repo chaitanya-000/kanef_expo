@@ -37,9 +37,7 @@ const Login = ({ navigation }: any) => {
       console.log(e);
     }
   };
-  // useEvent(() => {
-  //   getData();
-  // }, []);
+
   return (
     <>
       <ImageBackground
@@ -58,6 +56,7 @@ const Login = ({ navigation }: any) => {
           marginTop={"7%"}
           width={"100%"}
           onPress={() => handleLogin(email, password)}
+          // onPress={() => navigation.navigate("Settings")}
         >
           <Body1 style={{ color: "white" }}>Login</Body1>
         </GreenButton>
