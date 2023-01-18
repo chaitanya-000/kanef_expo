@@ -11,6 +11,7 @@ import AccountSettings from "../molecules/AccountSettings";
 import Help from "../molecules/Help";
 import SettingsOptionContainer from "../organisms/SettingsOptionContainer";
 import { Body1, Body2, Body3, Heading3, Heading6 } from "../atoms/Typography";
+import { GreenButton } from "../atoms/GreenButton";
 
 export default function Settings() {
   return (
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
     backgroundColor: "#121F27",
-    borderWidth: 1,
+    // borderWidth: ,
     // borderColor: "blue",
   },
   // headerColorSection: {
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   },
   WhiteImageAndOptionsContainer: {
     borderColor: "green",
-    borderWidth: 1.2,
+    borderWidth: 2.2,
     width: "100%",
     height: "78%",
     alignItems: "center",

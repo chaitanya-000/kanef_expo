@@ -95,7 +95,6 @@ export default function App() {
       {scanned && (
         <Button title={"Scan again?"} onPress={handlePost} color="tomato" />
       )}
-      <Button title="Logout" onPress={handleLogout} />
     </View>
   );
 }

@@ -21,11 +21,12 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../store";
 import { useEvent } from "react-native-reanimated";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, isLoading } = useContext(AuthContext);
 
   const getData = async () => {
     try {
@@ -39,6 +40,8 @@ const Login = ({ navigation }: any) => {
 
   return (
     <>
+      {isLoading ? <Spinner visible={isLoading} /> : null}
+
       <ImageBackground
         resizeMode="cover"
         source={require("../../assets/images/LoginScreenImage.png")}

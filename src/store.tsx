@@ -7,6 +7,7 @@ export const AuthContext = createContext<any>(null);
 export const AuthProvider = ({ children }: any) => {
   const BASE_URL = `https://kenaf.ie`;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {
     try {
@@ -20,6 +21,7 @@ export const AuthProvider = ({ children }: any) => {
   };
 
   const handleLogin = (email: string, password: string) => {
+    setIsLoading(true);
     axios
       .post(`${BASE_URL}/applogincheckusers`, {
         email: email,
@@ -27,6 +29,7 @@ export const AuthProvider = ({ children }: any) => {
       })
       .then((response) => {
         if (response.data.token) {
+          setIsLoading(false);
           console.log(response.data.user.uId);
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
           AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
@@ -41,6 +44,7 @@ export const AuthProvider = ({ children }: any) => {
   const handleLogout = () => {
     AsyncStorage.removeItem("token");
     setIsLoggedIn(false);
+    setIsLoading(true);
   };
 
   return (
