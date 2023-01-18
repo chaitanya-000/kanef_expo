@@ -1,19 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
-import { BarCodeScanner, BarCodeSize } from "expo-barcode-scanner";
+import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AuthContext } from "../store";
 
-export default function App() {
+export default function CameraScreen() {
   const [hasPermission, setHasPermission] = useState<any>(null);
-  const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState("");
-  const { handleLogout } = useContext(AuthContext);
+  const [scanned, setScanned] = useState<any>(false);
+  const [text, setText] = useState<any>("Not yet scanned");
   const [uId, setUid] = useState("");
 
   const askForCameraPermission = () => {
@@ -27,73 +25,73 @@ export default function App() {
     try {
       const value = await AsyncStorage.getItem("uId");
       if (value !== null) {
-        console.log(value);
         setUid(value);
       }
     } catch (e) {
       // error reading value
     }
-    console.log(uId);
   };
 
   // Request Camera Permission
   useEffect(() => {
     askForCameraPermission();
     getData();
-  }, []);
+  }, [uId]);
 
   // What happens when we scan the bar code
   const handleBarCodeScanned = async ({ type, data }: any) => {
     setScanned(true);
+
     axios
-      .post("https://kenaf.ie/qrcheck", {
+      .post("https://jsonplaceholder.typicode.com/posts", {
         QR_ID: data,
         uId: uId,
       })
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
       })
-      .catch(function (error) {
-        console.log(error.request);
+      .catch((error) => {
+        console.log(error);
       });
   };
 
   // Check permissions and return the screens
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return (
+      <View style={styles.container}>
+        <Text>Requesting for camera permission</Text>
+      </View>
+    );
   }
   if (hasPermission === false) {
-    return <Text style={{ margin: 10 }}>No access to camera</Text>;
+    return (
+      <View style={styles.container}>
+        <Text style={{ margin: 10 }}>No access to camera</Text>
+        <Button
+          title={"Allow Camera"}
+          onPress={() => askForCameraPermission()}
+        />
+      </View>
+    );
   }
 
-  const handlePost = async () => {
-    axios
-      .post("https://kenaf.ie/qrcheck", {
-        QR_ID: "QR_11153",
-        uId: "appUser_683930",
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error.request);
-      });
-  };
-
+  // Return the View
   return (
     <View style={styles.container}>
-      {/* <Text onPress={handlePost}>LogOut</Text> */}
-
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 500 }}
+          style={{ height: 400, width: 400 }}
         />
       </View>
       <Text style={styles.maintext}>{text}</Text>
 
       {scanned && (
-        <Button title={"Scan again?"} onPress={handlePost} color="tomato" />
+        <Button
+          title={"Scan again?"}
+          onPress={() => setScanned(false)}
+          color="tomato"
+        />
       )}
     </View>
   );
@@ -101,26 +99,24 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    width: responsiveScreenWidth(100),
-    height: responsiveScreenHeight(100),
-    // backgroundColor: "orange",
+    flex: 1,
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
-    // borderWidth: 2,
   },
   maintext: {
-    fontSize: 30,
+    fontSize: 16,
     margin: 20,
   },
   barcodebox: {
     alignItems: "center",
-    // justifyContent: "center",
-    height: responsiveScreenHeight(42),
-    width: responsiveScreenWidth(80),
-    overflow: "hidden",
+    justifyContent: "center",
+    height: responsiveScreenHeight(46),
+    width: responsiveScreenWidth(65),
     borderRadius: 30,
-    borderColor: "red",
+    backgroundColor: "#26ae60ed",
+    overflow: "hidden",
     borderWidth: 2,
-    // backgroundColor: "red",
+    borderColor: "gray",
   },
 });

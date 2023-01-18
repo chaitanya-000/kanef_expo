@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }: any) => {
         password: password,
       })
       .then((response) => {
+        // console.log(response);
         if (response.data.token) {
           setIsLoading(false);
           console.log(response.data.user.uId);
