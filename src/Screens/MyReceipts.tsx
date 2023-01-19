@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Body1,
   Body2,
@@ -21,35 +21,84 @@ import {
   ScreenContainer,
   WhiteRoundedContainer,
 } from "../styledComponents/Receipts,Reward,BillPage";
-import ReceiptRewardContainer from "../molecules/ReceiptRewardContainer";
 import { Feather } from "@expo/vector-icons";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Spinner from "react-native-loading-spinner-overlay/lib";
+import * as ImagePicker from "expo-image-picker";
 
 const MyReceipts = ({ navigation }: any) => {
+  const [uId, setUid] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [receivedData, setReceivedData] = useState<any>(null);
+  const orgNameRef = useRef<any>();
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uId");
+      if (value !== null) {
+        setUid(JSON.parse(value));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getStores = () => {
+    setIsLoading(true);
+    uId &&
+      axios
+        .post("https://kenaf.ie/MyReceiptList", {
+          uId: uId,
+        })
+        .then((response) => {
+          setIsLoading(false);
+          setReceivedData(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  };
+
+  const printStoreName = () => {
+    console.log(orgNameRef.current);
+  };
+
+  useEffect(() => {
+    getData();
+    getStores();
+  }, [uId]);
   return (
     <ScreenContainer>
+      <Spinner visible={isLoading} animation="fade" size="large" />
       <Body1 style={styles.ScreenName}>My Receipts</Body1>
       <WhiteRoundedContainer>
         <OptionsContainer>
           <Heading5 style={styles.ContentHeader}>Receipts</Heading5>
-          <TouchableOpacity
-            style={styles.container}
-            onPress={() => navigation.navigate("Invoices")}
-          >
-            <Image
-              source={require("../../assets/images/WalmartLogo.jpg")}
-              style={styles.StoreImage}
-            />
-            <View style={styles.NameAndDate}>
-              <Body2>Walmart</Body2>
-              <Body5 style={{ color: "gray" }}>23 July 2022</Body5>
-            </View>
-            <Feather
-              name="chevron-right"
-              size={25}
-              color="gray"
-              style={styles.rightArrow}
-            />
-          </TouchableOpacity>
+          {receivedData &&
+            receivedData.map((eachObj: { orName: string }, key: number) => {
+              return (
+                <TouchableOpacity
+                  style={styles.container}
+                  onPress={printStoreName}
+                  key={Math.random() * 10000000000}
+                >
+                  <Image
+                    source={require("../../assets/images/WalmartLogo.jpg")}
+                    style={styles.StoreImage}
+                  />
+                  <View style={styles.NameAndDate}>
+                    <Text ref={orgNameRef}>{eachObj.orName}</Text>
+                  </View>
+                  <Feather
+                    name="chevron-right"
+                    size={25}
+                    color="gray"
+                    style={styles.rightArrow}
+                  />
+                </TouchableOpacity>
+              );
+            })}
         </OptionsContainer>
       </WhiteRoundedContainer>
     </ScreenContainer>

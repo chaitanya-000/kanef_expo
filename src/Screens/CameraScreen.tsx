@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Image } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -7,12 +7,14 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
+import * as ImagePicker from "expo-image-picker";
 
 export default function CameraScreen() {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [scanned, setScanned] = useState<any>(false);
   const [text, setText] = useState<any>("Not yet scanned");
   const [uId, setUid] = useState("");
+  const [image, setImage] = useState<any>(null);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -74,6 +76,20 @@ export default function CameraScreen() {
       </View>
     );
   }
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   // Return the View
   return (
@@ -92,6 +108,10 @@ export default function CameraScreen() {
           onPress={() => setScanned(false)}
           color="tomato"
         />
+      )}
+      <Button title="Upload Image from Gallery" onPress={pickImage} />
+      {image && (
+        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )}
     </View>
   );
