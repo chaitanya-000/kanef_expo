@@ -81,7 +81,7 @@ const Invoices = ({ route }: any) => {
                     style={styles.StoreImage}
                   />
                   <View style={styles.NameAndDate}>
-                    <Body2>{eachObj.updated_at}</Body2>
+                    <Body2>{eachObj.updated_at.split("T")[0]}</Body2>
                   </View>
                   <Feather
                     name="chevron-right"
