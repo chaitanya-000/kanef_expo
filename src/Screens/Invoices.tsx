@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Body1,
   Body2,
@@ -23,7 +23,7 @@ import {
 } from "../styledComponents/Receipts,Reward,BillPage";
 import { Feather } from "@expo/vector-icons";
 
-const Invoices = () => {
+const Invoices = ({ route }: any) => {
   return (
     <ScreenContainer>
       <Body1 style={styles.ScreenName}>My Receipts</Body1>
@@ -38,7 +38,7 @@ const Invoices = () => {
             <View style={styles.NameAndDate}>
               <Body2>23 july 2022</Body2>
               <Body5 style={{ color: "gray" }}>
-                Click here to download bill
+                Click here to download bill {route.params.paramKey}
               </Body5>
             </View>
             <Feather

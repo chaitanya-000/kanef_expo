@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Image,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -8,6 +16,9 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import * as ImagePicker from "expo-image-picker";
+import { Body2, Body4 } from "../atoms/Typography";
+import { Entypo } from "@expo/vector-icons";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 export default function CameraScreen() {
   const [hasPermission, setHasPermission] = useState<any>(null);
@@ -15,6 +26,7 @@ export default function CameraScreen() {
   const [text, setText] = useState<any>("Not yet scanned");
   const [uId, setUid] = useState("");
   const [image, setImage] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -94,14 +106,14 @@ export default function CameraScreen() {
   // Return the View
   return (
     <View style={styles.container}>
+      <Spinner visible={loading} />
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{ height: 400, width: 400 }}
         />
       </View>
-      <Text style={styles.maintext}>{text}</Text>
-
+      {/* <Text style={styles.maintext}>{text}</Text> */}
       {scanned && (
         <Button
           title={"Scan again?"}
@@ -109,7 +121,10 @@ export default function CameraScreen() {
           color="tomato"
         />
       )}
-      <Button title="Upload Image from Gallery" onPress={pickImage} />
+      <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
+        <Body2>Upload Image</Body2>
+        <Entypo name="upload" size={20} color="black" />
+      </TouchableOpacity>
       {image && (
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )}
@@ -119,10 +134,11 @@ export default function CameraScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(100),
     backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
   },
   maintext: {
     fontSize: 16,
@@ -138,5 +154,15 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 2,
     borderColor: "gray",
+  },
+  uploadButton: {
+    width: responsiveScreenWidth(50),
+    height: responsiveScreenHeight(5),
+    backgroundColor: "#e9f2eb",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    borderRadius: 15,
   },
 });

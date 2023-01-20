@@ -60,8 +60,12 @@ const MyReceipts = ({ navigation }: any) => {
         });
   };
 
-  const printStoreName = () => {
-    console.log(orgNameRef.current);
+  const printStoreName = ({ orName }: any) => {
+    ``;
+    console.log(orName);
+    navigation.navigate("Invoices", {
+      paramKey: "testing Value = " + orName,
+    });
   };
 
   useEffect(() => {
@@ -80,7 +84,11 @@ const MyReceipts = ({ navigation }: any) => {
               return (
                 <TouchableOpacity
                   style={styles.container}
-                  onPress={printStoreName}
+                  onPress={() => {
+                    navigation.navigate("Invoices", {
+                      paramKey: eachObj.orName,
+                    });
+                  }}
                   key={Math.random() * 10000000000}
                 >
                   <Image
