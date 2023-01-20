@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Body1,
   Body2,
@@ -22,32 +22,76 @@ import {
   WhiteRoundedContainer,
 } from "../styledComponents/Receipts,Reward,BillPage";
 import { Feather } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const Invoices = ({ route }: any) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [receivedData, setReceivedData] = useState<any>(null);
+  const [uId, setUid] = useState("");
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uId");
+      if (value !== null) {
+        setUid(JSON.parse(value));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getSpecificStore = () => {
+    setIsLoading(true);
+    uId &&
+      axios
+        .post("https://kenaf.ie/MyInvoice", {
+          uId: uId,
+          orName: route.params.storeName,
+        })
+        .then((response) => {
+          console.log(response);
+          setIsLoading(false);
+          setReceivedData(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  };
+  useEffect(() => {
+    getData();
+    getSpecificStore();
+  }, [uId]);
   return (
     <ScreenContainer>
+      <Spinner visible={isLoading} animation="fade" size="large" />
       <Body1 style={styles.ScreenName}>My Receipts</Body1>
       <WhiteRoundedContainer>
         <OptionsContainer>
-          <Heading5 style={styles.ContentHeader}>Walmart</Heading5>
-          <TouchableOpacity style={styles.container}>
-            <Image
-              source={require("../../assets/images/WalmartLogo.jpg")}
-              style={styles.StoreImage}
-            />
-            <View style={styles.NameAndDate}>
-              <Body2>23 july 2022</Body2>
-              <Body5 style={{ color: "gray" }}>
-                Click here to download bill {route.params.paramKey}
-              </Body5>
-            </View>
-            <Feather
-              name="chevron-right"
-              size={25}
-              color="gray"
-              style={styles.rightArrow}
-            />
-          </TouchableOpacity>
+          <Heading5 style={styles.ContentHeader}>
+            {route.params.storeName}
+          </Heading5>
+          {receivedData &&
+            receivedData.map((eachObj: any) => {
+              return (
+                <TouchableOpacity style={styles.container}>
+                  <Image
+                    source={require("../../assets/images/WalmartLogo.jpg")}
+                    style={styles.StoreImage}
+                  />
+                  <View style={styles.NameAndDate}>
+                    <Body2>{eachObj.updated_at}</Body2>
+                  </View>
+                  <Feather
+                    name="chevron-right"
+                    size={25}
+                    color="gray"
+                    style={styles.rightArrow}
+                  />
+                </TouchableOpacity>
+              );
+            })}
         </OptionsContainer>
       </WhiteRoundedContainer>
     </ScreenContainer>

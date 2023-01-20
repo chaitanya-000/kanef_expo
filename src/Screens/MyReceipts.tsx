@@ -60,14 +60,6 @@ const MyReceipts = ({ navigation }: any) => {
         });
   };
 
-  const printStoreName = ({ orName }: any) => {
-    ``;
-    console.log(orName);
-    navigation.navigate("Invoices", {
-      paramKey: "testing Value = " + orName,
-    });
-  };
-
   useEffect(() => {
     getData();
     getStores();
@@ -86,7 +78,7 @@ const MyReceipts = ({ navigation }: any) => {
                   style={styles.container}
                   onPress={() => {
                     navigation.navigate("Invoices", {
-                      paramKey: eachObj.orName,
+                      storeName: eachObj.orName,
                     });
                   }}
                   key={Math.random() * 10000000000}
