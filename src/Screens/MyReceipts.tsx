@@ -52,6 +52,7 @@ const MyReceipts = ({ navigation }: any) => {
           uId: uId,
         })
         .then((response) => {
+          console.log(response.data);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })

@@ -7,6 +7,7 @@ import {
   Image,
   Platform,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
@@ -19,8 +20,9 @@ import * as ImagePicker from "expo-image-picker";
 import { Body2, Body4 } from "../atoms/Typography";
 import { Entypo } from "@expo/vector-icons";
 import Spinner from "react-native-loading-spinner-overlay/lib";
+import Navigation from "../Navigation";
 
-export default function CameraScreen() {
+export default function CameraScreen({ navigation }: any) {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [scanned, setScanned] = useState<any>(false);
   const [text, setText] = useState<any>("Not yet scanned");
@@ -57,12 +59,35 @@ export default function CameraScreen() {
     setScanned(true);
 
     axios
-      .post("https://jsonplaceholder.typicode.com/posts", {
-        QR_ID: data,
-        uId: uId,
+      .post("https://kenaf.ie/Invoice", {
+        tID: "till_557351869",
+        uId: "appUser_906891",
       })
       .then((response) => {
-        console.log(response);
+        const receivedResponseStatus = response.data.status;
+        console.log(receivedResponseStatus, typeof receivedResponseStatus);
+
+        (receivedResponseStatus === "false" &&
+          Alert.alert(
+            response.data.data,
+            "",
+            [
+              {
+                text: "Try Again",
+                onPress: () => setScanned(false),
+                style: "default",
+              },
+            ],
+            {
+              cancelable: true,
+            }
+          )) ||
+          Alert.alert(response.data.data, "", [
+            {
+              text: "Go to receipts",
+              onPress: () => navigation.navigate("My Receipts"),
+            },
+          ]);
       })
       .catch((error) => {
         console.log(error);
@@ -121,6 +146,7 @@ export default function CameraScreen() {
           color="tomato"
         />
       )}
+
       <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
         <Body2>Upload Image</Body2>
         <Entypo name="upload" size={20} color="black" />

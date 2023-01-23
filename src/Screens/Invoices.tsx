@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   Body1,
@@ -75,7 +82,14 @@ const Invoices = ({ route }: any) => {
           {receivedData &&
             receivedData.map((eachObj: any) => {
               return (
-                <TouchableOpacity style={styles.container}>
+                <TouchableOpacity
+                  style={styles.container}
+                  onPress={() => {
+                    Linking.openURL(
+                      `http://admin.kenaf.ie/userInvoice/${eachObj.id}`
+                    );
+                  }}
+                >
                   <Image
                     source={require("../../assets/images/WalmartLogo.jpg")}
                     style={styles.StoreImage}
