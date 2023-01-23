@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   FlatList,
+  Alert,
 } from "react-native";
 import React, { useContext, useState } from "react";
 import {
@@ -48,17 +49,41 @@ import { GreenButton } from "../atoms/GreenButton";
 import axios from "axios";
 import { AuthContext } from "../store";
 import Spinner from "react-native-loading-spinner-overlay/lib";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const Register = () => {
+const Register = ({ navigation }: any) => {
   const deviceHeight = Dimensions.get("screen").height;
   const deviceWidth = Dimensions.get("window").width;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [reEnteredPassword, setReEnteredPassword] = useState("");
+  const { isLoading, setIsLoading } = useContext(AuthContext);
 
+  const handleRegister = () => {
+    setIsLoading(true);
+    axios
+      .post("https://kenaf.ie/appuserregister", {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        setIsLoading(false);
+        const status = response.data.status;
+        !status && navigation.navigate("Login");
+
+        status === "false" && Alert.alert(response.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
-    <ScrollView contentContainerStyle={styles.ScrollView}>
+    <KeyboardAwareScrollView>
+      <Spinner visible={isLoading} />
       <Image
         source={require("../../assets/images/RegisterScreenImage.png")}
         style={styles.image}
@@ -73,26 +98,24 @@ const Register = () => {
         />
         <EmailAddress email={email} setEmail={setEmail} />
         <Password password={password} setPassword={setPassword} />
-        <ConfirmPassword password={password} />
+        <ConfirmPassword
+          reEnteredPassword={reEnteredPassword}
+          setReEnteredPassword={setReEnteredPassword}
+        />
         <GreenButton
           width={Dimensions.get("window").width - 40}
           height={Dimensions.get("window").height / 15}
           marginTop={50}
+          onPress={handleRegister}
         >
           <Body1 style={{ color: "white" }}>Sign up with email</Body1>
         </GreenButton>
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  ScrollView: {
-    // borderWidth: 1,
-    borderColor: "blue",
-    height: "215%",
-    // justifyContent: "flex-start",
-  },
   container: {
     width: Dimensions.get("window").width,
     height: responsiveScreenHeight(80),
@@ -102,7 +125,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     position: "relative",
-    bottom: "32%",
+    bottom: "22%",
     borderRadius: 25,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,

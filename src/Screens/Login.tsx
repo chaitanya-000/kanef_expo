@@ -40,7 +40,7 @@ const Login = ({ navigation }: any) => {
 
   return (
     <>
-      {isLoading ? <Spinner visible={isLoading} /> : null}
+      <Spinner visible={isLoading} />
 
       <ImageBackground
         resizeMode="cover"

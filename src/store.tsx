@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }: any) => {
       })
       .catch((error) => {
         console.log(error);
+        setIsLoading(false);
       });
   };
 
@@ -55,6 +56,8 @@ export const AuthProvider = ({ children }: any) => {
         getData,
         isLoggedIn,
         handleLogout,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
