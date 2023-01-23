@@ -118,7 +118,7 @@ const Register = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get("window").width,
-    height: responsiveScreenHeight(80),
+    height: responsiveScreenHeight(90),
     backgroundColor: "#FFFFFF",
     paddingVertical: "12%",
     paddingHorizontal: "5%",

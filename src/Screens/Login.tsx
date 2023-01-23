@@ -3,6 +3,7 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   View,
@@ -22,6 +23,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../store";
 import { useEvent } from "react-native-reanimated";
 import Spinner from "react-native-loading-spinner-overlay";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
@@ -39,7 +41,7 @@ const Login = ({ navigation }: any) => {
   };
 
   return (
-    <>
+    <KeyboardAwareScrollView>
       <Spinner visible={isLoading} />
 
       <ImageBackground
@@ -63,7 +65,7 @@ const Login = ({ navigation }: any) => {
           <Body1 style={{ color: "white" }}>Login</Body1>
         </GreenButton>
       </View>
-    </>
+    </KeyboardAwareScrollView>
   );
 };
 const styles = StyleSheet.create({
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     position: "relative",
-    bottom: "25%",
+    bottom: "10%",
     // justifyContent: "space-evenly",
 
     // flex: 2,
