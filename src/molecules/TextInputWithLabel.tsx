@@ -25,4 +25,5 @@ export const Label = styled.Text`
   color: #828282;
   font-weight: 500;
   margin-bottom: 4px;
+  text-transform: uppercase;
 `;
