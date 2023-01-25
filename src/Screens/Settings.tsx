@@ -13,7 +13,7 @@ import SettingsOptionContainer from "../organisms/SettingsOptionContainer";
 import { Body1, Body2, Body3, Heading3, Heading6 } from "../atoms/Typography";
 import { GreenButton } from "../atoms/GreenButton";
 
-export default function Settings() {
+export default function Settings({ navigation }: any) {
   return (
     <View style={styles.pageContainer}>
       <Heading6 style={{ color: "white" }}>Settings</Heading6>
@@ -22,7 +22,7 @@ export default function Settings() {
           source={require("../../assets/images/ProfileImage.png")}
           style={styles.ProfileImage}
         />
-        <SettingsOptionContainer />
+        <SettingsOptionContainer navigation={navigation} />
       </View>
     </View>
   );

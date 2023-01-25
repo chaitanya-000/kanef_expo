@@ -60,12 +60,12 @@ export default function CameraScreen({ navigation }: any) {
 
     axios
       .post("https://kenaf.ie/Invoice", {
-        tID: "till_557351869",
-        uId: "appUser_906891",
+        tID: data,
+        uId: JSON.parse(uId),
       })
       .then((response) => {
         const receivedResponseStatus = response.data.status;
-        console.log(receivedResponseStatus, typeof receivedResponseStatus);
+        console.log(response);
 
         (receivedResponseStatus === "false" &&
           Alert.alert(
@@ -148,7 +148,7 @@ export default function CameraScreen({ navigation }: any) {
       )}
 
       <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
-        <Body2>Upload Image</Body2>
+        <Body2>Upload Receipt from gallery</Body2>
         <Entypo name="upload" size={20} color="black" />
       </TouchableOpacity>
       {image && (
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
     borderColor: "gray",
   },
   uploadButton: {
-    width: responsiveScreenWidth(50),
-    height: responsiveScreenHeight(5),
+    width: responsiveScreenWidth(70),
+    height: responsiveScreenHeight(6),
     backgroundColor: "#e9f2eb",
     display: "flex",
     flexDirection: "row",

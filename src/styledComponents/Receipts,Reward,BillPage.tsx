@@ -4,7 +4,7 @@ import {
 } from "react-native-responsive-dimensions";
 import styled from "styled-components/native";
 
-export const WhiteRoundedContainer = styled.View`
+export const WhiteRoundedContainer = styled.ScrollView`
   width: ${responsiveScreenWidth(100)};
   height: ${responsiveScreenHeight(83)};
   border-radius: 30px;

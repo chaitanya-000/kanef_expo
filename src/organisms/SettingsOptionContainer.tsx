@@ -11,11 +11,11 @@ import { GreenButton } from "../atoms/GreenButton";
 import { Body1 } from "../atoms/Typography";
 import { AuthContext } from "../store";
 
-const SettingsOptionContainer = () => {
+const SettingsOptionContainer = ({ navigation }: any) => {
   const { handleLogout } = useContext(AuthContext);
   return (
     <View style={styles.container}>
-      <AccountSettings />
+      <AccountSettings navigation={navigation} />
       <Help />
       <ContactUs />
       <OpenOnCamera />
