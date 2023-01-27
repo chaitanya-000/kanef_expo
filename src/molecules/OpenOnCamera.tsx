@@ -1,5 +1,12 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Switch,
+} from "react-native";
+import React, { useState } from "react";
 import {
   responsiveFontSize,
   responsiveScreenHeight,
@@ -9,7 +16,13 @@ import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
 import { Entypo, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
 
-export default function OpenOnCamera() {
+export default function OpenOnCamera({ navigation }: any) {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState);
+    !isEnabled && navigation.navigate("Camera");
+    setIsEnabled(false);
+  };
   return (
     <View
       style={{
@@ -29,9 +42,12 @@ export default function OpenOnCamera() {
           />
           <Body2>Open on Camera</Body2>
         </View>
-        <Image
-          source={require("../../assets/images/OpenOnCameraToggle.png")}
-          style={styles.toggleLogo}
+        <Switch
+          trackColor={{ false: "black", true: "white" }}
+          thumbColor={isEnabled ? "#26ae60ed" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
         />
       </TouchableOpacity>
       <HorizontalDividerLine />

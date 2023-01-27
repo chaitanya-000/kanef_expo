@@ -43,11 +43,21 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import Gender from "../organisms/Gender";
 import { GreenButton } from "../atoms/GreenButton";
+import DropDownPicker from "react-native-dropdown-picker";
+import ModalDropdown from "react-native-modal-dropdown";
+``;
 
 const AccountSettingsScreen = () => {
   const [showPicker, setShowPicker] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
   const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "Apple", value: "apple" },
+    { label: "Banana", value: "banana" },
+  ]);
   return (
     <KeyboardAwareScrollView>
       <SafeAreaView
@@ -171,9 +181,19 @@ const AccountSettingsScreen = () => {
             <View style={{ width: "80%", height: "100%" }}>
               <Label>Gender</Label>
               <View>
-                <TextInput
-                  style={styles.inputWithLabelContainer_textInput_DateOfBirth}
-                  placeholder="male , female"
+                <ModalDropdown
+                  defaultValue="Male"
+                  options={["Male", "Female"]}
+                  style={{ marginTop: responsiveScreenHeight(2) }}
+                  isFullWidth={true}
+                  textStyle={{ fontSize: responsiveScreenFontSize(3) }}
+                  dropdownTextStyle={{
+                    fontSize: responsiveScreenFontSize(2),
+                  }}
+                  dropdownStyle={{
+                    width: responsiveScreenWidth(24),
+                    height: responsiveScreenHeight(10),
+                  }}
                 />
               </View>
             </View>
@@ -236,6 +256,7 @@ const AccountSettingsScreen = () => {
             </View>
           </View>
 
+          {/* Manage //////////////////////////////////////////////////////////////////////////////////// */}
           <Heading5
             style={{
               alignSelf: "flex-start",
@@ -247,8 +268,11 @@ const AccountSettingsScreen = () => {
           <View style={styles.manage}>
             <Body1>Notifications </Body1>
             <Switch
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+              trackColor={{ false: "black", true: "white" }}
+              thumbColor={isEnabled ? "#26ae60ed" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={isEnabled}
             />
           </View>
           <GreenButton
