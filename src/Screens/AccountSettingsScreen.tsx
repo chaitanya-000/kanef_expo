@@ -135,7 +135,7 @@ const AccountSettingsScreen = () => {
 
           <View style={styles.firstNameLastNameContainer}>
             <View style={styles.firstNameLastNameContainer_firstName}>
-              <Label>Password</Label>
+              <Label>first Name</Label>
               <View>
                 <TextInput
                   style={styles.inputWithLabelContainer_textInput}
@@ -146,7 +146,7 @@ const AccountSettingsScreen = () => {
               {/* Last Name ////////////////////////////////////////////////////////////////////////////////////*/}
             </View>
             <View style={styles.firstNameLastNameContainer_lastName}>
-              <Label>Password</Label>
+              <Label>Last name</Label>
               <View>
                 <TextInput
                   style={styles.inputWithLabelContainer_textInput}

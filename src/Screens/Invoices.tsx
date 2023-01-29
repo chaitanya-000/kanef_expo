@@ -33,7 +33,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import Spinner from "react-native-loading-spinner-overlay/lib";
 
-const Invoices = ({ route }: any) => {
+const Invoices = ({ route, navigation }: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [receivedData, setReceivedData] = useState<any>(null);
   const [uId, setUid] = useState("");
@@ -58,7 +58,7 @@ const Invoices = ({ route }: any) => {
           orName: route.params.storeName,
         })
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
@@ -85,9 +85,14 @@ const Invoices = ({ route }: any) => {
                 <TouchableOpacity
                   style={styles.container}
                   onPress={() => {
-                    Linking.openURL(
-                      `http://admin.kenaf.ie/userInvoice/${eachObj.id}`
-                    );
+                    navigation.navigate("SeperateInvoice", {
+                      InvoiceLink: eachObj.InvoiceLink,
+                    });
+                    // axios
+                    //   .get(`https://kenaf.ie/OrgInvoice/${eachObj.InvoiceLink}`)
+                    //   .then((response) => {
+                    //     console.log(response);
+                    //   });
                   }}
                 >
                   <Image
