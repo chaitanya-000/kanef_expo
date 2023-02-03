@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import {
   Body1,
   Body2,
@@ -8,8 +8,10 @@ import {
   Heading4,
   Heading6,
 } from "../atoms/Typography";
+import { AuthContext } from "../store";
 
 export default function GoogleButton() {
+  const { googleAuth } = useContext(AuthContext);
   return (
     <TouchableOpacity
       style={{
@@ -26,6 +28,7 @@ export default function GoogleButton() {
         borderBottomLeftRadius: 15,
         borderTopRightRadius: 15,
       }}
+      onPress={() => googleAuth()}
     >
       <Image source={require("../../assets/images/GoogleLogo.png")} />
       <Body1 style={{ color: "white", marginLeft: "6%" }}>Google</Body1>

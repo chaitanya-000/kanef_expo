@@ -8,6 +8,9 @@ export const AuthProvider = ({ children }: any) => {
   const BASE_URL = `https://kenaf.ie`;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    name: "chaitanya joshi",
+  });
 
   const getData = async () => {
     try {
@@ -49,6 +52,10 @@ export const AuthProvider = ({ children }: any) => {
     setIsLoading(true);
   };
 
+  const googleAuth = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -58,6 +65,7 @@ export const AuthProvider = ({ children }: any) => {
         handleLogout,
         isLoading,
         setIsLoading,
+        googleAuth,
       }}
     >
       {children}

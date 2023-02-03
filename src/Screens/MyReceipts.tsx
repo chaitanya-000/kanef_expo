@@ -31,7 +31,6 @@ const MyReceipts = ({ navigation }: any) => {
   const [uId, setUid] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [receivedData, setReceivedData] = useState<any>(null);
-  const orgNameRef = useRef<any>();
 
   const getData = async () => {
     try {
@@ -89,7 +88,7 @@ const MyReceipts = ({ navigation }: any) => {
                     style={styles.StoreImage}
                   />
                   <View style={styles.NameAndDate}>
-                    <Text ref={orgNameRef}>{eachObj.orName}</Text>
+                    <Text>{eachObj.orName}</Text>
                   </View>
                   <Feather
                     name="chevron-right"

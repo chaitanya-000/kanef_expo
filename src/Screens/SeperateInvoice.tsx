@@ -5,19 +5,18 @@ import axios from "axios";
 
 const SeperateInvoice = ({ route }: any) => {
   useEffect(() => {
-    axios
-      .get(`https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`)
-      .then((response) => {
-        console.log(response);
-      });
+    // axios
+    //   .get(`https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`)
+    //   .then((response) => {
+    //     console.log(response, "the api rendered");
+    //   });
+    console.log("this component re-rendered");
   }, []);
 
   return (
     <View style={styles.container}>
       <Image
         source={{
-          //   uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
-          //   uri: `https://picsum.photos/id/237/200/300`,
           uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
         }}
         style={{ height: 600, width: 400 }}
