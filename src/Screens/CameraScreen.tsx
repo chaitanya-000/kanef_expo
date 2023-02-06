@@ -17,31 +17,38 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import * as ImagePicker from "expo-image-picker";
-import { Body2, Body4 } from "../atoms/Typography";
+import { Body1, Body2, Body4 } from "../atoms/Typography";
 import { Entypo } from "@expo/vector-icons";
 import Spinner from "react-native-loading-spinner-overlay/lib";
 import Navigation from "../Navigation";
+import { Dropdown } from "react-native-element-dropdown";
+import OrgNameDropDown from "../organisms/OrgNameDropDown";
+import { GreenButton } from "../atoms/GreenButton";
 
 export default function CameraScreen({ navigation }: any) {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [scanned, setScanned] = useState<any>(false);
-  const [text, setText] = useState<any>("Not yet scanned");
   const [uId, setUid] = useState("");
   const [image, setImage] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [value, setValue] = useState<string>();
 
+  //ask for camera permission
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   };
+
+  //launch the camera. And then set the image to the clicked image
   const launchCamera = async () => {
     const { assets } = await ImagePicker.launchCameraAsync();
     console.log(assets[0]);
     setImage(assets[0].uri);
   };
 
+  //getting the uid of the logged in user for post request
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("uId");
@@ -53,7 +60,7 @@ export default function CameraScreen({ navigation }: any) {
     }
   };
 
-  // Request Camera Permission
+  //UseEffect
   useEffect(() => {
     askForCameraPermission();
     getData();
@@ -62,7 +69,6 @@ export default function CameraScreen({ navigation }: any) {
   // What happens when we scan the bar code
   const handleBarCodeScanned = async ({ type, data }: any) => {
     setScanned(true);
-
     axios
       .post("https://kenaf.ie/Invoice", {
         tID: data,
@@ -71,7 +77,6 @@ export default function CameraScreen({ navigation }: any) {
       .then((response) => {
         const receivedResponseStatus = response.data.status;
         console.log(response);
-
         (receivedResponseStatus === "false" &&
           Alert.alert(
             response.data.data,
@@ -125,14 +130,22 @@ export default function CameraScreen({ navigation }: any) {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
   };
 
+  const sendImage = () => {
+    axios
+      .post("https://kenaf.ie/PersonalReceipt", {
+        orId: value,
+        Invoice: image,
+        uId: uId,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+  };
   // Return the View
   return (
     <View style={styles.container}>
@@ -143,7 +156,6 @@ export default function CameraScreen({ navigation }: any) {
           style={{ height: 400, width: 400 }}
         />
       </View>
-      {/* <Text style={styles.maintext}>{text}</Text> */}
       {scanned && (
         <Button
           title={"Scan again?"}
@@ -151,18 +163,28 @@ export default function CameraScreen({ navigation }: any) {
           color="tomato"
         />
       )}
-
-      <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
-        <Body2>Upload Receipt from gallery</Body2>
-        <Entypo name="upload" size={20} color="black" />
-      </TouchableOpacity>
-      {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )}
-      <TouchableOpacity style={styles.uploadButton} onPress={launchCamera}>
-        <Body2>Click to open camera</Body2>
-        <Entypo name="camera" size={20} color="black" />
-      </TouchableOpacity>
+      <View style={styles.optionsContainer}>
+        <OrgNameDropDown value={value} setValue={setValue} />
+        <View style={styles.uploadAndCameraButtons}>
+          <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
+            <Body2>Upload</Body2>
+            <Entypo name="upload" size={25} color="black" />
+          </TouchableOpacity>
+          <Body1>OR</Body1>
+          <TouchableOpacity style={styles.uploadButton} onPress={launchCamera}>
+            <Body2>Camera</Body2>
+            <Entypo name="camera" size={25} color="black" />
+          </TouchableOpacity>
+        </View>
+        <GreenButton
+          height={"20%"}
+          marginTop={"15%"}
+          width={"62%"}
+          // onPress={()=> sendImage()}
+        >
+          <Body1 style={{ color: "white" }}>Send</Body1>
+        </GreenButton>
+      </View>
     </View>
   );
 }
@@ -182,16 +204,16 @@ const styles = StyleSheet.create({
   barcodebox: {
     alignItems: "center",
     justifyContent: "center",
-    height: responsiveScreenHeight(46),
-    width: responsiveScreenWidth(65),
+    height: responsiveScreenHeight(44),
+    width: responsiveScreenWidth(55),
     borderRadius: 30,
     backgroundColor: "#26ae60ed",
     overflow: "hidden",
-    borderWidth: 2,
+    // borderWidth: 2,
     borderColor: "gray",
   },
   uploadButton: {
-    width: responsiveScreenWidth(70),
+    width: responsiveScreenWidth(35),
     height: responsiveScreenHeight(6),
     backgroundColor: "#e9f2eb",
     display: "flex",
@@ -199,5 +221,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     borderRadius: 15,
+  },
+  optionsContainer: {
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(30),
+    // borderWidth: 2,
+    alignItems: "center",
+    // justifyContent: "space-between",
+  },
+  uploadAndCameraButtons: {
+    width: responsiveScreenWidth(90),
+    height: responsiveScreenHeight(10),
+    flexDirection: "row",
+    // borderWidth: 2,
+    alignItems: "center",
+    justifyContent: "space-around",
   },
 });
