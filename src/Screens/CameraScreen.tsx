@@ -36,6 +36,11 @@ export default function CameraScreen({ navigation }: any) {
       setHasPermission(status === "granted");
     })();
   };
+  const launchCamera = async () => {
+    const { assets } = await ImagePicker.launchCameraAsync();
+    console.log(assets[0]);
+    setImage(assets[0].uri);
+  };
 
   const getData = async () => {
     try {
@@ -154,6 +159,10 @@ export default function CameraScreen({ navigation }: any) {
       {image && (
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )}
+      <TouchableOpacity style={styles.uploadButton} onPress={launchCamera}>
+        <Body2>Click to open camera</Body2>
+        <Entypo name="camera" size={20} color="black" />
+      </TouchableOpacity>
     </View>
   );
 }
