@@ -48,6 +48,7 @@ import ModalDropdown from "react-native-modal-dropdown";
 import axios from "axios";
 import { AuthContext } from "../store";
 import { Dropdown } from "react-native-element-dropdown";
+import MaskInput, { Masks } from "react-native-mask-input";
 ``;
 
 const AccountSettingsScreen = () => {
@@ -188,11 +189,13 @@ const AccountSettingsScreen = () => {
             <View style={{ width: "80%", height: "100%" }}>
               <Label>Date of birth</Label>
               <View>
-                <TextInput
+                <MaskInput
                   style={styles.inputWithLabelContainer_textInput_DateOfBirth}
                   placeholder="DD/MM/YYYY"
-                  // value={values.DOB}
-                  onChangeText={(text) => handleOnchange(text, "DOB")}
+                  value={inputs.DOB}
+                  onChangeText={(masked) => handleOnchange(masked, "DOB")}
+                  keyboardType="number-pad"
+                  mask={Masks.DATE_YYYYMMDD}
                 />
               </View>
             </View>
