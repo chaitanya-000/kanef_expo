@@ -5,8 +5,9 @@ import {
   View,
   TextInput,
   Platform,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   responsiveFontSize,
@@ -16,8 +17,53 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Body1, Body2, Body3, Heading2, Heading5 } from "../atoms/Typography";
 import { GreenButton } from "../atoms/GreenButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const FeedbackScreen = () => {
+  const [userID, setUserId] = useState("");
+
+  const initialValues = {
+    tellUs: "",
+    Problem: "",
+  };
+  const [inputs, setInputs] = useState(initialValues);
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uId");
+      if (value !== null) {
+        setUserId(JSON.parse(value));
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  const sendFeedback = () => {
+    inputs.Problem && inputs.tellUs
+      ? axios
+          .post("https://kenaf.ie/feedback", {
+            tellUs: inputs.tellUs,
+            Problem: inputs.Problem,
+            uId: userID,
+          })
+          .then((res) => {
+            console.log(res.data.data);
+            Alert.alert(res.data.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      : Alert.alert("We would love to hear from you. inputs cant be empty");
+  };
+
+  useEffect(() => {
+    getData();
+  }, [userID]);
+
+  const handleOnchange = (text: any, input: any) => {
+    setInputs((prevState: any) => ({ ...prevState, [input]: text }));
+  };
   return (
     <KeyboardAwareScrollView>
       <View style={styles.screenContainer}>
@@ -37,7 +83,11 @@ const FeedbackScreen = () => {
           >
             Tell us how we can improve our app?
           </Body2>
-          <TextInput style={styles.textArea} multiline={true} />
+          <TextInput
+            style={styles.textArea}
+            multiline={true}
+            onChangeText={(text) => handleOnchange(text, "tellUs")}
+          />
           <Body2
             style={{
               alignSelf: "flex-start",
@@ -46,7 +96,11 @@ const FeedbackScreen = () => {
           >
             Report a Problem
           </Body2>
-          <TextInput style={styles.textArea} multiline={true} />
+          <TextInput
+            style={styles.textArea}
+            multiline={true}
+            onChangeText={(text) => handleOnchange(text, "Problem")}
+          />
           <GreenButton
             height={"7%"}
             marginTop={"0%"}
@@ -54,6 +108,7 @@ const FeedbackScreen = () => {
             style={{
               marginTop: responsiveScreenHeight(15),
             }}
+            onPress={sendFeedback}
           >
             <Body1 style={{ color: "white" }}>Save</Body1>
           </GreenButton>
