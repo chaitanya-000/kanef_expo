@@ -9,7 +9,7 @@ import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
 
-export default function ContactUs() {
+export default function ContactUs({ navigation }: any) {
   return (
     <View
       style={{
@@ -20,7 +20,10 @@ export default function ContactUs() {
         alignItems: "center",
       }}
     >
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => navigation.navigate("ContactUsScreen")}
+      >
         <View style={styles.IconAndName}>
           <Image
             source={require("../../assets/images/ContactUsLogo.png")}

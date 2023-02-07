@@ -12,6 +12,7 @@ import { AuthContext } from "./store";
 import AccountSettingsScreen from "./Screens/AccountSettingsScreen";
 import SeperateInvoice from "./Screens/SeperateInvoice";
 import FeedbackScreen from "./Screens/FeedbackScreen";
+import ContactUsScreen from "./Screens/ContactUsScreen";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -49,6 +50,7 @@ const Navigation = () => {
               component={AccountSettingsScreen}
             />
             <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
+            <Stack.Screen name="ContactUsScreen" component={ContactUsScreen} />
           </>
         ) : (
           <>

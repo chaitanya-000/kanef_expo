@@ -17,7 +17,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
     <View style={styles.container}>
       <AccountSettings navigation={navigation} />
       <Help />
-      <ContactUs />
+      <ContactUs navigation={navigation} />
       <OpenOnCamera navigation={navigation} />
       <Feedback navigation={navigation} />
       <TermsOfService />
