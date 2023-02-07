@@ -48,6 +48,7 @@ export default function CameraScreen({ navigation }: any) {
     setImage(assets[0].uri);
   };
 
+  // console.log(image);
   //getting the uid of the logged in user for post request
   const getData = async () => {
     try {
@@ -76,7 +77,7 @@ export default function CameraScreen({ navigation }: any) {
       })
       .then((response) => {
         const receivedResponseStatus = response.data.status;
-        console.log(response);
+        // console.log(response);
         (receivedResponseStatus === "false" &&
           Alert.alert(
             response.data.data,
@@ -127,7 +128,6 @@ export default function CameraScreen({ navigation }: any) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
     });
     if (!result.canceled) {
@@ -135,17 +135,28 @@ export default function CameraScreen({ navigation }: any) {
     }
   };
 
-  const sendImage = () => {
-    axios
-      .post("https://kenaf.ie/PersonalReceipt", {
-        orId: value,
-        Invoice: image,
-        uId: uId,
-      })
-      .then((response) => {
-        console.log(response);
-      });
+  const sendImage = (image: any) => {
+    console.log(image);
+    const formdata = new FormData();
+    formdata.append("orId", "MainOrg_289439654");
+    formdata.append("Invoice", image);
+    formdata.append("uId", "appUser_529877");
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch("https://kenaf.ie/PersonalReceipt", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   };
+
   // Return the View
   return (
     <View style={styles.container}>
@@ -176,11 +187,12 @@ export default function CameraScreen({ navigation }: any) {
             <Entypo name="camera" size={25} color="black" />
           </TouchableOpacity>
         </View>
+        {/* <Text>{image}</Text> */}
         <GreenButton
           height={"20%"}
           marginTop={"15%"}
           width={"62%"}
-          // onPress={()=> sendImage()}
+          onPress={() => sendImage(image)}
         >
           <Body1 style={{ color: "white" }}>Send</Body1>
         </GreenButton>

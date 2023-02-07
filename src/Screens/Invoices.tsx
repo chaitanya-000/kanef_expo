@@ -88,11 +88,6 @@ const Invoices = ({ route, navigation }: any) => {
                     navigation.navigate("SeperateInvoice", {
                       InvoiceLink: eachObj.InvoiceLink,
                     });
-                    // axios
-                    //   .get(`https://kenaf.ie/OrgInvoice/${eachObj.InvoiceLink}`)
-                    //   .then((response) => {
-                    //     console.log(response);
-                    //   });
                   }}
                 >
                   <Image

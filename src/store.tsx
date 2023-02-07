@@ -8,15 +8,14 @@ export const AuthProvider = ({ children }: any) => {
   const BASE_URL = `https://kenaf.ie`;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [userInfo, setUserInfo] = useState({
-    name: "chaitanya joshi",
-  });
+  const [uId, setUid] = useState();
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("token");
       if (value !== null) {
         setIsLoggedIn(true);
+        setUid(JSON.parse(value));
       }
     } catch (e) {
       // error reading value
@@ -66,6 +65,7 @@ export const AuthProvider = ({ children }: any) => {
         isLoading,
         setIsLoading,
         googleAuth,
+        uId,
       }}
     >
       {children}

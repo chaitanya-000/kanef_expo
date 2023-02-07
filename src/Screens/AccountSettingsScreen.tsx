@@ -6,8 +6,9 @@ import {
   TextInput,
   View,
   Switch,
+  Platform,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScreenContainer } from "../styledComponents/Receipts,Reward,BillPage";
 import { WhiteRoundedContainer } from "../styledComponents/Receipts,Reward,BillPage";
 import { Picker } from "@react-native-picker/picker";
@@ -44,19 +45,45 @@ import Gender from "../organisms/Gender";
 import { GreenButton } from "../atoms/GreenButton";
 import DropDownPicker from "react-native-dropdown-picker";
 import ModalDropdown from "react-native-modal-dropdown";
+import axios from "axios";
+import { AuthContext } from "../store";
+import { Dropdown } from "react-native-element-dropdown";
 ``;
 
 const AccountSettingsScreen = () => {
   const [showPicker, setShowPicker] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState();
   const [isEnabled, setIsEnabled] = useState(false);
+  const { uId } = useContext(AuthContext);
+  const initialValues = {
+    uId: uId,
+    DOB: "",
+    Gender: "",
+    address2: "",
+    city: "",
+    country: "",
+    EIRcode: "",
+    address1: "",
+  };
+  const [inputs, setInputs] = useState<any>(initialValues);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-  ]);
+  const data = [
+    {
+      id: "male",
+      value: "Male",
+    },
+    {
+      id: "Female",
+      value: "Female",
+    },
+  ];
+
+  useEffect(() => {
+    console.log(inputs);
+  }, [inputs]);
+
+  const handleOnchange = (text: any, input: any) => {
+    setInputs((prevState: any) => ({ ...prevState, [input]: text }));
+  };
   return (
     <KeyboardAwareScrollView>
       <SafeAreaView
@@ -164,6 +191,8 @@ const AccountSettingsScreen = () => {
                 <TextInput
                   style={styles.inputWithLabelContainer_textInput_DateOfBirth}
                   placeholder="DD/MM/YYYY"
+                  // value={values.DOB}
+                  onChangeText={(text) => handleOnchange(text, "DOB")}
                 />
               </View>
             </View>
@@ -180,28 +209,33 @@ const AccountSettingsScreen = () => {
             <View style={{ width: "80%", height: "100%" }}>
               <Label>Gender</Label>
               <View>
-                <ModalDropdown
-                  defaultValue="Male"
-                  options={["Male", "Female"]}
-                  style={{ marginTop: responsiveScreenHeight(2) }}
-                  isFullWidth={true}
-                  textStyle={{ fontSize: responsiveScreenFontSize(3) }}
-                  dropdownTextStyle={{
-                    fontSize: responsiveScreenFontSize(2),
-                  }}
-                  dropdownStyle={{
-                    width: responsiveScreenWidth(24),
-                    height: responsiveScreenHeight(10),
-                  }}
+                <Dropdown
+                  activeColor="#26ae60ed"
+                  placeholder="Male/Female"
+                  style={
+                    Platform.OS === "android"
+                      ? styles.dropDownAndroid
+                      : styles.dropDownIOS
+                  }
+                  data={[
+                    {
+                      id: "Male",
+                      value: "Male",
+                    },
+                    {
+                      id: "Female",
+                      value: "Female",
+                    },
+                  ]}
+                  labelField="value"
+                  valueField="value"
+                  containerStyle={styles.dropDownContainer}
+                  backgroundColor={`rgba(0,0,0,0.8)`}
+                  onChange={(data) => handleOnchange(data.value, "Gender")}
+                  value={inputs.Gender}
                 />
               </View>
             </View>
-            <AntDesign
-              name="caretdown"
-              size={24}
-              color="#26AE60"
-              onPress={() => setShowPicker(!showPicker)}
-            />
           </View>
 
           {/* AddressLine 1//////////////////////////////////////////////////////////////////////////////////// */}
@@ -211,6 +245,7 @@ const AccountSettingsScreen = () => {
               <TextInput
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="streetAddressLine1"
+                onChangeText={(text) => handleOnchange(text, "address1")}
               />
             </View>
           </View>
@@ -221,6 +256,7 @@ const AccountSettingsScreen = () => {
               <TextInput
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="streetAddressLine2"
+                onChangeText={(text) => handleOnchange(text, "address2")}
               />
             </View>
           </View>
@@ -231,6 +267,7 @@ const AccountSettingsScreen = () => {
               <TextInput
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="addressCity"
+                onChangeText={(text) => handleOnchange(text, "city")}
               />
             </View>
           </View>
@@ -241,6 +278,7 @@ const AccountSettingsScreen = () => {
               <TextInput
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="countryName"
+                onChangeText={(text) => handleOnchange(text, "country")}
               />
             </View>
           </View>
@@ -251,6 +289,7 @@ const AccountSettingsScreen = () => {
               <TextInput
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="postalCode"
+                onChangeText={(text) => handleOnchange(text, "EIRcode")}
               />
             </View>
           </View>
@@ -279,6 +318,7 @@ const AccountSettingsScreen = () => {
             marginTop={"0%"}
             width={"98%"}
             style={{ marginBottom: responsiveScreenHeight(8) }}
+            onPress={() => console.log("clicked")}
           >
             <Body1 style={{ color: "white" }}>Save</Body1>
           </GreenButton>
@@ -361,6 +401,36 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: responsiveScreenHeight(3),
     marginBottom: responsiveScreenHeight(3),
+  },
+  dropDownAndroid: {
+    width: responsiveScreenWidth(60),
+    borderRadius: 10,
+    height: responsiveScreenHeight(7),
+    paddingHorizontal: responsiveScreenWidth(5),
+    borderColor: "#e9f2eb",
+    borderWidth: 3,
+  },
+  dropDownIOS: {
+    width: responsiveScreenWidth(60),
+    borderRadius: 10,
+    height: responsiveScreenHeight(7),
+
+    paddingHorizontal: responsiveScreenWidth(5),
+    borderColor: "#e9f2eb",
+    borderWidth: 3,
+  },
+
+  dropDownContainer: {
+    marginTop: responsiveScreenHeight(0.5),
+    height: responsiveScreenHeight(15),
+    borderWidth: 2,
+    borderRadius: 10,
+  },
+  emptyList: {
+    paddingHorizontal: responsiveScreenWidth(5),
+    alignItems: "center",
+    height: responsiveScreenHeight(5),
+    justifyContent: "center",
   },
 });
 
