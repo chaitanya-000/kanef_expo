@@ -7,6 +7,7 @@ import {
   View,
   Switch,
   Platform,
+  Alert,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { ScreenContainer } from "../styledComponents/Receipts,Reward,BillPage";
@@ -49,14 +50,14 @@ import axios from "axios";
 import { AuthContext } from "../store";
 import { Dropdown } from "react-native-element-dropdown";
 import MaskInput, { Masks } from "react-native-mask-input";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 ``;
 
 const AccountSettingsScreen = () => {
-  const [showPicker, setShowPicker] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
-  const { uId } = useContext(AuthContext);
+  const [userID, setUserId] = useState("");
   const initialValues = {
-    uId: uId,
+    uId: userID,
     DOB: "",
     Gender: "",
     address2: "",
@@ -66,30 +67,67 @@ const AccountSettingsScreen = () => {
     address1: "",
   };
   const [inputs, setInputs] = useState<any>(initialValues);
+  const [fetchedData, setFetchedData] = useState<any>(null);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  // useEffect(() => {
-  //   console.log(inputs);
-  // }, [inputs]);
-
-  const sendData = () => {
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uId");
+      if (value !== null) {
+        setUserId(value);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+  const getUserInfo = () => {
     axios
-      .post("https://kenaf.ie/appUserUpdate", {
-        uId: inputs.uID,
-        DOB: inputs.DOB,
-        Gender: inputs.Gender,
-        address2: inputs.address2,
-        city: inputs.city,
-        country: inputs.country,
-        EIRcode: inputs.EIRcode,
-        address1: inputs.address1,
+      .post("https://kenaf.ie/appUserInfo", {
+        uId: JSON.parse(userID),
       })
       .then((response) => {
-        console.log(response);
+        const userDetails = response.data.data[0];
+        console.log(userDetails);
+        setFetchedData(userDetails);
       })
-      .catch((error) => {
-        console.log(error);
+      .then((error) => {
+        // console.log(error);
       });
+  };
+  useEffect(() => {
+    getData();
+    userID && getUserInfo();
+  }, [userID]);
+
+  const sendData = () => {
+    inputs.uID &&
+    inputs.DOB &&
+    inputs.Gender &&
+    inputs.address2 &&
+    inputs.city &&
+    inputs.country &&
+    inputs.EIRcode &&
+    inputs.address1
+      ? axios
+          .post("https://kenaf.ie/appUserUpdate", {
+            uId: inputs.uID,
+            DOB: inputs.DOB,
+            Gender: inputs.Gender,
+            address2: inputs.address2,
+            city: inputs.city,
+            country: inputs.country,
+            EIRcode: inputs.EIRcode,
+            address1: inputs.address1,
+          })
+          .then((response) => {
+            console.log(response);
+            setInputs(initialValues);
+            Alert.alert(response.data.message);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      : Alert.alert("Please enter all values");
   };
 
   const handleOnchange = (text: any, input: any) => {
@@ -145,6 +183,7 @@ const AccountSettingsScreen = () => {
               <TextInput
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="emailAddress"
+                value={fetchedData?.email}
               />
             </View>
           </View>
@@ -177,7 +216,7 @@ const AccountSettingsScreen = () => {
               <View>
                 <TextInput
                   style={styles.inputWithLabelContainer_textInput}
-                  secureTextEntry
+                  value={fetchedData?.firstName}
                 />
               </View>
 
@@ -188,7 +227,7 @@ const AccountSettingsScreen = () => {
               <View>
                 <TextInput
                   style={styles.inputWithLabelContainer_textInput}
-                  secureTextEntry
+                  value={fetchedData?.lastName}
                 />
               </View>
             </View>
