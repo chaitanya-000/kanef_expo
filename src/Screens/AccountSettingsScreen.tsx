@@ -67,20 +67,30 @@ const AccountSettingsScreen = () => {
   };
   const [inputs, setInputs] = useState<any>(initialValues);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-  const data = [
-    {
-      id: "male",
-      value: "Male",
-    },
-    {
-      id: "Female",
-      value: "Female",
-    },
-  ];
 
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
+  // useEffect(() => {
+  //   console.log(inputs);
+  // }, [inputs]);
+
+  const sendData = () => {
+    axios
+      .post("https://kenaf.ie/appUserUpdate", {
+        uId: inputs.uID,
+        DOB: inputs.DOB,
+        Gender: inputs.Gender,
+        address2: inputs.address2,
+        city: inputs.city,
+        country: inputs.country,
+        EIRcode: inputs.EIRcode,
+        address1: inputs.address1,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleOnchange = (text: any, input: any) => {
     setInputs((prevState: any) => ({ ...prevState, [input]: text }));
@@ -191,7 +201,7 @@ const AccountSettingsScreen = () => {
               <View>
                 <MaskInput
                   style={styles.inputWithLabelContainer_textInput_DateOfBirth}
-                  placeholder="DD/MM/YYYY"
+                  placeholder="YYYY/MM/DD"
                   value={inputs.DOB}
                   onChangeText={(masked) => handleOnchange(masked, "DOB")}
                   keyboardType="number-pad"
@@ -321,7 +331,7 @@ const AccountSettingsScreen = () => {
             marginTop={"0%"}
             width={"98%"}
             style={{ marginBottom: responsiveScreenHeight(8) }}
-            onPress={() => console.log("clicked")}
+            onPress={sendData}
           >
             <Body1 style={{ color: "white" }}>Save</Body1>
           </GreenButton>
