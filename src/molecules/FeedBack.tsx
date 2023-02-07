@@ -9,7 +9,7 @@ import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
 import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
 
-export default function Feedback() {
+export default function Feedback({ navigation }: any) {
   return (
     <View
       style={{
@@ -20,7 +20,10 @@ export default function Feedback() {
         alignItems: "center",
       }}
     >
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => navigation.navigate("FeedbackScreen")}
+      >
         <View style={styles.IconAndName}>
           <Image
             source={require("../../assets/images/FeedbackLogo.png")}

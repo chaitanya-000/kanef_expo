@@ -19,7 +19,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
       <Help />
       <ContactUs />
       <OpenOnCamera navigation={navigation} />
-      <Feedback />
+      <Feedback navigation={navigation} />
       <TermsOfService />
       <PrivacyPolicy />
       <GreenButton

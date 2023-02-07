@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "./store";
 import AccountSettingsScreen from "./Screens/AccountSettingsScreen";
 import SeperateInvoice from "./Screens/SeperateInvoice";
+import FeedbackScreen from "./Screens/FeedbackScreen";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -47,6 +48,7 @@ const Navigation = () => {
               name="AccountSettingsScreen"
               component={AccountSettingsScreen}
             />
+            <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
           </>
         ) : (
           <>
