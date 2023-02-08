@@ -19,7 +19,7 @@ export default function Settings({ navigation }: any) {
       <Heading6 style={{ color: "white" }}>Settings</Heading6>
       <View style={styles.WhiteImageAndOptionsContainer}>
         <Image
-          source={require("../../assets/images/ProfileImage.png")}
+          source={require("../../assets/images/default-profile-image.png")}
           style={styles.ProfileImage}
         />
         <SettingsOptionContainer navigation={navigation} />
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   // },
   ProfileImage: {
     marginTop: "3%",
-
+    width: responsiveScreenWidth(30),
+    height: responsiveScreenHeight(15),
     // borderWidth: 1,
     borderColor: "red",
     position: "relative",

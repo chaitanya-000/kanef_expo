@@ -15,7 +15,7 @@ const OrgNameDropDown = ({ value, setValue }: any) => {
   const getOrgNames = () => {
     setIsLoading(true);
     axios.get("https://kenaf.ie/organizationList").then((response) => {
-      // console.log(response.data.data);
+      //
       setIsLoading(false);
       setData(response.data.data);
     });

@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   Linking,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
@@ -44,9 +45,7 @@ const Invoices = ({ route, navigation }: any) => {
       if (value !== null) {
         setUid(JSON.parse(value));
       }
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   const getSpecificStore = () => {
@@ -58,13 +57,11 @@ const Invoices = ({ route, navigation }: any) => {
           orName: route.params.storeName,
         })
         .then((response) => {
-          console.log(response.data);
+          //
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => {});
   };
   useEffect(() => {
     getData();
@@ -79,33 +76,36 @@ const Invoices = ({ route, navigation }: any) => {
           <Heading5 style={styles.ContentHeader}>
             {route.params.storeName}
           </Heading5>
-          {receivedData &&
-            receivedData.map((eachObj: any) => {
-              return (
-                <TouchableOpacity
-                  style={styles.container}
-                  onPress={() => {
-                    navigation.navigate("SeperateInvoice", {
-                      InvoiceLink: eachObj.InvoiceLink,
-                    });
-                  }}
-                >
-                  <Image
-                    source={require("../../assets/images/WalmartLogo.jpg")}
-                    style={styles.StoreImage}
-                  />
-                  <View style={styles.NameAndDate}>
-                    <Body2>{eachObj.updated_at.split("T")[0]}</Body2>
-                  </View>
-                  <Feather
-                    name="chevron-right"
-                    size={25}
-                    color="gray"
-                    style={styles.rightArrow}
-                  />
-                </TouchableOpacity>
-              );
-            })}
+          <ScrollView style={{ width: responsiveScreenWidth(90) }}>
+            {receivedData &&
+              receivedData.map((eachObj: any) => {
+                return (
+                  <TouchableOpacity
+                    key={Math.random() * 1212121212}
+                    style={styles.container}
+                    onPress={() => {
+                      navigation.navigate("SeperateInvoice", {
+                        InvoiceLink: eachObj.InvoiceLink,
+                      });
+                    }}
+                  >
+                    <Image
+                      source={require("../../assets/images/WalmartLogo.jpg")}
+                      style={styles.StoreImage}
+                    />
+                    <View style={styles.NameAndDate}>
+                      <Body2>{eachObj.updated_at.split("T")[0]}</Body2>
+                    </View>
+                    <Feather
+                      name="chevron-right"
+                      size={25}
+                      color="gray"
+                      style={styles.rightArrow}
+                    />
+                  </TouchableOpacity>
+                );
+              })}
+          </ScrollView>
         </OptionsContainer>
       </WhiteRoundedContainer>
     </ScreenContainer>

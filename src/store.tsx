@@ -30,17 +30,15 @@ export const AuthProvider = ({ children }: any) => {
         password: password,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.token) {
           setIsLoading(false);
-          console.log(response.data.user.uId);
+
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
           AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
           setIsLoggedIn(true);
         }
       })
       .catch((error) => {
-        console.log(error);
         setIsLoading(false);
       });
   };

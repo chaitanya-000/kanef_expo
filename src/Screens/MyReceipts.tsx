@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Body1,
@@ -38,9 +45,7 @@ const MyReceipts = ({ navigation }: any) => {
       if (value !== null) {
         setUid(JSON.parse(value));
       }
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   const getStores = () => {
@@ -51,13 +56,10 @@ const MyReceipts = ({ navigation }: any) => {
           uId: uId,
         })
         .then((response) => {
-          console.log(response.data);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => {});
   };
 
   useEffect(() => {
@@ -71,34 +73,36 @@ const MyReceipts = ({ navigation }: any) => {
       <WhiteRoundedContainer>
         <OptionsContainer>
           <Heading5 style={styles.ContentHeader}>Receipts</Heading5>
-          {receivedData &&
-            receivedData.map((eachObj: { orName: string }, key: number) => {
-              return (
-                <TouchableOpacity
-                  style={styles.container}
-                  onPress={() => {
-                    navigation.navigate("Invoices", {
-                      storeName: eachObj.orName,
-                    });
-                  }}
-                  key={Math.random() * 10000000000}
-                >
-                  <Image
-                    source={require("../../assets/images/WalmartLogo.jpg")}
-                    style={styles.StoreImage}
-                  />
-                  <View style={styles.NameAndDate}>
-                    <Text>{eachObj.orName}</Text>
-                  </View>
-                  <Feather
-                    name="chevron-right"
-                    size={25}
-                    color="gray"
-                    style={styles.rightArrow}
-                  />
-                </TouchableOpacity>
-              );
-            })}
+          <ScrollView style={{ width: responsiveScreenWidth(90) }}>
+            {receivedData &&
+              receivedData.map((eachObj: { orName: string }, key: number) => {
+                return (
+                  <TouchableOpacity
+                    style={styles.container}
+                    onPress={() => {
+                      navigation.navigate("Invoices", {
+                        storeName: eachObj.orName,
+                      });
+                    }}
+                    key={Math.random() * 10000000000}
+                  >
+                    <Image
+                      source={require("../../assets/images/WalmartLogo.jpg")}
+                      style={styles.StoreImage}
+                    />
+                    <View style={styles.NameAndDate}>
+                      <Text>{eachObj.orName}</Text>
+                    </View>
+                    <Feather
+                      name="chevron-right"
+                      size={25}
+                      color="gray"
+                      style={styles.rightArrow}
+                    />
+                  </TouchableOpacity>
+                );
+              })}
+          </ScrollView>
         </OptionsContainer>
       </WhiteRoundedContainer>
     </ScreenContainer>

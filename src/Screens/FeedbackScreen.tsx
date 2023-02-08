@@ -48,12 +48,9 @@ const FeedbackScreen = () => {
             uId: userID,
           })
           .then((res) => {
-            console.log(res.data.data);
             Alert.alert(res.data.data);
           })
-          .catch((error) => {
-            console.log(error);
-          })
+          .catch((error) => {})
       : Alert.alert("We would love to hear from you. inputs cant be empty");
   };
 

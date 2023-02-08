@@ -87,11 +87,11 @@ const AccountSettingsScreen = () => {
       })
       .then((response) => {
         const userDetails = response.data.data[0];
-        console.log(userDetails);
+
         setFetchedData(userDetails);
       })
       .then((error) => {
-        // console.log(error);
+        //
       });
   };
   useEffect(() => {
@@ -120,13 +120,10 @@ const AccountSettingsScreen = () => {
             address1: inputs.address1,
           })
           .then((response) => {
-            console.log(response);
             setInputs(initialValues);
             Alert.alert(response.data.message);
           })
-          .catch((error) => {
-            console.log(error);
-          })
+          .catch((error) => {})
       : Alert.alert("Please enter all values");
   };
 

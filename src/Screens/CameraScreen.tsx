@@ -4,8 +4,6 @@ import {
   View,
   StyleSheet,
   Button,
-  Image,
-  Platform,
   TouchableOpacity,
   Alert,
 } from "react-native";
@@ -20,8 +18,6 @@ import * as ImagePicker from "expo-image-picker";
 import { Body1, Body2, Body4 } from "../atoms/Typography";
 import { Entypo } from "@expo/vector-icons";
 import Spinner from "react-native-loading-spinner-overlay/lib";
-import Navigation from "../Navigation";
-import { Dropdown } from "react-native-element-dropdown";
 import OrgNameDropDown from "../organisms/OrgNameDropDown";
 import { GreenButton } from "../atoms/GreenButton";
 
@@ -43,12 +39,13 @@ export default function CameraScreen({ navigation }: any) {
 
   //launch the camera. And then set the image to the clicked image
   const launchCamera = async () => {
-    const { assets } = await ImagePicker.launchCameraAsync();
+    const { assets } = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+    });
     console.log(assets[0]);
     setImage(assets[0].uri);
   };
 
-  // console.log(image);
   //getting the uid of the logged in user for post request
   const getData = async () => {
     try {
@@ -135,26 +132,37 @@ export default function CameraScreen({ navigation }: any) {
     }
   };
 
-  const sendImage = (image: any) => {
-    console.log(image);
-    const formdata = new FormData();
-    formdata.append("orId", "MainOrg_289439654");
-    formdata.append("Invoice", image);
-    formdata.append("uId", "appUser_529877");
-
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      body: formdata,
-      redirect: "follow",
-    };
-
-    fetch("https://kenaf.ie/PersonalReceipt", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+  const uploadImage = () => {
+    console.log(value);
+    const formData = new FormData();
+    formData.append("orId", value);
+    formData.append("uId", JSON.parse(uId));
+    formData.append("Invoice", {
+      uri: image,
+      type: "image/jpeg",
+      name: "photo.jpg",
+    });
+    if (value && image) {
+      setLoading(true);
+      axios({
+        method: "post",
+        url: "https://kenaf.ie/PersonalReceipt",
+        data: formData,
+      })
+        .then((response) => {
+          console.log(response);
+          setValue("");
+          setImage(null);
+          setLoading(false);
+          Alert.alert(response.data.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+          // need handling error
+        });
+    } else {
+      Alert.alert("Select the store & Image. Both are required!");
+    }
   };
 
   // Return the View
@@ -187,12 +195,12 @@ export default function CameraScreen({ navigation }: any) {
             <Entypo name="camera" size={25} color="black" />
           </TouchableOpacity>
         </View>
-        {/* <Text>{image}</Text> */}
+
         <GreenButton
           height={"20%"}
           marginTop={"15%"}
           width={"62%"}
-          onPress={() => sendImage(image)}
+          onPress={uploadImage}
         >
           <Body1 style={{ color: "white" }}>Send</Body1>
         </GreenButton>

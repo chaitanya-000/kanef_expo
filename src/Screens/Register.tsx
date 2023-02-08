@@ -77,9 +77,7 @@ const Register = ({ navigation }: any) => {
 
         status === "false" && Alert.alert(response.data.data);
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch((e) => {});
   };
   return (
     <KeyboardAwareScrollView>

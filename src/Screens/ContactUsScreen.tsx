@@ -85,15 +85,11 @@ const ContactUsScreen = () => {
             phone: inputs.phone,
           })
           .then((response) => {
-            console.log(response);
             setInputs(initialValues);
             Alert.alert(response.data.message);
           })
-          .catch((error) => {
-            console.log(error);
-          })
+          .catch((error) => {})
       : Alert.alert("Please enter all values");
-    console.log(inputs);
   };
 
   const handleOnchange = (text: any, input: any) => {

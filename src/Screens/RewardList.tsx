@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import React, { useEffect, useId, useState } from "react";
 import { Body1, Body2, Body5, Heading4, Heading5 } from "../atoms/Typography";
 import {
@@ -30,9 +37,7 @@ const RewardList = () => {
       if (value !== null) {
         setUid(JSON.parse(value));
       }
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   const getStores = () => {
@@ -43,13 +48,10 @@ const RewardList = () => {
           uId: uId,
         })
         .then((response) => {
-          console.log(response.data);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => {});
   };
 
   useEffect(() => {
@@ -67,33 +69,35 @@ const RewardList = () => {
         >
           <OptionsContainer>
             <Heading5 style={styles.ContentHeader}>Rewards</Heading5>
-            {receivedData &&
-              receivedData.map((eachObj: any, key: number) => {
-                return (
-                  <TouchableOpacity
-                    style={styles.container}
-                    onPress={() => setShowModal(!showModal)}
-                    key={key}
-                  >
-                    <Image
-                      source={require("../../assets/images/KingFisherLogo.png")}
-                      style={styles.StoreImage}
-                    />
-                    <View style={styles.NameAndType}>
-                      <Body2>{eachObj.mainOrName}</Body2>
-                      <Body5 style={{ color: "gray" }}>
-                        {eachObj.updated_at.split("T")[0]}
-                      </Body5>
-                    </View>
-                    <Feather
-                      name="chevron-right"
-                      size={25}
-                      color="gray"
-                      style={styles.rightArrow}
-                    />
-                  </TouchableOpacity>
-                );
-              })}
+            <ScrollView style={{ width: responsiveScreenWidth(90) }}>
+              {receivedData &&
+                receivedData.map((eachObj: any, key: number) => {
+                  return (
+                    <TouchableOpacity
+                      style={styles.container}
+                      onPress={() => setShowModal(!showModal)}
+                      key={key}
+                    >
+                      <Image
+                        source={require("../../assets/images/KingFisherLogo.png")}
+                        style={styles.StoreImage}
+                      />
+                      <View style={styles.NameAndType}>
+                        <Body2>{eachObj.mainOrName}</Body2>
+                        <Body5 style={{ color: "gray" }}>
+                          {eachObj.updated_at.split("T")[0]}
+                        </Body5>
+                      </View>
+                      <Feather
+                        name="chevron-right"
+                        size={25}
+                        color="gray"
+                        style={styles.rightArrow}
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
+            </ScrollView>
           </OptionsContainer>
         </WhiteRoundedContainer>
       </ScreenContainer>
