@@ -187,11 +187,12 @@ const AccountSettingsScreen = () => {
 
           {/* PASSWORD//////////////////////////////////////////////////////////////////////////////////// */}
           <View style={styles.inputWithLabelContainer}>
-            <Label>Password</Label>
+            <Label>Phone Number</Label>
             <View>
               <TextInput
                 style={styles.inputWithLabelContainer_textInput}
-                secureTextEntry
+                value={fetchedData?.phone}
+                textContentType="telephoneNumber"
               />
             </View>
           </View>

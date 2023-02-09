@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: any) => {
     axios
       .post(`${BASE_URL}/applogincheckusers`, {
         email: email,
-        password: password,
+        password: `password`,
       })
       .then((response) => {
         if (response.data.token) {
@@ -59,6 +59,7 @@ export const AuthProvider = ({ children }: any) => {
         handleLogin,
         getData,
         isLoggedIn,
+        setIsLoggedIn,
         handleLogout,
         isLoading,
         setIsLoading,
@@ -70,3 +71,4 @@ export const AuthProvider = ({ children }: any) => {
     </AuthContext.Provider>
   );
 };
+password: "123213123@chaitanya";

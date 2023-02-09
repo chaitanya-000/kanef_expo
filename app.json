@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "scheme": "ie.kenaf.kenaf",
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
@@ -12,13 +13,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "ie.kenaf.kenaf"
     },
     "android": {
+      "package": "ie.kenaf.kenaf",
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
       }
