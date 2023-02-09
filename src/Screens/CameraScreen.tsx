@@ -202,7 +202,7 @@ export default function CameraScreen({ navigation }: any) {
           width={"62%"}
           onPress={uploadImage}
         >
-          <Body1 style={{ color: "white" }}>Send</Body1>
+          <Body1 style={{ color: "white" }}>Save</Body1>
         </GreenButton>
       </View>
     </View>
