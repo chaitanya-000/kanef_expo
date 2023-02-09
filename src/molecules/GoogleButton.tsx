@@ -47,7 +47,7 @@ export default function GoogleButton() {
         if (response.data) {
           await AsyncStorage.setItem(
             "token",
-            JSON.stringify(response.data[0].google_id)
+            JSON.stringify(response.data.user.google_id)
           );
         }
         setIsLoggedIn(true);

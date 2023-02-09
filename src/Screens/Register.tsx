@@ -71,10 +71,10 @@ const Register = ({ navigation }: any) => {
         password: password,
       })
       .then((response) => {
+        console.log(response.data);
         setIsLoading(false);
         const status = response.data.status;
         !status && navigation.navigate("Login");
-
         status === "false" && Alert.alert(response.data.data);
       })
       .catch((e) => {});
