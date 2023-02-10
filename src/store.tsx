@@ -27,26 +27,26 @@ export const AuthProvider = ({ children }: any) => {
     axios
       .post(`${BASE_URL}/applogincheckusers`, {
         email: email,
-        password: `password`,
+        password: password,
       })
       .then((response) => {
+        setIsLoading(false);
+        console.log(response.data);
         if (response.data.token) {
-          setIsLoading(false);
-
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
           AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
           setIsLoggedIn(true);
         }
       })
       .catch((error) => {
+        console.log(error);
         setIsLoading(false);
       });
   };
 
-  const handleLogout = () => {
-    AsyncStorage.removeItem("token");
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem("token");
     setIsLoggedIn(false);
-    setIsLoading(true);
   };
 
   const googleAuth = () => {

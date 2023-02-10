@@ -25,6 +25,8 @@ import {
   Heading3,
   Heading4,
   Heading5,
+  Heading1,
+  Heading6,
 } from "../atoms/Typography";
 import {
   FullWidthContainer,
@@ -77,8 +79,11 @@ const Register = ({ navigation }: any) => {
         !status && navigation.navigate("Login");
         status === "false" && Alert.alert(response.data.data);
       })
-      .catch((e) => {});
+      .catch((e) => {
+        setIsLoading(false);
+      });
   };
+
   return (
     <KeyboardAwareScrollView>
       <Spinner visible={isLoading} />
@@ -96,18 +101,31 @@ const Register = ({ navigation }: any) => {
         />
         <EmailAddress email={email} setEmail={setEmail} />
         <Password password={password} setPassword={setPassword} />
-        <ConfirmPassword
-          reEnteredPassword={reEnteredPassword}
-          setReEnteredPassword={setReEnteredPassword}
-        />
-        <GreenButton
-          width={Dimensions.get("window").width - 40}
-          height={Dimensions.get("window").height / 15}
-          marginTop={50}
-          onPress={handleRegister}
-        >
-          <Body1 style={{ color: "white" }}>Sign up with email</Body1>
-        </GreenButton>
+        {password.length >= 1 && (
+          <ConfirmPassword
+            reEnteredPassword={reEnteredPassword}
+            setReEnteredPassword={setReEnteredPassword}
+          />
+        )}
+        {firstName &&
+        lastName &&
+        password &&
+        email.includes("@") &&
+        reEnteredPassword ? (
+          <GreenButton
+            width={Dimensions.get("window").width - 40}
+            height={Dimensions.get("window").height / 15}
+            marginTop={50}
+            man
+            onPress={handleRegister}
+          >
+            <Body1 style={{ color: "white" }}>Sign up with email</Body1>
+          </GreenButton>
+        ) : (
+          <Body1 style={{ marginTop: responsiveScreenHeight(3) }}>
+            All fields are mandatory.
+          </Body1>
+        )}
       </View>
     </KeyboardAwareScrollView>
   );
