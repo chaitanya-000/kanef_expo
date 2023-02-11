@@ -14,7 +14,11 @@ const Password = ({
 }) => {
   return (
     <FullWidthContainer>
-      <Label>PASSWORD</Label>
+      <Label>
+        {password.length < 5
+          ? "Password should be at least 5 characters long"
+          : "Good to go !"}
+      </Label>
       <FullWidthTextInputBox
         secureTextEntry
         onChangeText={(enteredValue) => setPassword(enteredValue)}

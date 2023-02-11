@@ -1,53 +1,23 @@
 import {
-  FlatList,
-  ScrollView,
   StyleSheet,
-  Text,
   TextInput,
   View,
   Switch,
   Platform,
   Alert,
+  SafeAreaView,
 } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
-import { ScreenContainer } from "../styledComponents/Receipts,Reward,BillPage";
-import { WhiteRoundedContainer } from "../styledComponents/Receipts,Reward,BillPage";
-import { Picker } from "@react-native-picker/picker";
+import React, { useEffect, useState } from "react";
+import { Body1, Heading5 } from "../atoms/Typography";
 import {
-  Body1,
-  Body2,
-  Body3,
-  Body5,
-  Body6,
-  Heading5,
-  Heading6,
-} from "../atoms/Typography";
-import {
-  responsiveScreenFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
-import EmailAddress from "../organisms/EmailAddress";
-import {
-  FullWidthContainer,
-  FullWidthTextInputBox,
-} from "../molecules/FullWidthInputContainer";
-import {
-  InputContainerWithLabel,
-  Label,
-  TextInputBox,
-} from "../molecules/TextInputWithLabel";
-import { SplitContainer } from "../atoms/InputContainer";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { Label } from "../molecules/TextInputWithLabel";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { MaterialIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import Gender from "../organisms/Gender";
 import { GreenButton } from "../atoms/GreenButton";
-import DropDownPicker from "react-native-dropdown-picker";
-import ModalDropdown from "react-native-modal-dropdown";
 import axios from "axios";
-import { AuthContext } from "../store";
 import { Dropdown } from "react-native-element-dropdown";
 import MaskInput, { Masks } from "react-native-mask-input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -57,7 +27,6 @@ const AccountSettingsScreen = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [userID, setUserId] = useState("");
   const initialValues = {
-    uId: userID,
     DOB: "",
     Gender: "",
     address2: "",
@@ -74,7 +43,8 @@ const AccountSettingsScreen = () => {
     try {
       const value = await AsyncStorage.getItem("uId");
       if (value !== null) {
-        setUserId(value);
+        const uid = value;
+        setUserId(uid);
       }
     } catch (e) {
       // error reading value
@@ -96,35 +66,36 @@ const AccountSettingsScreen = () => {
   };
   useEffect(() => {
     getData();
+
     userID && getUserInfo();
   }, [userID]);
 
   const sendData = () => {
-    inputs.uID &&
-    inputs.DOB &&
-    inputs.Gender &&
-    inputs.address2 &&
-    inputs.city &&
-    inputs.country &&
-    inputs.EIRcode &&
-    inputs.address1
-      ? axios
-          .post("https://kenaf.ie/appUserUpdate", {
-            uId: inputs.uID,
-            DOB: inputs.DOB,
-            Gender: inputs.Gender,
-            address2: inputs.address2,
-            city: inputs.city,
-            country: inputs.country,
-            EIRcode: inputs.EIRcode,
-            address1: inputs.address1,
-          })
-          .then((response) => {
-            setInputs(initialValues);
-            Alert.alert(response.data.message);
-          })
-          .catch((error) => {})
-      : Alert.alert("Please enter all values");
+    userID &&
+      inputs.DOB &&
+      inputs.Gender &&
+      inputs.address2 &&
+      inputs.city &&
+      inputs.country &&
+      inputs.EIRcode &&
+      inputs.address1;
+    axios
+      .post("https://kenaf.ie/appUserUpdate", {
+        uId: userID,
+        DOB: inputs.DOB,
+        Gender: inputs.Gender,
+        address2: inputs.address2,
+        city: inputs.city,
+        country: inputs.country,
+        EIRcode: inputs.EIRcode,
+        address1: inputs.address1,
+      })
+      .then((response) => {
+        response;
+        setInputs("");
+        Alert.alert(response.data.message);
+      })
+      .catch((error) => {});
   };
 
   const handleOnchange = (text: any, input: any) => {

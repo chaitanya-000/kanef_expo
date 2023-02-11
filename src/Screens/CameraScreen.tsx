@@ -42,7 +42,7 @@ export default function CameraScreen({ navigation }: any) {
     const { assets } = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
     });
-    console.log(assets[0]);
+    assets[0];
     setImage(assets[0].uri);
   };
 
@@ -74,7 +74,7 @@ export default function CameraScreen({ navigation }: any) {
       })
       .then((response) => {
         const receivedResponseStatus = response.data.status;
-        // console.log(response);
+        // (response);
         (receivedResponseStatus === "false" &&
           Alert.alert(
             response.data.data,
@@ -98,7 +98,7 @@ export default function CameraScreen({ navigation }: any) {
           ]);
       })
       .catch((error) => {
-        console.log(error);
+        error;
       });
   };
 
@@ -133,7 +133,7 @@ export default function CameraScreen({ navigation }: any) {
   };
 
   const uploadImage = () => {
-    console.log(value);
+    value;
     const formData = new FormData();
     formData.append("orId", value);
     formData.append("uId", JSON.parse(uId));
@@ -150,14 +150,14 @@ export default function CameraScreen({ navigation }: any) {
         data: formData,
       })
         .then((response) => {
-          console.log(response);
+          response;
           setValue("");
           setImage(null);
           setLoading(false);
           Alert.alert(response.data.data);
         })
         .catch(function (error) {
-          console.log(error);
+          error;
           // need handling error
         });
     } else {

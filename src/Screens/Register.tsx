@@ -25,8 +25,6 @@ import {
   Heading3,
   Heading4,
   Heading5,
-  Heading1,
-  Heading6,
 } from "../atoms/Typography";
 import {
   FullWidthContainer,
@@ -63,7 +61,7 @@ const Register = ({ navigation }: any) => {
   const [reEnteredPassword, setReEnteredPassword] = useState("");
   const { isLoading, setIsLoading } = useContext(AuthContext);
 
-  const handleRegister = () => {
+  const sendData = () => {
     setIsLoading(true);
     axios
       .post("https://kenaf.ie/appuserregister", {
@@ -83,6 +81,23 @@ const Register = ({ navigation }: any) => {
         setIsLoading(false);
       });
   };
+  const handleRegister = () => {
+    if (firstName && lastName && email && reEnteredPassword) {
+      if (!/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email)) {
+        Alert.alert("Invalid Email");
+      }
+      if (password.length <= 6) {
+        Alert.alert("Password must be at least 6 characters long");
+      }
+      if (password !== reEnteredPassword) {
+        Alert.alert("Passwords do not match");
+      } else {
+        sendData();
+      }
+    } else {
+      Alert.alert("All fields are mandatory");
+    }
+  };
 
   return (
     <KeyboardAwareScrollView>
@@ -101,31 +116,20 @@ const Register = ({ navigation }: any) => {
         />
         <EmailAddress email={email} setEmail={setEmail} />
         <Password password={password} setPassword={setPassword} />
-        {password.length >= 1 && (
-          <ConfirmPassword
-            reEnteredPassword={reEnteredPassword}
-            setReEnteredPassword={setReEnteredPassword}
-          />
-        )}
-        {firstName &&
-        lastName &&
-        password &&
-        email.includes("@") &&
-        reEnteredPassword ? (
-          <GreenButton
-            width={Dimensions.get("window").width - 40}
-            height={Dimensions.get("window").height / 15}
-            marginTop={50}
-            man
-            onPress={handleRegister}
-          >
-            <Body1 style={{ color: "white" }}>Sign up with email</Body1>
-          </GreenButton>
-        ) : (
-          <Body1 style={{ marginTop: responsiveScreenHeight(3) }}>
-            All fields are mandatory.
-          </Body1>
-        )}
+        <ConfirmPassword
+          password={password}
+          reEnteredPassword={reEnteredPassword}
+          setReEnteredPassword={setReEnteredPassword}
+        />
+
+        <GreenButton
+          width={Dimensions.get("window").width - 40}
+          height={Dimensions.get("window").height / 15}
+          marginTop={50}
+          onPress={handleRegister}
+        >
+          <Body1 style={{ color: "white" }}>Sign up with email</Body1>
+        </GreenButton>
       </View>
     </KeyboardAwareScrollView>
   );

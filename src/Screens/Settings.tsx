@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     bottom: "12%",
     zIndex: 21123,
     alignSelf: "center",
+    borderRadius: 60,
   },
   WhiteImageAndOptionsContainer: {
     borderColor: "green",

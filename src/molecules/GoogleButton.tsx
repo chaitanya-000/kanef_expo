@@ -43,7 +43,7 @@ export default function GoogleButton() {
         google_id: userInfo.id,
       })
       .then(async (response) => {
-        console.log(response.data);
+        response.data;
         if (response.data) {
           await AsyncStorage.setItem(
             "token",
@@ -53,7 +53,7 @@ export default function GoogleButton() {
         setIsLoggedIn(true);
       })
       .catch((error) => {
-        console.log(error);
+        error;
       });
   };
   useEffect(() => {
@@ -68,7 +68,7 @@ export default function GoogleButton() {
           },
         })
         .then(async (response) => {
-          console.log(response.data);
+          response.data;
           setUserInfo(response.data);
         });
   }, [response, token]);

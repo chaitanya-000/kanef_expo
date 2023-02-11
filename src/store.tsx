@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: any) => {
       })
       .then((response) => {
         setIsLoading(false);
-        console.log(response.data);
+        response.data;
         if (response.data.token) {
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
           AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: any) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        error;
         setIsLoading(false);
       });
   };
