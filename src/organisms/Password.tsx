@@ -16,7 +16,7 @@ const Password = ({
     <FullWidthContainer>
       <Label>
         {password.length < 5
-          ? "Password should be at least 5 characters long"
+          ? "Password  : password should be at least 6 characters long"
           : "Good to go !"}
       </Label>
       <FullWidthTextInputBox

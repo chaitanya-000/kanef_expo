@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { create } from "zustand";
 import React, { createContext, useEffect, useState } from "react";
+import { Alert } from "react-native";
 
 export const AuthContext = createContext<any>(null);
 export const AuthProvider = ({ children }: any) => {
@@ -31,7 +32,7 @@ export const AuthProvider = ({ children }: any) => {
       })
       .then((response) => {
         setIsLoading(false);
-        response.data;
+        console.log(response.data);
         if (response.data.token) {
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
           AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
@@ -39,7 +40,9 @@ export const AuthProvider = ({ children }: any) => {
         }
       })
       .catch((error) => {
-        error;
+        console.log(error.response.data);
+        Alert.alert(error.response.data.message[0]);
+
         setIsLoading(false);
       });
   };
