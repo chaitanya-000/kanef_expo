@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import FooterToolBar from "../organisms/FootertoolBar";
 import {
   responsiveFontSize,
@@ -12,6 +12,7 @@ import Help from "../molecules/Help";
 import SettingsOptionContainer from "../organisms/SettingsOptionContainer";
 import { Body1, Body2, Body3, Heading3, Heading6 } from "../atoms/Typography";
 import { GreenButton } from "../atoms/GreenButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Settings({ navigation }: any) {
   return (
@@ -19,7 +20,9 @@ export default function Settings({ navigation }: any) {
       <Heading6 style={{ color: "white" }}>Settings</Heading6>
       <View style={styles.WhiteImageAndOptionsContainer}>
         <Image
-          source={require("../../assets/images/default-profile-image.png")}
+          source={{
+            uri: "https://kenaf.ie/public/images/profile/noimage.png",
+          }}
           style={styles.ProfileImage}
         />
         <SettingsOptionContainer navigation={navigation} />

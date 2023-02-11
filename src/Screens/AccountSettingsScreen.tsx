@@ -56,6 +56,7 @@ const AccountSettingsScreen = () => {
         uId: JSON.parse(userID),
       })
       .then((response) => {
+        console.log(response);
         const userDetails = response.data.data[0];
 
         setFetchedData(userDetails);
@@ -71,31 +72,28 @@ const AccountSettingsScreen = () => {
   }, [userID]);
 
   const sendData = () => {
-    userID &&
-      inputs.DOB &&
-      inputs.Gender &&
-      inputs.address2 &&
-      inputs.city &&
-      inputs.country &&
-      inputs.EIRcode &&
-      inputs.address1;
-    axios
-      .post("https://kenaf.ie/appUserUpdate", {
-        uId: userID,
-        DOB: inputs.DOB,
-        Gender: inputs.Gender,
-        address2: inputs.address2,
-        city: inputs.city,
-        country: inputs.country,
-        EIRcode: inputs.EIRcode,
-        address1: inputs.address1,
-      })
-      .then((response) => {
-        response;
-        setInputs("");
-        Alert.alert(response.data.message);
-      })
-      .catch((error) => {});
+    userID
+      ? axios
+          .post("https://kenaf.ie/appUserUpdate", {
+            uId: JSON.parse(userID),
+            DOB: inputs.DOB,
+            Gender: inputs.Gender,
+            address2: inputs.address2,
+            city: inputs.city,
+            country: inputs.country,
+            EIRcode: inputs.EIRcode,
+            address1: inputs.address1,
+          })
+          .then((response) => {
+            console.log(response);
+            setInputs("");
+            Alert.alert(response.data.message);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      : Alert.alert("Enter all values");
+    // console.log(userID, inputs);
   };
 
   const handleOnchange = (text: any, input: any) => {
@@ -209,7 +207,10 @@ const AccountSettingsScreen = () => {
               <View>
                 <MaskInput
                   style={styles.inputWithLabelContainer_textInput_DateOfBirth}
-                  placeholder="YYYY/MM/DD"
+                  placeholder={fetchedData?.DOB}
+                  placeholderTextColor={
+                    fetchedData?.Gender ? "#26ae60ed" : "black"
+                  }
                   value={inputs.DOB}
                   onChangeText={(masked) => handleOnchange(masked, "DOB")}
                   keyboardType="number-pad"
@@ -232,7 +233,12 @@ const AccountSettingsScreen = () => {
               <View>
                 <Dropdown
                   activeColor="#26ae60ed"
-                  placeholder="Male/Female"
+                  placeholder={
+                    fetchedData?.Gender ? fetchedData.Gender : "Male/Female"
+                  }
+                  placeholderStyle={{
+                    color: fetchedData?.Gender ? "#26ae60ed" : "black",
+                  }}
                   style={
                     Platform.OS === "android"
                       ? styles.dropDownAndroid
@@ -264,9 +270,17 @@ const AccountSettingsScreen = () => {
             <Label>AddressLine 1</Label>
             <View>
               <TextInput
+                placeholder={
+                  fetchedData?.address1
+                    ? fetchedData.address1
+                    : "Street name..."
+                }
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="streetAddressLine1"
                 onChangeText={(text) => handleOnchange(text, "address1")}
+                placeholderTextColor={
+                  fetchedData?.address1 ? "#26ae60ed" : "black"
+                }
               />
             </View>
           </View>
@@ -278,6 +292,14 @@ const AccountSettingsScreen = () => {
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="streetAddressLine2"
                 onChangeText={(text) => handleOnchange(text, "address2")}
+                placeholder={
+                  fetchedData?.address2
+                    ? fetchedData.address2
+                    : "Area/Block Name"
+                }
+                placeholderTextColor={
+                  fetchedData?.address2 ? "#26ae60ed" : "black"
+                }
               />
             </View>
           </View>
@@ -289,6 +311,10 @@ const AccountSettingsScreen = () => {
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="addressCity"
                 onChangeText={(text) => handleOnchange(text, "city")}
+                placeholder={
+                  fetchedData?.city ? fetchedData.city : "eg . Dublin / Delhi"
+                }
+                placeholderTextColor={fetchedData?.city ? "#26ae60ed" : "black"}
               />
             </View>
           </View>
@@ -300,6 +326,14 @@ const AccountSettingsScreen = () => {
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="countryName"
                 onChangeText={(text) => handleOnchange(text, "country")}
+                placeholder={
+                  fetchedData?.country
+                    ? fetchedData.country
+                    : "eg . Ireland/India"
+                }
+                placeholderTextColor={
+                  fetchedData?.country ? "#26ae60ed" : "black"
+                }
               />
             </View>
           </View>
@@ -310,7 +344,15 @@ const AccountSettingsScreen = () => {
               <TextInput
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="postalCode"
+                placeholder={
+                  fetchedData?.EIRcode
+                    ? fetchedData.EIRcode
+                    : "eg . Ireland/India"
+                }
                 onChangeText={(text) => handleOnchange(text, "EIRcode")}
+                placeholderTextColor={
+                  fetchedData?.EIRcode ? "#26ae60ed" : "black"
+                }
               />
             </View>
           </View>
