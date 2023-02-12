@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  RefreshControl,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -38,6 +39,7 @@ const MyReceipts = ({ navigation }: any) => {
   const [uId, setUid] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [receivedData, setReceivedData] = useState<any>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   const getData = async () => {
     try {
@@ -50,12 +52,15 @@ const MyReceipts = ({ navigation }: any) => {
 
   const getStores = () => {
     setIsLoading(true);
+    setRefreshing(true);
     uId &&
       axios
         .post("https://kenaf.ie/MyReceiptList", {
           uId: uId,
         })
         .then((response) => {
+          setRefreshing(false);
+          console.log(response);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
@@ -73,7 +78,12 @@ const MyReceipts = ({ navigation }: any) => {
       <WhiteRoundedContainer>
         <OptionsContainer>
           <Heading5 style={styles.ContentHeader}>Receipts</Heading5>
-          <ScrollView style={{ width: responsiveScreenWidth(90) }}>
+          <ScrollView
+            style={{ width: responsiveScreenWidth(90) }}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={getStores} />
+            }
+          >
             {receivedData &&
               receivedData.map((eachObj: { orName: string }, key: number) => {
                 return (

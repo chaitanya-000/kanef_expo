@@ -15,7 +15,7 @@ const Password = ({
   return (
     <FullWidthContainer>
       <Label>
-        {password.length < 5
+        {password.length < 6
           ? "Password  : password should be at least 6 characters long"
           : "Good to go !"}
       </Label>

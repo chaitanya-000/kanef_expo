@@ -85,14 +85,16 @@ const Register = ({ navigation }: any) => {
     if (firstName && lastName && email && reEnteredPassword) {
       if (!/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email)) {
         Alert.alert("Invalid Email");
-      }
-      if (password.length <= 6) {
-        Alert.alert("Password must be at least 6 characters long");
-      }
-      if (password !== reEnteredPassword) {
-        Alert.alert("Passwords do not match");
       } else {
-        sendData();
+        if (password.length < 6) {
+          Alert.alert("Password must be at least 6 characters long");
+        } else {
+          if (password !== reEnteredPassword) {
+            Alert.alert("Passwords do not match");
+          } else {
+            sendData();
+          }
+        }
       }
     } else {
       Alert.alert("All fields are mandatory");

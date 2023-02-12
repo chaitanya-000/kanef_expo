@@ -16,8 +16,10 @@ const RewardCard = () => {
       <Body1 style={styles.ScreenName}>My Reward Card</Body1>
       <WhiteRoundedContainer>
         <OptionsContainer style={styles.OptionsContainer}>
-          <Heading5 style={styles.ContentHeader}>Receipts</Heading5>
-          <View style={styles.ImageContainer}>
+          <Heading5 style={styles.ContentHeader}>Comming Soon.....</Heading5>
+
+          {/* <Image source={require("../../assets/images/comming-soon1.jpeg")} /> */}
+          {/* <View style={styles.ImageContainer}>
             <ImageBackground
               resizeMode="cover"
               source={require("../../assets/images/QRcode3x.png")}
@@ -29,7 +31,7 @@ const RewardCard = () => {
           </Body4>
           <GreenButton width={"95%"} height={"10%"} marginTop={"10%"}>
             <Body2 style={styles.ButtonText}>View in Apple Wallet</Body2>
-          </GreenButton>
+          </GreenButton> */}
         </OptionsContainer>
       </WhiteRoundedContainer>
     </ScreenContainer>
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveScreenFontSize(3),
   },
   ContentHeader: {
-    alignSelf: "flex-start",
+    alignSelf: "center",
     fontWeight: "700",
     // fontSize: "28",
   },

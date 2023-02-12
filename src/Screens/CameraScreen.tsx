@@ -42,7 +42,6 @@ export default function CameraScreen({ navigation }: any) {
     const { assets } = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
     });
-    assets[0];
     setImage(assets[0].uri);
   };
 
@@ -73,32 +72,24 @@ export default function CameraScreen({ navigation }: any) {
         uId: JSON.parse(uId),
       })
       .then((response) => {
+        console.log(response.data);
         const receivedResponseStatus = response.data.status;
-        // (response);
-        (receivedResponseStatus === "false" &&
-          Alert.alert(
-            response.data.data,
-            "",
-            [
-              {
-                text: "Try Again",
-                onPress: () => setScanned(false),
-                style: "default",
-              },
-            ],
-            {
-              cancelable: true,
-            }
-          )) ||
+        console.log(receivedResponseStatus);
+
+        if (receivedResponseStatus === "false") {
+          Alert.alert(response.data.data);
+        } else {
           Alert.alert(response.data.data, "", [
             {
               text: "Go to receipts",
               onPress: () => navigation.navigate("My Receipts"),
+              style: "cancel",
             },
           ]);
+        }
       })
       .catch((error) => {
-        error;
+        console.log(error);
       });
   };
 
@@ -133,7 +124,6 @@ export default function CameraScreen({ navigation }: any) {
   };
 
   const uploadImage = () => {
-    value;
     const formData = new FormData();
     formData.append("orId", value);
     formData.append("uId", JSON.parse(uId));
@@ -150,7 +140,7 @@ export default function CameraScreen({ navigation }: any) {
         data: formData,
       })
         .then((response) => {
-          response;
+          // console.log(response);
           setValue("");
           setImage(null);
           setLoading(false);
