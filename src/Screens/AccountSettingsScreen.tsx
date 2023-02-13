@@ -101,37 +101,37 @@ const AccountSettingsScreen = () => {
     setInputs((prevState: any) => ({ ...prevState, [input]: text }));
   };
   return (
-    <SafeAreaView
-      style={{
-        width: responsiveScreenWidth(100),
-        height: responsiveScreenHeight(100),
-        alignItems: "center",
-        backgroundColor: "#121f27",
-      }}
-    >
-      <View
+    <KeyboardAvoidingView>
+      <SafeAreaView
         style={{
           width: responsiveScreenWidth(100),
-          height: responsiveScreenHeight(10),
-          // borderWidth: 1,
+          height: responsiveScreenHeight(100),
           alignItems: "center",
-          justifyContent: "center",
+          backgroundColor: "#121f27",
         }}
       >
-        <Body1 style={{ color: "white", alignSelf: "center" }}>
-          Account Settings
-        </Body1>
-      </View>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <ScrollView>
-          <KeyboardAwareScrollView
+        <View
+          style={{
+            width: responsiveScreenWidth(100),
+            height: responsiveScreenHeight(10),
+            // borderWidth: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Body1 style={{ color: "white", alignSelf: "center" }}>
+            Account Settings
+          </Body1>
+        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <ScrollView
             bounces={false}
             contentContainerStyle={{
               width: responsiveScreenWidth(100),
               alignItems: "center",
-              backgroundColor: "white",
+              backgroundColor: "red",
               borderRadius: 30,
               paddingHorizontal: responsiveScreenWidth(7),
               paddingVertical: responsiveScreenHeight(2),
@@ -386,15 +386,15 @@ const AccountSettingsScreen = () => {
               height={"4%"}
               marginTop={"0%"}
               width={"98%"}
-              style={{ marginBottom: responsiveScreenHeight(8) }}
+              style={{ marginBottom: responsiveScreenHeight(20) }}
               onPress={sendData}
             >
               <Body1 style={{ color: "white" }}>Save</Body1>
             </GreenButton>
-          </KeyboardAwareScrollView>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
