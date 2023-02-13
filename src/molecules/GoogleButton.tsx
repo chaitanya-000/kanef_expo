@@ -19,6 +19,7 @@ import { AuthContext } from "../store";
 import * as Google from "expo-auth-session/providers/google";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { androidClientId, iosClientId, expoClientId } from "../../config";
 
 export default function GoogleButton() {
   const [token, setToken] = useState<string>();
@@ -26,12 +27,9 @@ export default function GoogleButton() {
   const { setIsLoggedIn } = useContext(AuthContext);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId:
-      "1026449685475-u2e04rjo1g0h3uibjqbi1lprisarcjrk.apps.googleusercontent.com",
-    iosClientId:
-      "1026449685475-vtbgq4tnqh7ecl9m38evrm1rvve9itot.apps.googleusercontent.com",
-    expoClientId:
-      "1026449685475-7h9steioj713bls2dh72dj08jvpdcv40.apps.googleusercontent.com",
+    androidClientId: androidClientId,
+    iosClientId: iosClientId,
+    expoClientId: expoClientId,
   });
 
   const sendData = () => {
