@@ -47,6 +47,7 @@ export default function GoogleButton() {
             "token",
             JSON.stringify(response.data.user.google_id)
           );
+          ``;
         }
         setIsLoggedIn(true);
       })
