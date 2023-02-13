@@ -70,5 +70,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     position: "relative",
     marginTop: "22%",
+    marginBottom: "9%",
   },
 });

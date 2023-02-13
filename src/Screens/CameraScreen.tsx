@@ -140,7 +140,7 @@ export default function CameraScreen({ navigation }: any) {
         data: formData,
       })
         .then((response) => {
-          // console.log(response);
+          console.log(response);
           setValue("");
           setImage(null);
           setLoading(false);
@@ -148,7 +148,6 @@ export default function CameraScreen({ navigation }: any) {
         })
         .catch(function (error) {
           console.log(error);
-          // need handling error
         });
     } else {
       Alert.alert("Select the store & Image. Both are required!");
@@ -162,7 +161,10 @@ export default function CameraScreen({ navigation }: any) {
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
+          style={{
+            height: responsiveScreenHeight(50),
+            width: responsiveScreenWidth(60),
+          }}
         />
       </View>
       {scanned && (
@@ -192,7 +194,7 @@ export default function CameraScreen({ navigation }: any) {
           width={"62%"}
           onPress={uploadImage}
         >
-          <Body1 style={{ color: "white" }}>Changes applied</Body1>
+          <Body1 style={{ color: "white" }}>Save</Body1>
         </GreenButton>
       </View>
     </View>
@@ -214,7 +216,7 @@ const styles = StyleSheet.create({
   barcodebox: {
     alignItems: "center",
     justifyContent: "center",
-    height: responsiveScreenHeight(44),
+    height: responsiveScreenHeight(24),
     width: responsiveScreenWidth(55),
     borderRadius: 30,
     backgroundColor: "#26ae60ed",

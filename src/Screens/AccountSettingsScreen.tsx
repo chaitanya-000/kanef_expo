@@ -7,6 +7,7 @@ import {
   Alert,
   SafeAreaView,
   ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Body1, Heading5 } from "../atoms/Typography";
@@ -100,28 +101,30 @@ const AccountSettingsScreen = () => {
     setInputs((prevState: any) => ({ ...prevState, [input]: text }));
   };
   return (
-    <KeyboardAwareScrollView>
-      <SafeAreaView
+    <SafeAreaView
+      style={{
+        width: responsiveScreenWidth(100),
+        height: responsiveScreenHeight(100),
+        alignItems: "center",
+        backgroundColor: "#121f27",
+      }}
+    >
+      <View
         style={{
           width: responsiveScreenWidth(100),
-          height: responsiveScreenHeight(100),
+          height: responsiveScreenHeight(10),
+          // borderWidth: 1,
           alignItems: "center",
-          backgroundColor: "#121f27",
+          justifyContent: "center",
         }}
       >
-        <View
-          style={{
-            width: responsiveScreenWidth(100),
-            height: responsiveScreenHeight(10),
-            // borderWidth: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Body1 style={{ color: "white", alignSelf: "center" }}>
-            Account Settings
-          </Body1>
-        </View>
+        <Body1 style={{ color: "white", alignSelf: "center" }}>
+          Account Settings
+        </Body1>
+      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         <ScrollView>
           <KeyboardAwareScrollView
             bounces={false}
@@ -390,8 +393,8 @@ const AccountSettingsScreen = () => {
             </GreenButton>
           </KeyboardAwareScrollView>
         </ScrollView>
-      </SafeAreaView>
-    </KeyboardAwareScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
