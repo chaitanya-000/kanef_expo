@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 
 export const WhiteRoundedContainer = styled.View`
   width: ${responsiveScreenWidth(100)};
-  height: ${responsiveScreenHeight(83)};
+  height: ${responsiveScreenHeight(88)};
   border-radius: 30px;
   background-color: white;
   align-items: center;

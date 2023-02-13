@@ -3,6 +3,16 @@
     "version": ">= 3.4.1"
   },
   "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
     "development": {
       "developmentClient": true,
       "distribution": "internal",
@@ -10,7 +20,7 @@
         "resourceClass": "m1-medium"
       }
     },
-    "preview": {
+    "preview3": {
       "distribution": "internal",
       "ios": {
         "resourceClass": "m1-medium",

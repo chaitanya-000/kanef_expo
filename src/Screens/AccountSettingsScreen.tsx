@@ -6,6 +6,7 @@ import {
   Platform,
   Alert,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Body1, Heading5 } from "../atoms/Typography";
@@ -21,7 +22,6 @@ import axios from "axios";
 import { Dropdown } from "react-native-element-dropdown";
 import MaskInput, { Masks } from "react-native-mask-input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-``;
 
 const AccountSettingsScreen = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -122,270 +122,274 @@ const AccountSettingsScreen = () => {
             Account Settings
           </Body1>
         </View>
-        <KeyboardAwareScrollView
-          bounces={false}
-          contentContainerStyle={{
-            width: responsiveScreenWidth(100),
-            alignItems: "center",
-            backgroundColor: "white",
-            borderRadius: 30,
-            paddingHorizontal: responsiveScreenWidth(7),
-            paddingVertical: responsiveScreenHeight(2),
-          }}
-        >
-          <Body1
-            style={{
-              alignSelf: "flex-start",
-              marginBottom: responsiveScreenHeight(1),
+        <ScrollView>
+          <KeyboardAwareScrollView
+            bounces={false}
+            contentContainerStyle={{
+              width: responsiveScreenWidth(100),
+              alignItems: "center",
+              backgroundColor: "white",
+              borderRadius: 30,
+              paddingHorizontal: responsiveScreenWidth(7),
+              paddingVertical: responsiveScreenHeight(2),
             }}
           >
-            Account Details
-          </Body1>
+            <Body1
+              style={{
+                alignSelf: "flex-start",
+                marginBottom: responsiveScreenHeight(1),
+              }}
+            >
+              Account Details
+            </Body1>
 
-          {/* EMAIL ////////////////////////////////////////////////////////////////////////////////////*/}
-          <View style={styles.inputWithLabelContainer}>
-            <Label>EMAIL ADDRESS</Label>
-            <View>
-              <TextInput
-                style={styles.inputWithLabelContainer_textInput}
-                textContentType="emailAddress"
-                value={fetchedData?.email}
-              />
-            </View>
-          </View>
-
-          {/* PASSWORD//////////////////////////////////////////////////////////////////////////////////// */}
-          <View style={styles.inputWithLabelContainer}>
-            <Label>Phone Number</Label>
-            <View>
-              <TextInput
-                style={styles.inputWithLabelContainer_textInput}
-                value={fetchedData?.phone}
-                textContentType="telephoneNumber"
-              />
-            </View>
-          </View>
-
-          <Body1
-            style={{
-              alignSelf: "flex-start",
-              marginBottom: responsiveScreenHeight(1),
-            }}
-          >
-            About Me
-          </Body1>
-
-          {/* FirstName ////////////////////////////////////////////////////////////////////////////////////*/}
-
-          <View style={styles.firstNameLastNameContainer}>
-            <View style={styles.firstNameLastNameContainer_firstName}>
-              <Label>first Name</Label>
+            {/* EMAIL ////////////////////////////////////////////////////////////////////////////////////*/}
+            <View style={styles.inputWithLabelContainer}>
+              <Label>EMAIL ADDRESS</Label>
               <View>
                 <TextInput
                   style={styles.inputWithLabelContainer_textInput}
-                  value={fetchedData?.firstName}
+                  textContentType="emailAddress"
+                  value={fetchedData?.email}
                 />
               </View>
-
-              {/* Last Name ////////////////////////////////////////////////////////////////////////////////////*/}
             </View>
-            <View style={styles.firstNameLastNameContainer_lastName}>
-              <Label>Last name</Label>
+
+            {/* PASSWORD//////////////////////////////////////////////////////////////////////////////////// */}
+            <View style={styles.inputWithLabelContainer}>
+              <Label>Phone Number</Label>
               <View>
                 <TextInput
                   style={styles.inputWithLabelContainer_textInput}
-                  value={fetchedData?.lastName}
+                  value={fetchedData?.phone}
+                  textContentType="telephoneNumber"
                 />
               </View>
             </View>
-          </View>
 
-          {/* Date of Birth//////////////////////////////////////////////////////////////////////////////////// */}
-          <View style={styles.inputWithLabelContainer_DateOfBirth}>
-            <View style={{ width: "80%", height: "100%" }}>
-              <Label>Date of birth</Label>
-              <View>
-                <MaskInput
-                  style={styles.inputWithLabelContainer_textInput_DateOfBirth}
-                  placeholder={fetchedData?.DOB}
-                  placeholderTextColor={
-                    fetchedData?.Gender ? "#26ae60ed" : "black"
-                  }
-                  value={inputs.DOB}
-                  onChangeText={(masked) => handleOnchange(masked, "DOB")}
-                  keyboardType="number-pad"
-                  mask={Masks.DATE_YYYYMMDD}
-                />
+            <Body1
+              style={{
+                alignSelf: "flex-start",
+                marginBottom: responsiveScreenHeight(1),
+              }}
+            >
+              About Me
+            </Body1>
+
+            {/* FirstName ////////////////////////////////////////////////////////////////////////////////////*/}
+
+            <View style={styles.firstNameLastNameContainer}>
+              <View style={styles.firstNameLastNameContainer_firstName}>
+                <Label>first Name</Label>
+                <View>
+                  <TextInput
+                    style={styles.inputWithLabelContainer_textInput}
+                    value={fetchedData?.firstName}
+                  />
+                </View>
+
+                {/* Last Name ////////////////////////////////////////////////////////////////////////////////////*/}
+              </View>
+              <View style={styles.firstNameLastNameContainer_lastName}>
+                <Label>Last name</Label>
+                <View>
+                  <TextInput
+                    style={styles.inputWithLabelContainer_textInput}
+                    value={fetchedData?.lastName}
+                  />
+                </View>
               </View>
             </View>
-            <MaterialIcons
-              name="date-range"
-              size={34}
-              color="black"
-              style={{ alignSelf: "center", marginTop: "5%" }}
-            />
-          </View>
 
-          {/* Gender//////////////////////////////////////////////////////////////////////////////////// */}
-          <View style={styles.inputWithLabelContainer_DateOfBirth}>
-            <View style={{ width: "80%", height: "100%" }}>
-              <Label>Gender</Label>
+            {/* Date of Birth//////////////////////////////////////////////////////////////////////////////////// */}
+            <View style={styles.inputWithLabelContainer_DateOfBirth}>
+              <View style={{ width: "80%", height: "100%" }}>
+                <Label>Date of birth</Label>
+                <View>
+                  <MaskInput
+                    style={styles.inputWithLabelContainer_textInput_DateOfBirth}
+                    placeholder={fetchedData?.DOB}
+                    placeholderTextColor={
+                      fetchedData?.Gender ? "#26ae60ed" : "black"
+                    }
+                    value={inputs.DOB}
+                    onChangeText={(masked) => handleOnchange(masked, "DOB")}
+                    keyboardType="number-pad"
+                    mask={Masks.DATE_YYYYMMDD}
+                  />
+                </View>
+              </View>
+              <MaterialIcons
+                name="date-range"
+                size={34}
+                color="black"
+                style={{ alignSelf: "center", marginTop: "5%" }}
+              />
+            </View>
+
+            {/* Gender//////////////////////////////////////////////////////////////////////////////////// */}
+            <View style={styles.inputWithLabelContainer_DateOfBirth}>
+              <View style={{ width: "80%", height: "100%" }}>
+                <Label>Gender</Label>
+                <View>
+                  <Dropdown
+                    activeColor="#26ae60ed"
+                    placeholder={
+                      fetchedData?.Gender ? fetchedData.Gender : "Male/Female"
+                    }
+                    placeholderStyle={{
+                      color: fetchedData?.Gender ? "#26ae60ed" : "black",
+                    }}
+                    style={
+                      Platform.OS === "android"
+                        ? styles.dropDownAndroid
+                        : styles.dropDownIOS
+                    }
+                    data={[
+                      {
+                        id: "Male",
+                        value: "Male",
+                      },
+                      {
+                        id: "Female",
+                        value: "Female",
+                      },
+                    ]}
+                    labelField="value"
+                    valueField="value"
+                    containerStyle={styles.dropDownContainer}
+                    backgroundColor={`rgba(0,0,0,0.8)`}
+                    onChange={(data) => handleOnchange(data.value, "Gender")}
+                    value={inputs.Gender}
+                  />
+                </View>
+              </View>
+            </View>
+
+            {/* AddressLine 1//////////////////////////////////////////////////////////////////////////////////// */}
+            <View style={styles.inputWithLabelContainer}>
+              <Label>AddressLine 1</Label>
               <View>
-                <Dropdown
-                  activeColor="#26ae60ed"
+                <TextInput
                   placeholder={
-                    fetchedData?.Gender ? fetchedData.Gender : "Male/Female"
+                    fetchedData?.address1
+                      ? fetchedData.address1
+                      : "Street name..."
                   }
-                  placeholderStyle={{
-                    color: fetchedData?.Gender ? "#26ae60ed" : "black",
-                  }}
-                  style={
-                    Platform.OS === "android"
-                      ? styles.dropDownAndroid
-                      : styles.dropDownIOS
+                  style={styles.inputWithLabelContainer_textInput}
+                  textContentType="streetAddressLine1"
+                  onChangeText={(text) => handleOnchange(text, "address1")}
+                  placeholderTextColor={
+                    fetchedData?.address1 ? "#26ae60ed" : "black"
                   }
-                  data={[
-                    {
-                      id: "Male",
-                      value: "Male",
-                    },
-                    {
-                      id: "Female",
-                      value: "Female",
-                    },
-                  ]}
-                  labelField="value"
-                  valueField="value"
-                  containerStyle={styles.dropDownContainer}
-                  backgroundColor={`rgba(0,0,0,0.8)`}
-                  onChange={(data) => handleOnchange(data.value, "Gender")}
-                  value={inputs.Gender}
                 />
               </View>
             </View>
-          </View>
+            {/* AddressLine 2//////////////////////////////////////////////////////////////////////////////////// */}
+            <View style={styles.inputWithLabelContainer}>
+              <Label>AddressLine 2</Label>
+              <View>
+                <TextInput
+                  style={styles.inputWithLabelContainer_textInput}
+                  textContentType="streetAddressLine2"
+                  onChangeText={(text) => handleOnchange(text, "address2")}
+                  placeholder={
+                    fetchedData?.address2
+                      ? fetchedData.address2
+                      : "Area/Block Name"
+                  }
+                  placeholderTextColor={
+                    fetchedData?.address2 ? "#26ae60ed" : "black"
+                  }
+                />
+              </View>
+            </View>
+            {/* city//////////////////////////////////////////////////////////////////////////////////// */}
+            <View style={styles.inputWithLabelContainer}>
+              <Label>city</Label>
+              <View>
+                <TextInput
+                  style={styles.inputWithLabelContainer_textInput}
+                  textContentType="addressCity"
+                  onChangeText={(text) => handleOnchange(text, "city")}
+                  placeholder={
+                    fetchedData?.city ? fetchedData.city : "eg . Dublin / Delhi"
+                  }
+                  placeholderTextColor={
+                    fetchedData?.city ? "#26ae60ed" : "black"
+                  }
+                />
+              </View>
+            </View>
+            {/* Country//////////////////////////////////////////////////////////////////////////////////// */}
+            <View style={styles.inputWithLabelContainer}>
+              <Label>Country</Label>
+              <View>
+                <TextInput
+                  style={styles.inputWithLabelContainer_textInput}
+                  textContentType="countryName"
+                  onChangeText={(text) => handleOnchange(text, "country")}
+                  placeholder={
+                    fetchedData?.country
+                      ? fetchedData.country
+                      : "eg . Ireland/India"
+                  }
+                  placeholderTextColor={
+                    fetchedData?.country ? "#26ae60ed" : "black"
+                  }
+                />
+              </View>
+            </View>
+            {/* EIRCODE//////////////////////////////////////////////////////////////////////////////////// */}
+            <View style={styles.inputWithLabelContainer}>
+              <Label>EIRCODE</Label>
+              <View>
+                <TextInput
+                  style={styles.inputWithLabelContainer_textInput}
+                  textContentType="postalCode"
+                  placeholder={
+                    fetchedData?.EIRcode
+                      ? fetchedData.EIRcode
+                      : "eg . Ireland/India"
+                  }
+                  onChangeText={(text) => handleOnchange(text, "EIRcode")}
+                  placeholderTextColor={
+                    fetchedData?.EIRcode ? "#26ae60ed" : "black"
+                  }
+                />
+              </View>
+            </View>
 
-          {/* AddressLine 1//////////////////////////////////////////////////////////////////////////////////// */}
-          <View style={styles.inputWithLabelContainer}>
-            <Label>AddressLine 1</Label>
-            <View>
-              <TextInput
-                placeholder={
-                  fetchedData?.address1
-                    ? fetchedData.address1
-                    : "Street name..."
-                }
-                style={styles.inputWithLabelContainer_textInput}
-                textContentType="streetAddressLine1"
-                onChangeText={(text) => handleOnchange(text, "address1")}
-                placeholderTextColor={
-                  fetchedData?.address1 ? "#26ae60ed" : "black"
-                }
+            {/* Manage //////////////////////////////////////////////////////////////////////////////////// */}
+            <Heading5
+              style={{
+                alignSelf: "flex-start",
+                marginTop: responsiveScreenHeight(2),
+              }}
+            >
+              Manage
+            </Heading5>
+            <View style={styles.manage}>
+              <Body1>Notifications </Body1>
+              <Switch
+                trackColor={{ false: "black", true: "white" }}
+                thumbColor={isEnabled ? "#26ae60ed" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isEnabled}
               />
             </View>
-          </View>
-          {/* AddressLine 2//////////////////////////////////////////////////////////////////////////////////// */}
-          <View style={styles.inputWithLabelContainer}>
-            <Label>AddressLine 2</Label>
-            <View>
-              <TextInput
-                style={styles.inputWithLabelContainer_textInput}
-                textContentType="streetAddressLine2"
-                onChangeText={(text) => handleOnchange(text, "address2")}
-                placeholder={
-                  fetchedData?.address2
-                    ? fetchedData.address2
-                    : "Area/Block Name"
-                }
-                placeholderTextColor={
-                  fetchedData?.address2 ? "#26ae60ed" : "black"
-                }
-              />
-            </View>
-          </View>
-          {/* city//////////////////////////////////////////////////////////////////////////////////// */}
-          <View style={styles.inputWithLabelContainer}>
-            <Label>city</Label>
-            <View>
-              <TextInput
-                style={styles.inputWithLabelContainer_textInput}
-                textContentType="addressCity"
-                onChangeText={(text) => handleOnchange(text, "city")}
-                placeholder={
-                  fetchedData?.city ? fetchedData.city : "eg . Dublin / Delhi"
-                }
-                placeholderTextColor={fetchedData?.city ? "#26ae60ed" : "black"}
-              />
-            </View>
-          </View>
-          {/* Country//////////////////////////////////////////////////////////////////////////////////// */}
-          <View style={styles.inputWithLabelContainer}>
-            <Label>Country</Label>
-            <View>
-              <TextInput
-                style={styles.inputWithLabelContainer_textInput}
-                textContentType="countryName"
-                onChangeText={(text) => handleOnchange(text, "country")}
-                placeholder={
-                  fetchedData?.country
-                    ? fetchedData.country
-                    : "eg . Ireland/India"
-                }
-                placeholderTextColor={
-                  fetchedData?.country ? "#26ae60ed" : "black"
-                }
-              />
-            </View>
-          </View>
-          {/* EIRCODE//////////////////////////////////////////////////////////////////////////////////// */}
-          <View style={styles.inputWithLabelContainer}>
-            <Label>EIRCODE</Label>
-            <View>
-              <TextInput
-                style={styles.inputWithLabelContainer_textInput}
-                textContentType="postalCode"
-                placeholder={
-                  fetchedData?.EIRcode
-                    ? fetchedData.EIRcode
-                    : "eg . Ireland/India"
-                }
-                onChangeText={(text) => handleOnchange(text, "EIRcode")}
-                placeholderTextColor={
-                  fetchedData?.EIRcode ? "#26ae60ed" : "black"
-                }
-              />
-            </View>
-          </View>
-
-          {/* Manage //////////////////////////////////////////////////////////////////////////////////// */}
-          <Heading5
-            style={{
-              alignSelf: "flex-start",
-              marginTop: responsiveScreenHeight(2),
-            }}
-          >
-            Manage
-          </Heading5>
-          <View style={styles.manage}>
-            <Body1>Notifications </Body1>
-            <Switch
-              trackColor={{ false: "black", true: "white" }}
-              thumbColor={isEnabled ? "#26ae60ed" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
-          </View>
-          <GreenButton
-            height={"4%"}
-            marginTop={"0%"}
-            width={"98%"}
-            style={{ marginBottom: responsiveScreenHeight(8) }}
-            onPress={sendData}
-          >
-            <Body1 style={{ color: "white" }}>Save</Body1>
-          </GreenButton>
-        </KeyboardAwareScrollView>
+            <GreenButton
+              height={"4%"}
+              marginTop={"0%"}
+              width={"98%"}
+              style={{ marginBottom: responsiveScreenHeight(8) }}
+              onPress={sendData}
+            >
+              <Body1 style={{ color: "white" }}>Save</Body1>
+            </GreenButton>
+          </KeyboardAwareScrollView>
+        </ScrollView>
       </SafeAreaView>
     </KeyboardAwareScrollView>
   );

@@ -147,7 +147,7 @@ export default function CameraScreen({ navigation }: any) {
           Alert.alert(response.data.data);
         })
         .catch(function (error) {
-          error;
+          console.log(error);
           // need handling error
         });
     } else {
@@ -188,11 +188,11 @@ export default function CameraScreen({ navigation }: any) {
 
         <GreenButton
           height={"20%"}
-          marginTop={"15%"}
+          marginTop={"2%"}
           width={"62%"}
           onPress={uploadImage}
         >
-          <Body1 style={{ color: "white" }}>Save</Body1>
+          <Body1 style={{ color: "white" }}>Changes applied</Body1>
         </GreenButton>
       </View>
     </View>
