@@ -162,7 +162,7 @@ export default function CameraScreen({ navigation }: any) {
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{
-            height: responsiveScreenHeight(50),
+            height: responsiveScreenHeight(60),
             width: responsiveScreenWidth(60),
           }}
         />
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   barcodebox: {
     alignItems: "center",
     justifyContent: "center",
-    height: responsiveScreenHeight(24),
+    height: responsiveScreenHeight(30),
     width: responsiveScreenWidth(55),
     borderRadius: 30,
     backgroundColor: "#26ae60ed",

@@ -131,7 +131,7 @@ const AccountSettingsScreen = () => {
             contentContainerStyle={{
               width: responsiveScreenWidth(100),
               alignItems: "center",
-              backgroundColor: "red",
+              backgroundColor: "white",
               borderRadius: 30,
               paddingHorizontal: responsiveScreenWidth(7),
               paddingVertical: responsiveScreenHeight(2),

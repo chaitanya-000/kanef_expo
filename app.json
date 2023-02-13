@@ -1,10 +1,8 @@
 {
   "expo": {
-    "plugins": [
-      "expo-apple-authentication"
-    ],
+    "plugins": ["expo-apple-authentication"],
     "name": "kanef_with_expo",
-    "slug": "kenaf",
+    "slug": "kanef_with_expo",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -16,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["*/"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "ie.kenaf.kenaf"
@@ -34,9 +30,8 @@
     },
     "extra": {
       "eas": {
-        "projectId": "ae37d1cf-4a5c-43cc-81a5-bceb4512d103"
+        "projectId": "d1f029c0-c012-4d5d-80f6-2e004edaed87"
       }
-    },
-    "owner": "kenaf_app"
+    }
   }
 }

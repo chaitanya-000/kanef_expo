@@ -47,7 +47,6 @@ export default function GoogleButton() {
             "token",
             JSON.stringify(response.data.user.google_id)
           );
-          ``;
         }
         setIsLoggedIn(true);
       })
@@ -57,6 +56,7 @@ export default function GoogleButton() {
   };
   useEffect(() => {
     if (response?.type === "success") {
+      console.log(androidClientId, expoClientId, iosClientId);
       setToken(response.authentication?.accessToken);
     }
     token &&
