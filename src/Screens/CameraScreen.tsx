@@ -119,6 +119,7 @@ export default function CameraScreen({ navigation }: any) {
       quality: 1,
     });
     if (!result.canceled) {
+      console.log(result);
       setImage(result.assets[0].uri);
     }
   };
@@ -171,7 +172,7 @@ export default function CameraScreen({ navigation }: any) {
         <Button
           title={"Scan again?"}
           onPress={() => setScanned(false)}
-          color="tomato"
+          color="Green"
         />
       )}
       <View style={styles.optionsContainer}>
@@ -187,7 +188,7 @@ export default function CameraScreen({ navigation }: any) {
             <Entypo name="camera" size={25} color="black" />
           </TouchableOpacity>
         </View>
-
+        <Text>{image?.split("/").pop()}</Text>
         <GreenButton
           height={"20%"}
           marginTop={"2%"}

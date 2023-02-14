@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }: any) => {
       })
       .then((response) => {
         setIsLoading(false);
-        console.log(response.data);
         if (response.data.token) {
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
           AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));

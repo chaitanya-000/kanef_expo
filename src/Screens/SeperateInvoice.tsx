@@ -2,6 +2,10 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { WhiteRoundedContainer } from "../styledComponents/Receipts,Reward,BillPage";
 import axios from "axios";
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from "react-native-responsive-dimensions";
 
 const SeperateInvoice = ({ route }: any) => {
   return (
@@ -10,7 +14,7 @@ const SeperateInvoice = ({ route }: any) => {
         source={{
           uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
         }}
-        style={{ height: 400, width: 300 }}
+        style={{ height: responsiveHeight(80), width: responsiveWidth(95) }}
       />
     </View>
   );
