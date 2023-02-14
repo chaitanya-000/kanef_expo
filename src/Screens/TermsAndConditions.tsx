@@ -317,9 +317,7 @@ const TermsAndConditions = () => {
               lineHeight: 25,
               fontSize: responsiveFontSize(2),
               marginTop: "3%",
-              color: "blue",
             }}
-            onPress={() => Linking.openURL("http://google.com")}
           >
             customer.service@kenaf.ie
           </Text>

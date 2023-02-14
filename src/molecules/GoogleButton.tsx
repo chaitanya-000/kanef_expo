@@ -19,18 +19,11 @@ import { AuthContext } from "../store";
 import * as Google from "expo-auth-session/providers/google";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { androidClientId, iosClientId, expoClientId } from "../../config";
 
 export default function GoogleButton() {
   const [token, setToken] = useState<string>();
   const [userInfo, setUserInfo] = useState<any>();
   const { setIsLoggedIn } = useContext(AuthContext);
-
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: androidClientId,
-    iosClientId: iosClientId,
-    expoClientId: expoClientId,
-  });
 
   const sendData = () => {
     axios
@@ -55,10 +48,6 @@ export default function GoogleButton() {
       });
   };
   useEffect(() => {
-    if (response?.type === "success") {
-      console.log(androidClientId, expoClientId, iosClientId);
-      setToken(response.authentication?.accessToken);
-    }
     token &&
       axios
         .get("https://www.googleapis.com/userinfo/v2/me", {
@@ -70,18 +59,10 @@ export default function GoogleButton() {
           response.data;
           setUserInfo(response.data);
         });
-  }, [response, token]);
+  }, []);
   userInfo?.verified_email && sendData();
   return (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={() => {
-        promptAsync({
-          useProxy: true,
-          showInRecents: true,
-        });
-      }}
-    >
+    <TouchableOpacity style={styles.button}>
       <Image source={require("../../assets/images/GoogleLogo.png")} />
       <Body1 style={{ color: "white", marginLeft: "6%" }}>Google</Body1>
     </TouchableOpacity>

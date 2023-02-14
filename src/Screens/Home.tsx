@@ -29,9 +29,9 @@ const Home = ({ navigation }: any) => {
         navigation={navigation}
         style={styles.SignUpAndLoginContainer}
       />
-      <LineDivider />
+      {/* <LineDivider /> */}
 
-      <GoogleAndAppleButton />
+      {/* <GoogleAndAppleButton /> */}
     </View>
   );
 };
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: responsiveScreenWidth(100),
-    height: responsiveScreenHeight(55),
+    height: responsiveScreenHeight(65),
   },
   SignUpAndLoginContainer: {},
 });
