@@ -3,6 +3,7 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -28,6 +29,8 @@ const Login = () => {
 
   return (
     <KeyboardAwareScrollView>
+      <StatusBar hidden={true} />
+
       <Spinner visible={isLoading} />
 
       <ImageBackground

@@ -10,7 +10,7 @@ import Settings from "./src/Screens/Settings";
 import TabsNavigator from "./src/organisms/TabsNavigator";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Image } from "react-native";
+import { Image, StatusBar } from "react-native";
 import { lazy, useEffect, useState } from "react";
 import Invoices from "./src/Screens/Invoices";
 import AsyncStorage from "@react-native-async-storage/async-storage";

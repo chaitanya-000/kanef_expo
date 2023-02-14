@@ -6,6 +6,7 @@ import {
   Button,
   TouchableOpacity,
   Alert,
+  StatusBar,
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
@@ -119,7 +120,7 @@ export default function CameraScreen({ navigation }: any) {
       quality: 1,
     });
     if (!result.canceled) {
-      console.log(result);
+      // console.log(result);
       setImage(result.assets[0].uri);
     }
   };
@@ -149,6 +150,7 @@ export default function CameraScreen({ navigation }: any) {
         })
         .catch(function (error) {
           console.log(error);
+          setLoading(false);
         });
     } else {
       Alert.alert("Select the store & Image. Both are required!");
@@ -158,6 +160,7 @@ export default function CameraScreen({ navigation }: any) {
   // Return the View
   return (
     <View style={styles.container}>
+      {/* <StatusBar hidden={true} /> */}
       <Spinner visible={loading} />
       <View style={styles.barcodebox}>
         <BarCodeScanner

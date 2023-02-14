@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
+  StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Body1, Heading5 } from "../atoms/Typography";
@@ -57,7 +58,7 @@ const AccountSettingsScreen = () => {
         uId: JSON.parse(userID),
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         const userDetails = response.data.data[0];
 
         setFetchedData(userDetails);
@@ -102,6 +103,7 @@ const AccountSettingsScreen = () => {
   };
   return (
     <KeyboardAvoidingView>
+      <StatusBar hidden={true} />
       <SafeAreaView
         style={{
           width: responsiveScreenWidth(100),
@@ -353,7 +355,7 @@ const AccountSettingsScreen = () => {
                   placeholder={
                     fetchedData?.EIRcode
                       ? fetchedData.EIRcode
-                      : "eg . Ireland/India"
+                      : "eg . A65 F4E2."
                   }
                   onChangeText={(text) => handleOnchange(text, "EIRcode")}
                   placeholderTextColor={

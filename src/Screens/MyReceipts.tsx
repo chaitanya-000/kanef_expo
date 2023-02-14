@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   RefreshControl,
+  StatusBar,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -60,7 +61,7 @@ const MyReceipts = ({ navigation }: any) => {
         })
         .then((response) => {
           setRefreshing(false);
-          console.log(response);
+          // console.log(response);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
@@ -73,6 +74,8 @@ const MyReceipts = ({ navigation }: any) => {
   }, [uId]);
   return (
     <ScreenContainer>
+      <StatusBar hidden={true} />
+
       <Spinner visible={isLoading} animation="fade" size="large" />
       <Body1 style={styles.ScreenName}>My Receipts</Body1>
       <WhiteRoundedContainer>

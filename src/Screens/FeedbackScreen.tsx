@@ -6,6 +6,7 @@ import {
   TextInput,
   Platform,
   Alert,
+  StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
@@ -63,6 +64,7 @@ const FeedbackScreen = () => {
   };
   return (
     <KeyboardAwareScrollView>
+      <StatusBar hidden={true} />
       <View style={styles.screenContainer}>
         <View style={styles.screenName}>
           <Body1 style={{ color: "white", alignSelf: "center" }}>

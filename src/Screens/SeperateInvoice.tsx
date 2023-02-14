@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { WhiteRoundedContainer } from "../styledComponents/Receipts,Reward,BillPage";
 import axios from "axios";
@@ -10,6 +10,8 @@ import {
 const SeperateInvoice = ({ route }: any) => {
   return (
     <View style={styles.container}>
+      <StatusBar hidden={true} />
+
       <Image
         source={{
           uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,

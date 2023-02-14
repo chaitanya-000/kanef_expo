@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Linking,
   ScrollView,
+  StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
@@ -69,6 +70,8 @@ const Invoices = ({ route, navigation }: any) => {
   }, [uId]);
   return (
     <ScreenContainer>
+      <StatusBar hidden={true} />
+
       <Spinner visible={isLoading} animation="fade" size="large" />
       <Body1 style={styles.ScreenName}>My Receipts</Body1>
       <WhiteRoundedContainer>

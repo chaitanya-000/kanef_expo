@@ -8,6 +8,7 @@ import {
   Switch,
   Platform,
   Alert,
+  StatusBar,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { ScreenContainer } from "../styledComponents/Receipts,Reward,BillPage";
@@ -97,6 +98,7 @@ const ContactUsScreen = () => {
   };
   return (
     <KeyboardAwareScrollView>
+      <StatusBar hidden={true} />
       <SafeAreaView
         style={{
           width: responsiveScreenWidth(100),

@@ -6,6 +6,7 @@ import {
   Image,
   SafeAreaView,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import React, { useContext } from "react";
 import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
@@ -21,6 +22,7 @@ import { AuthContext } from "../store";
 const Home = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
+      <StatusBar hidden={true} />
       <Image
         source={require("../../assets/images/LoginPageImage.png")}
         style={styles.image}

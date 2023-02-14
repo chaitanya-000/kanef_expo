@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, StatusBar } from "react-native";
 import React, { useState } from "react";
 import FooterToolBar from "../organisms/FootertoolBar";
 import {
@@ -17,6 +17,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Settings({ navigation }: any) {
   return (
     <View style={styles.pageContainer}>
+      <StatusBar hidden={true} />
+
       <Heading6 style={{ color: "white" }}>Settings</Heading6>
       <View style={styles.WhiteImageAndOptionsContainer}>
         <Image

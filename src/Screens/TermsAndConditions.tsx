@@ -1,6 +1,7 @@
 import {
   Linking,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -31,6 +32,8 @@ const TermsAndConditions = () => {
 
   return (
     <SafeAreaView style={styles.pageContainer}>
+      {/* <StatusBar hidden={true} /> */}
+
       <View style={styles.pageName}>
         <Body1 style={{ color: "white", alignSelf: "center" }}>
           Terms & Conditions

@@ -1,4 +1,11 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import {
   Item,
@@ -13,6 +20,8 @@ import { GreenButton } from "../atoms/GreenButton";
 const RewardCard = () => {
   return (
     <ScreenContainer style={styles.ScreenContainer}>
+      <StatusBar hidden={true} />
+
       <Body1 style={styles.ScreenName}>My Reward Card</Body1>
       <WhiteRoundedContainer>
         <OptionsContainer style={styles.OptionsContainer}>

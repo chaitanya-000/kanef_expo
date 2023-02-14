@@ -8,6 +8,7 @@ import {
   Image,
   FlatList,
   Alert,
+  StatusBar,
 } from "react-native";
 import React, { useContext, useState } from "react";
 import {
@@ -103,6 +104,8 @@ const Register = ({ navigation }: any) => {
 
   return (
     <KeyboardAwareScrollView>
+      <StatusBar hidden={true} />
+
       <Spinner visible={isLoading} />
       <Image
         source={require("../../assets/images/RegisterScreenImage.png")}

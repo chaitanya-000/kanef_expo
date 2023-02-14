@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
 } from "react-native";
 import React, { useEffect, useId, useState } from "react";
 import { Body1, Body2, Body5, Heading4, Heading5 } from "../atoms/Typography";
@@ -61,6 +62,8 @@ const RewardList = () => {
   return (
     <>
       <Spinner visible={isLoading} animation="fade" size="large" />
+      <StatusBar hidden={true} />
+
       <ScreenContainer>
         <Body1 style={styles.ScreenName}>Reward List</Body1>
 
