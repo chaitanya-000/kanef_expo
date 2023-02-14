@@ -13,6 +13,7 @@ import AccountSettingsScreen from "./Screens/AccountSettingsScreen";
 import SeperateInvoice from "./Screens/SeperateInvoice";
 import FeedbackScreen from "./Screens/FeedbackScreen";
 import ContactUsScreen from "./Screens/ContactUsScreen";
+import TermsAndConditions from "./Screens/TermsAndConditions";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -51,6 +52,10 @@ const Navigation = () => {
             />
             <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
             <Stack.Screen name="ContactUsScreen" component={ContactUsScreen} />
+            <Stack.Screen
+              name="TermsAndConditions"
+              component={TermsAndConditions}
+            />
           </>
         ) : (
           <>

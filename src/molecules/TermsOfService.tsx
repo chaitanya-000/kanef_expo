@@ -9,7 +9,7 @@ import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
 
-export default function TermsOfService() {
+export default function TermsOfService({ navigation }: any) {
   return (
     <View
       style={{
@@ -20,7 +20,10 @@ export default function TermsOfService() {
         alignItems: "center",
       }}
     >
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => navigation.navigate("TermsAndConditions")}
+      >
         <View style={styles.IconAndName}>
           <AntDesign name="book" size={26} style={{ marginRight: "9%" }} />
           <Body2>Terms of Service</Body2>
