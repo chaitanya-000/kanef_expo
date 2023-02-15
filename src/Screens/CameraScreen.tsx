@@ -6,6 +6,7 @@ import {
   Button,
   TouchableOpacity,
   Alert,
+  RefreshControl,
   StatusBar,
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -21,6 +22,7 @@ import { Entypo } from "@expo/vector-icons";
 import Spinner from "react-native-loading-spinner-overlay/lib";
 import OrgNameDropDown from "../organisms/OrgNameDropDown";
 import { GreenButton } from "../atoms/GreenButton";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function CameraScreen({ navigation }: any) {
   const [hasPermission, setHasPermission] = useState<any>(null);
@@ -29,6 +31,7 @@ export default function CameraScreen({ navigation }: any) {
   const [image, setImage] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [value, setValue] = useState<string>();
+  const [refreshing, setRefreshing] = useState(false);
 
   //ask for camera permission
   const askForCameraPermission = () => {
@@ -41,8 +44,10 @@ export default function CameraScreen({ navigation }: any) {
   //launch the camera. And then set the image to the clicked image
   const launchCamera = async () => {
     const { assets } = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
     });
+    console.log(ImagePicker.MediaTypeOptions);
     setImage(assets[0].uri);
   };
 
@@ -75,16 +80,24 @@ export default function CameraScreen({ navigation }: any) {
       .then((response) => {
         console.log(response.data);
         const receivedResponseStatus = response.data.status;
-        console.log(receivedResponseStatus);
-
-        if (receivedResponseStatus === "false") {
-          Alert.alert(response.data.data);
+        if (receivedResponseStatus === "true") {
+          Alert.alert(
+            response.data.data,
+            "You can check the Receipts section",
+            [
+              {
+                text: "Ok",
+              },
+            ]
+          );
         } else {
           Alert.alert(response.data.data, "", [
             {
-              text: "Go to receipts",
-              onPress: () => navigation.navigate("My Receipts"),
-              style: "cancel",
+              text: "Try Again",
+              onPress: () => setScanned(false),
+            },
+            {
+              text: "Ok",
             },
           ]);
         }
@@ -159,8 +172,19 @@ export default function CameraScreen({ navigation }: any) {
 
   // Return the View
   return (
-    <View style={styles.container}>
-      {/* <StatusBar hidden={true} /> */}
+    <ScrollView
+      contentContainerStyle={styles.container}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={() => {
+            setImage(null);
+            setRefreshing(false);
+          }}
+        />
+      }
+    >
+      <StatusBar hidden={true} />
       <Spinner visible={loading} />
       <View style={styles.barcodebox}>
         <BarCodeScanner
@@ -175,7 +199,7 @@ export default function CameraScreen({ navigation }: any) {
         <Button
           title={"Scan again?"}
           onPress={() => setScanned(false)}
-          color="Green"
+          color="red"
         />
       )}
       <View style={styles.optionsContainer}>
@@ -191,7 +215,7 @@ export default function CameraScreen({ navigation }: any) {
             <Entypo name="camera" size={25} color="black" />
           </TouchableOpacity>
         </View>
-        <Text>{image?.split("/").pop()}</Text>
+        <Text>{image}</Text>
         <GreenButton
           height={"20%"}
           marginTop={"2%"}
@@ -201,7 +225,7 @@ export default function CameraScreen({ navigation }: any) {
           <Body1 style={{ color: "white" }}>Save</Body1>
         </GreenButton>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
