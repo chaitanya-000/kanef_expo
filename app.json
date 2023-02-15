@@ -4,6 +4,7 @@
     "name": "kanef_with_expo",
     "slug": "kanef_with_expo",
     "version": "1.0.0",
+    "icon": "./assets/images/ReceiptLogoFocused.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "scheme": "ie.kenaf.kenaf",
