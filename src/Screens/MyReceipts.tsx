@@ -65,7 +65,9 @@ const MyReceipts = ({ navigation }: any) => {
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          setIsLoading(false);
+        });
   };
 
   useEffect(() => {

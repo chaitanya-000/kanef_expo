@@ -30,7 +30,7 @@ export default function CameraScreen({ navigation }: any) {
   const [uId, setUid] = useState("");
   const [image, setImage] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [value, setValue] = useState<string>();
+  const [value, setValue] = useState<string | null>();
   const [refreshing, setRefreshing] = useState(false);
 
   //ask for camera permission
@@ -147,6 +147,7 @@ export default function CameraScreen({ navigation }: any) {
       type: "image/jpeg",
       name: "photo.jpg",
     });
+    alert("The upload function ran");
     if (value && image) {
       setLoading(true);
       axios({
@@ -170,7 +171,7 @@ export default function CameraScreen({ navigation }: any) {
     }
   };
 
-  // Return the View
+  // Return the Views
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -180,6 +181,7 @@ export default function CameraScreen({ navigation }: any) {
           onRefresh={() => {
             setImage(null);
             setRefreshing(false);
+            setValue(null);
           }}
         />
       }
