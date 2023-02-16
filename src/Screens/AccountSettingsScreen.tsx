@@ -58,7 +58,6 @@ const AccountSettingsScreen = () => {
         uId: JSON.parse(userID),
       })
       .then((response) => {
-        // console.log(response);
         const userDetails = response.data.data[0];
 
         setFetchedData(userDetails);
@@ -87,15 +86,13 @@ const AccountSettingsScreen = () => {
             address1: inputs.address1,
           })
           .then((response) => {
-            console.log(response);
             setInputs("");
             Alert.alert(response.data.message);
           })
           .catch((error) => {
-            console.log(error);
+            alert(error.message);
           })
       : Alert.alert("Enter all values");
-    // console.log(userID, inputs);
   };
 
   const handleOnchange = (text: any, input: any) => {

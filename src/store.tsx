@@ -39,7 +39,6 @@ export const AuthProvider = ({ children }: any) => {
         }
       })
       .catch((error) => {
-        console.log(error.response.data);
         Alert.alert(error.response.data.message[0]);
 
         setIsLoading(false);

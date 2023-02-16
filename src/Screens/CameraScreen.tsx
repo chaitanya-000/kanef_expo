@@ -42,12 +42,12 @@ export default function CameraScreen({ navigation }: any) {
   };
 
   //launch the camera. And then set the image to the clicked image
-  const launchCamera = async () => {
+  const takePhoto = async () => {
     const { assets } = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
+      quality: 0.7,
     });
-    console.log(ImagePicker.MediaTypeOptions);
     setImage(assets[0].uri);
   };
 
@@ -78,7 +78,6 @@ export default function CameraScreen({ navigation }: any) {
         uId: JSON.parse(uId),
       })
       .then((response) => {
-        console.log(response.data);
         const receivedResponseStatus = response.data.status;
         if (receivedResponseStatus === "true") {
           Alert.alert(
@@ -103,7 +102,7 @@ export default function CameraScreen({ navigation }: any) {
         }
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
 
@@ -126,14 +125,13 @@ export default function CameraScreen({ navigation }: any) {
       </View>
     );
   }
-  const pickImage = async () => {
+  const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      quality: 1,
+      quality: 0.7,
     });
     if (!result.canceled) {
-      // console.log(result);
       setImage(result.assets[0].uri);
     }
   };
@@ -147,27 +145,34 @@ export default function CameraScreen({ navigation }: any) {
       type: "image/jpeg",
       name: "photo.jpg",
     });
-    alert("The upload function ran");
-    if (value && image) {
-      setLoading(true);
-      axios({
-        method: "post",
-        url: "https://kenaf.ie/PersonalReceipt",
-        data: formData,
-      })
-        .then((response) => {
-          console.log(response);
-          setValue("");
-          setImage(null);
-          setLoading(false);
-          Alert.alert(response.data.data);
+    try {
+      if (value && image) {
+        setLoading(true);
+        axios({
+          method: "post",
+          url: "https://kenaf.ie/PersonalReceipt",
+          data: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json",
+          },
         })
-        .catch(function (error) {
-          console.log(error);
-          setLoading(false);
-        });
-    } else {
-      Alert.alert("Select the store & Image. Both are required!");
+          .then((response) => {
+            setValue("");
+            setImage(null);
+            setLoading(false);
+            Alert.alert(response.data.data);
+          })
+          .catch((error) => {
+            alert(`Message  ${error.message}`);
+            alert(` Status ${error.status}`);
+            setLoading(false);
+          });
+      } else {
+        Alert.alert("Select the store & Image. Both are required!");
+      }
+    } catch (error) {
+      alert(` Catch Block ${error}`);
     }
   };
 
@@ -207,12 +212,15 @@ export default function CameraScreen({ navigation }: any) {
       <View style={styles.optionsContainer}>
         <OrgNameDropDown value={value} setValue={setValue} />
         <View style={styles.uploadAndCameraButtons}>
-          <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
+          <TouchableOpacity
+            style={styles.uploadButton}
+            onPress={selectImageFromGallery}
+          >
             <Body2>Upload</Body2>
             <Entypo name="upload" size={25} color="black" />
           </TouchableOpacity>
           <Body1>OR</Body1>
-          <TouchableOpacity style={styles.uploadButton} onPress={launchCamera}>
+          <TouchableOpacity style={styles.uploadButton} onPress={takePhoto}>
             <Body2>Camera</Body2>
             <Entypo name="camera" size={25} color="black" />
           </TouchableOpacity>

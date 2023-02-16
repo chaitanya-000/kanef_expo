@@ -61,12 +61,12 @@ const MyReceipts = ({ navigation }: any) => {
         })
         .then((response) => {
           setRefreshing(false);
-          // console.log(response);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
         .catch((error) => {
           setIsLoading(false);
+          alert(error.message);
         });
   };
 
