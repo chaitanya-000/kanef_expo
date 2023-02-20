@@ -315,7 +315,7 @@ const AccountSettingsScreen = () => {
                   textContentType="addressCity"
                   onChangeText={(text) => handleOnchange(text, "city")}
                   placeholder={
-                    fetchedData?.city ? fetchedData.city : "eg . Dublin / Delhi"
+                    fetchedData?.city ? fetchedData.city : "eg . Dublin "
                   }
                   placeholderTextColor={
                     fetchedData?.city ? "#26ae60ed" : "black"
@@ -332,9 +332,7 @@ const AccountSettingsScreen = () => {
                   textContentType="countryName"
                   onChangeText={(text) => handleOnchange(text, "country")}
                   placeholder={
-                    fetchedData?.country
-                      ? fetchedData.country
-                      : "eg . Ireland/India"
+                    fetchedData?.country ? fetchedData.country : "eg . Ireland"
                   }
                   placeholderTextColor={
                     fetchedData?.country ? "#26ae60ed" : "black"

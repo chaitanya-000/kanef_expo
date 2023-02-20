@@ -17,8 +17,9 @@ import { Body1, Body4 } from "../atoms/Typography";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
+import Navigation from "../Navigation";
 
-const TermsAndConditions = () => {
+const TermsAndConditions = ({ navigation }: any) => {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showEligibility, setShowEligibility] = useState(false);
   const [showIntellectual, setShowIntellectual] = useState(false);
@@ -85,7 +86,7 @@ const TermsAndConditions = () => {
 
         <TouchableOpacity
           style={styles.infoContainer}
-          onPress={() => setShowPrivacy(!showPrivacy)}
+          onPress={() => navigation.navigate("PrivacyPolicy")}
         >
           <View style={styles.infoContainerName}>
             <Text style={styles.contentHeader}>Privacy & Policy</Text>

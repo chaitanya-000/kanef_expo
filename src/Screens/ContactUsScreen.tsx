@@ -9,6 +9,7 @@ import {
   Platform,
   Alert,
   StatusBar,
+  Linking,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { ScreenContainer } from "../styledComponents/Receipts,Reward,BillPage";
@@ -146,17 +147,7 @@ const ContactUsScreen = () => {
                 style={styles.inputWithLabelContainer_textInput}
                 textContentType="emailAddress"
                 onChangeText={(text) => handleOnchange(text, "email")}
-              />
-            </View>
-          </View>
-
-          {/* PASSWORD//////////////////////////////////////////////////////////////////////////////////// */}
-          <View style={styles.inputWithLabelContainer}>
-            <Label>Whats App Number</Label>
-            <View>
-              <TextInput
-                style={styles.inputWithLabelContainer_textInput}
-                onChangeText={(text) => handleOnchange(text, "phone")}
+                value="customer.service@kenaf.ie"
               />
             </View>
           </View>
