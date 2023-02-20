@@ -10,6 +10,7 @@ import {
   Alert,
   StatusBar,
   Linking,
+  TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { ScreenContainer } from "../styledComponents/Receipts,Reward,BillPage";
@@ -56,47 +57,47 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 ``;
 
 const ContactUsScreen = () => {
-  const [userID, setUserId] = useState("");
-  const initialValues = {
-    email: "",
-    phone: "",
-  };
-  const [inputs, setInputs] = useState<any>(initialValues);
+  // const [userID, setUserId] = useState("");
+  // const initialValues = {
+  //   email: "",
+  //   phone: "",
+  // };
+  // const [inputs, setInputs] = useState<any>(initialValues);
 
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("uId");
-      if (value !== null) {
-        setUserId(value);
-      }
-    } catch (e) {
-      // error reading value
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem("uId");
+  //     if (value !== null) {
+  //       setUserId(value);
+  //     }
+  //   } catch (e) {
+  //     // error reading value
+  //   }
+  // };
 
-  useEffect(() => {
-    getData();
-  }, [userID]);
+  // useEffect(() => {
+  //   getData();
+  // }, [userID]);
 
-  const sendData = () => {
-    inputs.email && inputs.phone
-      ? axios
-          .post("https://kenaf.ie/appUserUpdate", {
-            uId: inputs.uID,
-            email: inputs.email,
-            phone: inputs.phone,
-          })
-          .then((response) => {
-            setInputs(initialValues);
-            Alert.alert(response.data.message);
-          })
-          .catch((error) => {})
-      : Alert.alert("Please enter all values");
-  };
+  // const sendData = () => {
+  //   inputs.email && inputs.phone
+  //     ? axios
+  //         .post("https://kenaf.ie/appUserUpdate", {
+  //           uId: inputs.uID,
+  //           email: inputs.email,
+  //           phone: inputs.phone,
+  //         })
+  //         .then((response) => {
+  //           setInputs(initialValues);
+  //           Alert.alert(response.data.message);
+  //         })
+  //         .catch((error) => {})
+  //     : Alert.alert("Please enter all values");
+  // };
 
-  const handleOnchange = (text: any, input: any) => {
-    setInputs((prevState: any) => ({ ...prevState, [input]: text }));
-  };
+  // const handleOnchange = (text: any, input: any) => {
+  //   setInputs((prevState: any) => ({ ...prevState, [input]: text }));
+  // };
   return (
     <KeyboardAwareScrollView>
       <StatusBar hidden={true} />
@@ -124,7 +125,6 @@ const ContactUsScreen = () => {
             height: responsiveScreenHeight(100),
             alignItems: "center",
             backgroundColor: "white",
-
             borderRadius: 30,
             paddingHorizontal: responsiveScreenWidth(7),
             paddingVertical: responsiveScreenHeight(2),
@@ -142,24 +142,17 @@ const ContactUsScreen = () => {
           {/* EMAIL ////////////////////////////////////////////////////////////////////////////////////*/}
           <View style={styles.inputWithLabelContainer}>
             <Label>EMAIL ADDRESS</Label>
-            <View>
-              <TextInput
-                style={styles.inputWithLabelContainer_textInput}
-                textContentType="emailAddress"
-                onChangeText={(text) => handleOnchange(text, "email")}
-                value="customer.service@kenaf.ie"
-              />
-            </View>
+            <TouchableOpacity
+              style={styles.inputWithLabelContainer_textInput}
+              onPress={() =>
+                Linking.openURL("mailto:customer.service@kenaf.ie")
+              }
+            >
+              <Text style={{ fontSize: responsiveScreenFontSize(2.2) }}>
+                customer.service@kenaf.ie
+              </Text>
+            </TouchableOpacity>
           </View>
-
-          <GreenButton
-            height={"7%"}
-            marginTop={"80%"}
-            width={"98%"}
-            onPress={sendData}
-          >
-            <Body1 style={{ color: "white" }}>Done</Body1>
-          </GreenButton>
         </KeyboardAwareScrollView>
       </SafeAreaView>
     </KeyboardAwareScrollView>
@@ -200,6 +193,7 @@ const styles = StyleSheet.create({
     borderColor: "#dee8ef",
     marginTop: responsiveScreenHeight(1),
     borderWidth: 1,
+    justifyContent: "center",
   },
   inputWithLabelContainer_textInput_DateOfBirth: {
     width: "100%",

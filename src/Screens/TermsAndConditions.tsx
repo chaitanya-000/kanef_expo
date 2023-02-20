@@ -322,6 +322,7 @@ const TermsAndConditions = ({ navigation }: any) => {
               fontSize: responsiveFontSize(2),
               marginTop: "3%",
             }}
+            onPress={() => Linking.openURL("mailto:customer.service@kenaf.ie")}
           >
             customer.service@kenaf.ie
           </Text>
