@@ -9,7 +9,7 @@ import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
 import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
 
-export default function PrivacyPolicy() {
+export default function PrivacyPolicy({ navigation }: any) {
   return (
     <View
       style={{
@@ -20,7 +20,10 @@ export default function PrivacyPolicy() {
         alignItems: "center",
       }}
     >
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => navigation.navigate("PrivacyPolicy")}
+      >
         <View style={styles.IconAndName}>
           <MaterialIcons
             name="policy"

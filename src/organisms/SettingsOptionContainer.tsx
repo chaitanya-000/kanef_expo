@@ -21,7 +21,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
       <OpenOnCamera navigation={navigation} />
       <Feedback navigation={navigation} />
       <TermsOfService navigation={navigation} />
-      <PrivacyPolicy />
+      <PrivacyPolicy navigation={navigation} />
       <GreenButton
         height={"8%"}
         marginTop={"2%"}
