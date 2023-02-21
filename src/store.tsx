@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [uId, setUid] = useState();
+  const [data, setData] = useState(null);
 
   const getData = async () => {
     try {
@@ -54,6 +55,15 @@ export const AuthProvider = ({ children }: any) => {
     setIsLoggedIn(true);
   };
 
+  const getOrgNames = () => {
+    setIsLoading(true);
+    axios.get("https://kenaf.ie/organizationList").then((response) => {
+      setIsLoading(false);
+      console.log(data);
+      setData(response.data.data);
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -66,6 +76,8 @@ export const AuthProvider = ({ children }: any) => {
         setIsLoading,
         googleAuth,
         uId,
+        getOrgNames,
+        data,
       }}
     >
       {children}

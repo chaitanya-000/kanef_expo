@@ -1,5 +1,5 @@
 import { Alert, Platform, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   responsiveScreenHeight,
   responsiveScreenWidth,
@@ -7,22 +7,16 @@ import {
 import axios from "axios";
 import Spinner from "react-native-loading-spinner-overlay/lib";
 import { Dropdown } from "react-native-element-dropdown";
+import { AuthContext } from "../store";
 
 const OrgNameDropDown = ({ value, setValue }: any) => {
-  const [data, setData] = useState<any>(null);
+  // const [data, setData] = useState<any>(null);
   const [loading, setIsLoading] = useState(false);
-
-  const getOrgNames = () => {
-    setIsLoading(true);
-    axios.get("https://kenaf.ie/organizationList").then((response) => {
-      setIsLoading(false);
-      setData(response.data.data);
-    });
-  };
+  const { getOrgNames, data } = useContext(AuthContext);
 
   useEffect(() => {
     getOrgNames();
-  }, []);
+  }, [data]);
 
   return (
     data && (

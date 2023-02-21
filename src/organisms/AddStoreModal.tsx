@@ -24,7 +24,7 @@ const AddStoreModal = ({ showModal, setShowModal }: any) => {
         mainOrName: enteredStoreName,
       })
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         setShowModal(false);
       })
       .catch((error) => {
