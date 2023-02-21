@@ -1,9 +1,7 @@
 import {
-  Modal,
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
   TouchableOpacity,
   Pressable,
 } from "react-native";
@@ -13,11 +11,10 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
-import { Body1, Body2, Heading6 } from "../atoms/Typography";
-import { GreenButton } from "../atoms/GreenButton";
 import { AntDesign } from "@expo/vector-icons";
-import OutsideClickHandler from "react-outside-click-handler";
-import Animated from "react-native-reanimated";
+import { TextInput } from "react-native-gesture-handler";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Body3, Body4, Body6 } from "../atoms/Typography";
 
 const AddStoreModal = ({ showModal, setShowModal }: any) => {
   return (
@@ -30,93 +27,42 @@ const AddStoreModal = ({ showModal, setShowModal }: any) => {
           <Text
             style={{ fontSize: responsiveFontSize(2.6), fontWeight: "700" }}
           >
-            Add store Name
+            Add store
           </Text>
           <View>
             <AntDesign
               name="close"
-              size={35}
+              size={25}
               color="black"
               onPress={() => setShowModal(false)}
             />
           </View>
         </View>
-        <View style={styles.modal_worthAndBalanceContainer}>
-          <View style={styles.modal_worthAndBalanceContainer_pointsWorth}>
-            <View
-              style={
-                styles.modal_worthAndBalanceContainer_pointsWorth_pointsWorthHeading
-              }
+        <View style={styles.textInputAndButton}>
+          <TextInput style={styles.textInput} />
+          <TouchableOpacity
+            onPress={() => setShowModal(false)}
+            style={{
+              backgroundColor: "#26ae60ed",
+
+              height: "50%",
+              width: "18%",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                fontSize: responsiveFontSize(2.3),
+                fontWeight: "900",
+              }}
             >
-              <Text
-                style={{
-                  color: "#828282",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                  fontSize: responsiveFontSize(1.5),
-                }}
-              >
-                Points Worth
-              </Text>
-            </View>
-            <View
-              style={
-                styles.modal_worthAndBalanceContainer_pointsWorth_Totalpoints
-              }
-            >
-              <Text
-                style={{ fontSize: responsiveFontSize(2.2), fontWeight: "700" }}
-              >
-                10 Points
-              </Text>
-            </View>
-          </View>
-          <View
-            style={
-              styles.modal_worthAndBalanceContainer_pointsWorth_DividerLine
-            }
-          ></View>
-          {/* //same code for points balance container */}
-          <View style={styles.modal_worthAndBalanceContainer_pointsWorth}>
-            <View
-              style={
-                styles.modal_worthAndBalanceContainer_pointsWorth_pointsWorthHeading
-              }
-            >
-              <Text
-                style={{
-                  color: "#828282",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                  fontSize: responsiveFontSize(1.5),
-                }}
-              >
-                Points Balance
-              </Text>
-            </View>
-            <View
-              style={
-                styles.modal_worthAndBalanceContainer_pointsWorth_Totalpoints
-              }
-            >
-              <Text
-                style={{ fontSize: responsiveFontSize(2.2), fontWeight: "700" }}
-              >
-                $0.50
-              </Text>
-            </View>
-          </View>
+              Add
+            </Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.modal_balanceIpdated}>
-          <Text style={{ fontWeight: "500", color: "#828282" }}>
-            Balance Updated : HR:MM DD/MM/YYYY
-          </Text>
-        </View>
-        <GreenButton height={"25%"} marginTop={"0%"} width={"100%"}>
-          <Body2 style={{ color: "white", fontWeight: "800" }}>
-            Activate points to Reward Card
-          </Body2>
-        </GreenButton>
       </Pressable>
     </TouchableOpacity>
   );
@@ -136,69 +82,37 @@ const styles = StyleSheet.create({
   },
   modal: {
     width: responsiveScreenWidth(90),
-    height: responsiveScreenHeight(34),
-    borderWidth: 0.2,
-    marginTop: responsiveScreenHeight(20),
+    height: responsiveScreenHeight(20),
+    // borderWidth: 3,
+    marginTop: responsiveScreenHeight(30),
     alignItems: "center",
     justifyContent: "space-between",
     borderRadius: 15,
     padding: "4%",
     backgroundColor: "#fff",
-    borderColor: "green",
+    // borderColor: "green",
   },
   modal_BrandName: {
     width: "100%",
-    height: "15%",
+    height: "25%",
     flexDirection: "row",
     justifyContent: "space-between",
-
     // borderWidth: 2,
   },
-  modal_worthAndBalanceContainer: {
+  textInput: {
+    width: "80%",
+    backgroundColor: "#e9f2eb",
+    height: "64%",
+    borderRadius: 10,
+    paddingHorizontal: "5%",
+    fontSize: responsiveFontSize(2.6),
+  },
+  textInputAndButton: {
     width: "100%",
-    height: "30%",
-    // borderWidth: 2,
-    display: "flex",
-    alignItems: "center",
+    height: "60%",
     flexDirection: "row",
-    justifyContent: "space-evenly",
-    backgroundColor: "#F6F8FA",
-    borderWidth: 1,
-    borderColor: "#DEE8EF",
-    alignSelf: "center",
-    borderRadius: 15,
-    // paddingHorizontal: "1%",
-  },
-  modal_worthAndBalanceContainer_pointsWorth: {
-    width: "45%",
-    height: "77%",
-    // borderWidth: 1,
-    borderColor: "orange",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  modal_worthAndBalanceContainer_pointsWorth_DividerLine: {
-    width: "1%",
-    height: "50%",
-    backgroundColor: "#D9D9D9",
-  },
-  modal_worthAndBalanceContainer_pointsWorth_pointsWorthHeading: {
-    width: "100%",
-    height: "35%",
     // borderWidth: 2,
     alignItems: "center",
-    textTransform: "uppercase",
-  },
-  modal_worthAndBalanceContainer_pointsWorth_Totalpoints: {
-    width: "100%",
-    height: "30%",
-    // borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  modal_balanceIpdated: {
-    width: "90%",
-    height: "07%",
-    // borderWidth: 2,
+    justifyContent: "space-between",
   },
 });

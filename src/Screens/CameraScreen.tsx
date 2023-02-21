@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   containerWhenModalActive: {
-    opacity: 0.5,
+    opacity: 0.8,
     width: responsiveScreenWidth(100),
     height: responsiveScreenHeight(100),
     backgroundColor: "black",
