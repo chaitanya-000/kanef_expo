@@ -186,7 +186,6 @@ export default function CameraScreen({ navigation }: any) {
         contentContainerStyle={
           showModal ? styles.containerWhenModalActive : styles.container
         }
-        // style={showModal ? { opacity: 0.8 } : { opacity: 1 }}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}

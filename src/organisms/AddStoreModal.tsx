@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import {
   responsiveFontSize,
   responsiveScreenHeight,
@@ -13,10 +13,25 @@ import {
 } from "react-native-responsive-dimensions";
 import { AntDesign } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Body3, Body4, Body6 } from "../atoms/Typography";
+import axios from "axios";
 
 const AddStoreModal = ({ showModal, setShowModal }: any) => {
+  const [enteredStoreName, setEnteredStoreName] = useState("");
+
+  const sendStoreName = () => {
+    axios
+      .post("https://kenaf.ie/AddShop", {
+        mainOrName: enteredStoreName,
+      })
+      .then((response) => {
+        // console.log(response);
+        setShowModal(false);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
@@ -39,9 +54,12 @@ const AddStoreModal = ({ showModal, setShowModal }: any) => {
           </View>
         </View>
         <View style={styles.textInputAndButton}>
-          <TextInput style={styles.textInput} />
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(enteredValue) => setEnteredStoreName(enteredValue)}
+          />
           <TouchableOpacity
-            onPress={() => setShowModal(false)}
+            onPress={sendStoreName}
             style={{
               backgroundColor: "#26ae60ed",
 
