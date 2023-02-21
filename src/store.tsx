@@ -59,7 +59,6 @@ export const AuthProvider = ({ children }: any) => {
     setIsLoading(true);
     axios.get("https://kenaf.ie/organizationList").then((response) => {
       setIsLoading(false);
-      console.log(data);
       setData(response.data.data);
     });
   };
