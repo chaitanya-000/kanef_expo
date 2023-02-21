@@ -31,6 +31,7 @@ const OrgNameDropDown = ({ value, setValue }: any) => {
         <Spinner visible={loading} />
 
         <Dropdown
+          keyboardAvoiding
           activeColor="#26ae60ed"
           search
           searchPlaceholder="Enter store name"
@@ -59,17 +60,17 @@ export default OrgNameDropDown;
 
 const styles = StyleSheet.create({
   dropDownAndroid: {
-    width: responsiveScreenWidth(60),
+    width: responsiveScreenWidth(40),
     borderRadius: 10,
-    height: responsiveScreenHeight(7),
+    height: responsiveScreenHeight(6),
     paddingHorizontal: responsiveScreenWidth(5),
     borderColor: "#e9f2eb",
     borderWidth: 3,
   },
   dropDownIOS: {
-    width: responsiveScreenWidth(60),
+    width: responsiveScreenWidth(40),
     borderRadius: 10,
-    height: responsiveScreenHeight(7),
+    height: responsiveScreenHeight(6),
 
     paddingHorizontal: responsiveScreenWidth(5),
     borderColor: "#e9f2eb",
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
     height: responsiveScreenHeight(35),
     borderWidth: 2,
     borderRadius: 10,
+    paddingBottom: "10%",
   },
   emptyList: {
     paddingHorizontal: responsiveScreenWidth(5),

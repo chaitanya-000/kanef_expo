@@ -23,6 +23,8 @@ import Spinner from "react-native-loading-spinner-overlay/lib";
 import OrgNameDropDown from "../organisms/OrgNameDropDown";
 import { GreenButton } from "../atoms/GreenButton";
 import { ScrollView } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
+import AddStoreModal from "../organisms/AddStoreModal";
 
 export default function CameraScreen({ navigation }: any) {
   const [hasPermission, setHasPermission] = useState<any>(null);
@@ -32,6 +34,7 @@ export default function CameraScreen({ navigation }: any) {
   const [loading, setLoading] = useState<boolean>(false);
   const [value, setValue] = useState<string | null>();
   const [refreshing, setRefreshing] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   //ask for camera permission
   const askForCameraPermission = () => {
@@ -178,64 +181,91 @@ export default function CameraScreen({ navigation }: any) {
 
   // Return the Views
   return (
-    <ScrollView
-      contentContainerStyle={styles.container}
-      refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={() => {
-            setImage(null);
-            setRefreshing(false);
-            setValue(null);
-          }}
-        />
-      }
-    >
-      <StatusBar hidden={true} />
-      <Spinner visible={loading} />
-      <View style={styles.barcodebox}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{
-            height: responsiveScreenHeight(60),
-            width: responsiveScreenWidth(60),
-          }}
-        />
-      </View>
-      {scanned && (
-        <Button
-          title={"Scan again?"}
-          onPress={() => setScanned(false)}
-          color="red"
-        />
-      )}
-      <View style={styles.optionsContainer}>
-        <OrgNameDropDown value={value} setValue={setValue} />
-        <View style={styles.uploadAndCameraButtons}>
-          <TouchableOpacity
-            style={styles.uploadButton}
-            onPress={selectImageFromGallery}
-          >
-            <Body2>Upload</Body2>
-            <Entypo name="upload" size={25} color="black" />
-          </TouchableOpacity>
-          <Body1>OR</Body1>
-          <TouchableOpacity style={styles.uploadButton} onPress={takePhoto}>
-            <Body2>Camera</Body2>
-            <Entypo name="camera" size={25} color="black" />
-          </TouchableOpacity>
+    <>
+      <ScrollView
+        contentContainerStyle={
+          showModal ? styles.containerWhenModalActive : styles.container
+        }
+        // style={showModal ? { opacity: 0.8 } : { opacity: 1 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              setImage(null);
+              setRefreshing(false);
+              setValue(null);
+            }}
+          />
+        }
+      >
+        <StatusBar hidden={true} />
+        <Spinner visible={loading} />
+        <View style={styles.barcodebox}>
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={{
+              height: responsiveScreenHeight(60),
+              width: responsiveScreenWidth(60),
+            }}
+          />
         </View>
-        <Text>{image}</Text>
-        <GreenButton
-          height={"20%"}
-          marginTop={"2%"}
-          width={"62%"}
-          onPress={uploadImage}
-        >
-          <Body1 style={{ color: "white" }}>Save</Body1>
-        </GreenButton>
-      </View>
-    </ScrollView>
+        {scanned && (
+          <Button
+            title={"Scan again?"}
+            onPress={() => setScanned(false)}
+            color="red"
+          />
+        )}
+        <View style={styles.optionsContainer}>
+          <View
+            style={{
+              // borderWidth: 2,
+              width: responsiveScreenWidth(85),
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <OrgNameDropDown value={value} setValue={setValue} />
+            <Body1>OR</Body1>
+
+            <TouchableOpacity
+              style={{ alignItems: "center" }}
+              onPress={() => setShowModal(!showModal)}
+            >
+              <Ionicons name="ios-add-circle-sharp" size={24} color="black" />
+              <Body4>Add a store</Body4>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.uploadAndCameraButtons}>
+            <TouchableOpacity
+              style={styles.uploadButton}
+              onPress={selectImageFromGallery}
+            >
+              <Body2>Upload</Body2>
+              <Entypo name="upload" size={25} color="black" />
+            </TouchableOpacity>
+            <Body1>OR</Body1>
+            <TouchableOpacity style={styles.uploadButton} onPress={takePhoto}>
+              <Body2>Camera</Body2>
+              <Entypo name="camera" size={25} color="black" />
+            </TouchableOpacity>
+          </View>
+          <Text>{image}</Text>
+          <GreenButton
+            height={"20%"}
+            marginTop={"0%"}
+            width={"62%"}
+            onPress={uploadImage}
+          >
+            <Body1 style={{ color: "white" }}>Save</Body1>
+          </GreenButton>
+        </View>
+      </ScrollView>
+      {showModal && (
+        <AddStoreModal showModal={showModal} setShowModal={setShowModal} />
+      )}
+    </>
   );
 }
 
@@ -244,6 +274,14 @@ const styles = StyleSheet.create({
     width: responsiveScreenWidth(100),
     height: responsiveScreenHeight(100),
     backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  containerWhenModalActive: {
+    opacity: 0.5,
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(100),
+    backgroundColor: "black",
     alignItems: "center",
     justifyContent: "space-evenly",
   },
@@ -275,9 +313,9 @@ const styles = StyleSheet.create({
   optionsContainer: {
     width: responsiveScreenWidth(100),
     height: responsiveScreenHeight(30),
-    // borderWidth: 2,
+    // borderWidth: 1,
     alignItems: "center",
-    // justifyContent: "space-between",
+    justifyContent: "space-between",
   },
   uploadAndCameraButtons: {
     width: responsiveScreenWidth(90),
@@ -286,5 +324,6 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     alignItems: "center",
     justifyContent: "space-around",
+    marginTop: responsiveScreenHeight(5),
   },
 });
