@@ -72,7 +72,7 @@ const RewardList = () => {
         >
           <OptionsContainer>
             <Heading5 style={styles.ContentHeader}>Comming Soon.....</Heading5>
-            <ScrollView style={{ width: responsiveScreenWidth(90) }}>
+            {/* <ScrollView style={{ width: responsiveScreenWidth(90) }}>
               {receivedData &&
                 receivedData.map((eachObj: any, key: number) => {
                   return (
@@ -100,7 +100,7 @@ const RewardList = () => {
                     </TouchableOpacity>
                   );
                 })}
-            </ScrollView>
+            </ScrollView> */}
           </OptionsContainer>
         </WhiteRoundedContainer>
       </ScreenContainer>

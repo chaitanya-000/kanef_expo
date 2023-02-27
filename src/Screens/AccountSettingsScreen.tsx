@@ -73,7 +73,14 @@ const AccountSettingsScreen = () => {
   }, [userID]);
 
   const sendData = () => {
-    userID
+    userID &&
+    inputs.DOB &&
+    inputs.Gender &&
+    inputs.address2 &&
+    inputs.address1 &&
+    inputs.city &&
+    inputs.country &&
+    inputs.EIRcode
       ? axios
           .post("https://kenaf.ie/appUserUpdate", {
             uId: JSON.parse(userID),
