@@ -9,6 +9,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   StatusBar,
+  RefreshControl,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Body1, Heading5 } from "../atoms/Typography";
@@ -17,7 +18,6 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import { Label } from "../molecules/TextInputWithLabel";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { MaterialIcons } from "@expo/vector-icons";
 import { GreenButton } from "../atoms/GreenButton";
 import axios from "axios";
@@ -27,6 +27,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AccountSettingsScreen = () => {
   const [isEnabled, setIsEnabled] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [userID, setUserId] = useState("");
   const initialValues = {
     DOB: "",
@@ -59,6 +60,7 @@ const AccountSettingsScreen = () => {
       })
       .then((response) => {
         const userDetails = response.data.data[0];
+        console.log(userDetails);
 
         setFetchedData(userDetails);
       })
@@ -73,10 +75,35 @@ const AccountSettingsScreen = () => {
   }, [userID]);
 
   const sendData = () => {
+    if (!inputs.DOB) {
+      alert("Please Enter Date Of Birth");
+      return;
+    }
+    if (!inputs.Gender) {
+      alert("Please Enter Gender");
+      return;
+    }
+    if (!inputs.city) {
+      alert("Please ENter City");
+      return;
+    }
+    if (!inputs.address1) {
+      alert("Please Enter Address 1");
+      return;
+    }
+
+    if (!inputs.EIRcode) {
+      alert("Please Enter EIRCODE");
+      return;
+    }
+    if (!inputs.country) {
+      alert("Please Enter country ");
+      return;
+    }
+
     userID &&
     inputs.DOB &&
     inputs.Gender &&
-    inputs.address2 &&
     inputs.address1 &&
     inputs.city &&
     inputs.country &&
@@ -93,7 +120,7 @@ const AccountSettingsScreen = () => {
             address1: inputs.address1,
           })
           .then((response) => {
-            setInputs("");
+            console.log(response);
             Alert.alert(response.data.message);
           })
           .catch((error) => {
@@ -133,15 +160,24 @@ const AccountSettingsScreen = () => {
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           <ScrollView
-            bounces={false}
+            // bounces={false}
             contentContainerStyle={{
               width: responsiveScreenWidth(100),
               alignItems: "center",
               backgroundColor: "white",
               borderRadius: 30,
               paddingHorizontal: responsiveScreenWidth(7),
-              paddingVertical: responsiveScreenHeight(2),
+              paddingVertical: responsiveScreenHeight(4),
             }}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={() => {
+                  setRefreshing(false);
+                  getUserInfo();
+                }}
+              />
+            }
           >
             <Body1
               style={{
