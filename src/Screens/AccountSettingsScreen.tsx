@@ -11,7 +11,7 @@ import {
   StatusBar,
   RefreshControl,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Body1, Heading5 } from "../atoms/Typography";
 import {
   responsiveScreenHeight,
@@ -24,8 +24,10 @@ import axios from "axios";
 import { Dropdown } from "react-native-element-dropdown";
 import MaskInput, { Masks } from "react-native-mask-input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../store";
 
 const AccountSettingsScreen = () => {
+  const { hasUpdatedData, setHasUpdatedData } = useContext(AuthContext);
   const [isEnabled, setIsEnabled] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [userID, setUserId] = useState("");
@@ -122,6 +124,7 @@ const AccountSettingsScreen = () => {
           .then((response) => {
             console.log(response);
             Alert.alert(response.data.message);
+            setHasUpdatedData(true);
           })
           .catch((error) => {
             alert(error.message);
@@ -253,7 +256,9 @@ const AccountSettingsScreen = () => {
                 <View>
                   <MaskInput
                     style={styles.inputWithLabelContainer_textInput_DateOfBirth}
-                    placeholder={fetchedData?.DOB}
+                    placeholder={
+                      fetchedData?.DOB ? fetchedData.DOB : "YYYY/MM/DD"
+                    }
                     placeholderTextColor={
                       fetchedData?.Gender ? "#26ae60ed" : "black"
                     }

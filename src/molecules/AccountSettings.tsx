@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   responsiveFontSize,
   responsiveScreenHeight,
@@ -11,10 +11,12 @@ import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Feather } from "@expo/vector-icons";
+import { AuthContext } from "../store";
 
 export default function AccountSettings({ navigation }: any) {
   const [userId, setUserId] = useState("");
   const [isDataUpdated, setIsDateUpdated] = useState(true);
+  const { hasUpdatedData, setHasUpdatedData } = useContext(AuthContext);
 
   const getData = async () => {
     try {
@@ -51,10 +53,11 @@ export default function AccountSettings({ navigation }: any) {
         console.log(error);
       });
   };
+
   useEffect(() => {
     getData();
     userId && getUserInfo();
-  }, [userId]);
+  }, [userId, hasUpdatedData]);
   return (
     <View
       style={{
@@ -79,10 +82,10 @@ export default function AccountSettings({ navigation }: any) {
             Account Settings
           </Body2>
         </View>
-        {isDataUpdated ? (
-          <Feather name="alert-triangle" size={24} color="black" />
-        ) : (
+        {hasUpdatedData ? (
           <Entypo name="chevron-right" size={30} color="gray" />
+        ) : (
+          <Feather name="alert-triangle" size={24} color="black" />
         )}
       </TouchableOpacity>
       <HorizontalDividerLine />

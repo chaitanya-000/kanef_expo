@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { create } from "zustand";
 import React, { createContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
 
@@ -11,6 +10,7 @@ export const AuthProvider = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [uId, setUid] = useState();
   const [data, setData] = useState(null);
+  const [hasUpdatedData, setHasUpdatedData] = useState(false);
 
   const getData = async () => {
     try {
@@ -77,6 +77,8 @@ export const AuthProvider = ({ children }: any) => {
         uId,
         getOrgNames,
         data,
+        hasUpdatedData,
+        setHasUpdatedData,
       }}
     >
       {children}
