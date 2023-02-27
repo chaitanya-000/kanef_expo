@@ -60,7 +60,7 @@ const AccountSettingsScreen = () => {
       })
       .then((response) => {
         const userDetails = response.data.data[0];
-        console.log(userDetails);
+        // console.log(userDetails);
 
         setFetchedData(userDetails);
       })

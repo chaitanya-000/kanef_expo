@@ -83,4 +83,3 @@ export const AuthProvider = ({ children }: any) => {
     </AuthContext.Provider>
   );
 };
-password: "123213123@chaitanya";

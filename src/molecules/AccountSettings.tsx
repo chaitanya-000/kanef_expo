@@ -1,15 +1,60 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   responsiveFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
-import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
+import { Body2 } from "../atoms/Typography";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import { Feather } from "@expo/vector-icons";
 
 export default function AccountSettings({ navigation }: any) {
+  const [userId, setUserId] = useState("");
+  const [isDataUpdated, setIsDateUpdated] = useState(true);
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uId");
+      if (value !== null) {
+        const uid = value;
+        setUserId(uid);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  const getUserInfo = () => {
+    axios
+      .post("https://kenaf.ie/appUserInfo", {
+        uId: JSON.parse(userId),
+      })
+      .then((response) => {
+        const data = response.data.data[0];
+
+        if (
+          data.DOB &&
+          data.Gender &&
+          data.address1 &&
+          data.city &&
+          data.country &&
+          data.EIRcode
+        ) {
+          setIsDateUpdated(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    getData();
+    userId && getUserInfo();
+  }, [userId]);
   return (
     <View
       style={{
@@ -30,9 +75,15 @@ export default function AccountSettings({ navigation }: any) {
             size={26}
             style={{ marginRight: "9%" }}
           />
-          <Body2>Account Settings</Body2>
+          <Body2 style={{ color: isDataUpdated ? "orange" : "black" }}>
+            Account Settings
+          </Body2>
         </View>
-        <Entypo name="chevron-right" size={30} color="gray" />
+        {isDataUpdated ? (
+          <Feather name="alert-triangle" size={24} color="black" />
+        ) : (
+          <Entypo name="chevron-right" size={30} color="gray" />
+        )}
       </TouchableOpacity>
       <HorizontalDividerLine />
     </View>

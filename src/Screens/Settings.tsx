@@ -1,18 +1,13 @@
 import { View, Text, StyleSheet, Image, StatusBar } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import FooterToolBar from "../organisms/FootertoolBar";
 import {
   responsiveFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
-import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
-import AccountSettings from "../molecules/AccountSettings";
-import Help from "../molecules/Help";
 import SettingsOptionContainer from "../organisms/SettingsOptionContainer";
-import { Body1, Body2, Body3, Heading3, Heading6 } from "../atoms/Typography";
-import { GreenButton } from "../atoms/GreenButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Heading6 } from "../atoms/Typography";
 
 export default function Settings({ navigation }: any) {
   return (
@@ -23,7 +18,7 @@ export default function Settings({ navigation }: any) {
       <View style={styles.WhiteImageAndOptionsContainer}>
         <Image
           source={{
-            uri: "https://kenaf.ie/public/images/profile/noimage.png",
+            uri: "https://kenaf.ie/public/images/noimage.png",
           }}
           style={styles.ProfileImage}
         />
@@ -49,13 +44,13 @@ const styles = StyleSheet.create({
   // },
   ProfileImage: {
     marginTop: "3%",
-    width: responsiveScreenWidth(30),
+    width: responsiveScreenWidth(33),
     height: responsiveScreenHeight(15),
     // borderWidth: 1,
     borderColor: "red",
     position: "relative",
     // top: "8%",
-    bottom: "12%",
+    bottom: "11%",
     zIndex: 21123,
     alignSelf: "center",
     borderRadius: 60,
