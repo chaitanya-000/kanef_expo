@@ -37,6 +37,7 @@ export default function AccountSettings({ navigation }: any) {
       })
       .then((response) => {
         const data = response.data.data[0];
+        // console.log(data);
 
         if (
           data.DOB &&
@@ -83,9 +84,9 @@ export default function AccountSettings({ navigation }: any) {
           </Body2>
         </View>
         {hasUpdatedData ? (
-          <Entypo name="chevron-right" size={30} color="gray" />
-        ) : (
           <Feather name="alert-triangle" size={24} color="black" />
+        ) : (
+          <Entypo name="chevron-right" size={30} color="gray" />
         )}
       </TouchableOpacity>
       <HorizontalDividerLine />

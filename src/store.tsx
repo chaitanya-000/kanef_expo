@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [uId, setUid] = useState();
+  const [userId, setUserId] = useState("");
+
   const [data, setData] = useState(null);
   const [hasUpdatedData, setHasUpdatedData] = useState(false);
 
