@@ -25,6 +25,7 @@ import { GreenButton } from "../atoms/GreenButton";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import AddStoreModal from "../organisms/AddStoreModal";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function CameraScreen({ navigation }: any) {
   const [hasPermission, setHasPermission] = useState<any>(null);
@@ -242,7 +243,11 @@ export default function CameraScreen({ navigation }: any) {
               onPress={selectImageFromGallery}
             >
               <Body2>Upload</Body2>
-              <Entypo name="upload" size={25} color="black" />
+              {image ? (
+                <AntDesign name="checkcircleo" size={24} color="black" />
+              ) : (
+                <Entypo name="upload" size={25} color="black" />
+              )}
             </TouchableOpacity>
             <Body1>OR</Body1>
             <TouchableOpacity style={styles.uploadButton} onPress={takePhoto}>
@@ -250,7 +255,6 @@ export default function CameraScreen({ navigation }: any) {
               <Entypo name="camera" size={25} color="black" />
             </TouchableOpacity>
           </View>
-          <Text>{image}</Text>
           <GreenButton
             height={"20%"}
             marginTop={"0%"}
