@@ -1,5 +1,5 @@
 {
-  "name": "kanef_with_expo",
+  "name": "kenaf",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "proxy": "http://localhost:8000",
