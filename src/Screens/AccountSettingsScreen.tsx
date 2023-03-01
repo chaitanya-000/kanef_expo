@@ -62,7 +62,6 @@ const AccountSettingsScreen = () => {
       })
       .then((response) => {
         const userDetails = response.data.data[0];
-        // console.log(userDetails);
 
         setFetchedData(userDetails);
       })
@@ -122,7 +121,6 @@ const AccountSettingsScreen = () => {
             address1: inputs.address1,
           })
           .then((response) => {
-            console.log(response);
             Alert.alert(response.data.message);
             setHasUpdatedData(true);
           })

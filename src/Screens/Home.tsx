@@ -27,13 +27,8 @@ const Home = ({ navigation }: any) => {
         source={require("../../assets/images/LoginPageImage.png")}
         style={styles.image}
       />
-      <SignUpLoginContainer
-        navigation={navigation}
-        style={styles.SignUpAndLoginContainer}
-      />
+      <SignUpLoginContainer navigation={navigation} />
       {/* <LineDivider /> */}
-
-      {/* <GoogleAndAppleButton /> */}
     </View>
   );
 };
@@ -50,5 +45,4 @@ const styles = StyleSheet.create({
     width: responsiveScreenWidth(100),
     height: responsiveScreenHeight(65),
   },
-  SignUpAndLoginContainer: {},
 });

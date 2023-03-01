@@ -35,7 +35,6 @@ export default function Settings({ navigation }: any) {
       aspect: [1, 1],
     });
     if (!result.canceled) {
-      console.log(result.assets[0].uri);
       const formData = new FormData();
       formData.append("uId", JSON.parse(userId));
       formData.append("image", {
@@ -53,7 +52,6 @@ export default function Settings({ navigation }: any) {
         },
       })
         .then((response) => {
-          console.log(response);
           setLoading(false);
           Alert.alert(response.data.message, "", [
             {
@@ -64,7 +62,6 @@ export default function Settings({ navigation }: any) {
           ]);
         })
         .catch((error) => {
-          console.log(error);
           setLoading(false);
         });
     }
@@ -87,11 +84,10 @@ export default function Settings({ navigation }: any) {
         uId: JSON.parse(userId),
       })
       .then((response) => {
-        console.log(response.data.data[0]);
         setProfileImage(response.data.data[0]?.profileimg);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
 

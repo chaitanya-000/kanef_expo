@@ -37,7 +37,6 @@ export default function AccountSettings({ navigation }: any) {
       })
       .then((response) => {
         const data = response.data.data[0];
-        // console.log(data);
 
         if (
           data.DOB &&
@@ -51,7 +50,7 @@ export default function AccountSettings({ navigation }: any) {
         }
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
 

@@ -53,10 +53,6 @@ export const AuthProvider = ({ children }: any) => {
     setIsLoggedIn(false);
   };
 
-  const googleAuth = () => {
-    setIsLoggedIn(true);
-  };
-
   const getOrgNames = () => {
     setIsLoading(true);
     axios.get("https://kenaf.ie/organizationList").then((response) => {
