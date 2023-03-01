@@ -11,8 +11,6 @@ import {
 import React, { useContext } from "react";
 import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
 import LineDivider from "../organisms/LineDivider";
-import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
-import Gender from "../organisms/Gender";
 import {
   responsiveScreenHeight,
   responsiveScreenWidth,

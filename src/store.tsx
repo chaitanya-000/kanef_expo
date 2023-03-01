@@ -71,7 +71,6 @@ export const AuthProvider = ({ children }: any) => {
         handleLogout,
         isLoading,
         setIsLoading,
-        googleAuth,
         uId,
         getOrgNames,
         data,
