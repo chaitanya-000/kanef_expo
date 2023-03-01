@@ -1,10 +1,10 @@
 {
   "expo": {
     "plugins": ["expo-apple-authentication"],
-    "name": "kenaf",
+    "name": "Kenaf",
     "slug": "kanef_with_expo",
     "version": "1.0.0",
-    "icon": "./assets/images/kenafLogo1.png",
+    "icon": "./assets/images/kenafLogo.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "scheme": "ie.kenaf.kenaf",
