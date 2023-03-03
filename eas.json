@@ -27,11 +27,7 @@
         "simulator": "true"
       }
     },
-    "production": {
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
-    }
+    "production": {}
   },
   "submit": {
     "production": {
