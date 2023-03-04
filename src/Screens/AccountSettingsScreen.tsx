@@ -26,7 +26,7 @@ import MaskInput, { Masks } from "react-native-mask-input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../store";
 
-const AccountSettingsScreen = () => {
+const AccountSettingsScreen = ({ navigation }: any) => {
   const { hasUpdatedData, setHasUpdatedData } = useContext(AuthContext);
   const [isEnabled, setIsEnabled] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -123,6 +123,7 @@ const AccountSettingsScreen = () => {
           .then((response) => {
             Alert.alert(response.data.message);
             setHasUpdatedData(true);
+            navigation.navigate("Camera");
           })
           .catch((error) => {
             alert(error.message);
