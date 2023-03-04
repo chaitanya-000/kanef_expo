@@ -32,7 +32,7 @@ const TabsNavigator = () => {
           tabBarStyle: {
             paddingHorizontal: 17,
             paddingBottom: 10,
-            height: 60,
+            height: responsiveHeight(11),
             borderTopLeftRadius: 25,
             borderTopRightRadius: 25,
           },
@@ -43,6 +43,7 @@ const TabsNavigator = () => {
                 : responsiveHeight(1.2),
             fontWeight: "bold",
             color: "#BDBDBD",
+            height: responsiveHeight(5),
           },
         }}
       >

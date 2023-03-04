@@ -275,7 +275,7 @@ export default function CameraScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     width: responsiveScreenWidth(100),
-    height: responsiveScreenHeight(100),
+    height: responsiveScreenHeight(95),
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "space-evenly",
