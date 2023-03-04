@@ -75,7 +75,16 @@ const Invoices = ({ route, navigation }: any) => {
       <Spinner visible={isLoading} animation="fade" size="large" />
       <Body1 style={styles.ScreenName}>My Receipts</Body1>
       <WhiteRoundedContainer>
-        <OptionsContainer>
+        <View
+          style={{
+            width: responsiveScreenWidth(87),
+            height: responsiveScreenHeight(80),
+            marginTop: "10%",
+            borderRadius: 20,
+            alignItems: "center",
+            // borderWidth: 10,
+          }}
+        >
           <Heading5 style={styles.ContentHeader}>
             {route.params.storeName}
           </Heading5>
@@ -109,7 +118,7 @@ const Invoices = ({ route, navigation }: any) => {
                 );
               })}
           </ScrollView>
-        </OptionsContainer>
+        </View>
       </WhiteRoundedContainer>
     </ScreenContainer>
   );
