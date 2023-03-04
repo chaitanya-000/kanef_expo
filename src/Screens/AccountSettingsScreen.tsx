@@ -62,11 +62,11 @@ const AccountSettingsScreen = () => {
       })
       .then((response) => {
         const userDetails = response.data.data[0];
-
         setFetchedData(userDetails);
+        getUserInfo();
       })
-      .then((error) => {
-        //
+      .catch((error) => {
+        alert(error.message);
       });
   };
   useEffect(() => {
@@ -201,7 +201,7 @@ const AccountSettingsScreen = () => {
               </View>
             </View>
 
-            {/* PASSWORD//////////////////////////////////////////////////////////////////////////////////// */}
+            {/* Phone//////////////////////////////////////////////////////////////////////////////////// */}
             <View style={styles.inputWithLabelContainer}>
               <Label>Phone Number</Label>
               <View>
@@ -253,7 +253,11 @@ const AccountSettingsScreen = () => {
                 <Label>Date of birth</Label>
                 <View>
                   <MaskInput
-                    style={styles.inputWithLabelContainer_textInput_DateOfBirth}
+                    style={
+                      fetchedData?.DOB
+                        ? styles.inputWithLabelContainer_textInput_DateOfBirth
+                        : styles.Data_Does_not_exist_inputWithLabelContainer_textInput_DateOfBirth
+                    }
                     placeholder={
                       fetchedData?.DOB ? fetchedData.DOB : "YYYY/MM/DD"
                     }
@@ -290,8 +294,12 @@ const AccountSettingsScreen = () => {
                     }}
                     style={
                       Platform.OS === "android"
-                        ? styles.dropDownAndroid
-                        : styles.dropDownIOS
+                        ? fetchedData?.Gender
+                          ? styles.dropDownAndroid
+                          : styles.Data_Does_Not_exist_dropDownAndroid
+                        : fetchedData?.Gender
+                        ? styles.dropDownIOS
+                        : styles.Data_Does_Not_exist_dropDownIOS
                     }
                     data={[
                       {
@@ -324,7 +332,11 @@ const AccountSettingsScreen = () => {
                       ? fetchedData.address1
                       : "Street name..."
                   }
-                  style={styles.inputWithLabelContainer_textInput}
+                  style={
+                    fetchedData?.address1
+                      ? styles.inputWithLabelContainer_textInput
+                      : styles.Data_Does_not_exist_inputWithLabelContainer_textInput
+                  }
                   textContentType="streetAddressLine1"
                   onChangeText={(text) => handleOnchange(text, "address1")}
                   placeholderTextColor={
@@ -338,7 +350,11 @@ const AccountSettingsScreen = () => {
               <Label>AddressLine 2</Label>
               <View>
                 <TextInput
-                  style={styles.inputWithLabelContainer_textInput}
+                  style={
+                    fetchedData?.address2
+                      ? styles.inputWithLabelContainer_textInput
+                      : styles.Data_Does_not_exist_inputWithLabelContainer_textInput
+                  }
                   textContentType="streetAddressLine2"
                   onChangeText={(text) => handleOnchange(text, "address2")}
                   placeholder={
@@ -357,7 +373,11 @@ const AccountSettingsScreen = () => {
               <Label>city</Label>
               <View>
                 <TextInput
-                  style={styles.inputWithLabelContainer_textInput}
+                  style={
+                    fetchedData?.city
+                      ? styles.inputWithLabelContainer_textInput
+                      : styles.Data_Does_not_exist_inputWithLabelContainer_textInput
+                  }
                   textContentType="addressCity"
                   onChangeText={(text) => handleOnchange(text, "city")}
                   placeholder={
@@ -374,7 +394,11 @@ const AccountSettingsScreen = () => {
               <Label>Country</Label>
               <View>
                 <TextInput
-                  style={styles.inputWithLabelContainer_textInput}
+                  style={
+                    fetchedData?.country
+                      ? styles.inputWithLabelContainer_textInput
+                      : styles.Data_Does_not_exist_inputWithLabelContainer_textInput
+                  }
                   textContentType="countryName"
                   onChangeText={(text) => handleOnchange(text, "country")}
                   placeholder={
@@ -391,7 +415,11 @@ const AccountSettingsScreen = () => {
               <Label>EIRCODE</Label>
               <View>
                 <TextInput
-                  style={styles.inputWithLabelContainer_textInput}
+                  style={
+                    fetchedData?.EIRcode
+                      ? styles.inputWithLabelContainer_textInput
+                      : styles.Data_Does_not_exist_inputWithLabelContainer_textInput
+                  }
                   textContentType="postalCode"
                   placeholder={
                     fetchedData?.EIRcode
@@ -473,6 +501,19 @@ const styles = StyleSheet.create({
     paddingLeft: "5%",
     color: "black",
     borderColor: "#dee8ef",
+    // borderColor: "#dee8ef",
+    marginTop: responsiveScreenHeight(1),
+    borderWidth: 1,
+  },
+  Data_Does_not_exist_inputWithLabelContainer_textInput: {
+    width: "100%",
+    height: "75%",
+    borderRadius: 15,
+    backgroundColor: "#f6f8fa",
+    fontSize: 19,
+    paddingLeft: "5%",
+    color: "black",
+    borderColor: "orange",
     marginTop: responsiveScreenHeight(1),
     borderWidth: 1,
   },
@@ -485,6 +526,20 @@ const styles = StyleSheet.create({
     paddingLeft: "5%",
     color: "black",
     borderColor: "#dee8ef",
+
+    marginTop: responsiveScreenHeight(1),
+    borderWidth: 1,
+  },
+  Data_Does_not_exist_inputWithLabelContainer_textInput_DateOfBirth: {
+    width: "100%",
+    height: "75%",
+    borderRadius: 15,
+    backgroundColor: "#f6f8fa",
+    fontSize: 19,
+    paddingLeft: "5%",
+    color: "black",
+    borderColor: "orange",
+
     marginTop: responsiveScreenHeight(1),
     borderWidth: 1,
   },
@@ -523,6 +578,14 @@ const styles = StyleSheet.create({
     borderColor: "#e9f2eb",
     borderWidth: 3,
   },
+  Data_Does_Not_exist_dropDownAndroid: {
+    width: responsiveScreenWidth(60),
+    borderRadius: 10,
+    height: responsiveScreenHeight(7),
+    paddingHorizontal: responsiveScreenWidth(5),
+    borderColor: "orange",
+    borderWidth: 1.2,
+  },
   dropDownIOS: {
     width: responsiveScreenWidth(60),
     borderRadius: 10,
@@ -531,6 +594,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveScreenWidth(5),
     borderColor: "#e9f2eb",
     borderWidth: 3,
+  },
+  Data_Does_Not_exist_dropDownIOS: {
+    width: responsiveScreenWidth(60),
+    borderRadius: 10,
+    height: responsiveScreenHeight(7),
+
+    paddingHorizontal: responsiveScreenWidth(5),
+    borderColor: "orange",
+
+    borderWidth: 1.2,
   },
 
   dropDownContainer: {
