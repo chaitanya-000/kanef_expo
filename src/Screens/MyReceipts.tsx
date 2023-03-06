@@ -81,10 +81,16 @@ const MyReceipts = ({ navigation }: any) => {
       <Spinner visible={isLoading} animation="fade" size="large" />
       <Body1 style={styles.ScreenName}>My Receipts</Body1>
       <WhiteRoundedContainer>
-        <OptionsContainer>
+        <OptionsContainer
+          style={{
+            height: responsiveScreenHeight(65),
+          }}
+        >
           <Heading5 style={styles.ContentHeader}>Receipts</Heading5>
           <ScrollView
-            style={{ width: responsiveScreenWidth(90) }}
+            style={{
+              width: responsiveScreenWidth(90),
+            }}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={getStores} />
             }

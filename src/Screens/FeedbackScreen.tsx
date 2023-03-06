@@ -87,7 +87,7 @@ const FeedbackScreen = ({ navigation }: any) => {
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: 10,
-                marginRight: "15%",
+                marginRight: "24%",
                 borderWidth: 1,
                 borderColor: "rgba(222, 232, 239, 0.1)",
               }}
@@ -96,7 +96,7 @@ const FeedbackScreen = ({ navigation }: any) => {
               <Ionicons name="arrow-back" size={30} color="white" />
             </TouchableOpacity>
             <Body1 style={{ color: "white", alignSelf: "center" }}>
-              Kenaf Privacy Policy
+              Feedback
             </Body1>
           </View>
         </View>

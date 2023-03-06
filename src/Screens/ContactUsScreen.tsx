@@ -40,64 +40,11 @@ import {
   Label,
   TextInputBox,
 } from "../molecules/TextInputWithLabel";
-import { SplitContainer } from "../atoms/InputContainer";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { MaterialIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import Gender from "../organisms/Gender";
-import { GreenButton } from "../atoms/GreenButton";
-import DropDownPicker from "react-native-dropdown-picker";
-import ModalDropdown from "react-native-modal-dropdown";
-import axios from "axios";
-import { AuthContext } from "../store";
-import { Dropdown } from "react-native-element-dropdown";
-import MaskInput, { Masks } from "react-native-mask-input";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-``;
+import { Ionicons } from "@expo/vector-icons";
 
-const ContactUsScreen = () => {
-  // const [userID, setUserId] = useState("");
-  // const initialValues = {
-  //   email: "",
-  //   phone: "",
-  // };
-  // const [inputs, setInputs] = useState<any>(initialValues);
-
-  // const getData = async () => {
-  //   try {
-  //     const value = await AsyncStorage.getItem("uId");
-  //     if (value !== null) {
-  //       setUserId(value);
-  //     }
-  //   } catch (e) {
-  //     // error reading value
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getData();
-  // }, [userID]);
-
-  // const sendData = () => {
-  //   inputs.email && inputs.phone
-  //     ? axios
-  //         .post("https://kenaf.ie/appUserUpdate", {
-  //           uId: inputs.uID,
-  //           email: inputs.email,
-  //           phone: inputs.phone,
-  //         })
-  //         .then((response) => {
-  //           setInputs(initialValues);
-  //           Alert.alert(response.data.message);
-  //         })
-  //         .catch((error) => {})
-  //     : Alert.alert("Please enter all values");
-  // };
-
-  // const handleOnchange = (text: any, input: any) => {
-  //   setInputs((prevState: any) => ({ ...prevState, [input]: text }));
-  // };
+const ContactUsScreen = ({ navigation }: any) => {
   return (
     <KeyboardAwareScrollView>
       <StatusBar hidden={true} />
@@ -117,7 +64,38 @@ const ContactUsScreen = () => {
             alignItems: "center",
             justifyContent: "center",
           }}
-        ></View>
+        >
+          <View
+            style={{
+              width: "90%",
+              height: "90%",
+              // borderWidth: 2,
+              flexDirection: "row",
+              // justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                height: "60%",
+                width: "13%",
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 10,
+                marginRight: "15%",
+                borderWidth: 1,
+                borderColor: "rgba(222, 232, 239, 0.1)",
+              }}
+              onPress={() => navigation.navigate("Settings")}
+            >
+              <Ionicons name="arrow-back" size={30} color="white" />
+            </TouchableOpacity>
+            <Body1 style={{ color: "white", alignSelf: "center" }}>
+              Contact Us
+            </Body1>
+          </View>
+        </View>
         <KeyboardAwareScrollView
           bounces={false}
           contentContainerStyle={{

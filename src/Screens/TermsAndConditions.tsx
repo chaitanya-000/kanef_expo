@@ -73,7 +73,7 @@ const TermsAndConditions = ({ navigation }: any) => {
             <Ionicons name="arrow-back" size={30} color="white" />
           </TouchableOpacity>
           <Body1 style={{ color: "white", alignSelf: "center" }}>
-            Kenaf Privacy Policy
+            Terms and Conditions
           </Body1>
         </View>
       </View>
