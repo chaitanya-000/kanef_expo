@@ -69,7 +69,6 @@ const ContactUsScreen = ({ navigation }: any) => {
             style={{
               width: "90%",
               height: "90%",
-              // borderWidth: 2,
               flexDirection: "row",
               // justifyContent: "center",
               alignItems: "center",
@@ -83,7 +82,7 @@ const ContactUsScreen = ({ navigation }: any) => {
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: 10,
-                marginRight: "15%",
+                marginRight: "24%",
                 borderWidth: 1,
                 borderColor: "rgba(222, 232, 239, 0.1)",
               }}

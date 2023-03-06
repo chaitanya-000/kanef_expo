@@ -78,17 +78,25 @@ const Invoices = ({ route, navigation }: any) => {
         <View
           style={{
             width: responsiveScreenWidth(87),
-            height: responsiveScreenHeight(80),
+            // height: responsiveScreenHeight(90),
             marginTop: "10%",
             borderRadius: 20,
             alignItems: "center",
-            // borderWidth: 10,
           }}
         >
           <Heading5 style={styles.ContentHeader}>
             {route.params.storeName}
           </Heading5>
-          <ScrollView style={{ width: responsiveScreenWidth(90) }}>
+
+          <ScrollView
+            style={{
+              width: responsiveScreenWidth(90),
+              borderWidth: 1,
+            }}
+            contentContainerStyle={{
+              height: responsiveScreenHeight(60),
+            }}
+          >
             {receivedData &&
               receivedData.map((eachObj: any) => {
                 return (

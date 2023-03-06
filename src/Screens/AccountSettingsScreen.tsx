@@ -546,7 +546,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     paddingLeft: "5%",
     color: "black",
-    borderColor: "orange",
+    borderColor: "red",
     marginTop: responsiveScreenHeight(1),
     borderWidth: 1,
   },
@@ -571,7 +571,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     paddingLeft: "5%",
     color: "black",
-    borderColor: "orange",
+    borderColor: "red",
 
     marginTop: responsiveScreenHeight(1),
     borderWidth: 1,
@@ -616,7 +616,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: responsiveScreenHeight(7),
     paddingHorizontal: responsiveScreenWidth(5),
-    borderColor: "orange",
+    borderColor: "red",
     borderWidth: 1.2,
   },
   dropDownIOS: {
@@ -634,7 +634,7 @@ const styles = StyleSheet.create({
     height: responsiveScreenHeight(7),
 
     paddingHorizontal: responsiveScreenWidth(5),
-    borderColor: "orange",
+    borderColor: "red",
 
     borderWidth: 1.2,
   },

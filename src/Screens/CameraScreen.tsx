@@ -132,8 +132,8 @@ export default function CameraScreen({ navigation }: any) {
   const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
       quality: 0.7,
+      allowsEditing: true,
     });
     if (!result.canceled) {
       setImage(result.assets[0].uri);
