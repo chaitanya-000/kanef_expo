@@ -86,6 +86,7 @@ export default function Settings({ navigation }: any) {
         uId: JSON.parse(userId),
       })
       .then((response) => {
+        console.log(response.data.data);
         setProfileImage(response.data.data[0]?.profileimg);
       })
       .catch((error) => {

@@ -10,9 +10,10 @@ import {
   KeyboardAvoidingView,
   StatusBar,
   RefreshControl,
+  TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { Body1, Heading5 } from "../atoms/Typography";
+import { Body1, Heading5, Heading6 } from "../atoms/Typography";
 import {
   responsiveScreenHeight,
   responsiveScreenWidth,
@@ -25,6 +26,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import MaskInput, { Masks } from "react-native-mask-input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../store";
+import { Ionicons } from "@expo/vector-icons";
 
 const AccountSettingsScreen = ({ navigation }: any) => {
   const { hasUpdatedData, setHasUpdatedData } = useContext(AuthContext);
@@ -39,6 +41,7 @@ const AccountSettingsScreen = ({ navigation }: any) => {
     country: "",
     EIRcode: "",
     address1: "",
+    phone: "",
   };
   const [inputs, setInputs] = useState<any>(initialValues);
   const [fetchedData, setFetchedData] = useState<any>(null);
@@ -119,6 +122,7 @@ const AccountSettingsScreen = ({ navigation }: any) => {
             country: inputs.country,
             EIRcode: inputs.EIRcode,
             address1: inputs.address1,
+            phone: inputs.phone,
           })
           .then((response) => {
             Alert.alert(response.data.message);
@@ -149,14 +153,42 @@ const AccountSettingsScreen = ({ navigation }: any) => {
           style={{
             width: responsiveScreenWidth(100),
             height: responsiveScreenHeight(10),
-            // borderWidth: 1,
+            // borderWidth: 2,
+            flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Body1 style={{ color: "white", alignSelf: "center" }}>
-            Account Settings
-          </Body1>
+          <View
+            style={{
+              width: "90%",
+              height: "90%",
+              // borderWidth: 2,
+              flexDirection: "row",
+              // justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                height: "60%",
+                width: "13%",
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 10,
+                marginRight: "15%",
+                borderWidth: 1,
+                borderColor: "rgba(222, 232, 239, 0.1)",
+              }}
+              onPress={() => navigation.navigate("Settings")}
+            >
+              <Ionicons name="arrow-back" size={30} color="white" />
+            </TouchableOpacity>
+            <Body1 style={{ color: "white", alignSelf: "center" }}>
+              Account Settings
+            </Body1>
+          </View>
         </View>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}

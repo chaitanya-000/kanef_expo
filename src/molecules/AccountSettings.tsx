@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Feather } from "@expo/vector-icons";
 import { AuthContext } from "../store";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function AccountSettings({ navigation }: any) {
   const [userId, setUserId] = useState("");
@@ -78,14 +79,14 @@ export default function AccountSettings({ navigation }: any) {
             size={26}
             style={{ marginRight: "9%" }}
           />
-          <Body2 style={{ color: isDataUpdated ? "orange" : "black" }}>
+          <Body2 style={{ color: isDataUpdated ? "black" : "black" }}>
             Account Settings
           </Body2>
         </View>
         {hasUpdatedData ? (
           <Entypo name="chevron-right" size={30} color="gray" />
         ) : (
-          <Feather name="alert-triangle" size={30} color="black" />
+          <MaterialIcons name="looks-one" size={30} color="red" />
         )}
       </TouchableOpacity>
       <HorizontalDividerLine />
