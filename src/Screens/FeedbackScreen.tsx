@@ -7,6 +7,7 @@ import {
   Platform,
   Alert,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
@@ -20,8 +21,9 @@ import { Body1, Body2, Body3, Heading2, Heading5 } from "../atoms/Typography";
 import { GreenButton } from "../atoms/GreenButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { Ionicons } from "@expo/vector-icons";
 
-const FeedbackScreen = () => {
+const FeedbackScreen = ({ navigation }: any) => {
   const [userID, setUserId] = useState("");
 
   const initialValues = {
@@ -67,9 +69,36 @@ const FeedbackScreen = () => {
       <StatusBar hidden={true} />
       <View style={styles.screenContainer}>
         <View style={styles.screenName}>
-          <Body1 style={{ color: "white", alignSelf: "center" }}>
-            Feedback
-          </Body1>
+          <View
+            style={{
+              width: "90%",
+              height: "60%",
+              // borderWidth: 2,
+              flexDirection: "row",
+              // justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                height: "72%",
+                width: "13%",
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 10,
+                marginRight: "15%",
+                borderWidth: 1,
+                borderColor: "rgba(222, 232, 239, 0.1)",
+              }}
+              onPress={() => navigation.navigate("Settings")}
+            >
+              <Ionicons name="arrow-back" size={30} color="white" />
+            </TouchableOpacity>
+            <Body1 style={{ color: "white", alignSelf: "center" }}>
+              Kenaf Privacy Policy
+            </Body1>
+          </View>
         </View>
         <KeyboardAwareScrollView
           contentContainerStyle={styles.whiteRoundedContainer}
@@ -137,7 +166,7 @@ const styles = StyleSheet.create({
     width: responsiveScreenWidth(100),
     height: responsiveScreenHeight(98),
     backgroundColor: "white",
-    marginTop: responsiveScreenHeight(3),
+    marginTop: responsiveScreenHeight(2),
     borderRadius: 35,
     padding: responsiveScreenHeight(3),
     alignItems: "center",

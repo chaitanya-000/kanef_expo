@@ -17,8 +17,9 @@ import { Body1, Body4 } from "../atoms/Typography";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
+import { Ionicons } from "@expo/vector-icons";
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy = ({ navigation }: any) => {
   const [KenafPrivacyPolicy, setKenafPrivacyPolicy] = useState(false);
   const [privacyProtectionPolicy, setPrivacyProtectionPolicy] = useState(false);
   const [useOfPersonalData, setUseOfPersonalData] = useState(false);
@@ -34,10 +35,46 @@ const PrivacyPolicy = () => {
     <SafeAreaView style={styles.pageContainer}>
       {/* <StatusBar hidden={true} /> */}
 
-      <View style={styles.pageName}>
-        <Body1 style={{ color: "white", alignSelf: "center" }}>
-          Kenaf Privacy Policy
-        </Body1>
+      <View
+        style={{
+          width: responsiveScreenWidth(100),
+          height: responsiveScreenHeight(10),
+          // borderWidth: 2,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <View
+          style={{
+            width: "90%",
+            height: "90%",
+            // borderWidth: 2,
+            flexDirection: "row",
+            // justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              height: "60%",
+              width: "13%",
+              backgroundColor: "rgba(255, 255, 255, 0.05)",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 10,
+              marginRight: "15%",
+              borderWidth: 1,
+              borderColor: "rgba(222, 232, 239, 0.1)",
+            }}
+            onPress={() => navigation.navigate("Settings")}
+          >
+            <Ionicons name="arrow-back" size={30} color="white" />
+          </TouchableOpacity>
+          <Body1 style={{ color: "white", alignSelf: "center" }}>
+            Kenaf Privacy Policy
+          </Body1>
+        </View>
       </View>
       {/* ////////////////////////////////////////////// */}
       <ScrollView
@@ -398,7 +435,7 @@ const styles = StyleSheet.create({
     height: "12%",
     alignItems: "center",
     justifyContent: "center",
-    // borderWidth: 2,
+    borderWidth: 2,
   },
   whiteContainer: {
     backgroundColor: "white",
