@@ -86,7 +86,15 @@ export default function AccountSettings({ navigation }: any) {
         {hasUpdatedData ? (
           <Entypo name="chevron-right" size={30} color="gray" />
         ) : (
-          <MaterialIcons name="looks-one" size={30} color="red" />
+          <Image
+            source={require("../../assets/images/notification.png")}
+            style={{
+              width: responsiveScreenWidth(6.5),
+              // height: responsiveScreenHeight(4),
+              borderRadius: 100,
+              aspectRatio: 1,
+            }}
+          />
         )}
       </TouchableOpacity>
       <HorizontalDividerLine />
