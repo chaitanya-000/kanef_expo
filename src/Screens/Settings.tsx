@@ -29,7 +29,7 @@ export default function Settings({ navigation }: any) {
 
   const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 0.7,
       aspect: [1, 1],
@@ -63,6 +63,8 @@ export default function Settings({ navigation }: any) {
         })
         .catch((error) => {
           setLoading(false);
+          console.log(error);
+          alert(error.message);
         });
     }
   };
@@ -108,8 +110,6 @@ export default function Settings({ navigation }: any) {
           <Image
             source={{
               uri: `https://kenaf.ie/public/images/profile/${profileImage}`,
-              // uri: `https://kenaf.ie/public/images/profile/appUser_529877.jpg`,
-              // uri: `https://picsum.photos/seed/picsum/200/300`,
             }}
             style={styles.ProfileImage}
           />

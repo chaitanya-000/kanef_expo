@@ -48,7 +48,7 @@ export default function CameraScreen({ navigation }: any) {
   //launch the camera. And then set the image to the clicked image
   const takePhoto = async () => {
     const { assets } = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 0.7,
     });
@@ -131,7 +131,7 @@ export default function CameraScreen({ navigation }: any) {
   }
   const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 0.7,
     });

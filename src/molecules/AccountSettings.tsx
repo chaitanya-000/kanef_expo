@@ -83,9 +83,9 @@ export default function AccountSettings({ navigation }: any) {
           </Body2>
         </View>
         {hasUpdatedData ? (
-          <Feather name="alert-triangle" size={24} color="black" />
-        ) : (
           <Entypo name="chevron-right" size={30} color="gray" />
+        ) : (
+          <Feather name="alert-triangle" size={30} color="black" />
         )}
       </TouchableOpacity>
       <HorizontalDividerLine />
