@@ -258,7 +258,6 @@ const AccountSettingsScreen = ({ navigation }: any) => {
               <Label>Phone Number</Label>
               <View>
                 <TextInput
-                  value=""
                   style={
                     fetchedData?.phone
                       ? styles.inputWithLabelContainer_textInput
