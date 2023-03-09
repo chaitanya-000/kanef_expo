@@ -64,7 +64,7 @@ const SeperateInvoice = ({ route, navigation }: any) => {
             style={{
               color: "white",
               alignSelf: "center",
-              fontSize: responsiveScreenFontSize(3),
+              fontSize: responsiveScreenFontSize(2),
             }}
           >
             {route.params.StoreName} : {route.params.Date.split("T")[0]}
@@ -78,6 +78,7 @@ const SeperateInvoice = ({ route, navigation }: any) => {
           source={{
             uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
           }}
+          resizeMode="contain"
           onLoadStart={() => setLoading(true)}
           onLoadEnd={() => setLoading(false)}
           style={styles.image}
@@ -96,15 +97,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-    width: "90%",
-    height: "70%",
+    width: "100%",
+    height: "100%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   image: {
-    width: "98%",
-    height: "99%",
+    height: "90%",
+    width: "90%",
+
+    // aspectRatio: 3,
     // aspectRatio: 2,
   },
 });

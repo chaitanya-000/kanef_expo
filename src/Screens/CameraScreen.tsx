@@ -135,6 +135,7 @@ export default function CameraScreen({ navigation }: any) {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 0.7,
       allowsEditing: true,
+      aspect: [9, 16],
     });
     if (!result.canceled) {
       setImage(result.assets[0].uri);

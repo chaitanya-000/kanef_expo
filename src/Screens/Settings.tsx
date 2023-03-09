@@ -52,12 +52,12 @@ export default function Settings({ navigation }: any) {
         },
       })
         .then((response) => {
+          console.log(response.data);
           setLoading(false);
+          getUserInfo();
           Alert.alert(response.data.message, "", [
             {
               text: "OK",
-              onPress: () => getUserInfo(),
-              style: "default",
             },
           ]);
         })

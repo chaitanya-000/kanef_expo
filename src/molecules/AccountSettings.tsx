@@ -15,9 +15,8 @@ import { AuthContext } from "../store";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export default function AccountSettings({ navigation }: any) {
+  const [showUpdateIcon, setShowUpdateIcon] = useState(false);
   const [userId, setUserId] = useState("");
-  const [isDataUpdated, setIsDateUpdated] = useState(true);
-  const { hasUpdatedData, setHasUpdatedData } = useContext(AuthContext);
 
   const getData = async () => {
     try {
@@ -38,6 +37,7 @@ export default function AccountSettings({ navigation }: any) {
         uId: JSON.parse(userId),
       })
       .then((response) => {
+        console.log(response);
         const data = response.data.data[0];
 
         if (
@@ -46,9 +46,10 @@ export default function AccountSettings({ navigation }: any) {
           data.address1 &&
           data.city &&
           data.country &&
-          data.EIRcode
+          data.EIRcode &&
+          data.phone
         ) {
-          setIsDateUpdated(false);
+          setShowUpdateIcon(true);
         }
       })
       .catch((error) => {
@@ -60,7 +61,7 @@ export default function AccountSettings({ navigation }: any) {
   useEffect(() => {
     getData();
     userId && getUserInfo();
-  }, [userId, hasUpdatedData]);
+  }, [userId, showUpdateIcon]);
   return (
     <View
       style={{
@@ -81,11 +82,9 @@ export default function AccountSettings({ navigation }: any) {
             size={26}
             style={{ marginRight: "9%" }}
           />
-          <Body2 style={{ color: isDataUpdated ? "black" : "black" }}>
-            Account Settings
-          </Body2>
+          <Body2>Account Settings</Body2>
         </View>
-        {hasUpdatedData ? (
+        {!showUpdateIcon ? (
           <Image
             source={require("../../assets/images/notification.png")}
             style={{

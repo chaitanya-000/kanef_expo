@@ -90,8 +90,9 @@ const Invoices = ({ route, navigation }: any) => {
             height: "90%",
             // borderWidth: 2,
             flexDirection: "row",
-            // justifyContent: "center",
+            // justifyContent: "flex-start",
             alignItems: "center",
+            // backgroundColor: "red",
           }}
         >
           <TouchableOpacity
@@ -102,7 +103,7 @@ const Invoices = ({ route, navigation }: any) => {
               alignItems: "center",
               justifyContent: "center",
               borderRadius: 10,
-              marginRight: "30%",
+              // marginRight: "30%",
               borderWidth: 1,
               borderColor: "rgba(222, 232, 239, 0.1)",
             }}
@@ -110,15 +111,26 @@ const Invoices = ({ route, navigation }: any) => {
           >
             <Ionicons name="arrow-back" size={30} color="white" />
           </TouchableOpacity>
-          <Body1
+          <View
             style={{
-              color: "white",
-              alignSelf: "center",
-              fontSize: responsiveScreenFontSize(3),
+              // backgroundColor: "green",
+              width: "80%",
+              height: "100%",
+              alignSelf: "auto",
+              justifyContent: "center",
             }}
           >
-            {route.params.storeName}
-          </Body1>
+            <Body1
+              style={{
+                color: "white",
+                alignSelf: "center",
+                fontSize: responsiveScreenFontSize(2),
+                // backgroundColor: "blue",
+              }}
+            >
+              {route.params.storeName}
+            </Body1>
+          </View>
         </View>
       </View>
       <WhiteRoundedContainer style={{ height: responsiveScreenHeight(85) }}>

@@ -30,7 +30,6 @@ import { Ionicons } from "@expo/vector-icons";
 import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const AccountSettingsScreen = ({ navigation }: any) => {
-  const { hasUpdatedData, setHasUpdatedData } = useContext(AuthContext);
   const [loading, setLoading] = useState<boolean>(false);
   const [isEnabled, setIsEnabled] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -68,7 +67,6 @@ const AccountSettingsScreen = ({ navigation }: any) => {
       })
       .then((response) => {
         setLoading(false);
-
         console.log(response.data.data[0]);
         const userDetails = response.data.data[0];
         setFetchedData(userDetails);
@@ -138,11 +136,9 @@ const AccountSettingsScreen = ({ navigation }: any) => {
             phone: inputs.phone,
           })
           .then((response) => {
-            inputs.phone.length > 5 && console.log("phone number was sent");
             setLoading(false);
             console.log(response);
             Alert.alert(response.data.message);
-            setHasUpdatedData(true);
             navigation.navigate("Camera");
           })
           .catch((error) => {
