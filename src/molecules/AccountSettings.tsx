@@ -26,8 +26,9 @@ export default function AccountSettings({ navigation }: any) {
         const uid = value;
         setUserId(uid);
       }
-    } catch (e) {
-      // error reading value
+    } catch (error: any) {
+      console.log(error);
+      alert(error.message);
     }
   };
 
@@ -37,6 +38,7 @@ export default function AccountSettings({ navigation }: any) {
         uId: JSON.parse(userId),
       })
       .then((response) => {
+        console.log(response);
         const data = response.data.data[0];
 
         if (
@@ -52,6 +54,7 @@ export default function AccountSettings({ navigation }: any) {
       })
       .catch((error) => {
         alert(error.message);
+        console.log(error);
       });
   };
 
@@ -84,8 +87,6 @@ export default function AccountSettings({ navigation }: any) {
           </Body2>
         </View>
         {hasUpdatedData ? (
-          <Entypo name="chevron-right" size={30} color="gray" />
-        ) : (
           <Image
             source={require("../../assets/images/notification.png")}
             style={{
@@ -95,6 +96,8 @@ export default function AccountSettings({ navigation }: any) {
               aspectRatio: 1,
             }}
           />
+        ) : (
+          <Entypo name="chevron-right" size={30} color="gray" />
         )}
       </TouchableOpacity>
       <HorizontalDividerLine />

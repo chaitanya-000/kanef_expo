@@ -106,6 +106,7 @@ export default function CameraScreen({ navigation }: any) {
         }
       })
       .catch((error) => {
+        console.log(error.message);
         alert(error.message);
       });
   };
@@ -171,6 +172,7 @@ export default function CameraScreen({ navigation }: any) {
             alert(`Message  ${error.message}`);
             alert(` Status ${error.status}`);
             setLoading(false);
+            console.log(error.message);
           });
       } else {
         Alert.alert("Select the store & Image. Both are required!");

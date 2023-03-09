@@ -27,9 +27,11 @@ import MaskInput, { Masks } from "react-native-mask-input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../store";
 import { Ionicons } from "@expo/vector-icons";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const AccountSettingsScreen = ({ navigation }: any) => {
   const { hasUpdatedData, setHasUpdatedData } = useContext(AuthContext);
+  const [loading, setLoading] = useState<boolean>(false);
   const [isEnabled, setIsEnabled] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [userID, setUserId] = useState("");
@@ -59,16 +61,21 @@ const AccountSettingsScreen = ({ navigation }: any) => {
     }
   };
   const getUserInfo = () => {
+    setLoading(true);
     axios
       .post("https://kenaf.ie/appUserInfo", {
         uId: JSON.parse(userID),
       })
       .then((response) => {
+        setLoading(false);
+
+        console.log(response.data.data[0]);
         const userDetails = response.data.data[0];
         setFetchedData(userDetails);
-        getUserInfo();
       })
       .catch((error) => {
+        setLoading(false);
+
         alert(error.message);
       });
   };
@@ -79,6 +86,11 @@ const AccountSettingsScreen = ({ navigation }: any) => {
   }, [userID]);
 
   const sendData = () => {
+    setLoading(true);
+    if (!inputs.phone) {
+      alert("Please Enter Phone number");
+      return;
+    }
     if (!inputs.DOB) {
       alert("Please Enter Date Of Birth");
       return;
@@ -111,7 +123,8 @@ const AccountSettingsScreen = ({ navigation }: any) => {
     inputs.address1 &&
     inputs.city &&
     inputs.country &&
-    inputs.EIRcode
+    inputs.EIRcode &&
+    inputs.phone
       ? axios
           .post("https://kenaf.ie/appUserUpdate", {
             uId: JSON.parse(userID),
@@ -125,11 +138,16 @@ const AccountSettingsScreen = ({ navigation }: any) => {
             phone: inputs.phone,
           })
           .then((response) => {
+            inputs.phone.length > 5 && console.log("phone number was sent");
+            setLoading(false);
+            console.log(response);
             Alert.alert(response.data.message);
             setHasUpdatedData(true);
             navigation.navigate("Camera");
           })
           .catch((error) => {
+            setLoading(false);
+
             alert(error.message);
           })
       : Alert.alert("Enter all values");
@@ -140,6 +158,7 @@ const AccountSettingsScreen = ({ navigation }: any) => {
   };
   return (
     <KeyboardAvoidingView>
+      <Spinner visible={loading} />
       <StatusBar hidden={true} />
       <SafeAreaView
         style={{
@@ -239,9 +258,25 @@ const AccountSettingsScreen = ({ navigation }: any) => {
               <Label>Phone Number</Label>
               <View>
                 <TextInput
-                  style={styles.inputWithLabelContainer_textInput}
-                  value={fetchedData?.phone}
+                  value=""
+                  style={
+                    fetchedData?.phone
+                      ? styles.inputWithLabelContainer_textInput
+                      : styles.Data_Does_not_exist_inputWithLabelContainer_textInput
+                  }
                   textContentType="telephoneNumber"
+                  onChangeText={(text) => {
+                    handleOnchange(text, "phone");
+                    console.log(text);
+                  }}
+                  maxLength={10}
+                  keyboardType="number-pad"
+                  placeholder={
+                    fetchedData?.phone ? fetchedData.phone : "phone number..."
+                  }
+                  placeholderTextColor={
+                    fetchedData?.phone ? "#26ae60ed" : "black"
+                  }
                 />
               </View>
             </View>
@@ -297,7 +332,7 @@ const AccountSettingsScreen = ({ navigation }: any) => {
                     placeholderTextColor={
                       fetchedData?.Gender ? "#26ae60ed" : "black"
                     }
-                    value={inputs.DOB}
+                    value={inputs?.DOB}
                     onChangeText={(masked) => handleOnchange(masked, "DOB")}
                     keyboardType="number-pad"
                     mask={Masks.DATE_YYYYMMDD}
@@ -349,7 +384,7 @@ const AccountSettingsScreen = ({ navigation }: any) => {
                     containerStyle={styles.dropDownContainer}
                     backgroundColor={`rgba(0,0,0,0.8)`}
                     onChange={(data) => handleOnchange(data.value, "Gender")}
-                    value={inputs.Gender}
+                    value={inputs?.Gender}
                   />
                 </View>
               </View>

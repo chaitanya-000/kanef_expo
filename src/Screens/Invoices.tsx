@@ -34,6 +34,7 @@ import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import Spinner from "react-native-loading-spinner-overlay/lib";
+import { Ionicons } from "@expo/vector-icons";
 
 const Invoices = ({ route, navigation }: any) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +59,7 @@ const Invoices = ({ route, navigation }: any) => {
           orName: route.params.storeName,
         })
         .then((response) => {
-          //
+          console.log(response.data);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
@@ -73,28 +74,68 @@ const Invoices = ({ route, navigation }: any) => {
       <StatusBar hidden={true} />
 
       <Spinner visible={isLoading} animation="fade" size="large" />
-      <Body1 style={styles.ScreenName}>My Receipts</Body1>
-      <WhiteRoundedContainer>
+      <View
+        style={{
+          width: responsiveScreenWidth(100),
+          height: responsiveScreenHeight(10),
+          // borderWidth: 2,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <View
           style={{
-            width: responsiveScreenWidth(87),
-            // height: responsiveScreenHeight(90),
-            marginTop: "10%",
-            borderRadius: 20,
+            width: "90%",
+            height: "90%",
+            // borderWidth: 2,
+            flexDirection: "row",
+            // justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Heading5 style={styles.ContentHeader}>
+          <TouchableOpacity
+            style={{
+              height: "60%",
+              width: "13%",
+              backgroundColor: "rgba(255, 255, 255, 0.05)",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 10,
+              marginRight: "30%",
+              borderWidth: 1,
+              borderColor: "rgba(222, 232, 239, 0.1)",
+            }}
+            onPress={() => navigation.navigate("Settings")}
+          >
+            <Ionicons name="arrow-back" size={30} color="white" />
+          </TouchableOpacity>
+          <Body1
+            style={{
+              color: "white",
+              alignSelf: "center",
+              fontSize: responsiveScreenFontSize(3),
+            }}
+          >
             {route.params.storeName}
-          </Heading5>
-
+          </Body1>
+        </View>
+      </View>
+      <WhiteRoundedContainer style={{ height: responsiveScreenHeight(85) }}>
+        <View
+          style={{
+            width: responsiveScreenWidth(87),
+            marginTop: "10%",
+            borderRadius: 10,
+            alignItems: "center",
+            paddingBottom: responsiveScreenHeight(8),
+          }}
+        >
           <ScrollView
             style={{
               width: responsiveScreenWidth(90),
-              borderWidth: 1,
-            }}
-            contentContainerStyle={{
-              height: responsiveScreenHeight(60),
+              // borderWidth: 5,
+              paddingBottom: responsiveScreenHeight(10),
             }}
           >
             {receivedData &&
@@ -106,6 +147,8 @@ const Invoices = ({ route, navigation }: any) => {
                     onPress={() => {
                       navigation.navigate("SeperateInvoice", {
                         InvoiceLink: eachObj.InvoiceLink,
+                        Date: eachObj.updated_at,
+                        StoreName: eachObj.orName,
                       });
                     }}
                   >
