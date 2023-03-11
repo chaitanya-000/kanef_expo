@@ -50,7 +50,9 @@ export default function CameraScreen({ navigation }: any) {
     const { assets } = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      quality: 0.7,
+      aspect: [9, 16],
+
+      quality: 0.6,
     });
     setImage(assets[0].uri);
   };
@@ -133,11 +135,12 @@ export default function CameraScreen({ navigation }: any) {
   const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 0.7,
+      quality: 0.6,
       allowsEditing: true,
       aspect: [9, 16],
     });
     if (!result.canceled) {
+      console.log(result.assets[0].uri);
       setImage(result.assets[0].uri);
     }
   };
@@ -149,7 +152,7 @@ export default function CameraScreen({ navigation }: any) {
     formData.append("Invoice", {
       uri: image,
       type: "image/jpeg",
-      name: "photo.jpg",
+      name: "photo.jpeg",
     });
     try {
       if (value && image) {
@@ -164,6 +167,7 @@ export default function CameraScreen({ navigation }: any) {
           },
         })
           .then((response) => {
+            console.log(response);
             setValue("");
             setImage(null);
             setLoading(false);

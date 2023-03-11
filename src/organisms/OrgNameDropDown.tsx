@@ -26,7 +26,6 @@ const OrgNameDropDown = ({ value, setValue }: any) => {
         <Dropdown
           keyboardAvoiding
           activeColor="#26ae60ed"
-          search
           searchPlaceholder="Enter store name"
           placeholder="Select Store"
           data={data}
