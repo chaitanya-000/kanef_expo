@@ -59,7 +59,7 @@ const Invoices = ({ route, navigation }: any) => {
           orName: route.params.storeName,
         })
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })

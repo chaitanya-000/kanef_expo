@@ -52,7 +52,7 @@ export default function CameraScreen({ navigation }: any) {
       allowsEditing: true,
       aspect: [9, 16],
 
-      quality: 0.6,
+      quality: 0.1,
     });
     setImage(assets[0].uri);
   };
@@ -134,12 +134,13 @@ export default function CameraScreen({ navigation }: any) {
   }
   const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 0.6,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      quality: 0.1,
       allowsEditing: true,
       aspect: [9, 16],
     });
     if (!result.canceled) {
+      console.log(result);
       console.log(result.assets[0].uri);
       setImage(result.assets[0].uri);
     }
@@ -157,27 +158,28 @@ export default function CameraScreen({ navigation }: any) {
     try {
       if (value && image) {
         setLoading(true);
-        axios({
-          method: "post",
-          url: "https://kenaf.ie/PersonalReceipt",
-          data: formData,
+        fetch("https://kenaf.ie/PersonalReceipt", {
+          method: "POST",
+
+          body: formData,
           headers: {
             "Content-Type": "multipart/form-data",
             Accept: "application/json",
           },
         })
-          .then((response) => {
-            console.log(response);
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
             setValue("");
             setImage(null);
             setLoading(false);
-            Alert.alert(response.data.data);
+            Alert.alert(data.data);
           })
           .catch((error) => {
             alert(`Message  ${error.message}`);
             alert(` Status ${error.status}`);
             setLoading(false);
-            console.log(error.message);
+            console.log(error);
           });
       } else {
         Alert.alert("Select the store & Image. Both are required!");

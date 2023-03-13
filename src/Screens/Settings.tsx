@@ -24,7 +24,6 @@ import Spinner from "react-native-loading-spinner-overlay/lib";
 export default function Settings({ navigation }: any) {
   const [userId, setUserId] = useState("");
   const [profileImage, setProfileImage] = useState(null);
-  const [selectedImage, setSelectedImage] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
   const selectImageFromGallery = async () => {
@@ -40,26 +39,27 @@ export default function Settings({ navigation }: any) {
       formData.append("image", {
         uri: result.assets[0].uri,
         type: "image/jpeg",
-        name: "photo.jpg",
+        name: "photo.jpeg",
       });
       setLoading(true);
-      axios({
-        method: "post",
-        url: "https://kenaf.ie/updateProfilePic",
-        data: formData,
+      fetch("https://kenaf.ie/updateProfilePic", {
+        method: "POST",
+        body: formData,
         headers: {
           "Content-Type": "multipart/form-data",
+          Accept: "application/json",
         },
       })
-        .then((response) => {
-          console.log(response.data);
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
           setLoading(false);
           getUserInfo();
-          Alert.alert(response.data.message, "", [
-            {
-              text: "OK",
-            },
-          ]);
+          // Alert.alert(data.data.message, "", [
+          //   {
+          //     text: "OK",
+          //   },
+          // ]);
         })
         .catch((error) => {
           setLoading(false);
