@@ -28,9 +28,9 @@ export default function Settings({ navigation }: any) {
 
   const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      quality: 0.3,
+      quality: 0.1,
       aspect: [9, 16],
     });
     if (!result.canceled) {
