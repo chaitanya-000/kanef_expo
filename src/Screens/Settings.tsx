@@ -55,11 +55,11 @@ export default function Settings({ navigation }: any) {
           console.log(data);
           setLoading(false);
           getUserInfo();
-          // Alert.alert(data.data.message, "", [
-          //   {
-          //     text: "OK",
-          //   },
-          // ]);
+          Alert.alert(data.message, "", [
+            {
+              text: "OK",
+            },
+          ]);
         })
         .catch((error) => {
           setLoading(false);
