@@ -35,8 +35,6 @@ import EmailAddress from "../organisms/EmailAddress";
 import Password from "../organisms/Password";
 import DateOfBirth from "../organisms/DateOfBirth";
 import Gender from "../organisms/Gender";
-import Address from "../organisms/Address";
-import City from "../organisms/City";
 import SolidGreenButton from "../atoms/SolidGreenButton";
 import Country from "../organisms/Country";
 import EirCode from "../organisms/EirCode";

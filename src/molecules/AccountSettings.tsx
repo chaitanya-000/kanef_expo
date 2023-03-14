@@ -37,7 +37,7 @@ export default function AccountSettings({ navigation }: any) {
         uId: JSON.parse(userId),
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         const data = response.data.data[0];
 
         if (

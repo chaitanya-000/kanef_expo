@@ -28,44 +28,49 @@ export default function Settings({ navigation }: any) {
 
   const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      quality: 0.7,
+      quality: 0.5,
       aspect: [1, 1],
     });
     if (!result.canceled) {
       const formData = new FormData();
-      formData.append("uId", JSON.parse(userId));
-      formData.append("image", {
+      formData.append("orId", "MainOrg_726005528");
+      formData.append("uId", "appUser_355246");
+      formData.append("Invoice", {
         uri: result.assets[0].uri,
         type: "image/jpeg",
         name: "photo.jpeg",
       });
-      setLoading(true);
-      fetch("https://kenaf.ie/updateProfilePic", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Accept: "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setLoading(false);
-          getUserInfo();
-          // Alert.alert(data.data.message, "", [
-          //   {
-          //     text: "OK",
-          //   },
-          // ]);
-        })
-        .catch((error) => {
-          setLoading(false);
-          console.log(error);
-          alert(error.message);
-        });
+      try {
+        if (!result.canceled) {
+          setLoading(true);
+          fetch("https://kenaf.ie/PersonalReceipt", {
+            method: "POST",
+            body: formData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Accept: "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              setLoading(false);
+              Alert.alert(data.data);
+            })
+            .catch((error) => {
+              alert(`Message  ${error}`);
+              alert(` Status ${error}`);
+              setLoading(false);
+              console.log(error);
+            });
+        } else {
+          Alert.alert("Select the store & Image. Both are required!");
+        }
+      } catch (error) {
+        alert(` Catch Block ${error}`);
+      }
     }
   };
 

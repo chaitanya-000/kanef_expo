@@ -60,6 +60,7 @@ const MyReceipts = ({ navigation }: any) => {
           uId: uId,
         })
         .then((response) => {
+          console.log(response.data);
           setRefreshing(false);
           setIsLoading(false);
           setReceivedData(response.data.data);

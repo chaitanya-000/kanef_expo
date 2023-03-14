@@ -52,7 +52,7 @@ export default function CameraScreen({ navigation }: any) {
       allowsEditing: true,
       aspect: [9, 16],
 
-      quality: 0.1,
+      quality: 0.3,
     });
     setImage(assets[0].uri);
   };
@@ -135,7 +135,7 @@ export default function CameraScreen({ navigation }: any) {
   const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      quality: 0.1,
+      quality: 0.3,
       allowsEditing: true,
       aspect: [9, 16],
     });
@@ -160,7 +160,6 @@ export default function CameraScreen({ navigation }: any) {
         setLoading(true);
         fetch("https://kenaf.ie/PersonalReceipt", {
           method: "POST",
-
           body: formData,
           headers: {
             "Content-Type": "multipart/form-data",
@@ -176,8 +175,8 @@ export default function CameraScreen({ navigation }: any) {
             Alert.alert(data.data);
           })
           .catch((error) => {
-            alert(`Message  ${error.message}`);
-            alert(` Status ${error.status}`);
+            alert(`Message  ${error}`);
+            alert(` Status ${error}`);
             setLoading(false);
             console.log(error);
           });
