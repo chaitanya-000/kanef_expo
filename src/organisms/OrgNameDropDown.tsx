@@ -1,4 +1,11 @@
-import { Alert, Platform, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import {
   responsiveScreenHeight,
@@ -9,22 +16,13 @@ import Spinner from "react-native-loading-spinner-overlay/lib";
 import { Dropdown } from "react-native-element-dropdown";
 import { AuthContext } from "../store";
 
-const OrgNameDropDown = ({ value, setValue }: any) => {
-  // const [data, setData] = useState<any>(null);
-  const [loading, setIsLoading] = useState(false);
-  const { getOrgNames, data } = useContext(AuthContext);
-
-  useEffect(() => {
-    getOrgNames();
-  }, [data]);
-
+const OrgNameDropDown = ({ value, setValue, data }: any) => {
   return (
     data && (
-      <>
-        <Spinner visible={loading} />
-
+      <KeyboardAvoidingView behavior="height">
         <Dropdown
           keyboardAvoiding
+          search
           activeColor="#26ae60ed"
           searchPlaceholder="Enter store name"
           placeholder="Select Store"
@@ -43,7 +41,7 @@ const OrgNameDropDown = ({ value, setValue }: any) => {
             setValue(data.mainOrId);
           }}
         />
-      </>
+      </KeyboardAvoidingView>
     )
   );
 };

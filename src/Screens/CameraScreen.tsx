@@ -36,6 +36,7 @@ export default function CameraScreen({ navigation }: any) {
   const [value, setValue] = useState<string | null>();
   const [refreshing, setRefreshing] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [data, setData] = useState<any>(null);
 
   //ask for camera permission
   const askForCameraPermission = () => {
@@ -69,10 +70,25 @@ export default function CameraScreen({ navigation }: any) {
     }
   };
 
+  const getOrgNames = () => {
+    setLoading(true);
+    axios
+      .get("https://kenaf.ie/organizationList")
+      .then((response) => {
+        console.log(response);
+        setLoading(false);
+        setData(response.data.data);
+      })
+      .catch((error) => {
+        setLoading(false);
+        alert(error.message);
+      });
+  };
   //UseEffect
   useEffect(() => {
     askForCameraPermission();
     getData();
+    getOrgNames();
   }, [uId]);
 
   // What happens when we scan the bar code
@@ -227,14 +243,13 @@ export default function CameraScreen({ navigation }: any) {
         <View style={styles.optionsContainer}>
           <View
             style={{
-              // borderWidth: 2,
               width: responsiveScreenWidth(85),
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
             }}
           >
-            <OrgNameDropDown value={value} setValue={setValue} />
+            <OrgNameDropDown value={value} setValue={setValue} data={data} />
             <Body1>OR</Body1>
 
             <TouchableOpacity
@@ -265,7 +280,7 @@ export default function CameraScreen({ navigation }: any) {
           </View>
           <GreenButton
             height={"20%"}
-            marginTop={"0%"}
+            marginTop={"20%"}
             width={"62%"}
             onPress={uploadImage}
           >
@@ -274,7 +289,11 @@ export default function CameraScreen({ navigation }: any) {
         </View>
       </ScrollView>
       {showModal && (
-        <AddStoreModal showModal={showModal} setShowModal={setShowModal} />
+        <AddStoreModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          getOrgNames={getOrgNames}
+        />
       )}
     </>
   );
@@ -326,7 +345,9 @@ const styles = StyleSheet.create({
     height: responsiveScreenHeight(30),
     // borderWidth: 1,
     alignItems: "center",
+    // backgroundColor: "red",
     justifyContent: "space-between",
+    marginBottom: "30%",
   },
   uploadAndCameraButtons: {
     width: responsiveScreenWidth(90),

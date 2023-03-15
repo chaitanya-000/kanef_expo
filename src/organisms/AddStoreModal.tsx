@@ -15,7 +15,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import axios from "axios";
 
-const AddStoreModal = ({ showModal, setShowModal }: any) => {
+const AddStoreModal = ({ showModal, setShowModal, getOrgNames }: any) => {
   const [enteredStoreName, setEnteredStoreName] = useState("");
 
   const sendStoreName = () => {
@@ -25,6 +25,7 @@ const AddStoreModal = ({ showModal, setShowModal }: any) => {
       })
       .then((response) => {
         setShowModal(false);
+        getOrgNames();
       })
       .catch((error) => {
         alert(error.message);

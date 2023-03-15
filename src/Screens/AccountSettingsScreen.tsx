@@ -262,7 +262,6 @@ const AccountSettingsScreen = ({ navigation }: any) => {
                   textContentType="telephoneNumber"
                   onChangeText={(text) => {
                     handleOnchange(text, "phone");
-                    console.log(text);
                   }}
                   maxLength={10}
                   keyboardType="number-pad"

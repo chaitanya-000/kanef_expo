@@ -79,7 +79,7 @@ const MyReceipts = ({ navigation }: any) => {
     <ScreenContainer>
       <StatusBar hidden={true} />
 
-      <Spinner visible={isLoading} animation="fade" size="large" />
+      <Spinner visible={isLoading} size="large" />
       <Body1 style={styles.ScreenName}>My Receipts</Body1>
       <WhiteRoundedContainer>
         <OptionsContainer

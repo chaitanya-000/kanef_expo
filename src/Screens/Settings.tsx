@@ -77,7 +77,8 @@ export default function Settings({ navigation }: any) {
         setUserId(uid);
       }
     } catch (e) {
-      // error reading value
+      alert(e);
+      console.log(e);
     }
   };
   const getUserInfo = () => {

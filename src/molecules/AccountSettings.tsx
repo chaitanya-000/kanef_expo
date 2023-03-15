@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import {
-  responsiveFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
@@ -10,12 +9,10 @@ import { Entypo, Ionicons } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { Feather } from "@expo/vector-icons";
-import { AuthContext } from "../store";
-import { MaterialIcons } from "@expo/vector-icons";
 
 export default function AccountSettings({ navigation }: any) {
-  const [showUpdateIcon, setShowUpdateIcon] = useState(false);
+  const [showIcon, setShowIcon] = useState(false);
+
   const [userId, setUserId] = useState("");
 
   const getData = async () => {
@@ -32,24 +29,18 @@ export default function AccountSettings({ navigation }: any) {
   };
 
   const getUserInfo = () => {
+    console.log("this func is running");
     axios
       .post("https://kenaf.ie/appUserInfo", {
         uId: JSON.parse(userId),
       })
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         const data = response.data.data[0];
-
-        if (
-          data.DOB &&
-          data.Gender &&
-          data.address1 &&
-          data.city &&
-          data.country &&
-          data.EIRcode &&
-          data.phone
-        ) {
-          setShowUpdateIcon(true);
+        if (data.Gender) {
+          setShowIcon(true);
+        } else {
+          setShowIcon(false);
         }
       })
       .catch((error) => {
@@ -61,11 +52,10 @@ export default function AccountSettings({ navigation }: any) {
   useEffect(() => {
     getData();
     userId && getUserInfo();
-  }, [userId, showUpdateIcon]);
+  }, [userId]);
   return (
     <View
       style={{
-        // borderWidth: 0.2,
         height: responsiveScreenHeight(7),
         width: responsiveScreenWidth(87),
         justifyContent: "space-between",
@@ -84,7 +74,7 @@ export default function AccountSettings({ navigation }: any) {
           />
           <Body2>Account Settings</Body2>
         </View>
-        {!showUpdateIcon ? (
+        {!showIcon ? (
           <Image
             source={require("../../assets/images/notification.png")}
             style={{

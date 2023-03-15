@@ -53,14 +53,6 @@ export const AuthProvider = ({ children }: any) => {
     setIsLoggedIn(false);
   };
 
-  const getOrgNames = () => {
-    setIsLoading(true);
-    axios.get("https://kenaf.ie/organizationList").then((response) => {
-      setIsLoading(false);
-      setData(response.data.data);
-    });
-  };
-
   return (
     <AuthContext.Provider
       value={{
@@ -72,7 +64,6 @@ export const AuthProvider = ({ children }: any) => {
         isLoading,
         setIsLoading,
         uId,
-        getOrgNames,
         data,
         hasUpdatedData,
         setHasUpdatedData,

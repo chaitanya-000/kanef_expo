@@ -9,27 +9,13 @@ import {
   StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import {
-  Body1,
-  Body2,
-  Body5,
-  Heading1,
-  Heading3,
-  Heading4,
-  Heading5,
-  Heading6,
-} from "../atoms/Typography";
+import { Body1, Body2 } from "../atoms/Typography";
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
-import {
-  Item,
-  OptionsContainer,
-  ScreenContainer,
-  WhiteRoundedContainer,
-} from "../styledComponents/Receipts,Reward,BillPage";
+
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -59,7 +45,7 @@ const Invoices = ({ route, navigation }: any) => {
           orName: route.params.storeName,
         })
         .then((response) => {
-          // console.log(response.data);
+          console.log(response.data);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
@@ -70,10 +56,10 @@ const Invoices = ({ route, navigation }: any) => {
     getSpecificStore();
   }, [uId]);
   return (
-    <ScreenContainer>
+    <View style={styles.ScreenContainer}>
       <StatusBar hidden={true} />
 
-      <Spinner visible={isLoading} animation="fade" size="large" />
+      <Spinner visible={isLoading} size="large" />
       <View
         style={{
           width: responsiveScreenWidth(100),
@@ -133,7 +119,7 @@ const Invoices = ({ route, navigation }: any) => {
           </View>
         </View>
       </View>
-      <WhiteRoundedContainer style={{ height: responsiveScreenHeight(85) }}>
+      <View style={styles.WhiteRoundedContainer}>
         <View
           style={{
             width: responsiveScreenWidth(87),
@@ -182,8 +168,8 @@ const Invoices = ({ route, navigation }: any) => {
               })}
           </ScrollView>
         </View>
-      </WhiteRoundedContainer>
-    </ScreenContainer>
+      </View>
+    </View>
   );
 };
 
@@ -230,6 +216,20 @@ const styles = StyleSheet.create({
     borderColor: "green",
     width: "10%",
     alignSelf: "center",
+  },
+  ScreenContainer: {
+    backgroundColor: "#121f27",
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(100),
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  WhiteRoundedContainer: {
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(87),
+    borderRadius: 30,
+    backgroundColor: "white",
+    alignItems: "center",
   },
 });
 
