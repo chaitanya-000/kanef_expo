@@ -4,9 +4,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
   RefreshControl,
   StatusBar,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -34,7 +34,6 @@ import { Feather } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Spinner from "react-native-loading-spinner-overlay/lib";
-import * as ImagePicker from "expo-image-picker";
 
 const MyReceipts = ({ navigation }: any) => {
   const [uId, setUid] = useState("");
@@ -56,7 +55,7 @@ const MyReceipts = ({ navigation }: any) => {
     setRefreshing(true);
     uId &&
       axios
-        .post("https://kenaf.ie/MyReceiptList", {
+        .post("https:kenaf.ie/MyReceiptList", {
           uId: uId,
         })
         .then((response) => {
@@ -76,71 +75,101 @@ const MyReceipts = ({ navigation }: any) => {
     getStores();
   }, [uId]);
   return (
-    <ScreenContainer>
-      <StatusBar hidden={true} />
-
-      <Spinner visible={isLoading} size="large" />
-      <Body1 style={styles.ScreenName}>My Receipts</Body1>
-      <WhiteRoundedContainer>
-        <OptionsContainer
-          style={{
-            height: responsiveScreenHeight(65),
-          }}
+    <View style={styles.parentContainer}>
+      <View style={styles.screenName}>
+        <Body1
+          style={{ color: "white", fontSize: responsiveScreenFontSize(3) }}
         >
-          <Heading5 style={styles.ContentHeader}>Receipts</Heading5>
-          <ScrollView
-            style={{
-              width: responsiveScreenWidth(90),
-            }}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={getStores} />
-            }
-          >
-            {receivedData &&
-              receivedData.map((eachObj: { orName: string }, key: number) => {
-                return (
-                  <TouchableOpacity
-                    style={styles.container}
-                    onPress={() => {
-                      navigation.navigate("Invoices", {
-                        storeName: eachObj.orName,
-                      });
-                    }}
-                    key={Math.random() * 10000000000}
-                  >
-                    <Image
-                      source={require("../../assets/images/WalmartLogo.jpg")}
-                      style={styles.StoreImage}
-                    />
-                    <View style={styles.NameAndDate}>
-                      <Text>{eachObj.orName}</Text>
-                    </View>
-                    <Feather
-                      name="chevron-right"
-                      size={25}
-                      color="gray"
-                      style={styles.rightArrow}
-                    />
-                  </TouchableOpacity>
-                );
-              })}
-          </ScrollView>
-        </OptionsContainer>
-      </WhiteRoundedContainer>
-    </ScreenContainer>
+          My Receipts
+        </Body1>
+      </View>
+      <View style={styles.WhiteRoundedContainer}>
+        <Body5
+          style={{ fontSize: responsiveScreenFontSize(4), fontWeight: "800" }}
+        >
+          Receipts
+        </Body5>
+        <ScrollView
+          bounces={true}
+          style={styles.scrollViewParentContainer}
+          contentContainerStyle={{
+            // height: "120%",
+            width: "100%",
+            backgroundColor: "white",
+            paddingBottom: responsiveScreenHeight(25),
+            borderWidth: 2,
+          }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={getStores} />
+          }
+        >
+          {receivedData &&
+            receivedData.map((eachObj: { orName: string }, key: number) => {
+              return (
+                <TouchableOpacity
+                  style={styles.container}
+                  onPress={() => {
+                    navigation.navigate("Invoices", {
+                      storeName: eachObj.orName,
+                    });
+                  }}
+                  key={Math.random() * 10000000000}
+                >
+                  <Image
+                    source={require("../../assets/images/WalmartLogo.jpg")}
+                    style={styles.StoreImage}
+                  />
+                  <View style={styles.NameAndDate}>
+                    <Text>{eachObj.orName}</Text>
+                  </View>
+                  <Feather
+                    name="chevron-right"
+                    size={25}
+                    color="gray"
+                    style={styles.rightArrow}
+                  />
+                </TouchableOpacity>
+              );
+            })}
+        </ScrollView>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  ScreenName: {
-    color: "white",
-    marginBottom: "10%",
-    fontSize: responsiveScreenFontSize(3),
+  parentContainer: {
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(100),
+    backgroundColor: "#121F27",
   },
-  ContentHeader: {
-    alignSelf: "flex-start",
-    fontWeight: "700",
-    // fontSize: "28",
+  screenName: {
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(13),
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  WhiteRoundedContainer: {
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(100),
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    backgroundColor: "white",
+    padding: responsiveScreenWidth(8),
+  },
+  scrollViewParentContainer: {
+    height: "120%",
+    width: "100%",
+    backgroundColor: "white",
+  },
+  scrollList: {
+    backgroundColor: "green",
+    width: "100%",
+    height: "80%",
+  },
+  storeButton: {
+    width: "100%",
+    borderWidth: 2,
   },
   container: {
     borderWidth: 1,
@@ -154,7 +183,7 @@ const styles = StyleSheet.create({
   },
   StoreImage: {
     // borderWidth: 1,
-    // borderColor: "red",
+    // borderColor: "bor",
     width: "18%",
     borderRadius: 10,
     height: "100%",

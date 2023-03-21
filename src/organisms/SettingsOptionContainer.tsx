@@ -10,6 +10,7 @@ import PrivacyPolicy from "../molecules/PrivacyPolicy";
 import { GreenButton } from "../atoms/GreenButton";
 import { Body1 } from "../atoms/Typography";
 import { AuthContext } from "../store";
+import BankAccountDetails from "../molecules/BankAccountDetails";
 
 const SettingsOptionContainer = ({ navigation }: any) => {
   const { handleLogout } = useContext(AuthContext);
@@ -18,7 +19,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
       <AccountSettings navigation={navigation} />
       <Help />
       <ContactUs navigation={navigation} />
-      <OpenOnCamera navigation={navigation} />
+      <BankAccountDetails navigation={navigation} />
       <Feedback navigation={navigation} />
       <TermsOfService navigation={navigation} />
       <PrivacyPolicy navigation={navigation} />
