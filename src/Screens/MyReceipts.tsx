@@ -90,6 +90,7 @@ const MyReceipts = ({ navigation }: any) => {
           Receipts
         </Body5>
         <ScrollView
+          showsVerticalScrollIndicator={false}
           bounces={true}
           style={styles.scrollViewParentContainer}
           contentContainerStyle={{
@@ -97,7 +98,6 @@ const MyReceipts = ({ navigation }: any) => {
             width: "100%",
             backgroundColor: "white",
             paddingBottom: responsiveScreenHeight(25),
-            borderWidth: 2,
           }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={getStores} />

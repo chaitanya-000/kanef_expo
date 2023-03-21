@@ -13,7 +13,6 @@ export default function BankAccountDetails({ navigation }: any) {
   return (
     <View
       style={{
-        // borderWidth: 0.2,
         height: responsiveScreenHeight(7),
         width: responsiveScreenWidth(87),
         justifyContent: "space-between",
@@ -22,7 +21,7 @@ export default function BankAccountDetails({ navigation }: any) {
     >
       <TouchableOpacity
         style={styles.container}
-        onPress={() => navigation.navigate("FeedbackScreen")}
+        onPress={() => navigation.navigate("BankDetailsScreen")}
       >
         <View style={styles.IconAndName}>
           <Image
@@ -52,12 +51,11 @@ const styles = StyleSheet.create({
     height: responsiveScreenHeight(6),
   },
   IconAndName: {
-    width: "65%",
+    width: "85%",
     height: "100%",
     display: "flex",
     flexDirection: "row",
     // justifyContent: "space-around",
     alignItems: "center",
-    // borderWidth: 1,
   },
 });
