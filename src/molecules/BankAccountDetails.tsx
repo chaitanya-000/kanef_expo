@@ -26,7 +26,7 @@ export default function BankAccountDetails({ navigation }: any) {
         <View style={styles.IconAndName}>
           <Image
             source={require("../../assets/images/bankaccountdetailsLogo.png")}
-            style={{ marginRight: "10%", marginLeft: "2%" }}
+            style={{ marginRight: "6%", marginLeft: "1%" }}
           />
           <Body2 style={{ flex: 1 }}>Bank Account Details</Body2>
         </View>
