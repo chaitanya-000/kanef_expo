@@ -75,7 +75,6 @@ export default function CameraScreen({ navigation }: any) {
     axios
       .get("https://kenaf.ie/organizationList")
       .then((response) => {
-        console.log(response);
         setLoading(false);
         setData(response.data.data);
       })
