@@ -1,6 +1,13 @@
 import { StyleSheet, StatusBar } from "react-native";
 import React, { useEffect, useId, useState } from "react";
-import { Body1, Body2, Body5, Heading4, Heading5 } from "../atoms/Typography";
+import {
+  Body1,
+  Body2,
+  Body5,
+  Heading4,
+  Heading5,
+  Heading6,
+} from "../atoms/Typography";
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
@@ -22,12 +29,14 @@ const RewardList = () => {
 
         <WhiteRoundedContainer
           style={{
-            opacity: 0.1,
+            padding: "10%",
           }}
-        ></WhiteRoundedContainer>
+        >
+          <Heading6 style={{ fontWeight: "700" }}>Coming soon...</Heading6>
+        </WhiteRoundedContainer>
       </ScreenContainer>
 
-      <RewardScreenModal />
+      {/* <RewardScreenModal /> */}
     </>
   );
 };

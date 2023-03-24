@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AccountSettings from "../molecules/AccountSettings";
 import Help from "../molecules/Help";
 import ContactUs from "../molecules/ContactUs";
@@ -13,11 +13,45 @@ import { AuthContext } from "../store";
 import BankAccountDetails from "../molecules/BankAccountDetails";
 import ClaimPoints from "../molecules/ClaimPoints";
 import RewardScreenModal from "./RewardScreenModal";
-import { ScrollView } from "react-native-gesture-handler";
+import { RefreshControl, ScrollView } from "react-native-gesture-handler";
+import TotalPoints from "./TotalPoints";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const SettingsOptionContainer = ({ navigation }: any) => {
   const { handleLogout } = useContext(AuthContext);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [receivedDataPoints, setReceivedDataPoints] = useState(null);
+  const [uId, setUid] = useState<string | null>(null);
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uId");
+      if (value !== null) {
+        setUid(value);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  const getPoints = () => {
+    axios
+      .post("https://kenaf.ie/RewardInfo", {
+        uId: JSON.parse(uId),
+      })
+      .then((response) => {
+        setReceivedDataPoints(response.data.data);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+    uId && getPoints();
+  }, [uId]);
 
   return (
     <>
@@ -27,14 +61,19 @@ const SettingsOptionContainer = ({ navigation }: any) => {
           alignItems: "center",
           width: "100%",
           opacity: showModal ? 0.02 : 1,
-          // backgroundColor: showModal ? "#26ae60ed" : "white",
           backgroundColor: showModal ? "black" : "white",
-          height: "110%",
+          height: "125%",
+          // paddingBottom: "20%",
         }}
         bounces={true}
       >
+        <TotalPoints
+          uId={uId}
+          setUid={setUid}
+          receivedDataPoints={receivedDataPoints}
+        />
         <ClaimPoints showModal={showModal} setShowModal={setShowModal} />
-        <AccountSettings navigation={navigation} />
+        <AccountSettings navigation={navigation} uId={uId} />
         <Help />
         <ContactUs navigation={navigation} />
         <BankAccountDetails navigation={navigation} />
@@ -42,7 +81,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
         <TermsOfService navigation={navigation} />
         <PrivacyPolicy navigation={navigation} />
         <GreenButton
-          height={"9%"}
+          height={"8%"}
           marginTop={"2%"}
           width={"90%"}
           onPress={handleLogout}
@@ -51,7 +90,15 @@ const SettingsOptionContainer = ({ navigation }: any) => {
         </GreenButton>
       </ScrollView>
       {showModal && (
-        <RewardScreenModal showModal={showModal} setShowModal={setShowModal} />
+        <RewardScreenModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          receivedDataPoints={receivedDataPoints}
+          getPoints={getPoints}
+          uId={uId}
+          setUid={setUid}
+          navigation={navigation}
+        />
       )}
     </>
   );

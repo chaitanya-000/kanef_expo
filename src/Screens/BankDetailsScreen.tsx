@@ -27,10 +27,10 @@ const BankDetailsScreen = ({ navigation }: any) => {
     IBAN: "",
     BIC: "",
   };
-  const [userID, setUserId] = useState("");
   const [inputs, setInputs] = useState<any>(initialValues);
   const [isFirstTimeUser, setIsFirstTimeUser] = useState(false);
   const [bankData, setBankData] = useState(null);
+  const [userID, setUserId] = useState("");
 
   const getData = async () => {
     try {

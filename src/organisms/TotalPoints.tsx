@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   responsiveFontSize,
   responsiveScreenHeight,
@@ -8,36 +8,31 @@ import {
 import { Body1, Body2, Body3, Body4, Heading6 } from "../atoms/Typography";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
 import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
-import RewardScreenModal from "../organisms/RewardScreenModal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
-export default function ClaimPoints({ showModal, setShowModal }: any) {
+export default function TotalPoints({ uId, setUid, receivedDataPoints }: any) {
   return (
     <View
       style={{
-        // borderWidth: 0.2,
-        height: responsiveScreenHeight(7),
+        height: responsiveScreenHeight(8),
         width: responsiveScreenWidth(87),
         justifyContent: "space-between",
         alignItems: "center",
       }}
     >
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() => setShowModal(!showModal)}
-      >
+      <TouchableOpacity style={styles.container}>
         <View style={styles.IconAndName}>
-          <Entypo
-            name="wallet"
-            size={30}
-            color="black"
-            style={{ marginRight: "9%" }}
-          />
-          <Body2>Claim Balance</Body2>
+          <Text
+            style={{
+              fontSize: responsiveFontSize(3.2),
+              fontWeight: "bold",
+            }}
+          >
+            Total Balance : €{receivedDataPoints / 100}
+          </Text>
         </View>
-        <Entypo name="chevron-right" size={30} color="gray" />
       </TouchableOpacity>
-      <HorizontalDividerLine />
-      {/* <RewardScreenModal /> */}
     </View>
   );
 }
@@ -48,20 +43,19 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   logo: {
     width: responsiveScreenWidth(9),
     height: responsiveScreenHeight(6),
-    // alignSelf: "flex-start",
   },
   IconAndName: {
-    // borderWidth: 1,
-    width: "65%",
+    // borderWidth: 0.1,
+    width: "100%",
     height: "100%",
     display: "flex",
     flexDirection: "row",
-    // justifyContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
   },
 });

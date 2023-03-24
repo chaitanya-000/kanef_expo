@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Pressable,
   RefreshControl,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
@@ -23,57 +24,97 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import Navigation from "../Navigation";
 
-const RewardScreenModal = ({ showModal, setShowModal }: any) => {
-  const [uId, setUid] = useState("");
-  const [receivedDataPoints, setReceivedDataPoints] = useState(null);
+const RewardScreenModal = ({
+  setShowModal,
+  receivedDataPoints,
+  getPoints,
+  uId,
+  navigation,
+  setUid,
+}: any) => {
   const [refreshing, setRefreshing] = useState(false);
+  const [isFirstTimeUser, setIsFirstTimeUser] = useState(false);
 
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("uId");
-      if (value !== null) {
-        setUid(value);
-      }
-    } catch (e) {
-      // error reading value
+  // const getData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem("uId");
+  //     if (value !== null) {
+  //       const uid = value;
+  //       setUid(uid);
+  //     }
+  //   } catch (e) {
+  //     // error reading value
+  //   }
+  // };
+
+  // const getBankDetails = () => {
+  //   axios
+  //     .post("https://kenaf.ie/BankAccountInfo", {
+  //       userId: JSON.parse(uId),
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data.data.length);
+  //       response.data.data.length === 0 && setIsFirstTimeUser(true);
+  //     })
+  //     .catch((error) => {
+  //       alert(error.message);
+  //     });
+  // };
+
+  const getBankDetails = () => {
+    uId &&
+      axios
+        .post("https://kenaf.ie/BankAccountInfo", {
+          userId: JSON.parse(uId),
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.data.length === 0) {
+            setIsFirstTimeUser(true);
+          } else {
+            setIsFirstTimeUser(false);
+          }
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+  };
+
+  const claimReward = async () => {
+    console.log(isFirstTimeUser);
+    if (isFirstTimeUser) {
+      Alert.alert("Enter Bank Details First", "", [
+        {
+          text: "Ok",
+          style: "default",
+          onPress: () => {
+            navigation.navigate("BankDetailsScreen");
+            setShowModal(false);
+          },
+        },
+      ]);
+    } else {
+      axios
+        .post("https://kenaf.ie/ClaimReward", {
+          uId: JSON.parse(uId),
+          points: receivedDataPoints,
+          amount: receivedDataPoints / 100,
+        })
+        .then((response) => {
+          getPoints();
+          alert(response.data.data);
+          setShowModal(false);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     }
   };
-
-  const getPoints = () => {
-    axios
-      .post("https://kenaf.ie/RewardInfo", {
-        uId: JSON.parse(uId),
-      })
-      .then((response) => {
-        setReceivedDataPoints(response.data.data);
-        setRefreshing(false);
-      })
-      .catch((error) => {
-        alert(error.message);
-        setRefreshing(false);
-      });
-  };
-
-  const claimReward = () => {
-    axios
-      .post("https://kenaf.ie/ClaimReward", {
-        uId: JSON.parse(uId),
-        points: receivedDataPoints,
-        amount: receivedDataPoints / 100,
-      })
-      .then((response) => {
-        getPoints();
-        alert(response.data.data);
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  };
   useEffect(() => {
-    getData();
-    uId && getPoints();
-  }, [uId]);
+    getBankDetails();
+  }, [isFirstTimeUser]);
 
   return (
     <ScrollView
@@ -139,7 +180,7 @@ const RewardScreenModal = ({ showModal, setShowModal }: any) => {
                   textAlign: "center",
                 }}
               >
-                {receivedDataPoints} Points
+                {receivedDataPoints}
               </Text>
             </View>
           </View>
@@ -190,7 +231,7 @@ const RewardScreenModal = ({ showModal, setShowModal }: any) => {
           onPress={claimReward}
         >
           <Body2 style={{ color: "white", fontWeight: "800" }}>
-            Claim Reward
+            Claim Balance
           </Body2>
         </GreenButton>
       </View>
