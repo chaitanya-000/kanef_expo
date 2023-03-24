@@ -46,7 +46,6 @@ const UpdateBankDetails = ({ navigation, route }: any) => {
           BIC: inputs.BIC,
         })
         .then((response) => {
-          console.log(response);
           alert(response.data.message);
         })
         .catch((error) => {

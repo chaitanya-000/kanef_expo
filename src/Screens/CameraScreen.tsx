@@ -123,7 +123,6 @@ export default function CameraScreen({ navigation }: any) {
         }
       })
       .catch((error) => {
-        console.log(error.message);
         alert(error.message);
       });
   };
@@ -155,8 +154,6 @@ export default function CameraScreen({ navigation }: any) {
       aspect: [9, 16],
     });
     if (!result.canceled) {
-      // console.log(result);
-      // console.log(result.assets[0].uri);
       setImage(result.assets[0].uri);
     }
   };
@@ -183,7 +180,6 @@ export default function CameraScreen({ navigation }: any) {
         })
           .then((response) => response.json())
           .then((data) => {
-            // console.log(data);
             setValue("");
             setImage(null);
             setLoading(false);
@@ -192,8 +188,8 @@ export default function CameraScreen({ navigation }: any) {
           .catch((error) => {
             alert(`Message  ${error}`);
             alert(` Status ${error}`);
+
             setLoading(false);
-            console.log(error);
           });
       } else {
         Alert.alert("Select the store & Image. Both are required!");

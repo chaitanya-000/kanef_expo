@@ -52,7 +52,6 @@ export default function Settings({ navigation }: any) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setLoading(false);
           getUserInfo();
           Alert.alert(data.message, "", [
@@ -63,7 +62,6 @@ export default function Settings({ navigation }: any) {
         })
         .catch((error) => {
           setLoading(false);
-          console.log(error);
           alert(error.message);
         });
     }
@@ -77,8 +75,7 @@ export default function Settings({ navigation }: any) {
         setUserId(uid);
       }
     } catch (e) {
-      alert(e);
-      console.log(e);
+      alert(e.message);
     }
   };
   const getUserInfo = () => {

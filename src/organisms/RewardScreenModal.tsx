@@ -45,12 +45,10 @@ const RewardScreenModal = () => {
         uId: JSON.parse(uId),
       })
       .then((response) => {
-        console.log(response);
         setReceivedDataPoints(response.data.data);
         setRefreshing(false);
       })
       .catch((error) => {
-        console.log(error);
         alert(error.message);
         setRefreshing(false);
       });
@@ -64,12 +62,11 @@ const RewardScreenModal = () => {
         amount: receivedDataPoints / 100,
       })
       .then((response) => {
-        console.log(response);
         getPoints();
         alert(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
   useEffect(() => {

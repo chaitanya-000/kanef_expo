@@ -67,7 +67,6 @@ const AccountSettingsScreen = ({ navigation }: any) => {
       })
       .then((response) => {
         setLoading(false);
-        console.log(response.data.data[0]);
         const userDetails = response.data.data[0];
         setFetchedData(userDetails);
       })
@@ -137,7 +136,6 @@ const AccountSettingsScreen = ({ navigation }: any) => {
           })
           .then((response) => {
             setLoading(false);
-            console.log(response);
             Alert.alert(response.data.message);
             navigation.navigate("Camera");
           })

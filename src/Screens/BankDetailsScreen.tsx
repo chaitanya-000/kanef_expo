@@ -51,7 +51,6 @@ const BankDetailsScreen = ({ navigation }: any) => {
         userId: JSON.parse(userID),
       })
       .then((response) => {
-        // console.log("GET", response);
         if (response.data.data.length === 0) {
           setIsFirstTimeUser(true);
         } else {
@@ -59,7 +58,7 @@ const BankDetailsScreen = ({ navigation }: any) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
 
@@ -78,7 +77,6 @@ const BankDetailsScreen = ({ navigation }: any) => {
           BIC: inputs.BIC,
         })
         .then((response) => {
-          console.log(response);
           alert(response.data.data);
         })
         .catch((error) => {

@@ -23,13 +23,11 @@ export default function AccountSettings({ navigation }: any) {
         setUserId(uid);
       }
     } catch (error: any) {
-      console.log(error);
       alert(error.message);
     }
   };
 
   const getUserInfo = () => {
-    console.log("this func is running");
     axios
       .post("https://kenaf.ie/appUserInfo", {
         uId: JSON.parse(userId),
@@ -44,7 +42,6 @@ export default function AccountSettings({ navigation }: any) {
       })
       .catch((error) => {
         alert(error.message);
-        console.log(error);
       });
   };
 

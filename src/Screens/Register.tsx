@@ -76,6 +76,7 @@ const Register = ({ navigation }: any) => {
         status === "false" && Alert.alert(response.data.data);
       })
       .catch((e) => {
+        alert(e.message);
         setIsLoading(false);
       });
   };

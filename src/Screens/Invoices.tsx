@@ -45,11 +45,12 @@ const Invoices = ({ route, navigation }: any) => {
           orName: route.params.storeName,
         })
         .then((response) => {
-          console.log(response.data);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          alert(error.message);
+        });
   };
   useEffect(() => {
     getData();
