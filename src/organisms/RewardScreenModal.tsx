@@ -6,8 +6,9 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Pressable,
+  RefreshControl,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   responsiveFontSize,
   responsiveScreenHeight,
@@ -18,28 +19,85 @@ import { GreenButton } from "../atoms/GreenButton";
 import { AntDesign } from "@expo/vector-icons";
 import OutsideClickHandler from "react-outside-click-handler";
 import Animated from "react-native-reanimated";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ScrollView } from "react-native-gesture-handler";
 
-const RewardScreenModal = ({ showModal, setShowModal }: any) => {
+const RewardScreenModal = () => {
+  const [uId, setUid] = useState("");
+  const [receivedDataPoints, setReceivedDataPoints] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uId");
+      if (value !== null) {
+        setUid(value);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  const getPoints = () => {
+    axios
+      .post("https://kenaf.ie/RewardInfo", {
+        uId: JSON.parse(uId),
+      })
+      .then((response) => {
+        console.log(response);
+        setReceivedDataPoints(response.data.data);
+        setRefreshing(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error.message);
+        setRefreshing(false);
+      });
+  };
+
+  const claimReward = () => {
+    axios
+      .post("https://kenaf.ie/ClaimReward", {
+        uId: JSON.parse(uId),
+        points: receivedDataPoints,
+        amount: receivedDataPoints / 100,
+      })
+      .then((response) => {
+        console.log(response);
+        getPoints();
+        alert(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    getData();
+    uId && getPoints();
+  }, [uId]);
+
   return (
-    <TouchableOpacity
+    <ScrollView
+      bounces={true}
       style={styles.container}
-      onPress={() => setShowModal(false)}
+      contentContainerStyle={{
+        alignItems: "center",
+        justifyContent: "center",
+        width: responsiveScreenWidth(100),
+        height: responsiveScreenHeight(100),
+      }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={getPoints} />
+      }
     >
-      <Pressable style={styles.modal} onPress={() => setShowModal(true)}>
+      <Pressable style={styles.modal}>
         <View style={styles.modal_BrandName}>
           <Text
             style={{ fontSize: responsiveFontSize(2.6), fontWeight: "700" }}
           >
-            Brand Name
+            Total Points
           </Text>
-          <View>
-            <AntDesign
-              name="close"
-              size={35}
-              color="black"
-              onPress={() => setShowModal(false)}
-            />
-          </View>
         </View>
         <View style={styles.modal_worthAndBalanceContainer}>
           <View style={styles.modal_worthAndBalanceContainer_pointsWorth}>
@@ -65,9 +123,13 @@ const RewardScreenModal = ({ showModal, setShowModal }: any) => {
               }
             >
               <Text
-                style={{ fontSize: responsiveFontSize(2.2), fontWeight: "700" }}
+                style={{
+                  fontSize: responsiveFontSize(3.6),
+                  fontWeight: "700",
+                  textAlign: "center",
+                }}
               >
-                10 Points
+                {receivedDataPoints} Points
               </Text>
             </View>
           </View>
@@ -100,25 +162,26 @@ const RewardScreenModal = ({ showModal, setShowModal }: any) => {
               }
             >
               <Text
-                style={{ fontSize: responsiveFontSize(2.2), fontWeight: "700" }}
+                style={{ fontSize: responsiveFontSize(3.6), fontWeight: "700" }}
               >
-                $0.50
+                € {receivedDataPoints / 100}
               </Text>
             </View>
           </View>
         </View>
-        <View style={styles.modal_balanceIpdated}>
-          <Text style={{ fontWeight: "500", color: "#828282" }}>
-            Balance Updated : HR:MM DD/MM/YYYY
-          </Text>
-        </View>
-        <GreenButton height={"25%"} marginTop={"0%"} width={"100%"}>
+
+        <GreenButton
+          height={"22%"}
+          marginTop={"10%"}
+          width={"100%"}
+          onPress={claimReward}
+        >
           <Body2 style={{ color: "white", fontWeight: "800" }}>
-            Activate points to Reward Card
+            Claim Reward
           </Body2>
         </GreenButton>
       </Pressable>
-    </TouchableOpacity>
+    </ScrollView>
   );
 };
 
@@ -129,7 +192,7 @@ const styles = StyleSheet.create({
     width: responsiveScreenWidth(100),
     height: responsiveScreenHeight(100),
     display: "flex",
-    alignItems: "center",
+    // alignItems: "center",
     position: "absolute",
     // justifyContent: "center",
     // backgroundColor: "red",
@@ -137,14 +200,23 @@ const styles = StyleSheet.create({
   modal: {
     width: responsiveScreenWidth(90),
     height: responsiveScreenHeight(34),
-    borderWidth: 0.2,
-    marginTop: responsiveScreenHeight(20),
+    // borderWidth: 0.2,
+    // marginTop: responsiveScreenHeight(30),
     alignItems: "center",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     borderRadius: 15,
     padding: "4%",
-    backgroundColor: "#fff",
-    borderColor: "green",
+    backgroundColor: "red",
+    // backgroundColor: "#fff",
+    shadowColor: "#26ae60ed",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 16.0,
+
+    elevation: 24,
   },
   modal_BrandName: {
     width: "100%",
@@ -156,7 +228,7 @@ const styles = StyleSheet.create({
   },
   modal_worthAndBalanceContainer: {
     width: "100%",
-    height: "30%",
+    height: "45%",
     // borderWidth: 2,
     display: "flex",
     alignItems: "center",
@@ -171,7 +243,7 @@ const styles = StyleSheet.create({
   },
   modal_worthAndBalanceContainer_pointsWorth: {
     width: "45%",
-    height: "77%",
+    height: "70%",
     // borderWidth: 1,
     borderColor: "orange",
     alignItems: "center",
@@ -190,8 +262,8 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   modal_worthAndBalanceContainer_pointsWorth_Totalpoints: {
-    width: "100%",
-    height: "30%",
+    width: "70%",
+    height: "90%",
     // borderWidth: 2,
     alignItems: "center",
     justifyContent: "center",

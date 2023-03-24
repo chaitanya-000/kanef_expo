@@ -13,9 +13,6 @@ import {
 import RewardScreenModal from "../organisms/RewardScreenModal";
 
 const RewardList = () => {
-  const [showModal, setShowModal] = useState(false);
-
-  //
   return (
     <>
       <StatusBar hidden={true} />
@@ -24,16 +21,15 @@ const RewardList = () => {
         <Body1 style={styles.ScreenName}>Reward List</Body1>
 
         <WhiteRoundedContainer
-          style={showModal ? { opacity: 0.2 } : { opacity: 1 }}
+          style={{
+            opacity: 0.1,
+          }}
         >
-          <OptionsContainer>
-            <Heading5 style={styles.ContentHeader}>Coming Soon.....</Heading5>
-          </OptionsContainer>
+          <OptionsContainer></OptionsContainer>
         </WhiteRoundedContainer>
       </ScreenContainer>
-      {showModal && (
-        <RewardScreenModal showModal={showModal} setShowModal={setShowModal} />
-      )}
+
+      <RewardScreenModal />
     </>
   );
 };

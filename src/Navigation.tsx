@@ -16,6 +16,7 @@ import ContactUsScreen from "./Screens/ContactUsScreen";
 import TermsAndConditions from "./Screens/TermsAndConditions";
 import PrivacyPolicy from "./Screens/PrivacyPolicy";
 import BankDetailsScreen from "./Screens/BankDetailsScreen";
+import UpdateBankDetails from "./Screens/UpdateBankDetails";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -62,6 +63,11 @@ const Navigation = () => {
             <Stack.Screen
               name="BankDetailsScreen"
               component={BankDetailsScreen}
+            />
+
+            <Stack.Screen
+              name="UpdateBankDetails"
+              component={UpdateBankDetails}
             />
           </>
         ) : (

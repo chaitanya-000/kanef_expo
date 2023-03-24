@@ -155,8 +155,8 @@ export default function CameraScreen({ navigation }: any) {
       aspect: [9, 16],
     });
     if (!result.canceled) {
-      console.log(result);
-      console.log(result.assets[0].uri);
+      // console.log(result);
+      // console.log(result.assets[0].uri);
       setImage(result.assets[0].uri);
     }
   };
@@ -183,7 +183,7 @@ export default function CameraScreen({ navigation }: any) {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             setValue("");
             setImage(null);
             setLoading(false);

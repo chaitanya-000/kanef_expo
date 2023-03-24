@@ -16,12 +16,10 @@ import {
 } from "react-native-responsive-dimensions";
 import { Ionicons } from "@expo/vector-icons";
 import { Body1, Body2 } from "../atoms/Typography";
-import { TextInput } from "react-native-gesture-handler";
-import SolidGreenButton from "../atoms/SolidGreenButton";
-import { GreenButton } from "../atoms/GreenButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
+import { GreenButton } from "../atoms/GreenButton";
+import { TextInput } from "react-native-gesture-handler";
 
 const BankDetailsScreen = ({ navigation }: any) => {
   const initialValues = {
@@ -31,6 +29,9 @@ const BankDetailsScreen = ({ navigation }: any) => {
   };
   const [userID, setUserId] = useState("");
   const [inputs, setInputs] = useState<any>(initialValues);
+  const [isFirstTimeUser, setIsFirstTimeUser] = useState(false);
+  const [bankData, setBankData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const getData = async () => {
     try {
@@ -47,10 +48,15 @@ const BankDetailsScreen = ({ navigation }: any) => {
   const getBankDetails = () => {
     axios
       .post("https://kenaf.ie/BankAccountInfo", {
-        userId: userID,
+        userId: JSON.parse(userID),
       })
       .then((response) => {
-        console.log("GET", response);
+        // console.log("GET", response);
+        if (response.data.data.length === 0) {
+          setIsFirstTimeUser(true);
+        } else {
+          setBankData(response.data.data[0]);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -65,12 +71,14 @@ const BankDetailsScreen = ({ navigation }: any) => {
     if (inputs.bankName && inputs.IBAN) {
       axios
         .post("https://kenaf.ie/BankAccount", {
+          // userId: userID.replace("", " "),
           userId: JSON.parse(userID),
           bankName: inputs.bankName,
           IBAN: inputs.IBAN,
           BIC: inputs.BIC,
         })
         .then((response) => {
+          console.log(response);
           alert(response.data.data);
         })
         .catch((error) => {
@@ -80,86 +88,119 @@ const BankDetailsScreen = ({ navigation }: any) => {
       alert("Enter BankName and IBAN");
     }
   };
+  const updateData = () => {
+    navigation.navigate("UpdateBankDetails", {
+      userID: userID,
+    });
+  };
 
   useEffect(() => {
     getData();
-    getBankDetails();
-  }, [userID]);
+    userID && getBankDetails();
+  }, [userID, isFirstTimeUser]);
 
   return (
-    <KeyboardAvoidingView
-      style={styles.pageContainer}
-      behavior="height"
-      keyboardVerticalOffset={-240}
-    >
-      <View style={styles.nameBackButtonContainer}>
-        <View style={styles.nameBackButtonChild}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.navigate("Settings")}
-          >
-            <Ionicons name="arrow-back" size={30} color="white" />
-          </TouchableOpacity>
-          <View
-            style={{
-              width: "35%",
-              height: "70%",
-              marginLeft: "5%",
-              // backgroundColor: "red",
-              alignSelf: "center",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Body1 style={{ color: "white", alignSelf: "center" }}>
-              Bank Details
-            </Body1>
+    <>
+      <KeyboardAvoidingView
+        style={styles.pageContainer}
+        behavior="height"
+        keyboardVerticalOffset={-280}
+      >
+        <View style={styles.nameBackButtonContainer}>
+          <View style={styles.nameBackButtonChild}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => navigation.navigate("Settings")}
+            >
+              <Ionicons name="arrow-back" size={30} color="white" />
+            </TouchableOpacity>
+            <View style={styles.screenNameContainer}>
+              <Body1 style={{ color: "white", alignSelf: "center" }}>
+                Bank Details
+              </Body1>
+            </View>
           </View>
         </View>
-      </View>
-      <View style={styles.whiteRoundedContainer}>
-        <View style={styles.labelAndText}>
-          <Body1 style={{ fontWeight: "600" }}> Bank Name</Body1>
-          <View style={styles.Text}>
-            <Body2 style={{ fontWeight: "300" }}>jwqndkjqwnd</Body2>
-          </View>
-        </View>
-        <View style={[styles.labelAndText]}>
-          <Body1 style={{ fontWeight: "600" }}> IBAN</Body1>
-          <View style={styles.Text}>
-            <Body2 style={{ fontWeight: "300" }}>jwqndkjqwnd</Body2>
-          </View>
-        </View>
-        <View style={styles.LineDivider}></View>
-        {/* <Body1>Add your bank details</Body1> */}
-        {/* <View style={styles.labelAndText}>
-          <Body1 style={{ fontWeight: "600" }}>IBAN</Body1>
+        <View style={styles.whiteRoundedContainer}>
+          {isFirstTimeUser && (
+            <>
+              <View style={styles.labelAndText}>
+                <Body1 style={{ fontWeight: "600" }}>Name</Body1>
 
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(value: any) => handleOnchange("IBAN", value)}
-            placeholder="Enter details"
-          />
-        </View>
-        <View style={styles.labelAndText}>
-          <Body1 style={{ fontWeight: "600" }}>BIC</Body1>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(value: any) =>
+                    handleOnchange("bankName", value)
+                  }
+                  placeholder="Enter details"
+                />
+              </View>
+              <View style={styles.labelAndText}>
+                <Body1 style={{ fontWeight: "600" }}>IBAN</Body1>
 
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(value: any) => handleOnchange("BIC", value)}
-            placeholder="Enter details"
-          />
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(value: any) => handleOnchange("IBAN", value)}
+                  placeholder="Enter details"
+                />
+              </View>
+              <View style={styles.labelAndText}>
+                <Body1 style={{ fontWeight: "600" }}>BIC</Body1>
+
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(value: any) => handleOnchange("BIC", value)}
+                  placeholder="Enter details"
+                />
+              </View>
+              <GreenButton
+                height={"8%"}
+                marginTop={"35%"}
+                width={"98%"}
+                style={{ marginBottom: responsiveScreenHeight(20) }}
+                onPress={sendData}
+              >
+                <Body1 style={{ color: "white" }}>Save</Body1>
+              </GreenButton>
+            </>
+          )}
+          {!isFirstTimeUser && (
+            <>
+              <View style={styles.labelAndText}>
+                <Body2 style={{ fontWeight: "600" }}>Bank Name</Body2>
+                <View style={styles.Text}>
+                  <Body2 style={{ fontWeight: "300" }}>
+                    {bankData?.bankName}
+                  </Body2>
+                </View>
+              </View>
+              <View style={styles.labelAndText}>
+                <Body2 style={{ fontWeight: "600" }}>IBAN</Body2>
+                <View style={styles.Text}>
+                  <Body2 style={{ fontWeight: "300" }}> {bankData?.IBAN}</Body2>
+                </View>
+              </View>
+              <View style={styles.labelAndText}>
+                <Body2 style={{ fontWeight: "600" }}>BIC</Body2>
+                <View style={styles.Text}>
+                  <Body2 style={{ fontWeight: "300" }}> {bankData?.BIC}</Body2>
+                </View>
+              </View>
+              <View style={styles.LineDivider}></View>
+              <GreenButton
+                height={"6%"}
+                marginTop={"4%"}
+                width={"40%"}
+                style={{ alignSelf: "center" }}
+                onPress={updateData}
+              >
+                <Body1 style={{ color: "white" }}>Update</Body1>
+              </GreenButton>
+            </>
+          )}
         </View>
-        <GreenButton
-          height={"8%"}
-          marginTop={"35%"}
-          width={"98%"}
-          style={{ marginBottom: responsiveScreenHeight(20) }}
-          onPress={sendData}
-        >
-          <Body1 style={{ color: "white" }}>Save</Body1>
-        </GreenButton> */}
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </>
   );
 };
 
@@ -194,7 +235,14 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "white",
     borderRadius: 30,
-    padding: "4%",
+    padding: "5%",
+  },
+  screenNameContainer: {
+    width: "35%",
+    height: "70%",
+    marginLeft: "5%",
+    alignSelf: "center",
+    justifyContent: "flex-end",
   },
   textInput: {
     width: "100%",
@@ -221,9 +269,9 @@ const styles = StyleSheet.create({
   },
   labelAndText: {
     width: "100%",
-    height: "11%",
+    height: "12%",
     justifyContent: "space-between",
-    marginTop: "4%",
+    marginTop: "6%",
   },
 
   Text: {
@@ -235,14 +283,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: "5%",
     borderRadius: 10,
     fontSize: responsiveScreenFontSize(2.4),
-    justifyContent: "center",
-    alignItems: "flex-start",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     color: "white",
   },
   LineDivider: {
     width: "100%",
-    height: responsiveScreenHeight(0.2),
+    height: responsiveScreenHeight(0.1),
     backgroundColor: "#E0E0E0",
-    marginTop: "5%",
+    marginTop: "10%",
+  },
+  UpdateButton: {
+    width: "100%",
+    height: "8%",
+    backgroundColor: "red",
+    borderRadius: 10,
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
