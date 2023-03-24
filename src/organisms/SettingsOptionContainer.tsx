@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AccountSettings from "../molecules/AccountSettings";
 import Help from "../molecules/Help";
 import ContactUs from "../molecules/ContactUs";
@@ -11,27 +11,49 @@ import { GreenButton } from "../atoms/GreenButton";
 import { Body1 } from "../atoms/Typography";
 import { AuthContext } from "../store";
 import BankAccountDetails from "../molecules/BankAccountDetails";
+import ClaimPoints from "../molecules/ClaimPoints";
+import RewardScreenModal from "./RewardScreenModal";
+import { ScrollView } from "react-native-gesture-handler";
 
 const SettingsOptionContainer = ({ navigation }: any) => {
   const { handleLogout } = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(true);
+
   return (
-    <View style={styles.container}>
-      <AccountSettings navigation={navigation} />
-      <Help />
-      <ContactUs navigation={navigation} />
-      <BankAccountDetails navigation={navigation} />
-      <Feedback navigation={navigation} />
-      <TermsOfService navigation={navigation} />
-      <PrivacyPolicy navigation={navigation} />
-      <GreenButton
-        height={"8%"}
-        marginTop={"2%"}
-        width={"90%"}
-        onPress={handleLogout}
+    <>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{
+          alignItems: "center",
+          width: "100%",
+          opacity: showModal ? 0.02 : 1,
+          // backgroundColor: showModal ? "#26ae60ed" : "white",
+          backgroundColor: showModal ? "black" : "white",
+          height: "110%",
+        }}
+        bounces={true}
       >
-        <Body1 style={{ color: "white" }}>Logout</Body1>
-      </GreenButton>
-    </View>
+        <ClaimPoints showModal={showModal} setShowModal={setShowModal} />
+        <AccountSettings navigation={navigation} />
+        <Help />
+        <ContactUs navigation={navigation} />
+        <BankAccountDetails navigation={navigation} />
+        <Feedback navigation={navigation} />
+        <TermsOfService navigation={navigation} />
+        <PrivacyPolicy navigation={navigation} />
+        <GreenButton
+          height={"9%"}
+          marginTop={"2%"}
+          width={"90%"}
+          onPress={handleLogout}
+        >
+          <Body1 style={{ color: "white" }}>Logout</Body1>
+        </GreenButton>
+      </ScrollView>
+      {showModal && (
+        <RewardScreenModal showModal={showModal} setShowModal={setShowModal} />
+      )}
+    </>
   );
 };
 
@@ -46,6 +68,5 @@ const styles = StyleSheet.create({
     bottom: "8%",
     width: "90%",
     height: "100%",
-    alignItems: "center",
   },
 });

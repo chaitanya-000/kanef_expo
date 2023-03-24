@@ -24,9 +24,7 @@ const RewardList = () => {
           style={{
             opacity: 0.1,
           }}
-        >
-          <OptionsContainer></OptionsContainer>
-        </WhiteRoundedContainer>
+        ></WhiteRoundedContainer>
       </ScreenContainer>
 
       <RewardScreenModal />

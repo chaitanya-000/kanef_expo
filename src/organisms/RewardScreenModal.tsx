@@ -22,8 +22,9 @@ import Animated from "react-native-reanimated";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
-const RewardScreenModal = () => {
+const RewardScreenModal = ({ showModal, setShowModal }: any) => {
   const [uId, setUid] = useState("");
   const [receivedDataPoints, setReceivedDataPoints] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -88,13 +89,25 @@ const RewardScreenModal = () => {
         <RefreshControl refreshing={refreshing} onRefresh={getPoints} />
       }
     >
-      <Pressable style={styles.modal}>
+      <View style={styles.modal}>
         <View style={styles.modal_BrandName}>
           <Text
             style={{ fontSize: responsiveFontSize(2.6), fontWeight: "700" }}
           >
             Total Points
           </Text>
+          <Ionicons
+            name="close-circle-outline"
+            size={35}
+            color="black"
+            onPress={() => setShowModal(false)}
+          />
+          {/* <FontAwesome5
+            name="window-close"
+            size={30}
+            color="black"
+            onPress={() => setShowModal(false)}
+          /> */}
         </View>
         <View style={styles.modal_worthAndBalanceContainer}>
           <View style={styles.modal_worthAndBalanceContainer_pointsWorth}>
@@ -159,7 +172,10 @@ const RewardScreenModal = () => {
               }
             >
               <Text
-                style={{ fontSize: responsiveFontSize(3.6), fontWeight: "700" }}
+                style={{
+                  fontSize: responsiveFontSize(3.6),
+                  fontWeight: "700",
+                }}
               >
                 € {receivedDataPoints / 100}
               </Text>
@@ -177,7 +193,7 @@ const RewardScreenModal = () => {
             Claim Reward
           </Body2>
         </GreenButton>
-      </Pressable>
+      </View>
     </ScrollView>
   );
 };
@@ -189,30 +205,31 @@ const styles = StyleSheet.create({
     width: responsiveScreenWidth(100),
     height: responsiveScreenHeight(100),
     display: "flex",
-    // alignItems: "center",
     position: "absolute",
     // justifyContent: "center",
     // backgroundColor: "red",
   },
   modal: {
-    width: responsiveScreenWidth(90),
+    width: responsiveScreenWidth(85),
     height: responsiveScreenHeight(34),
-    // borderWidth: 0.2,
+    // borderWidth: 0.1,
     // marginTop: responsiveScreenHeight(30),
     alignItems: "center",
-    // justifyContent: "space-between",
     borderRadius: 15,
     padding: "4%",
     backgroundColor: "#fff",
-    shadowColor: "#26ae60ed",
+    // backgroundColor: "red",
+    // shadowColor: "#26ae60ed",
+    shadowColor: "black",
     shadowOffset: {
       width: 0,
       height: 1,
     },
-    shadowOpacity: 0.6,
-    shadowRadius: 16.0,
+    shadowOpacity: 12,
+    shadowRadius: 1.0,
 
-    elevation: 24,
+    elevation: 30,
+    marginBottom: "30%",
   },
   modal_BrandName: {
     width: "100%",
