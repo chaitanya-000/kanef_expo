@@ -203,8 +203,7 @@ const styles = StyleSheet.create({
     // justifyContent: "space-between",
     borderRadius: 15,
     padding: "4%",
-    backgroundColor: "red",
-    // backgroundColor: "#fff",
+    backgroundColor: "#fff",
     shadowColor: "#26ae60ed",
     shadowOffset: {
       width: 0,

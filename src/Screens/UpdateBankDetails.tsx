@@ -46,7 +46,13 @@ const UpdateBankDetails = ({ navigation, route }: any) => {
           BIC: inputs.BIC,
         })
         .then((response) => {
-          alert(response.data.message);
+          Alert.alert(response.data.message, "", [
+            {
+              text: "OK",
+              onPress: () => navigation.navigate("Settings"),
+              style: "default",
+            },
+          ]);
         })
         .catch((error) => {
           alert(error.message);
@@ -65,7 +71,7 @@ const UpdateBankDetails = ({ navigation, route }: any) => {
         <View style={styles.nameBackButtonChild}>
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() => navigation.navigate("BankDetailsScreen")}
+            onPress={() => navigation.navigate("Settings")}
           >
             <Ionicons name="arrow-back" size={30} color="white" />
           </TouchableOpacity>

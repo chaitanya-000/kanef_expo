@@ -31,7 +31,6 @@ const BankDetailsScreen = ({ navigation }: any) => {
   const [inputs, setInputs] = useState<any>(initialValues);
   const [isFirstTimeUser, setIsFirstTimeUser] = useState(false);
   const [bankData, setBankData] = useState(null);
-  const [showModal, setShowModal] = useState(false);
 
   const getData = async () => {
     try {
