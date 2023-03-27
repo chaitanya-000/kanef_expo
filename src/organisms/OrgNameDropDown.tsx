@@ -21,7 +21,7 @@ const OrgNameDropDown = ({ value, setValue, data }: any) => {
     data && (
       <KeyboardAvoidingView behavior="height">
         <Dropdown
-          keyboardAvoiding
+          keyboardAvoiding={true}
           search
           activeColor="#26ae60ed"
           searchPlaceholder="Enter store name"

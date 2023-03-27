@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Image,
   StatusBar,
   StyleSheet,
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#121f27",
   },
   imageContainer: {
-    width: "100%",
+    width: responsiveScreenWidth(100),
     height: "100%",
     flex: 1,
     justifyContent: "center",
@@ -115,8 +116,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   image: {
-    height: "90%",
-    width: "90%",
+    height: "100%",
+    width: "100%",
 
     // aspectRatio: 3,
     // aspectRatio: 2,

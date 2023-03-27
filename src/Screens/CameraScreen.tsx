@@ -17,7 +17,7 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import * as ImagePicker from "expo-image-picker";
-import { Body1, Body2, Body4 } from "../atoms/Typography";
+import { Body1, Body2, Body4, Heading4, Heading6 } from "../atoms/Typography";
 import { Entypo } from "@expo/vector-icons";
 import Spinner from "react-native-loading-spinner-overlay/lib";
 import OrgNameDropDown from "../organisms/OrgNameDropDown";
@@ -243,6 +243,7 @@ export default function CameraScreen({ navigation }: any) {
       >
         <StatusBar hidden={true} />
         <Spinner visible={loading} />
+        <Heading6 style={{ fontWeight: "600" }}>QR SCAN</Heading6>
         <View style={styles.barcodebox}>
           <BarCodeScanner
             onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
