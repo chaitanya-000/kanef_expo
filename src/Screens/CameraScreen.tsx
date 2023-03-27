@@ -56,8 +56,20 @@ export default function CameraScreen({ navigation }: any) {
 
       quality: 0.3,
     });
-
-    setImage(assets[0].uri);
+    if (assets[0].uri) {
+      try {
+        const resizedImage = await ImageManipulator.manipulateAsync(
+          assets[0].uri,
+          [{ resize: { width: 700, height: 1600 } }],
+          { compress: 0.8 }
+        );
+        setImage(resizedImage.uri);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("error in selecting the image");
+    }
   };
 
   //getting the uid of the logged in user for post request
@@ -163,7 +175,7 @@ export default function CameraScreen({ navigation }: any) {
         );
         setImage(resizedImage.uri);
       } catch (error) {
-        // console.log(error);
+        console.log(error);
       }
     } else {
       console.log("error in selecting the image");
