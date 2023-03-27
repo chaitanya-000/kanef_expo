@@ -26,6 +26,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import AddStoreModal from "../organisms/AddStoreModal";
 import { AntDesign } from "@expo/vector-icons";
+import * as ImageManipulator from "expo-image-manipulator";
 
 export default function CameraScreen({ navigation }: any) {
   const [hasPermission, setHasPermission] = useState<any>(null);
@@ -50,11 +51,13 @@ export default function CameraScreen({ navigation }: any) {
   const takePhoto = async () => {
     const { assets } = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
+      allowsEditing: false,
       aspect: [9, 16],
 
       quality: 0.3,
     });
+    console.log(assets);
+
     setImage(assets[0].uri);
   };
 
@@ -150,11 +153,22 @@ export default function CameraScreen({ navigation }: any) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       quality: 0.3,
-      allowsEditing: true,
-      aspect: [9, 16],
+      allowsEditing: false,
     });
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      console.log(result);
+      try {
+        const resizedImage = await ImageManipulator.manipulateAsync(
+          result.assets[0].uri,
+          [{ resize: { width: 700, height: 1600 } }],
+          { compress: 0.8 }
+        );
+        setImage(resizedImage.uri);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("error in selecting the image");
     }
   };
 
