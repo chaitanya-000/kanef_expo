@@ -56,7 +56,6 @@ export default function CameraScreen({ navigation }: any) {
 
       quality: 0.3,
     });
-    console.log(assets);
 
     setImage(assets[0].uri);
   };
@@ -156,7 +155,6 @@ export default function CameraScreen({ navigation }: any) {
       allowsEditing: false,
     });
     if (!result.canceled) {
-      console.log(result);
       try {
         const resizedImage = await ImageManipulator.manipulateAsync(
           result.assets[0].uri,
@@ -165,7 +163,7 @@ export default function CameraScreen({ navigation }: any) {
         );
         setImage(resizedImage.uri);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     } else {
       console.log("error in selecting the image");

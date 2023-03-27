@@ -49,7 +49,6 @@ const RewardScreenModal = ({
         .then((response) => {
           setLoading(false);
 
-          console.log(response);
           if (response.data.data.length === 0) {
             setIsFirstTimeUser(true);
           } else {
@@ -64,7 +63,6 @@ const RewardScreenModal = ({
   };
 
   const claimReward = async () => {
-    console.log(isFirstTimeUser);
     if (isFirstTimeUser) {
       Alert.alert("Enter Bank Details First", "", [
         {

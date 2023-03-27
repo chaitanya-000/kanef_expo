@@ -44,7 +44,6 @@ const SettingsOptionContainer = ({ navigation }: any) => {
       })
       .then((response) => {
         setRefreshing(false);
-        console.log(response);
         setReceivedDataPoints(response.data.data);
       })
       .catch((error) => {
