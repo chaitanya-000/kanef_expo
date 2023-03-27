@@ -25,6 +25,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import Navigation from "../Navigation";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const RewardScreenModal = ({
   setShowModal,
@@ -36,14 +37,18 @@ const RewardScreenModal = ({
 }: any) => {
   const [refreshing, setRefreshing] = useState(false);
   const [isFirstTimeUser, setIsFirstTimeUser] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const getBankDetails = () => {
+    setLoading(true);
     uId &&
       axios
         .post("https://kenaf.ie/BankAccountInfo", {
           userId: JSON.parse(uId),
         })
         .then((response) => {
+          setLoading(false);
+
           console.log(response);
           if (response.data.data.length === 0) {
             setIsFirstTimeUser(true);
@@ -52,6 +57,8 @@ const RewardScreenModal = ({
           }
         })
         .catch((error) => {
+          setLoading(false);
+
           alert(error.message);
         });
   };
@@ -105,6 +112,7 @@ const RewardScreenModal = ({
         <RefreshControl refreshing={refreshing} onRefresh={getPoints} />
       }
     >
+      <Spinner visible={loading} />
       <View style={styles.modal}>
         <View style={styles.modal_BrandName}>
           <Text

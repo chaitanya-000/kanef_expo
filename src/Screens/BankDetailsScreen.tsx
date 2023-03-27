@@ -20,6 +20,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { GreenButton } from "../atoms/GreenButton";
 import { TextInput } from "react-native-gesture-handler";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const BankDetailsScreen = ({ navigation }: any) => {
   const initialValues = {
@@ -31,6 +32,7 @@ const BankDetailsScreen = ({ navigation }: any) => {
   const [isFirstTimeUser, setIsFirstTimeUser] = useState(false);
   const [bankData, setBankData] = useState(null);
   const [userID, setUserId] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const getData = async () => {
     try {
@@ -45,11 +47,14 @@ const BankDetailsScreen = ({ navigation }: any) => {
   };
 
   const getBankDetails = () => {
+    setLoading(true);
     axios
       .post("https://kenaf.ie/BankAccountInfo", {
         userId: JSON.parse(userID),
       })
       .then((response) => {
+        setLoading(false);
+
         if (response.data.data.length === 0) {
           setIsFirstTimeUser(true);
         } else {
@@ -57,6 +62,8 @@ const BankDetailsScreen = ({ navigation }: any) => {
         }
       })
       .catch((error) => {
+        setLoading(false);
+
         alert(error.message);
       });
   };
@@ -67,6 +74,8 @@ const BankDetailsScreen = ({ navigation }: any) => {
 
   const sendData = () => {
     if (inputs.bankName && inputs.IBAN) {
+      setLoading(true);
+
       axios
         .post("https://kenaf.ie/BankAccount", {
           // userId: userID.replace("", " "),
@@ -76,9 +85,13 @@ const BankDetailsScreen = ({ navigation }: any) => {
           BIC: inputs.BIC,
         })
         .then((response) => {
+          setLoading(false);
+
           alert(response.data.data);
         })
         .catch((error) => {
+          setLoading(false);
+
           alert(error.message);
         });
     } else {
@@ -103,6 +116,7 @@ const BankDetailsScreen = ({ navigation }: any) => {
         behavior="height"
         keyboardVerticalOffset={-280}
       >
+        <Spinner visible={loading} />
         <View style={styles.nameBackButtonContainer}>
           <View style={styles.nameBackButtonChild}>
             <TouchableOpacity

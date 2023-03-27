@@ -31,12 +31,15 @@ const UpdateBankDetails = ({ navigation, route }: any) => {
 
   const { userID } = route.params;
   const [inputs, setInputs] = useState<any>(initialValues);
+  const [loading, setLoading] = useState(false);
 
   const handleOnchange = (name: any, value: any) => {
     setInputs((prevState: any) => ({ ...prevState, [name]: value }));
   };
   const sendData = () => {
     if (inputs.bankName && inputs.IBAN) {
+      setLoading(true);
+
       axios
         .post("https://kenaf.ie/appUserBankUpdate", {
           // userId: userID.replace("", " "),
@@ -46,6 +49,8 @@ const UpdateBankDetails = ({ navigation, route }: any) => {
           BIC: inputs.BIC,
         })
         .then((response) => {
+          setLoading(false);
+
           Alert.alert(response.data.message, "", [
             {
               text: "OK",
@@ -55,6 +60,8 @@ const UpdateBankDetails = ({ navigation, route }: any) => {
           ]);
         })
         .catch((error) => {
+          setLoading(false);
+
           alert(error.message);
         });
     } else {
