@@ -37,32 +37,6 @@ const RewardScreenModal = ({
   const [refreshing, setRefreshing] = useState(false);
   const [isFirstTimeUser, setIsFirstTimeUser] = useState(false);
 
-  // const getData = async () => {
-  //   try {
-  //     const value = await AsyncStorage.getItem("uId");
-  //     if (value !== null) {
-  //       const uid = value;
-  //       setUid(uid);
-  //     }
-  //   } catch (e) {
-  //     // error reading value
-  //   }
-  // };
-
-  // const getBankDetails = () => {
-  //   axios
-  //     .post("https://kenaf.ie/BankAccountInfo", {
-  //       userId: JSON.parse(uId),
-  //     })
-  //     .then((response) => {
-  //       console.log(response.data.data.length);
-  //       response.data.data.length === 0 && setIsFirstTimeUser(true);
-  //     })
-  //     .catch((error) => {
-  //       alert(error.message);
-  //     });
-  // };
-
   const getBankDetails = () => {
     uId &&
       axios
@@ -114,6 +88,7 @@ const RewardScreenModal = ({
   };
   useEffect(() => {
     getBankDetails();
+    getPoints();
   }, [isFirstTimeUser]);
 
   return (

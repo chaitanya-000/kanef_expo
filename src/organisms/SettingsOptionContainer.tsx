@@ -23,6 +23,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [receivedDataPoints, setReceivedDataPoints] = useState(null);
   const [uId, setUid] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   const getData = async () => {
     try {
@@ -36,14 +37,19 @@ const SettingsOptionContainer = ({ navigation }: any) => {
   };
 
   const getPoints = () => {
+    setRefreshing(true);
     axios
       .post("https://kenaf.ie/RewardInfo", {
         uId: JSON.parse(uId),
       })
       .then((response) => {
+        setRefreshing(false);
+        console.log(response);
         setReceivedDataPoints(response.data.data);
       })
       .catch((error) => {
+        setRefreshing(false);
+
         alert(error.message);
       });
   };
@@ -66,6 +72,9 @@ const SettingsOptionContainer = ({ navigation }: any) => {
           // paddingBottom: "20%",
         }}
         bounces={true}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={getPoints} />
+        }
       >
         <TotalPoints
           uId={uId}
