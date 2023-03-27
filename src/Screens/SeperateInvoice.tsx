@@ -27,8 +27,7 @@ const SeperateInvoice = ({ route, navigation }: any) => {
       <View
         style={{
           width: responsiveScreenWidth(100),
-          height: responsiveScreenHeight(10),
-          backgroundColor: "#121f27",
+          height: responsiveScreenHeight(13),
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
@@ -38,7 +37,6 @@ const SeperateInvoice = ({ route, navigation }: any) => {
           style={{
             width: "90%",
             height: "90%",
-            // borderWidth: 2,
             flexDirection: "row",
             // justifyContent: "center",
             alignItems: "center",
@@ -46,7 +44,7 @@ const SeperateInvoice = ({ route, navigation }: any) => {
         >
           <TouchableOpacity
             style={{
-              height: "60%",
+              height: "50%",
               width: "13%",
               backgroundColor: "rgba(255, 255, 255, 0.05)",
               alignItems: "center",
@@ -60,15 +58,24 @@ const SeperateInvoice = ({ route, navigation }: any) => {
           >
             <Ionicons name="arrow-back" size={30} color="white" />
           </TouchableOpacity>
-          <Body1
+          <View
             style={{
-              color: "white",
-              alignSelf: "center",
-              fontSize: responsiveScreenFontSize(2),
+              // borderWidth: 2,
+              height: "70%",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            {route.params.StoreName} : {route.params.Date.split("T")[0]}
-          </Body1>
+            <Body1
+              style={{
+                color: "white",
+                alignSelf: "center",
+                fontSize: responsiveScreenFontSize(2.6),
+              }}
+            >
+              {route.params.StoreName} : {route.params.Date.split("T")[0]}
+            </Body1>
+          </View>
         </View>
       </View>
       <Spinner visible={loading} color="#26ae60ed" />
@@ -95,6 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#121f27",
   },
   imageContainer: {
     width: "100%",
@@ -102,6 +110,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    backgroundColor: "white",
   },
   image: {
     height: "90%",
