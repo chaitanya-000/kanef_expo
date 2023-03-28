@@ -77,7 +77,6 @@ const RewardScreenModal = ({
       ]);
     } else {
       if (isZeroPoints) {
-        console.log(isZeroPoints);
         Alert.alert(
           "Collect 100 points to claim reward. Upload more Receipts to get points.",
           "",

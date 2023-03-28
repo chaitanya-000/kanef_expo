@@ -44,15 +44,9 @@ const SettingsOptionContainer = ({ navigation }: any) => {
         uId: JSON.parse(uId),
       })
       .then((response) => {
-        console.log(response);
-        // console.log(response.data.data, typeof response.data.data);
         if (response.data.data < 100) {
-          console.log(response.data.data, "less than 100");
           setIsZeroPoints(true);
-          console.log("if block");
         } else {
-          console.log(response.data.data, "is equal to or more than  100");
-
           setIsZeroPoints(false);
         }
         setRefreshing(false);
