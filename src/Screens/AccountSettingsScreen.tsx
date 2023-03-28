@@ -83,7 +83,6 @@ const AccountSettingsScreen = ({ navigation }: any) => {
   }, [userID]);
 
   const sendData = () => {
-    setLoading(true);
     if (!inputs.phone) {
       alert("Please Enter Phone number");
       return;
@@ -114,6 +113,7 @@ const AccountSettingsScreen = ({ navigation }: any) => {
       return;
     }
 
+    setLoading(true);
     userID &&
     inputs.DOB &&
     inputs.Gender &&

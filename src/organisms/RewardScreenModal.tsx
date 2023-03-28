@@ -77,8 +77,9 @@ const RewardScreenModal = ({
       ]);
     } else {
       if (isZeroPoints) {
+        console.log(isZeroPoints);
         Alert.alert(
-          "You currently have no points in your account. Upload Receipts to gain points.",
+          "Collect 100 points to claim reward. Upload more Receipts to get points.",
           "",
           [
             {
