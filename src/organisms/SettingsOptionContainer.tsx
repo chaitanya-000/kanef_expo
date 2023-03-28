@@ -24,6 +24,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
   const [receivedDataPoints, setReceivedDataPoints] = useState(null);
   const [uId, setUid] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [isZeroPoints, setIsZeroPoints] = useState(false);
 
   const getData = async () => {
     try {
@@ -43,6 +44,10 @@ const SettingsOptionContainer = ({ navigation }: any) => {
         uId: JSON.parse(uId),
       })
       .then((response) => {
+        console.log(response);
+        if (response.data.data === 0) {
+          setIsZeroPoints(true);
+        }
         setRefreshing(false);
         setReceivedDataPoints(response.data.data);
       })
@@ -57,7 +62,6 @@ const SettingsOptionContainer = ({ navigation }: any) => {
     getData();
     uId && getPoints();
   }, [uId]);
-
   return (
     <>
       <ScrollView
@@ -106,6 +110,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
           uId={uId}
           setUid={setUid}
           navigation={navigation}
+          isZeroPoints={isZeroPoints}
         />
       )}
     </>

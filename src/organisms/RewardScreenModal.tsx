@@ -34,6 +34,7 @@ const RewardScreenModal = ({
   uId,
   navigation,
   setUid,
+  isZeroPoints,
 }: any) => {
   const [refreshing, setRefreshing] = useState(false);
   const [isFirstTimeUser, setIsFirstTimeUser] = useState(false);
@@ -75,20 +76,33 @@ const RewardScreenModal = ({
         },
       ]);
     } else {
-      axios
-        .post("https://kenaf.ie/ClaimReward", {
-          uId: JSON.parse(uId),
-          points: receivedDataPoints,
-          amount: receivedDataPoints / 100,
-        })
-        .then((response) => {
-          getPoints();
-          alert(response.data.data);
-          setShowModal(false);
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+      if (isZeroPoints) {
+        Alert.alert(
+          "You currently have no points in your account. Upload Receipts to gain points.",
+          "",
+          [
+            {
+              text: "OK",
+              style: "default",
+            },
+          ]
+        );
+      } else {
+        axios
+          .post("https://kenaf.ie/ClaimReward", {
+            uId: JSON.parse(uId),
+            points: receivedDataPoints,
+            amount: receivedDataPoints / 100,
+          })
+          .then((response) => {
+            getPoints();
+            alert(response.data.data);
+            setShowModal(false);
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      }
     }
   };
   useEffect(() => {
