@@ -8,6 +8,7 @@ import {
   Alert,
   RefreshControl,
   StatusBar,
+  Platform,
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
@@ -51,7 +52,7 @@ export default function CameraScreen({ navigation }: any) {
   const takePhoto = async () => {
     const { assets } = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: false,
+      allowsEditing: Platform.OS === "android" ? true : false,
       aspect: [9, 16],
 
       quality: 0.3,
@@ -165,7 +166,7 @@ export default function CameraScreen({ navigation }: any) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       quality: 0.3,
-      allowsEditing: false,
+      allowsEditing: Platform.OS === "android" ? true : false,
     });
     if (!result.canceled) {
       try {
