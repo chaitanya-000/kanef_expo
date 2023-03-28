@@ -89,6 +89,7 @@ export default function CameraScreen({ navigation }: any) {
     axios
       .get("https://kenaf.ie/organizationList")
       .then((response) => {
+        console.log(response);
         setLoading(false);
         setData(response.data.data);
       })
@@ -243,7 +244,7 @@ export default function CameraScreen({ navigation }: any) {
       >
         <StatusBar hidden={true} />
         <Spinner visible={loading} />
-        <Heading6 style={{ fontWeight: "600" }}>QR SCAN</Heading6>
+        <Heading6 style={{ fontWeight: "400" }}>QR SCAN</Heading6>
         <View style={styles.barcodebox}>
           <BarCodeScanner
             onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}

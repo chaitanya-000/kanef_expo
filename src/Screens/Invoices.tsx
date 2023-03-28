@@ -9,7 +9,7 @@ import {
   StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Body1, Body2 } from "../atoms/Typography";
+import { Body1, Body2, Heading5 } from "../atoms/Typography";
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
@@ -77,7 +77,7 @@ const Invoices = ({ route, navigation }: any) => {
             height: "90%",
             // borderWidth: 2,
             flexDirection: "row",
-            // justifyContent: "flex-start",
+            justifyContent: "flex-start",
             alignItems: "center",
             // backgroundColor: "red",
           }}
@@ -101,22 +101,24 @@ const Invoices = ({ route, navigation }: any) => {
           <View
             style={{
               // backgroundColor: "green",
-              width: "80%",
+              // borderWidth: 1,
+
+              width: "40%",
               height: "100%",
               alignSelf: "auto",
               justifyContent: "center",
             }}
           >
-            <Body1
+            <Heading5
               style={{
                 color: "white",
                 alignSelf: "center",
-                fontSize: responsiveScreenFontSize(2),
+                fontSize: responsiveScreenFontSize(2.7),
                 // backgroundColor: "blue",
               }}
             >
               {route.params.storeName}
-            </Body1>
+            </Heading5>
           </View>
         </View>
       </View>

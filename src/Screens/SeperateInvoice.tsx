@@ -28,7 +28,7 @@ const SeperateInvoice = ({ route, navigation }: any) => {
       <View
         style={{
           width: responsiveScreenWidth(100),
-          height: responsiveScreenHeight(13),
+          height: responsiveScreenHeight(17),
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
@@ -40,18 +40,18 @@ const SeperateInvoice = ({ route, navigation }: any) => {
             height: "90%",
             flexDirection: "row",
             // justifyContent: "center",
-            alignItems: "center",
+            alignItems: "flex-end",
           }}
         >
           <TouchableOpacity
             style={{
-              height: "50%",
+              height: "35%",
               width: "13%",
               backgroundColor: "rgba(255, 255, 255, 0.05)",
               alignItems: "center",
               justifyContent: "center",
               borderRadius: 10,
-              marginRight: "15%",
+              marginRight: "5%",
               borderWidth: 1,
               borderColor: "rgba(222, 232, 239, 0.1)",
             }}
@@ -62,9 +62,10 @@ const SeperateInvoice = ({ route, navigation }: any) => {
           <View
             style={{
               // borderWidth: 2,
+              width: "70%",
               height: "70%",
-              alignItems: "center",
-              justifyContent: "center",
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
             }}
           >
             <Body1
@@ -106,18 +107,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#121f27",
   },
   imageContainer: {
-    width: responsiveScreenWidth(100),
-    height: "100%",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    width: Dimensions.get("screen").width,
+    height: responsiveScreenHeight(94),
+    // flex: 1,
+    justifyContent: "flex-start",
+
+    // alignItems: "flex-start",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     backgroundColor: "white",
   },
   image: {
-    height: "100%",
+    marginTop: 14,
+    height: "90%",
     width: "100%",
+    // borderWidth: 2,
 
     // aspectRatio: 3,
     // aspectRatio: 2,
