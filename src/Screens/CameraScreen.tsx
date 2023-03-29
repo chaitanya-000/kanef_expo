@@ -244,7 +244,16 @@ export default function CameraScreen({ navigation }: any) {
       >
         <StatusBar hidden={true} />
         <Spinner visible={loading} />
-        <Heading6 style={{ fontWeight: "400" }}>QR SCAN</Heading6>
+        <View
+          style={{
+            width: responsiveScreenWidth(100),
+            height: "10%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Heading6 style={{ fontWeight: "400" }}>QR SCAN</Heading6>
+        </View>
         <View style={styles.barcodebox}>
           <BarCodeScanner
             onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
