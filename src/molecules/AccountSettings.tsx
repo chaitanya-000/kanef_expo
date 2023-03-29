@@ -10,46 +10,7 @@ import HorizontalDividerLine from "../atoms/HorizontalDividerLine";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-export default function AccountSettings({ navigation }: any) {
-  const [showIcon, setShowIcon] = useState(false);
-
-  const [userId, setUserId] = useState("");
-
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("uId");
-      if (value !== null) {
-        const uid = value;
-        setUserId(uid);
-      }
-    } catch (error: any) {
-      alert(error.message);
-    }
-  };
-
-  const getUserInfo = () => {
-    axios
-      .post("https://kenaf.ie/appUserInfo", {
-        uId: JSON.parse(userId),
-      })
-      .then((response) => {
-        console.log(response);
-        const data = response.data.data[0];
-        if (data.Gender) {
-          setShowIcon(true);
-        } else {
-          setShowIcon(false);
-        }
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  };
-
-  useEffect(() => {
-    getData();
-    userId && getUserInfo();
-  }, [userId]);
+export default function AccountSettings({ navigation, showIcon }: any) {
   return (
     <View
       style={{
@@ -71,12 +32,11 @@ export default function AccountSettings({ navigation }: any) {
           />
           <Body2>Account Settings</Body2>
         </View>
-        {!showIcon ? (
+        {showIcon ? (
           <Image
             source={require("../../assets/images/notification.png")}
             style={{
               width: responsiveScreenWidth(6.5),
-              // height: responsiveScreenHeight(4),
               borderRadius: 100,
               aspectRatio: 1,
             }}

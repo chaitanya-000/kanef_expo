@@ -25,6 +25,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
   const [uId, setUid] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
   const [isZeroPoints, setIsZeroPoints] = useState(false);
+  const [showIcon, setShowIcon] = useState(false);
 
   const getData = async () => {
     try {
@@ -59,9 +60,38 @@ const SettingsOptionContainer = ({ navigation }: any) => {
       });
   };
 
+  const getUserInfo = () => {
+    axios
+      .post("https://kenaf.ie/appUserInfo", {
+        uId: JSON.parse(uId),
+      })
+      .then((response) => {
+        const data = response.data.data[0];
+        if (data.Gender) {
+          setShowIcon(false);
+          console.log("user has updated  before");
+        } else {
+          console.log("first time user");
+
+          setShowIcon(true);
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
+  const handleRefresh = () => {
+    getPoints();
+    getUserInfo();
+  };
+
   useEffect(() => {
     getData();
-    uId && getPoints();
+    if (uId) {
+      getPoints();
+      getUserInfo();
+    }
   }, [uId]);
   return (
     <>
@@ -77,7 +107,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
         }}
         bounces={true}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={getPoints} />
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
       >
         <TotalPoints
@@ -86,7 +116,11 @@ const SettingsOptionContainer = ({ navigation }: any) => {
           receivedDataPoints={receivedDataPoints}
         />
         <ClaimPoints showModal={showModal} setShowModal={setShowModal} />
-        <AccountSettings navigation={navigation} uId={uId} />
+        <AccountSettings
+          navigation={navigation}
+          uId={uId}
+          showIcon={showIcon}
+        />
         <Help />
         <ContactUs navigation={navigation} />
         <BankAccountDetails navigation={navigation} />
