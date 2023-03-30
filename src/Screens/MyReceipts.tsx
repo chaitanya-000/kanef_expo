@@ -115,7 +115,7 @@ const MyReceipts = ({ navigation }: any) => {
                   key={Math.random() * 10000000000}
                 >
                   <Image
-                    source={require("../../assets/images/WalmartLogo.jpg")}
+                    source={require("../../assets/images/ReceiptScreenGenericIcon.png")}
                     style={styles.StoreImage}
                   />
                   <View style={styles.NameAndDate}>
