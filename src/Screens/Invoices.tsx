@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
     width: "100%",
-    height: responsiveScreenHeight(9),
+    height: responsiveScreenHeight(10),
     borderRadius: 20,
     flexDirection: "row",
     padding: "3%",
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   StoreImage: {
     // borderWidth: 1,
     // borderColor: "red",
-    width: "18%",
+    width: "20%",
     borderRadius: 10,
     height: "100%",
   },
