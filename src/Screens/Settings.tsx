@@ -6,6 +6,7 @@ import {
   StatusBar,
   TouchableOpacity,
   Alert,
+  Platform,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import FooterToolBar from "../organisms/FootertoolBar";
@@ -20,6 +21,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 import Spinner from "react-native-loading-spinner-overlay/lib";
+import * as ImageManipulator from "expo-image-manipulator";
 
 export default function Settings({ navigation }: any) {
   const [userId, setUserId] = useState("");
@@ -30,14 +32,19 @@ export default function Settings({ navigation }: any) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      quality: 0.1,
-      aspect: [9, 16],
+      quality: 0.7,
+      aspect: [1, 1],
     });
     if (!result.canceled) {
+      const resizedImage = await ImageManipulator.manipulateAsync(
+        result.assets[0].uri,
+        [{ resize: { width: 400, height: 400 } }],
+        { compress: 0.8 }
+      );
       const formData = new FormData();
       formData.append("uId", JSON.parse(userId));
       formData.append("image", {
-        uri: result.assets[0].uri,
+        uri: resizedImage.uri,
         type: "image/jpeg",
         name: "photo.jpeg",
       });
