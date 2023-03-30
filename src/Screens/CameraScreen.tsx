@@ -87,14 +87,18 @@ export default function CameraScreen({ navigation }: any) {
 
   const getOrgNames = () => {
     setLoading(true);
+    setRefreshing(true);
     axios
       .get("https://kenaf.ie/organizationList")
       .then((response) => {
         setLoading(false);
         setData(response.data.data);
+        setRefreshing(false);
       })
       .catch((error) => {
         setLoading(false);
+        setRefreshing(false);
+
         alert(error.message);
       });
   };
@@ -238,6 +242,7 @@ export default function CameraScreen({ navigation }: any) {
               setImage(null);
               setRefreshing(false);
               setValue(null);
+              getOrgNames();
             }}
           />
         }

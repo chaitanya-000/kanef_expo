@@ -87,7 +87,13 @@ const BankDetailsScreen = ({ navigation }: any) => {
         .then((response) => {
           setLoading(false);
 
-          alert(response.data.data);
+          Alert.alert(response.data.data, "", [
+            {
+              text: "OK",
+              onPress: () => navigation.navigate("Settings"),
+              style: "default",
+            },
+          ]);
         })
         .catch((error) => {
           setLoading(false);
@@ -136,23 +142,23 @@ const BankDetailsScreen = ({ navigation }: any) => {
           {isFirstTimeUser && (
             <>
               <View style={styles.labelAndText}>
-                <Body1 style={{ fontWeight: "600" }}>Name</Body1>
+                <Body1 style={{ fontWeight: "600" }}>Bank Name *</Body1>
 
                 <TextInput
                   style={styles.textInput}
                   onChangeText={(value: any) =>
                     handleOnchange("bankName", value)
                   }
-                  placeholder="Enter details"
+                  placeholder="Enter Bank name"
                 />
               </View>
               <View style={styles.labelAndText}>
-                <Body1 style={{ fontWeight: "600" }}>IBAN</Body1>
+                <Body1 style={{ fontWeight: "600" }}>IBAN *</Body1>
 
                 <TextInput
                   style={styles.textInput}
                   onChangeText={(value: any) => handleOnchange("IBAN", value)}
-                  placeholder="Enter details"
+                  placeholder="Enter IBAN"
                 />
               </View>
               <View style={styles.labelAndText}>
@@ -161,7 +167,7 @@ const BankDetailsScreen = ({ navigation }: any) => {
                 <TextInput
                   style={styles.textInput}
                   onChangeText={(value: any) => handleOnchange("BIC", value)}
-                  placeholder="Enter details"
+                  placeholder="Enter BIC"
                 />
               </View>
               <GreenButton
