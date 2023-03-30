@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "ie.kenafltd.kenaf",
-      "buildNumber": "11"
+      "buildNumber": "12"
     },
     "android": {
       "package": "ie.kenaf.kenaf",
