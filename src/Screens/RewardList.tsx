@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet, StatusBar, Image, View, Text } from "react-native";
 import React, { useEffect, useId, useState } from "react";
 import {
   Body1,
@@ -11,6 +11,7 @@ import {
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
+  responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import {
   OptionsContainer,
@@ -27,13 +28,27 @@ const RewardList = () => {
       <ScreenContainer>
         <Body1 style={styles.ScreenName}>Reward List</Body1>
 
-        <WhiteRoundedContainer
-          style={{
-            padding: "10%",
-          }}
-        >
-          <Heading6 style={{ fontWeight: "700" }}>Coming soon...</Heading6>
-        </WhiteRoundedContainer>
+        <View style={styles.WhiteRoundedContainer}>
+          <View style={styles.ComingSoonContainer}>
+            <Image source={require("../../assets/images/CommingSoon.png")} />
+            <Text
+              style={{
+                fontSize: responsiveScreenFontSize(3.7),
+                fontWeight: "600",
+              }}
+            >
+              Coming Soon...
+            </Text>
+            <Text
+              style={{
+                fontSize: responsiveScreenFontSize(2.3),
+                fontWeight: "500",
+              }}
+            >
+              See the settings tab to claim balance.
+            </Text>
+          </View>
+        </View>
       </ScreenContainer>
 
       {/* <RewardScreenModal /> */}
@@ -84,6 +99,24 @@ const styles = StyleSheet.create({
     borderColor: "green",
     width: "10%",
     alignSelf: "center",
+  },
+  WhiteRoundedContainer: {
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(87),
+    borderRadius: 30,
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "10%",
+    // backgroundColor: "red",
+  },
+  ComingSoonContainer: {
+    width: "100%",
+    height: "40%",
+    // backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginBottom: "25%",
   },
 });
 

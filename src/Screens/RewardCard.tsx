@@ -1,80 +1,123 @@
+import { StyleSheet, StatusBar, Image, View, Text } from "react-native";
+import React, { useEffect, useId, useState } from "react";
 import {
-  Image,
-  ImageBackground,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import React from "react";
+  Body1,
+  Body2,
+  Body5,
+  Heading4,
+  Heading5,
+  Heading6,
+} from "../atoms/Typography";
 import {
-  Item,
+  responsiveScreenFontSize,
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from "react-native-responsive-dimensions";
+import {
   OptionsContainer,
   ScreenContainer,
   WhiteRoundedContainer,
 } from "../styledComponents/Receipts,Reward,BillPage";
-import { Body1, Body2, Body4, Body5, Heading5 } from "../atoms/Typography";
-import { responsiveScreenFontSize } from "react-native-responsive-dimensions";
+import RewardScreenModal from "../organisms/RewardScreenModal";
 
 const RewardCard = () => {
   return (
-    <ScreenContainer style={styles.ScreenContainer}>
+    <>
       <StatusBar hidden={true} />
 
-      <Body1 style={styles.ScreenName}>My Reward Card</Body1>
-      <WhiteRoundedContainer>
-        <OptionsContainer style={styles.OptionsContainer}>
-          <Heading5 style={styles.ContentHeader}>Coming Soon.....</Heading5>
-        </OptionsContainer>
-      </WhiteRoundedContainer>
-    </ScreenContainer>
+      <ScreenContainer>
+        <Body1 style={styles.ScreenName}>My Reward Card</Body1>
+
+        <View style={styles.WhiteRoundedContainer}>
+          <View style={styles.ComingSoonContainer}>
+            <Image source={require("../../assets/images/CommingSoon.png")} />
+            <Text
+              style={{
+                fontSize: responsiveScreenFontSize(3.7),
+                fontWeight: "600",
+              }}
+            >
+              Coming Soon...
+            </Text>
+            <Text
+              style={{
+                fontSize: responsiveScreenFontSize(2.3),
+                fontWeight: "500",
+              }}
+            >
+              See the settings tab to claim balance.
+            </Text>
+          </View>
+        </View>
+      </ScreenContainer>
+
+      {/* <RewardScreenModal /> */}
+    </>
   );
 };
 
-export default RewardCard;
-
 const styles = StyleSheet.create({
-  OptionsContainer: {
-    // justifyContent: "space-even",
-    alignItems: "center",
-    //   borderWidth: 1,
-  },
-  ScreenContainer: {
-    alignItems: "center",
-    //   borderWidth: 1,
-  },
   ScreenName: {
     color: "white",
     marginBottom: "10%",
     fontSize: responsiveScreenFontSize(3),
   },
   ContentHeader: {
-    alignSelf: "center",
+    alignSelf: "flex-start",
     fontWeight: "700",
     // fontSize: "28",
   },
-  QRimage: {
-    height: 325,
-    width: 325,
-    alignSelf: "center",
-    flex: 1,
-    // borderWidth: 1,
-  },
-  TextBelowQRcode: {
-    color: "#828282",
-    lineHeight: 25,
-    textAlign: "center",
-  },
-  ImageContainer: {
+  container: {
+    borderWidth: 1,
     width: "100%",
-    height: "60%",
+    height: responsiveScreenHeight(9),
+    borderRadius: 20,
+    flexDirection: "row",
+    padding: "3%",
+    borderColor: "#dee8ef",
+    marginTop: "6%",
+  },
+  StoreImage: {
+    // borderWidth: 1,
+    // borderColor: "red",
+    width: "18%",
+    borderRadius: 10,
+    height: "100%",
+  },
+  NameAndType: {
+    // borderWidth: 1,
+    alignSelf: "flex-end",
+    borderColor: "orange",
+    width: "40%",
+    flex: 1,
+    justifyContent: "space-around",
+    height: "95%",
+    marginLeft: "3.5%",
+  },
+  rightArrow: {
+    // borderWidth: 1,
+    borderColor: "green",
+    width: "10%",
+    alignSelf: "center",
+  },
+  WhiteRoundedContainer: {
+    width: responsiveScreenWidth(100),
+    height: responsiveScreenHeight(87),
+    borderRadius: 30,
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "red",
-    //   borderWidth: 1,
+    padding: "10%",
+    // backgroundColor: "red",
   },
-  ButtonText: {
-    color: "white",
-    fontWeight: "700",
+  ComingSoonContainer: {
+    width: "100%",
+    height: "40%",
+    // backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginBottom: "25%",
   },
 });
+
+export default RewardCard;
