@@ -154,7 +154,7 @@ const Invoices = ({ route, navigation }: any) => {
                     }}
                   >
                     <Image
-                      source={require("../../assets/images/WalmartLogo.jpg")}
+                      source={require("../../assets/images/ReceiptScreenGenericIcon.png")}
                       style={styles.StoreImage}
                     />
                     <View style={styles.NameAndDate}>
