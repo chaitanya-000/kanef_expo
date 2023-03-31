@@ -3,7 +3,7 @@
     "plugins": ["expo-apple-authentication"],
     "name": "Kenaf",
     "slug": "kanef_with_expo",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icon": "./assets/images/kenafLogo.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
