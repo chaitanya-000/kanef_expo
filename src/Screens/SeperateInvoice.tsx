@@ -1,43 +1,26 @@
 import {
-  Dimensions,
   Image,
   Pressable,
   SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
-import { WhiteRoundedContainer } from "../styledComponents/Receipts,Reward,BillPage";
-import axios from "axios";
-import {
-  responsiveHeight,
-  responsiveScreenFontSize,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  responsiveWidth,
-} from "react-native-responsive-dimensions";
+import React, { useState } from "react";
 import Spinner from "react-native-loading-spinner-overlay/lib";
 import { Ionicons } from "@expo/vector-icons";
-import { Body1 } from "../atoms/Typography";
 
 const SeperateInvoice = ({ route, navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const [showOptions, setShowOptions] = useState(true);
   const [lastTap, setLastTap] = useState(0);
   const [scale, setScale] = useState(1);
-  const imageRef = useRef(null);
 
-  const handlePress = () => {
-    setShowOptions(!showOptions);
-  };
   const handleDoubleTap = () => {
     const now = Date.now();
     if (lastTap && now - lastTap < 300) {
-      const newScale = scale === 1 ? 2 : 1;
+      const newScale = scale === 1 ? 2.1 : 1;
       setScale(newScale);
+      setShowOptions(false);
     } else {
       setShowOptions(!showOptions);
       setLastTap(now);
@@ -99,5 +82,3 @@ const SeperateInvoice = ({ route, navigation }: any) => {
 };
 
 export default SeperateInvoice;
-
-const styles = StyleSheet.create({});
