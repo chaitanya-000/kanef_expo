@@ -4,7 +4,6 @@
     "name": "Kenaf",
     "slug": "kanef_with_expo",
     "version": "1.0.1",
-
     "icon": "./assets/images/kenafLogo.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -18,9 +17,14 @@
     },
     "assetBundlePatterns": ["*/"],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "ie.kenafltd.kenaf",
-      "buildNumber": "12"
+      "buildNumber": "13",
+      "supportedDevices": ["iphone"],
+      "infoPlist": {
+        "NSCameraUsageDescription": "Kenaf would like to access your camera to scan QR codes at the store and capture the receipt for your purchase. This will allow you to easily keep track of your purchases",
+        "NSPhotoLibraryUsageDescription": "Kenaf would like to access your photo library to allow you to upload images of your receipts."
+      }
     },
     "android": {
       "package": "ie.kenaf.kenaf",
