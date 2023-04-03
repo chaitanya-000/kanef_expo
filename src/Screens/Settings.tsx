@@ -134,8 +134,9 @@ const styles = StyleSheet.create({
   },
 
   ProfileImage: {
-    width: responsiveScreenWidth(36),
-    height: responsiveScreenHeight(16),
+    width: responsiveScreenWidth(37),
+    aspectRatio: 1,
+    // height: responsiveScreenHeight(16),
     borderWidth: 1,
     borderColor: "black",
     position: "relative",

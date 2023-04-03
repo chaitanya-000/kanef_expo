@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import AccountSettings from "../molecules/AccountSettings";
 import Help from "../molecules/Help";
@@ -17,6 +17,7 @@ import { RefreshControl, ScrollView } from "react-native-gesture-handler";
 import TotalPoints from "./TotalPoints";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { LogoutButton } from "../atoms/LogoutButton";
 
 const SettingsOptionContainer = ({ navigation }: any) => {
   const { handleLogout } = useContext(AuthContext);
@@ -102,8 +103,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
           width: "100%",
           opacity: showModal ? 0.02 : 1,
           backgroundColor: showModal ? "black" : "white",
-          height: "125%",
-          // paddingBottom: "20%",
+          height: "135%",
         }}
         bounces={true}
         refreshControl={
@@ -135,6 +135,9 @@ const SettingsOptionContainer = ({ navigation }: any) => {
         >
           <Body1 style={{ color: "white" }}>Logout</Body1>
         </GreenButton>
+        <LogoutButton height={"8%"} marginTop={"2%"} width={"90%"}>
+          <Body1 style={{ color: "white" }}>Delete Account</Body1>
+        </LogoutButton>
       </ScrollView>
       {showModal && (
         <RewardScreenModal
