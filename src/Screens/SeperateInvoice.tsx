@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { WhiteRoundedContainer } from "../styledComponents/Receipts,Reward,BillPage";
 import axios from "axios";
 import {
@@ -26,20 +26,32 @@ import { Body1 } from "../atoms/Typography";
 const SeperateInvoice = ({ route, navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const [showOptions, setShowOptions] = useState(true);
+  const [lastTap, setLastTap] = useState(0);
+  const [scale, setScale] = useState(1);
+  const imageRef = useRef(null);
 
   const handlePress = () => {
     setShowOptions(!showOptions);
   };
-
+  const handleDoubleTap = () => {
+    const now = Date.now();
+    if (lastTap && now - lastTap < 300) {
+      const newScale = scale === 1 ? 2 : 1;
+      setScale(newScale);
+    } else {
+      setShowOptions(!showOptions);
+      setLastTap(now);
+    }
+  };
   return (
     <SafeAreaView>
       <Spinner visible={loading} />
-      <Pressable onPress={handlePress}>
+      <Pressable onPress={handleDoubleTap}>
         <Image
           source={{
             uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
           }}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", height: "100%", transform: [{ scale }] }}
           resizeMode="contain"
         />
       </Pressable>
