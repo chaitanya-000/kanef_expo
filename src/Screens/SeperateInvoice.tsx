@@ -51,10 +51,11 @@ const SeperateInvoice = ({ route, navigation }: any) => {
             right: 0,
             zIndex: 2454,
             width: "100%",
-            height: "8%",
-            // backgroundColor: "#26ae60ed",
-            // backgroundColor: "#121f27",
-            opacity: 0.8,
+            height: "10%",
+            backgroundColor: "#26ae60ed",
+            // backgroundColor: "#A9A9A9",
+            // backgroundColor: "red",
+            opacity: 1,
             // backgroundColor: "red",
 
             flexDirection: "row",
@@ -67,16 +68,17 @@ const SeperateInvoice = ({ route, navigation }: any) => {
               width: "13%",
               aspectRatio: 1,
               flexDirection: "row",
-              marginLeft: "3%",
+              marginLeft: "5%",
               alignItems: "center",
               justifyContent: "center",
               borderRadius: 10,
               marginRight: "5%",
+              // borderWidth: 1,
               // backgroundColor: "green",
             }}
             onPress={() => navigation.navigate("Settings")}
           >
-            <Ionicons name="arrow-back" size={45} color="black" />
+            <Ionicons name="arrow-back" size={50} color="white" />
           </TouchableOpacity>
         </View>
       )}
