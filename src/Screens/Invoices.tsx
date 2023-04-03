@@ -45,6 +45,7 @@ const Invoices = ({ route, navigation }: any) => {
           orName: route.params.storeName,
         })
         .then((response) => {
+          console.log(receivedData);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
@@ -141,6 +142,17 @@ const Invoices = ({ route, navigation }: any) => {
           >
             {receivedData &&
               receivedData.map((eachObj: any) => {
+                const dateObj = new Date(eachObj?.updated_at?.split("T")[0]);
+                console.log(dateObj);
+                const options: any = {
+                  day: "2-digit",
+                  month: "short",
+                  year: "2-digit",
+                };
+                const formattedDate = dateObj
+                  .toLocaleDateString("en-GB", options)
+                  .replace(/ /g, "-")
+                  .toUpperCase();
                 return (
                   <TouchableOpacity
                     key={Math.random() * 1212121212}
@@ -158,7 +170,7 @@ const Invoices = ({ route, navigation }: any) => {
                       style={styles.StoreImage}
                     />
                     <View style={styles.NameAndDate}>
-                      <Body2>{eachObj.updated_at.split("T")[0]}</Body2>
+                      <Body2>{formattedDate}</Body2>
                     </View>
                     <Feather
                       name="chevron-right"
