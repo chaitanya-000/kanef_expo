@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-export const LogoutButton = styled.TouchableOpacity`
+export const DeleteAccountButton = styled.TouchableOpacity`
   /* border: 2px solid red; */
   width: ${(props) => props.width};
   height: ${(props) => props.height};

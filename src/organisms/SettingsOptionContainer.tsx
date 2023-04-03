@@ -1,4 +1,4 @@
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Alert, Platform, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import AccountSettings from "../molecules/AccountSettings";
 import Help from "../molecules/Help";
@@ -17,7 +17,7 @@ import { RefreshControl, ScrollView } from "react-native-gesture-handler";
 import TotalPoints from "./TotalPoints";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { LogoutButton } from "../atoms/LogoutButton";
+import { DeleteAccountButton, LogoutButton } from "../atoms/LogoutButton";
 
 const SettingsOptionContainer = ({ navigation }: any) => {
   const { handleLogout } = useContext(AuthContext);
@@ -56,7 +56,6 @@ const SettingsOptionContainer = ({ navigation }: any) => {
       })
       .catch((error) => {
         setRefreshing(false);
-
         alert(error.message);
       });
   };
@@ -68,12 +67,9 @@ const SettingsOptionContainer = ({ navigation }: any) => {
       })
       .then((response) => {
         const data = response.data.data[0];
-        if (data.Gender) {
+        if (data?.Gender) {
           setShowIcon(false);
-          console.log("user has updated  before");
         } else {
-          console.log("first time user");
-
           setShowIcon(true);
         }
       })
@@ -85,6 +81,29 @@ const SettingsOptionContainer = ({ navigation }: any) => {
   const handleRefresh = () => {
     getPoints();
     getUserInfo();
+  };
+  const deleteAccount = () => {
+    axios
+      .post("https://kenaf.ie/userDelete", {
+        uId: JSON.parse(uId),
+      })
+      .then(async (response) => {
+        // Alert.alert(response.data.data, "", [
+        //   {
+        //     text: "Ok",
+        //     onPress: () => handleLogout(),
+        //     style: "default",
+        //   },
+        // ]);
+        alert(response.data.data);
+        setTimeout(() => {
+          handleLogout();
+        }, 4000);
+      })
+      .catch((error: any) => {
+        alert(error.message);
+        console.log(error.message);
+      });
   };
 
   useEffect(() => {
@@ -135,9 +154,30 @@ const SettingsOptionContainer = ({ navigation }: any) => {
         >
           <Body1 style={{ color: "white" }}>Logout</Body1>
         </GreenButton>
-        <LogoutButton height={"8%"} marginTop={"2%"} width={"90%"}>
+        <DeleteAccountButton
+          height={"8%"}
+          marginTop={"2%"}
+          width={"90%"}
+          onPress={() =>
+            Alert.alert(
+              "Please note that all receipts and data will be deleted permanently upon account deletion and cannot be recovered , are you sure you want to proceed?",
+              "",
+              [
+                {
+                  text: "Yes, Delete the Account",
+                  onPress: () => deleteAccount(),
+                  style: "default",
+                },
+                {
+                  text: "Cancel",
+                  style: "default",
+                },
+              ]
+            )
+          }
+        >
           <Body1 style={{ color: "white" }}>Delete Account</Body1>
-        </LogoutButton>
+        </DeleteAccountButton>
       </ScrollView>
       {showModal && (
         <RewardScreenModal
