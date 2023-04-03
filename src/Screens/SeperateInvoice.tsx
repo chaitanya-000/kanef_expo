@@ -36,6 +36,8 @@ const SeperateInvoice = ({ route, navigation }: any) => {
           }}
           style={{ width: "100%", height: "100%", transform: [{ scale }] }}
           resizeMode="contain"
+          onLoadStart={() => setLoading(true)}
+          onLoadEnd={() => setLoading(false)}
         />
       </Pressable>
       {showOptions && (
@@ -48,10 +50,7 @@ const SeperateInvoice = ({ route, navigation }: any) => {
             width: "100%",
             height: "10%",
             backgroundColor: "#26ae60ed",
-            // backgroundColor: "#A9A9A9",
-            // backgroundColor: "red",
             opacity: 1,
-            // backgroundColor: "red",
 
             flexDirection: "row",
             alignItems: "center",
@@ -68,8 +67,6 @@ const SeperateInvoice = ({ route, navigation }: any) => {
               justifyContent: "center",
               borderRadius: 10,
               marginRight: "5%",
-              // borderWidth: 1,
-              // backgroundColor: "green",
             }}
             onPress={() => navigation.navigate("Settings")}
           >
