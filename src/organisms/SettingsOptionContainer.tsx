@@ -122,7 +122,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
           width: "100%",
           opacity: showModal ? 0.02 : 1,
           backgroundColor: showModal ? "black" : "white",
-          height: "135%",
+          height: Platform.OS === "ios" && Platform.isPad ? "170%" : "135%",
         }}
         bounces={true}
         refreshControl={
