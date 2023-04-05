@@ -45,7 +45,6 @@ const Invoices = ({ route, navigation }: any) => {
           orName: route.params.storeName,
         })
         .then((response) => {
-          console.log(receivedData);
           setIsLoading(false);
           setReceivedData(response.data.data);
         })
@@ -143,7 +142,6 @@ const Invoices = ({ route, navigation }: any) => {
             {receivedData &&
               receivedData.map((eachObj: any) => {
                 const dateObj = new Date(eachObj?.updated_at?.split("T")[0]);
-                console.log(dateObj);
                 const options: any = {
                   day: "2-digit",
                   month: "short",
