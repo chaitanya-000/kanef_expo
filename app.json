@@ -3,7 +3,7 @@
     "plugins": ["expo-apple-authentication"],
     "name": "Kenaf",
     "slug": "kanef_with_expo",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "icon": "./assets/images/kenafLogo.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "ie.kenafltd.kenaf",
-      "buildNumber": "13",
+      "buildNumber": "14",
       "supportedDevices": ["iphone"],
       "infoPlist": {
         "NSCameraUsageDescription": "Kenaf would like to access your camera to scan QR codes at the store and capture the receipt for your purchase. This will allow you to easily keep track of your purchases",
