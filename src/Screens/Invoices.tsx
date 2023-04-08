@@ -7,6 +7,7 @@ import {
   Linking,
   ScrollView,
   StatusBar,
+  Platform,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Body1, Body2, Heading5 } from "../atoms/Typography";
@@ -141,16 +142,38 @@ const Invoices = ({ route, navigation }: any) => {
           >
             {receivedData &&
               receivedData.map((eachObj: any) => {
+                // const dateObj = new Date(eachObj?.updated_at?.split("T")[0]);
+                // const options: any = {
+                //   day: "2-digit",
+                //   // month: Platform.OS === "android" ? "long" : "short",
+                //   month: "long",
+                //   year: "2-digit",
+                // };
+                // const formattedDate = dateObj
+                //   .toLocaleDateString("en-GB", options)
+                //   .replace(/ /g, "-")
+                //   .toUpperCase();
+
                 const dateObj = new Date(eachObj?.updated_at?.split("T")[0]);
-                const options: any = {
-                  day: "2-digit",
-                  month: "short",
-                  year: "2-digit",
-                };
-                const formattedDate = dateObj
-                  .toLocaleDateString("en-GB", options)
-                  .replace(/ /g, "-")
-                  .toUpperCase();
+                const monthNames = [
+                  "JAN",
+                  "FEB",
+                  "MAR",
+                  "APR",
+                  "MAY",
+                  "JUN",
+                  "JUL",
+                  "AUG",
+                  "SEP",
+                  "OCT",
+                  "NOV",
+                  "DEC",
+                ];
+                const day = dateObj.getDate().toString().padStart(2, "0");
+                const month = monthNames[dateObj.getMonth()];
+                const year = dateObj.getFullYear().toString().slice(-2);
+                const formattedDate = `${day}-${month}-${year}`;
+
                 return (
                   <TouchableOpacity
                     key={Math.random() * 1212121212}
