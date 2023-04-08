@@ -27,14 +27,24 @@ const SeperateInvoice = ({ route, navigation }: any) => {
     }
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "black" }}>
       <Spinner visible={loading} />
-      <Pressable onPress={handleDoubleTap}>
+      <Pressable
+        onPress={handleDoubleTap}
+        style={{
+          backgroundColor: "black",
+        }}
+      >
         <Image
           source={{
             uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
           }}
-          style={{ width: "100%", height: "100%", transform: [{ scale }] }}
+          style={{
+            width: "100%",
+            height: "100%",
+            transform: [{ scale }],
+            backgroundColor: "black",
+          }}
           resizeMode="contain"
           onLoadStart={() => setLoading(true)}
           onLoadEnd={() => setLoading(false)}
