@@ -29,7 +29,8 @@
     "android": {
       "package": "ie.kenaf.kenaf",
       "adaptiveIcon": {
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#FFFFFF",
+        "foregroundImage": "./assets/images/kenafLogo.png"
       },
       "versionCode": 3
     },
