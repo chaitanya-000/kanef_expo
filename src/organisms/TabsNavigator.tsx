@@ -47,7 +47,7 @@ const TabsNavigator = () => {
           },
         }}
       >
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Reward Card"
           component={RewardCard}
           options={{
@@ -65,7 +65,7 @@ const TabsNavigator = () => {
               />
             ),
           }}
-        />
+        /> */}
         <Tab.Screen
           name="My Receipts"
           component={MyReceipts}
