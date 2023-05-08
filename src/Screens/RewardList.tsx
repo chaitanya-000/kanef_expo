@@ -1,24 +1,12 @@
 import { StyleSheet, StatusBar, Image, View, Text } from "react-native";
-import React, { useEffect, useId, useState } from "react";
-import {
-  Body1,
-  Body2,
-  Body5,
-  Heading4,
-  Heading5,
-  Heading6,
-} from "../atoms/Typography";
+import React from "react";
+import { Body1 } from "../atoms/Typography";
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
-import {
-  OptionsContainer,
-  ScreenContainer,
-  WhiteRoundedContainer,
-} from "../styledComponents/Receipts,Reward,BillPage";
-import RewardScreenModal from "../organisms/RewardScreenModal";
+import { ScreenContainer } from "../styledComponents/Receipts,Reward,BillPage";
 
 const RewardList = () => {
   return (

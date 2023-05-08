@@ -1,22 +1,9 @@
-import {
-  Dimensions,
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, Platform, Text } from "react-native";
 import React, { Suspense, lazy } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Settings from "../Screens/Settings";
 import MyReceipts from "../Screens/MyReceipts";
-import RewardList from "../Screens/RewardList";
-import RewardCard from "../Screens/RewardCard";
-// import CameraScreen from "../Screens/CameraScreen";
-import {
-  responsiveFontSize,
-  responsiveHeight,
-} from "react-native-responsive-dimensions";
+import { responsiveHeight } from "react-native-responsive-dimensions";
 const CameraScreen = lazy(() => import("../Screens/CameraScreen"));
 
 const Tab = createBottomTabNavigator();
@@ -104,7 +91,8 @@ const TabsNavigator = () => {
             ),
           }}
         />
-        <Tab.Screen
+
+        {/* <Tab.Screen
           name="Rewards"
           component={RewardList}
           options={{
@@ -119,7 +107,7 @@ const TabsNavigator = () => {
               />
             ),
           }}
-        />
+        /> */}
         <Tab.Screen
           name="Settings"
           component={Settings}

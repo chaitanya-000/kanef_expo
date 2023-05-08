@@ -44,7 +44,7 @@ const Navigation = () => {
           <>
             <Stack.Screen name="Settings" component={TabsNavigator} />
             <Stack.Screen name="My Receipts" component={TabsNavigator} />
-            <Stack.Screen name="RewardLists" component={TabsNavigator} />
+            {/* <Stack.Screen name="RewardLists" component={TabsNavigator} /> */}
             {/* <Stack.Screen name="RewardCard" component={TabsNavigator} /> */}
             <Stack.Screen name="Camera" component={TabsNavigator} />
             <Stack.Screen name="Invoices" component={Invoices} />
