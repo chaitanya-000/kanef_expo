@@ -278,17 +278,18 @@ export default function CameraScreen({ navigation }: any) {
         <View style={styles.optionsContainer}>
           <View
             style={{
-              width: responsiveScreenWidth(85),
+              width: responsiveScreenWidth(84),
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "space-between",
+              // justifyContent: "space-around",
+              // borderWidth: 1,
             }}
           >
             <OrgNameDropDown value={value} setValue={setValue} data={data} />
             <Body1>OR</Body1>
 
             <TouchableOpacity
-              style={{ alignItems: "center" }}
+              style={{ alignItems: "center", marginLeft: "14%" }}
               onPress={() => setShowModal(!showModal)}
             >
               <Ionicons name="ios-add-circle-sharp" size={24} color="black" />
@@ -391,6 +392,8 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     alignItems: "center",
     justifyContent: "space-around",
+    // borderWidth: 1,
+
     marginTop: responsiveScreenHeight(5),
   },
 });

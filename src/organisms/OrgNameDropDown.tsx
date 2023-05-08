@@ -50,19 +50,21 @@ export default OrgNameDropDown;
 
 const styles = StyleSheet.create({
   dropDownAndroid: {
-    width: responsiveScreenWidth(40),
+    width: responsiveScreenWidth(32),
     borderRadius: 10,
     height: responsiveScreenHeight(6),
-    paddingHorizontal: responsiveScreenWidth(5),
+    paddingHorizontal: responsiveScreenWidth(2),
     borderColor: "#e9f2eb",
     borderWidth: 3,
+    marginRight: "8%",
   },
   dropDownIOS: {
-    width: responsiveScreenWidth(40),
+    width: responsiveScreenWidth(34),
     borderRadius: 10,
     height: responsiveScreenHeight(6),
+    marginRight: "6%",
 
-    paddingHorizontal: responsiveScreenWidth(5),
+    paddingHorizontal: responsiveScreenWidth(2),
     borderColor: "#e9f2eb",
     borderWidth: 3,
   },
