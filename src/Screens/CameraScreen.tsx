@@ -18,7 +18,7 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 import * as ImagePicker from "expo-image-picker";
-import { Body1, Body2, Body4, Heading4, Heading6 } from "../atoms/Typography";
+import { Body1, Body2, Body4, Heading6 } from "../atoms/Typography";
 import { Entypo } from "@expo/vector-icons";
 import Spinner from "react-native-loading-spinner-overlay/lib";
 import OrgNameDropDown from "../organisms/OrgNameDropDown";
@@ -39,6 +39,8 @@ export default function CameraScreen({ navigation }: any) {
   const [refreshing, setRefreshing] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState<any>(null);
+  const [showQRScanningCamera, setShowQRScanningCamera] =
+    useState<boolean>(false);
 
   //ask for camera permission
   const askForCameraPermission = () => {
@@ -229,6 +231,7 @@ export default function CameraScreen({ navigation }: any) {
   };
 
   // Return the Views
+
   return (
     <>
       <ScrollView
@@ -252,22 +255,48 @@ export default function CameraScreen({ navigation }: any) {
         <View
           style={{
             width: responsiveScreenWidth(100),
-            height: "10%",
+            height: showQRScanningCamera ? "9%" : "25%",
             alignItems: "center",
             justifyContent: "center",
+            flexDirection: "row",
           }}
         >
-          <Heading6 style={{ fontWeight: "400" }}>QR SCAN</Heading6>
-        </View>
-        <View style={styles.barcodebox}>
-          <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-            style={{
-              height: responsiveScreenHeight(60),
-              width: responsiveScreenWidth(60),
+          <TouchableOpacity
+            style={styles.scanQRButton}
+            onPress={() => {
+              setShowQRScanningCamera(!showQRScanningCamera);
+              setScanned(false);
             }}
-          />
+          >
+            <AntDesign
+              name="qrcode"
+              size={showQRScanningCamera ? 34 : 120}
+              color="black"
+            />
+
+            <Heading6
+              style={{
+                fontWeight: "100",
+                fontSize: showQRScanningCamera ? 17 : 25,
+              }}
+            >
+              Scan QR code
+            </Heading6>
+          </TouchableOpacity>
         </View>
+        {showQRScanningCamera && (
+          <View style={styles.barcodebox}>
+            <BarCodeScanner
+              onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+              style={{
+                height: responsiveScreenHeight(60),
+                width: responsiveScreenWidth(90),
+                // borderWidth: 1,
+                backgroundColor: "red",
+              }}
+            />
+          </View>
+        )}
         {scanned && (
           <Button
             title={"Scan again?"}
@@ -281,6 +310,7 @@ export default function CameraScreen({ navigation }: any) {
               width: responsiveScreenWidth(84),
               flexDirection: "row",
               alignItems: "center",
+              marginTop: "10%",
               // justifyContent: "space-around",
               // borderWidth: 1,
             }}
@@ -316,7 +346,7 @@ export default function CameraScreen({ navigation }: any) {
           </View>
           <GreenButton
             height={"20%"}
-            marginTop={"20%"}
+            marginTop={showQRScanningCamera ? "3%" : "8%"}
             width={"62%"}
             onPress={uploadImage}
           >
@@ -363,7 +393,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: "#26ae60ed",
     overflow: "hidden",
-    // borderWidth: 2,
     borderColor: "gray",
   },
   uploadButton: {
@@ -389,11 +418,20 @@ const styles = StyleSheet.create({
     width: responsiveScreenWidth(90),
     height: responsiveScreenHeight(10),
     flexDirection: "row",
-    // borderWidth: 2,
+
     alignItems: "center",
     justifyContent: "space-around",
     // borderWidth: 1,
-
     marginTop: responsiveScreenHeight(5),
+  },
+  scanQRButton: {
+    // borderWidth: 1,
+    width: "50%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 30,
+    backgroundColor: "#e9f2eb",
+    borderColor: "gray",
   },
 });
