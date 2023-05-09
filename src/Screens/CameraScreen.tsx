@@ -128,6 +128,11 @@ export default function CameraScreen({ navigation }: any) {
             [
               {
                 text: "Ok",
+                onPress: () => {
+                  setShowQRScanningCamera(false);
+                  navigation.navigate("My Receipts");
+                  setScanned(false);
+                },
               },
             ]
           );
