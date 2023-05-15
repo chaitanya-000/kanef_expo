@@ -1,43 +1,33 @@
+import { StyleSheet } from "react-native";
 import React from "react";
-import { View } from "react-native";
-import { SplitContainer } from "../atoms/InputContainer";
 import {
-  InputContainerWithLabel,
+  InputContainer,
+  SplitContainer,
   Label,
-  TextInputBox,
-} from "../molecules/TextInputWithLabel";
+  TextInput_Styled,
+} from "../styledComponents/Register,Login";
 
-const FirstNameLastNameContainer = ({
-  firstName,
-  setFirstName,
-  lastName,
-  setLastName,
-}: {
-  firstName: string;
-  setFirstName: any;
-  lastName: string;
-  setLastName: any;
-}) => {
+const FirstNameLastName = ({ setFirstName, setLastName }: any) => {
   return (
-    <SplitContainer>
-      <InputContainerWithLabel>
+    <InputContainer>
+      <SplitContainer>
         <Label>FIRST NAME</Label>
-        <TextInputBox
-          onChangeText={(enteredValue) => setFirstName(enteredValue)}
-        >
-          {firstName}
-        </TextInputBox>
-      </InputContainerWithLabel>
-      <InputContainerWithLabel>
-        <Label>LAST NAME</Label>
-        <TextInputBox
-          onChangeText={(enteredValue) => setLastName(enteredValue)}
-        >
-          {lastName}
-        </TextInputBox>
-      </InputContainerWithLabel>
-    </SplitContainer>
+        <TextInput_Styled
+          onChangeText={(enteredValue: any) => {
+            setFirstName(enteredValue);
+          }}
+        />
+      </SplitContainer>
+      <SplitContainer>
+        <Label>Last Name</Label>
+        <TextInput_Styled
+          onChangeText={(enteredValue: any) => setLastName(enteredValue)}
+        />
+      </SplitContainer>
+    </InputContainer>
   );
 };
 
-export default FirstNameLastNameContainer;
+export default FirstNameLastName;
+
+const styles = StyleSheet.create({});

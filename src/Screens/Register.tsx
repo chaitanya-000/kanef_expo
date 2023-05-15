@@ -1,176 +1,203 @@
 import {
-  View,
-  Text,
-  Dimensions,
-  StyleSheet,
-  ScrollView,
-  TextInput,
-  Image,
-  FlatList,
   Alert,
-  StatusBar,
+  Image,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  InputContainerWithLabel,
-  Label,
-  TextInputBox,
-} from "../molecules/TextInputWithLabel";
+  SolidGreenButton,
+  WhiteRoundedContainer,
+  StyledScrollView,
+  ScrollViewContainer,
+  ScreenName,
+} from "../styledComponents/Register,Login";
+import {
+  BASE_URL,
+  height,
+  responsiveFontSize,
+  width,
+} from "../helperFunctions";
+import axios from "axios";
 import FirstNameLastNameContainer from "../organisms/FirstNameLastNameContainer";
-import {
-  Body1,
-  Body3,
-  Body2,
-  Body4,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-} from "../atoms/Typography";
-import {
-  FullWidthContainer,
-  FullWidthTextInputBox,
-} from "../molecules/FullWidthInputContainer";
 import EmailAddress from "../organisms/EmailAddress";
 import Password from "../organisms/Password";
-import DateOfBirth from "../organisms/DateOfBirth";
-import Gender from "../organisms/Gender";
-import SolidGreenButton from "../atoms/SolidGreenButton";
-import Country from "../organisms/Country";
-import EirCode from "../organisms/EirCode";
-import SelectGender from "../atoms/SelectGender";
 import ConfirmPassword from "../organisms/ConfirmPassword";
-import {
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-} from "react-native-responsive-dimensions";
-import { GreenButton } from "../atoms/GreenButton";
-import axios from "axios";
-import { AuthContext } from "../store";
-import Spinner from "react-native-loading-spinner-overlay/lib";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { responsiveScreenFontSize } from "react-native-responsive-dimensions";
 
 const Register = ({ navigation }: any) => {
-  const deviceHeight = Dimensions.get("screen").height;
-  const deviceWidth = Dimensions.get("window").width;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [reEnteredPassword, setReEnteredPassword] = useState("");
-  const { isLoading, setIsLoading } = useContext(AuthContext);
+  const [re_enteredPassword, setRe_enteredPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const sendData = () => {
-    setIsLoading(true);
-    axios
-      .post("https://kenaf.ie/appuserregister", {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        setIsLoading(false);
-        const status = response.data.status;
-        !status && navigation.navigate("Login");
-        status === "false" && Alert.alert(response.data.data);
-      })
-      .catch((e) => {
-        alert(e.message);
-        setIsLoading(false);
-      });
-  };
-  const handleRegister = () => {
-    if (firstName && lastName && email && reEnteredPassword) {
-      if (!/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email)) {
-        Alert.alert("Invalid Email");
-      } else {
-        if (password.length < 6) {
-          Alert.alert("Password must be at least 6 characters long");
-        } else {
-          if (password !== reEnteredPassword) {
-            Alert.alert("Passwords do not match");
-          } else {
-            sendData();
-          }
-        }
+  const registerUser = () => {
+    try {
+      if (!firstName) {
+        throw new Error("Please Enter First name");
       }
-    } else {
-      Alert.alert("All fields are mandatory");
+      if (!lastName) {
+        throw new Error("Please Enter last Name");
+      }
+
+      if (!email) {
+        throw new Error("Please enter Email ");
+      }
+
+      if (!password) {
+        throw new Error("Please Enter password");
+      }
+
+      if (password.length < 6) {
+        throw new Error("Password should be at least 6 characters long");
+      }
+      if (password !== re_enteredPassword) {
+        throw new Error("Passwords do not match");
+      }
+      setLoading(true);
+
+      axios
+        .post(`${BASE_URL}/cloverAppUserRegister`, {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        })
+        .then((response) => {
+          if (response.data.data) {
+            Alert.alert(response.data.data, "", [
+              {
+                text: "OK",
+                onPress: () => navigation.navigate("Login"),
+              },
+            ]);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } catch (error: any) {
+      Alert.alert(error.message);
     }
   };
 
   return (
-    <KeyboardAwareScrollView>
-      <StatusBar hidden={true} />
-
-      <Spinner visible={isLoading} />
-      <Image
-        source={require("../../assets/images/RegisterScreenImage.png")}
-        style={styles.image}
-      />
-      <View style={styles.container}>
-        <Heading5 style={{ alignSelf: "flex-start" }}>Register</Heading5>
-        <FirstNameLastNameContainer
-          firstName={firstName}
-          setFirstName={setFirstName}
-          lastName={lastName}
-          setLastName={setLastName}
-        />
-        <EmailAddress email={email} setEmail={setEmail} />
-        <Password password={password} setPassword={setPassword} />
-        <ConfirmPassword
-          password={password}
-          reEnteredPassword={reEnteredPassword}
-          setReEnteredPassword={setReEnteredPassword}
-        />
-
-        <GreenButton
-          width={Dimensions.get("window").width - 40}
-          height={Dimensions.get("window").height / 15}
-          marginTop={50}
-          onPress={handleRegister}
+    <>
+      <KeyboardAvoidingView
+        style={{ width: width, height: height, backgroundColor: "red" }}
+        behavior="height"
+      >
+        <View
+          style={{
+            width: width,
+            height: "100%",
+            backgroundColor: "red",
+          }}
         >
-          <Body1 style={{ color: "white" }}>Sign up with email</Body1>
-        </GreenButton>
-      </View>
-    </KeyboardAwareScrollView>
+          <Image
+            source={require("../../assets/images/RegisterScreenImage.png")}
+            style={{
+              width: "100%",
+              height: "70%",
+              bottom: "35%",
+              position: "absolute",
+              left: 0,
+              alignSelf: "center",
+            }}
+            resizeMode="cover"
+          />
+          <WhiteRoundedContainer
+            style={{
+              position: "absolute",
+              top: "35%",
+            }}
+          >
+            <ScrollViewContainer>
+              <StyledScrollView
+                contentContainerStyle={styles.scrollViewContentContainer}
+              >
+                <ScreenName style={styles.screenName}>Register</ScreenName>
+                <FirstNameLastNameContainer
+                  firstName={firstName}
+                  lastName={lastName}
+                  setFirstName={setFirstName}
+                  setLastName={setLastName}
+                />
+
+                <EmailAddress email={email} setEmail={setEmail} />
+
+                <Password password={password} setPassword={setPassword} />
+                <ConfirmPassword
+                  setRe_enteredPassword={setRe_enteredPassword}
+                />
+
+                <SolidGreenButton
+                  width={"85%"}
+                  height={"13%"}
+                  style={{ alignSelf: "center" }}
+                  onPress={registerUser}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontWeight: "900",
+                      fontSize: 20,
+                    }}
+                  >
+                    Sign Up
+                  </Text>
+                </SolidGreenButton>
+                <View style={styles.footer}>
+                  <Text style={styles.already_have_an_account}>
+                    Already have an account?
+                  </Text>
+
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Login")}
+                  >
+                    <Text style={styles.login}>Login</Text>
+                  </TouchableOpacity>
+                </View>
+              </StyledScrollView>
+            </ScrollViewContainer>
+          </WhiteRoundedContainer>
+        </View>
+      </KeyboardAvoidingView>
+    </>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    width: Dimensions.get("window").width,
-    height: responsiveScreenHeight(90),
-    backgroundColor: "#FFFFFF",
-    paddingVertical: "12%",
-    paddingHorizontal: "5%",
-    display: "flex",
-    alignItems: "center",
-    position: "relative",
-    bottom: "22%",
-    borderRadius: 25,
-    borderTopRightRadius: 25,
-    borderTopLeftRadius: 25,
-    shadowColor: "gray",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 1.25,
-    shadowRadius: 3.84,
+export default Register;
 
-    elevation: 15,
-    // borderColor: "orange",
-    // justifyContent: "space-evenly",
-    // flex: 1,
+const styles = StyleSheet.create({
+  scrollViewContentContainer: {
+    paddingBottom: "60%",
+  },
+  screenName: {
+    fontSize: responsiveScreenFontSize(4),
+    fontWeight: "700",
+    marginBottom: "5%",
+  },
+  footer: {
+    alignItems: "center",
+    marginTop: "10%",
     // borderWidth: 1,
   },
-  image: {
-    width: responsiveScreenWidth(100),
-    height: responsiveScreenHeight(70),
-    position: "relative",
-    bottom: "3%",
+  already_have_an_account: {
+    color: "rgba(130, 130, 130, 1)",
+    fontSize: 17,
+  },
+  login: {
+    color: "rgba(38, 174, 96, 1)",
+    fontWeight: "600",
+    fontSize: 20,
   },
 });
-export default Register;

@@ -1,32 +1,27 @@
+import { StyleSheet } from "react-native";
 import React from "react";
 import {
-  FullWidthContainer,
-  FullWidthTextInputBox,
-} from "../molecules/FullWidthInputContainer";
-import { Label } from "../molecules/TextInputWithLabel";
+  Label,
+  TextInput_Styled,
+  InputContainer,
+  TextInputContainer,
+} from "../styledComponents/Register,Login";
 
-const Password = ({
-  password,
-  setPassword,
-}: {
-  password: string;
-  setPassword: any;
-}) => {
+const Password = ({ setPassword }: any) => {
   return (
-    <FullWidthContainer>
-      <Label>
-        {password.length < 6
-          ? "Password  : password should be at least 6 characters long"
-          : "Good to go !"}
-      </Label>
-      <FullWidthTextInputBox
-        secureTextEntry
-        onChangeText={(enteredValue) => setPassword(enteredValue)}
-      >
-        {password}
-      </FullWidthTextInputBox>
-    </FullWidthContainer>
+    <InputContainer>
+      <TextInputContainer>
+        <Label>Password</Label>
+        <TextInput_Styled
+          textContentType="password"
+          secureTextEntry
+          onChangeText={(value) => setPassword(value)}
+        />
+      </TextInputContainer>
+    </InputContainer>
   );
 };
 
 export default Password;
+
+const styles = StyleSheet.create({});

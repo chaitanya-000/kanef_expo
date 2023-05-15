@@ -1,27 +1,23 @@
+import { StyleSheet } from "react-native";
 import React from "react";
 import {
-  FullWidthContainer,
-  FullWidthTextInputBox,
-} from "../molecules/FullWidthInputContainer";
-import { Label } from "../molecules/TextInputWithLabel";
-import { useState } from "react";
+  Label,
+  TextInput_Styled,
+  InputContainer,
+  TextInputContainer,
+} from "../styledComponents/Register,Login";
 
-const EmailAddress = ({
-  email,
-  setEmail,
-}: {
-  email: string;
-  setEmail: any;
-}) => {
+const EmailAddress = ({ email, setEmail }: any) => {
   return (
-    <FullWidthContainer>
-      <Label>EMAIL ADDRESS</Label>
-      <FullWidthTextInputBox
-        textContentType="emailAddress"
-        onChangeText={(enteredValue) => setEmail(enteredValue)}
-      ></FullWidthTextInputBox>
-    </FullWidthContainer>
+    <InputContainer>
+      <TextInputContainer>
+        <Label>Email Address</Label>
+        <TextInput_Styled onChangeText={(value: any) => setEmail(value)} />
+      </TextInputContainer>
+    </InputContainer>
   );
 };
 
 export default EmailAddress;
+
+const styles = StyleSheet.create({});
