@@ -157,7 +157,7 @@ export const TextInput_Styled = styled.TextInput`
   border-color: #dee8ef;
   border-width: 1px;
   padding: 10px;
-  font-size: 15px;
+  font-size: 17px;
   color: rgba(18, 31, 39, 1);
 `;
 export const TextInputContainer = styled.View`

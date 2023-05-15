@@ -27,6 +27,7 @@ import EmailAddress from "../organisms/EmailAddress";
 import Password from "../organisms/Password";
 import ConfirmPassword from "../organisms/ConfirmPassword";
 import { responsiveScreenFontSize } from "react-native-responsive-dimensions";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const Register = ({ navigation }: any) => {
   const [firstName, setFirstName] = useState("");
@@ -59,16 +60,17 @@ const Register = ({ navigation }: any) => {
       if (password !== re_enteredPassword) {
         throw new Error("Passwords do not match");
       }
-      setLoading(true);
 
+      setLoading(true);
       axios
-        .post(`${BASE_URL}/cloverAppUserRegister`, {
+        .post(`${BASE_URL}/appuserregister`, {
           firstName: firstName,
           lastName: lastName,
           email: email,
           password: password,
         })
         .then((response) => {
+          console.log(response);
           if (response.data.data) {
             Alert.alert(response.data.data, "", [
               {
@@ -95,6 +97,7 @@ const Register = ({ navigation }: any) => {
         style={{ width: width, height: height, backgroundColor: "red" }}
         behavior="height"
       >
+        {loading && <Spinner visible={loading} />}
         <View
           style={{
             width: width,
