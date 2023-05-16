@@ -17,6 +17,7 @@ import TermsAndConditions from "./Screens/TermsAndConditions";
 import PrivacyPolicy from "./Screens/PrivacyPolicy";
 import BankDetailsScreen from "./Screens/BankDetailsScreen";
 import UpdateBankDetails from "./Screens/UpdateBankDetails";
+import VerifyOtp from "./Screens/VerifyOtp";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -75,6 +76,7 @@ const Navigation = () => {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="RegisterPage" component={Register} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="VerifyOtp" component={VerifyOtp} />
           </>
         )}
       </Stack.Navigator>
