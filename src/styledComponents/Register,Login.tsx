@@ -132,7 +132,15 @@ export const StyledScrollView = styled.ScrollView`
 
 export const InputContainer = styled.View`
   width: 100%;
-  height: 19%;
+  height: 18%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5%;
+  /* border: 1px; */
+`;
+export const InputContainerLogin = styled.View`
+  width: 100%;
+  height: 27%;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 5%;

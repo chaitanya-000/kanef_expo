@@ -5,6 +5,7 @@ import {
   TextInput_Styled,
   InputContainer,
   TextInputContainer,
+  InputContainerLogin,
 } from "../styledComponents/Register,Login";
 
 const Password = ({ setPassword }: any) => {

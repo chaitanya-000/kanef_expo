@@ -8,17 +8,17 @@ import {
   InputContainerLogin,
 } from "../styledComponents/Register,Login";
 
-const EmailAddress = ({ email, setEmail }: any) => {
+const EmailAddressLogin = ({ email, setEmail }: any) => {
   return (
-    <InputContainer>
+    <InputContainerLogin>
       <TextInputContainer>
         <Label>Email Address</Label>
         <TextInput_Styled onChangeText={(value: any) => setEmail(value)} />
       </TextInputContainer>
-    </InputContainer>
+    </InputContainerLogin>
   );
 };
 
-export default EmailAddress;
+export default EmailAddressLogin;
 
 const styles = StyleSheet.create({});
