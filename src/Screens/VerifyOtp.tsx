@@ -13,10 +13,13 @@ import {
 } from "react-native-responsive-dimensions";
 import { TextInput } from "react-native-gesture-handler";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
+import axios from "axios";
+import { BASE_URL } from "../helperFunctions";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const VerifyOtp = ({ route, navigation }: any) => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
-  console.log(route.params.otp);
+  const [loading, setLoading] = useState(false);
 
   const handleOTPChange = (index: any, value: any) => {
     // Allow only numbers
@@ -44,14 +47,40 @@ const VerifyOtp = ({ route, navigation }: any) => {
   // Array to store refs of the OTP input fields
   const refs: any = useRef([]);
 
-  const expectedOTP = "12345";
+  const sendUserRegistrationDetails = () => {
+    setLoading(true);
+    axios
+      .post(`${BASE_URL}/appuserregister`, {
+        firstName: route.params.firstName,
+        lastName: route.params.lastName,
+        email: route.params.email,
+        password: route.params.password,
+      })
+      .then((response) => {
+        setLoading(false);
+        // console.log(response.data);
+        response.data[0] &&
+          Alert.alert(response.data.data, "", [
+            {
+              text: "Ok",
+              onPress: () => navigation.navigate("Login"),
+            },
+          ]);
+      })
+      .catch((error) => {
+        setLoading(false);
+
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const handleVerifyOTP = () => {
-    console.log(route.params.otp);
     const enteredOTP = otp.join("");
-    console.log(enteredOTP);
     if (enteredOTP == route.params.otp) {
-      // OTP verification successful
-      navigation.navigate("Login");
+      sendUserRegistrationDetails();
     } else {
       // OTP verification failed
       Alert.alert("Error", "OTP verification failed");
@@ -60,6 +89,7 @@ const VerifyOtp = ({ route, navigation }: any) => {
 
   return (
     <PageContainer style={{ backgroundColor: "rgba(38, 174, 96, 1)" }}>
+      <Spinner visible={loading} />
       <View style={styles.infoText}>
         <Text style={styles.verificationCodeHeading}>
           Verification {route.params.otp}
