@@ -60,27 +60,40 @@ const Register = ({ navigation }: any) => {
       if (password !== re_enteredPassword) {
         throw new Error("Passwords do not match");
       }
-
       setLoading(true);
       axios
-        .post(`${BASE_URL}/appuserregister`, {
-          firstName: firstName,
-          lastName: lastName,
+        .post(`https://kenaf.ie/sendEmail`, {
           email: email,
-          password: password,
         })
         .then((response) => {
-          console.log(response);
-          if (response.data.data) {
-            Alert.alert(response.data.data, "", [
-              {
-                text: "OK",
-                onPress: () => navigation.navigate("Login"),
-              },
-            ]);
+          // console.log(response);
+          console.log(response.data.status);
+          if (response.data.status) {
+            navigation.navigate("VerifyOtp", {
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              password: password,
+              otp: response.data.data,
+            });
+          } else {
+            Alert.alert(
+              "This email is already registered. Try Logging in",
+              "",
+              [
+                {
+                  text: "Ok",
+                  onPress: () => {
+                    navigation.navigate("Login");
+                  },
+                },
+              ]
+            );
           }
         })
         .catch((error) => {
+          setLoading(false);
+
           console.log(error);
         })
         .finally(() => {

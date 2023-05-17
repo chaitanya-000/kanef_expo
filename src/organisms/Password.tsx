@@ -8,11 +8,16 @@ import {
   InputContainerLogin,
 } from "../styledComponents/Register,Login";
 
-const Password = ({ setPassword }: any) => {
+const Password = ({ setPassword, password }: any) => {
   return (
     <InputContainer>
       <TextInputContainer>
-        <Label>Password</Label>
+        <Label>
+          Password :{" "}
+          {password.length < 6
+            ? "must be at least 6 characters long"
+            : "Good to go"}
+        </Label>
         <TextInput_Styled
           textContentType="password"
           secureTextEntry
