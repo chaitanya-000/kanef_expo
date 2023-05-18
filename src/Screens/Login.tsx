@@ -115,6 +115,11 @@ const Login = ({ navigation }: any) => {
                     Sign Up
                   </Text>
                 </SolidGreenButton>
+                <TouchableOpacity style={styles.forgetPassword}>
+                  <Text style={styles.forgetPasswordText}>
+                    Forget password ?
+                  </Text>
+                </TouchableOpacity>
                 <View style={styles.footer}>
                   <Text style={styles.already_have_an_account}>
                     Don't have an account
@@ -160,5 +165,18 @@ const styles = StyleSheet.create({
     color: "rgba(38, 174, 96, 1)",
     fontWeight: "600",
     fontSize: 20,
+  },
+  forgetPassword: {
+    width: "100%",
+    height: "10%",
+    // backgroundColor: "red",
+    marginTop: "5%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  forgetPasswordText: {
+    fontSize: 20,
+    color: "rgba(38, 174, 96, 1)",
+    fontWeight: "600",
   },
 });
