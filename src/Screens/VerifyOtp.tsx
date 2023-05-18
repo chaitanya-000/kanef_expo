@@ -1,4 +1,11 @@
-import { Alert, Image, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useRef, useState } from "react";
 import {
   Header,
@@ -20,6 +27,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 const VerifyOtp = ({ route, navigation }: any) => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
   const [loading, setLoading] = useState(false);
+  const [regeneratedOtp, setRegeneratedOtp] = useState(null);
 
   const handleOTPChange = (index: any, value: any) => {
     // Allow only numbers
@@ -58,7 +66,7 @@ const VerifyOtp = ({ route, navigation }: any) => {
       })
       .then((response) => {
         setLoading(false);
-        // console.log(response.data);
+        console.log(response.data);
         response.data[0] &&
           Alert.alert(response.data.data, "", [
             {
@@ -79,12 +87,26 @@ const VerifyOtp = ({ route, navigation }: any) => {
 
   const handleVerifyOTP = () => {
     const enteredOTP = otp.join("");
-    if (enteredOTP == route.params.otp) {
+    if (enteredOTP == route.params.otp || regeneratedOtp) {
       sendUserRegistrationDetails();
     } else {
       // OTP verification failed
       Alert.alert("Error", "OTP verification failed");
     }
+  };
+
+  const sendEmailAgain = () => {
+    axios
+      .post(`https://kenaf.ie/sendEmail`, {
+        email: route.params.email,
+      })
+      .then((response) => {
+        console.log(response);
+        setRegeneratedOtp(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -115,11 +137,29 @@ const VerifyOtp = ({ route, navigation }: any) => {
                 />
               ))}
             </View>
+            <View style={styles.clickToGetOtpAgain}>
+              <TouchableOpacity onPress={sendEmailAgain}>
+                <Text>Didn't get the OTP ? Click here to send again</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.footer}>
+              <Text style={styles.already_have_an_account}>
+                Incorrect Email ?{"\n"}
+                {route.params.email}
+              </Text>
+
+              <TouchableOpacity
+                onPress={() => navigation.navigate("RegisterPage")}
+              >
+                <Text style={styles.login}>Click here to edit</Text>
+              </TouchableOpacity>
+            </View>
 
             <SolidGreenButton
               width={"85%"}
               height={"10%"}
-              style={{ alignSelf: "center", marginTop: "90%" }}
+              style={{ alignSelf: "center", marginTop: "10%" }}
               onPress={handleVerifyOTP}
             >
               <Text
@@ -208,5 +248,26 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: responsiveScreenFontSize(4),
     // backgroundColor: "red",
+  },
+  clickToGetOtpAgain: {
+    width: "100%",
+    height: "10%",
+    // borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  footer: {
+    alignItems: "center",
+    marginTop: "60%",
+    // borderWidth: 1,
+  },
+  already_have_an_account: {
+    color: "rgba(130, 130, 130, 1)",
+    fontSize: 17,
+  },
+  login: {
+    color: "rgba(38, 174, 96, 1)",
+    fontWeight: "600",
+    fontSize: 20,
   },
 });
