@@ -1,14 +1,6 @@
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  Alert,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React, { useRef, useState } from "react";
-import {
-  Header,
   PageContainer,
   PageContent,
   SolidGreenButton,
@@ -19,15 +11,17 @@ import {
   responsiveScreenFontSize,
 } from "react-native-responsive-dimensions";
 import { TextInput } from "react-native-gesture-handler";
-import OTPInputView from "@twotalltotems/react-native-otp-input";
 import axios from "axios";
 import { BASE_URL } from "../helperFunctions";
 import Spinner from "react-native-loading-spinner-overlay";
+import Timer from "../organisms/Timer";
 
 const VerifyOtp = ({ route, navigation }: any) => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [regeneratedOtp, setRegeneratedOtp] = useState(null);
+  const [seconds, setSeconds] = useState(60);
+  const [showOtpAgain, setShowOtpAgain] = useState(false);
 
   const handleOTPChange = (index: any, value: any) => {
     // Allow only numbers
@@ -96,6 +90,7 @@ const VerifyOtp = ({ route, navigation }: any) => {
   };
 
   const sendEmailAgain = () => {
+    setShowOtpAgain(false);
     axios
       .post(`https://kenaf.ie/sendEmail`, {
         email: route.params.email,
@@ -108,6 +103,22 @@ const VerifyOtp = ({ route, navigation }: any) => {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds - 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (seconds === 0) {
+      // Timer finished
+    }
+  }, [seconds]);
 
   return (
     <PageContainer style={{ backgroundColor: "rgba(38, 174, 96, 1)" }}>
@@ -137,13 +148,15 @@ const VerifyOtp = ({ route, navigation }: any) => {
                 />
               ))}
             </View>
-            <View style={styles.clickToGetOtpAgain}>
-              <TouchableOpacity onPress={sendEmailAgain}>
-                <Text>Didn't get the OTP ? Click here to send again</Text>
-              </TouchableOpacity>
-            </View>
+            {showOtpAgain && (
+              <View style={styles.clickToGetOtpAgain}>
+                <TouchableOpacity onPress={sendEmailAgain}>
+                  <Text>Didn't get the OTP ? Click here to send again</Text>
+                </TouchableOpacity>
+              </View>
+            )}
 
-            <View style={styles.footer}>
+            {/* <View style={styles.footer}>
               <Text style={styles.already_have_an_account}>
                 Incorrect Email ?{"\n"}
                 {route.params.email}
@@ -154,6 +167,9 @@ const VerifyOtp = ({ route, navigation }: any) => {
               >
                 <Text style={styles.login}>Click here to edit</Text>
               </TouchableOpacity>
+            </View> */}
+            <View style={styles.timer_container}>
+              {!showOtpAgain && <Timer setShowOtpAgain={setShowOtpAgain} />}
             </View>
 
             <SolidGreenButton
@@ -269,5 +285,12 @@ const styles = StyleSheet.create({
     color: "rgba(38, 174, 96, 1)",
     fontWeight: "600",
     fontSize: 20,
+  },
+  timer_container: {
+    width: "100%",
+    height: "10%",
+    alignItems: "center",
+    justifyContent: "center",
+    // borderWidth: 1,
   },
 });
