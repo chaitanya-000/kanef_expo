@@ -19,8 +19,7 @@ import Timer from "../organisms/Timer";
 const VerifyOtp = ({ route, navigation }: any) => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
   const [loading, setLoading] = useState(false);
-  const [regeneratedOtp, setRegeneratedOtp] = useState(null);
-  const [seconds, setSeconds] = useState(60);
+  const [regeneratedOtp, setRegeneratedOtp] = useState(route.params.otp);
   const [showOtpAgain, setShowOtpAgain] = useState(false);
 
   const handleOTPChange = (index: any, value: any) => {
@@ -60,7 +59,7 @@ const VerifyOtp = ({ route, navigation }: any) => {
       })
       .then((response) => {
         setLoading(false);
-        console.log(response.data);
+        // console.log(response.data);
         response.data[0] &&
           Alert.alert(response.data.data, "", [
             {
@@ -81,11 +80,11 @@ const VerifyOtp = ({ route, navigation }: any) => {
 
   const handleVerifyOTP = () => {
     const enteredOTP = otp.join("");
-    if (enteredOTP == route.params.otp || regeneratedOtp) {
+    if (parseInt(enteredOTP) === parseInt(regeneratedOtp)) {
       sendUserRegistrationDetails();
     } else {
       // OTP verification failed
-      Alert.alert("Error", "OTP verification failed");
+      Alert.alert("Error", "OTP's don't match");
     }
   };
 
@@ -96,7 +95,7 @@ const VerifyOtp = ({ route, navigation }: any) => {
         email: route.params.email,
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setRegeneratedOtp(response.data.data);
       })
       .catch((error) => {
@@ -104,29 +103,11 @@ const VerifyOtp = ({ route, navigation }: any) => {
       });
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds - 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (seconds === 0) {
-      // Timer finished
-    }
-  }, [seconds]);
-
   return (
     <PageContainer style={{ backgroundColor: "rgba(38, 174, 96, 1)" }}>
       <Spinner visible={loading} />
       <View style={styles.infoText}>
-        <Text style={styles.verificationCodeHeading}>
-          Verification {route.params.otp}
-        </Text>
+        <Text style={styles.verificationCodeHeading}>Verification</Text>
         <Text style={styles.instructions}>
           Hey {route.params.firstName}, we have sent a 5 digit verification code
           to {route.params.email}.
