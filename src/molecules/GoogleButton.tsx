@@ -1,95 +1,66 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Platform,
-  StyleSheet,
-} from "react-native";
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Body1,
-  Body2,
-  Body3,
-  Body6,
-  Heading4,
-  Heading6,
-} from "../atoms/Typography";
-import { AuthContext } from "../store";
-import * as WebBrowser from "expo-web-browser";
+import { TouchableOpacity, Image, Platform, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Body1 } from "../atoms/Typography";
 import * as Google from "expo-auth-session/providers/google";
 
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 export default function GoogleButton() {
-  const [token, setToken] = useState<string>();
-  const [userInfo, setUserInfo] = useState<any>();
-  const { setIsLoggedIn } = useContext(AuthContext);
-
+  const [accessToken, setAccessToken] = useState<string | any>(null);
+  const [userInfo, setUserInfo] = useState(null);
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId:
-      "1026449685475-u2e04rjo1g0h3uibjqbi1lprisarcjrk.apps.googleusercontent.com",
+      "1026449685475-7mhb7p5j90d1jukj87jp7pdqakr04m29.apps.googleusercontent.com",
     iosClientId:
-      "1026449685475-vtbgq4tnqh7ecl9m38evrm1rvve9itot.apps.googleusercontent.com",
+      "1026449685475-0flih1m3bcqemittmllq4ocjbko438iq.apps.googleusercontent.com",
     expoClientId:
-      "1026449685475-7h9steioj713bls2dh72dj08jvpdcv40.apps.googleusercontent.com",
+      "1026449685475-mnqieo55i9db3s60m6h0e5h5c7773jhc.apps.googleusercontent.com",
   });
+  // const sendData = () => {
+  //   axios
+  //     .post("https://kenaf.ie/GoogleAPI", {
+  //       email: userInfo.email,
+  //       firstName: userInfo.given_name,
+  //       lastName: userInfo.family_name,
+  //       google_id: userInfo.id,
+  //     })
+  //     .then(async (response) => {
+  //       console.log(response.data);
+  //       if (response.data) {
+  //         await AsyncStorage.setItem(
+  //           "token",
+  //           JSON.stringify(response.data.user.google_id)
+  //         );
+  //       }
+  //       setIsLoggedIn(true);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
-  WebBrowser.maybeCompleteAuthSession();
-  const sendData = () => {
-    axios
-      .post("https://kenaf.ie/GoogleAPI", {
-        email: userInfo.email,
-        firstName: userInfo.given_name,
-        lastName: userInfo.family_name,
-        google_id: userInfo.id,
-      })
-      .then(async (response) => {
-        console.log(response.data);
-        if (response.data) {
-          await AsyncStorage.setItem(
-            "token",
-            JSON.stringify(response.data.user.google_id)
-          );
-        }
-        setIsLoggedIn(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   useEffect(() => {
     if (response?.type === "success") {
-      setToken(response.authentication.accessToken);
-      getUserInfo();
+      setAccessToken(response.authentication?.accessToken);
+      getUserData();
     }
-  }, [response, token]);
+  }, [response]);
 
-  const getUserInfo = async () => {
-    try {
-      const response = await fetch(
-        "https://www.googleapis.com/userinfo/v2/me",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      const user = await response.json();
-      setUserInfo(user);
-    } catch (error) {
-      console.log(error);
-    }
+  const getUserData = async () => {
+    let receivedUserData = await fetch(
+      "https://www.googleapis.com/userinfo/v2/me",
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    receivedUserData.json().then((data) => {
+      setUserInfo(data);
+      console.log(data);
+    });
   };
-  // userInfo?.verified_email && sendData();
   return (
     <TouchableOpacity
       style={styles.button}
       onPress={() => {
-        promptAsync({
-          useProxy: true,
-          showInRecents: true,
-        });
+        promptAsync({ useProxy: true, showInRecents: true });
       }}
     >
       <Image source={require("../../assets/images/GoogleLogo.png")} />
