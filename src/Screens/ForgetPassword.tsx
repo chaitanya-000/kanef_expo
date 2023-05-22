@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useRef, useState } from "react";
 import {
   PageContainer,
@@ -14,6 +14,7 @@ import { WhiteRoundedContainer } from "../styledComponents/Receipts,Reward,BillP
 import { TextInput } from "react-native-gesture-handler";
 import axios from "axios";
 import { BASE_URL } from "../helperFunctions";
+import Timer from "../organisms/Timer";
 
 const ForgetPassword = ({ navigation }: any) => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
@@ -21,7 +22,9 @@ const ForgetPassword = ({ navigation }: any) => {
   const [email, setEmail] = useState<string>("");
   const [showOtpInput, setShowOtpInput] = useState<boolean>(false);
   const [apiMessage, setApiMessage] = useState<string | null>(null);
-  const [receivedOtp, setReceivedOtp] = useState<string>("");
+  const [receivedOtp, setReceivedOtp] = useState<any>("");
+  // const [regeneratedOtp, setRegeneratedOtp] = useState<any>(null);
+  const [showOtpAgain, setShowOtpAgain] = useState(false);
 
   const handleOTPChange = (index: any, value: any) => {
     const numericValue = value.replace(/[^0-9]/g, "");
@@ -47,11 +50,10 @@ const ForgetPassword = ({ navigation }: any) => {
         email: email,
       })
       .then((response) => {
-        console.log(response.data.data);
         setLoading(false);
         if (response.data.status) {
           setShowOtpInput(true);
-          setReceivedOtp(response.data.data);
+          setReceivedOtp(parseInt(response.data.data));
           setApiMessage(response.data.message);
         } else {
           Alert.alert(response.data.message, "", [
@@ -79,22 +81,36 @@ const ForgetPassword = ({ navigation }: any) => {
   };
 
   const handleVerifyOTP = () => {
-    const enteredOTP = otp.join("");
-    if (enteredOTP == receivedOtp) {
+    const enteredOTP = parseInt(otp.join(""));
+
+    if (enteredOTP === receivedOtp) {
       navigation.navigate("UpdatePassword", {
         email: email,
       });
     } else {
-      // OTP verification failed
-      Alert.alert("Error", "OTP verification failed");
+      Alert.alert("OTPs do not match");
     }
+  };
+
+  const sendEmailAgain = () => {
+    setShowOtpAgain(false);
+    axios
+      .post(`${BASE_URL}/ForgetPasswordVerification`, {
+        email: email,
+      })
+      .then((response) => {
+        setReceivedOtp(parseInt(response.data.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <PageContainer style={{ backgroundColor: "rgba(38, 174, 96, 1)" }}>
       <Spinner visible={loading} />
       <View style={styles.infoText}>
-        <Text style={styles.verificationCodeHeading}>Verification</Text>
+        <Text style={styles.verificationCodeHeading}>Forget Password</Text>
         <Text style={styles.instructions}>
           Enter your registered email address with Kenaf
         </Text>
@@ -110,6 +126,7 @@ const ForgetPassword = ({ navigation }: any) => {
 
               {(showOtpInput && (
                 <View style={styles.otpContainer}>
+                  <Text style={styles.APImessage}>{apiMessage}</Text>
                   <View style={styles.otpInputContainer}>
                     {otp.map((digit, index) => (
                       <TextInput
@@ -123,7 +140,18 @@ const ForgetPassword = ({ navigation }: any) => {
                       />
                     ))}
                   </View>
-                  <Text style={styles.APImessage}>{apiMessage}</Text>
+
+                  {showOtpAgain ? (
+                    <View style={styles.clickToGetOtpAgain}>
+                      <TouchableOpacity onPress={sendEmailAgain}>
+                        <Text>
+                          Didn't get the OTP ? Click here to send again
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  ) : (
+                    <Timer setShowOtpAgain={setShowOtpAgain} />
+                  )}
                   <SolidGreenButton
                     width={"85%"}
                     height={"17%"}
@@ -132,6 +160,7 @@ const ForgetPassword = ({ navigation }: any) => {
                   >
                     <Text style={styles.buttonText}>Send</Text>
                   </SolidGreenButton>
+                  <View style={styles.timer_container}></View>
                 </View>
               )) || (
                 <SolidGreenButton
@@ -225,9 +254,9 @@ const styles = StyleSheet.create({
   clickToGetOtpAgain: {
     width: "100%",
     height: "10%",
-    // borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
+    // borderWidth: 1,
   },
   footer: {
     alignItems: "center",
@@ -269,7 +298,14 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
   },
   APImessage: {
-    fontSize: responsiveFontSize(2.4),
+    fontSize: responsiveFontSize(2),
     textAlign: "center",
+  },
+  timer_container: {
+    width: "100%",
+    height: "14%",
+    alignItems: "center",
+    justifyContent: "center",
+    // borderWidth: 1,
   },
 });
