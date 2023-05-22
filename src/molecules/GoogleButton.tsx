@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Body1 } from "../atoms/Typography";
 import * as Google from "expo-auth-session/providers/google";
 
-export default function GoogleButton() {
+export default function GoogleButton({ navigation }: any) {
   const [accessToken, setAccessToken] = useState<string | any>(null);
   const [userInfo, setUserInfo] = useState(null);
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -53,7 +53,8 @@ export default function GoogleButton() {
     );
     receivedUserData.json().then((data) => {
       setUserInfo(data);
-      console.log(data);
+      console.log(data.verified_email);
+      data.verified_email && navigation.navigate("PasswordGoogle");
     });
   };
   return (

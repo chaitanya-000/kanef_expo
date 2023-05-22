@@ -3,10 +3,10 @@ import GoogleButton from "../molecules/GoogleButton";
 import AppleButton from "../molecules/AppleButton";
 // import AppleButton from "../molecules/AppleButton";
 
-export default function GoogleAndAppleButton() {
+export default function GoogleAndAppleButton({ navigation }: any) {
   return (
     <View style={styles.container}>
-      <GoogleButton />
+      <GoogleButton navigation={navigation} />
       <AppleButton />
     </View>
   );

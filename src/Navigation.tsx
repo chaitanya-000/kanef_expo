@@ -20,6 +20,7 @@ import UpdateBankDetails from "./Screens/UpdateBankDetails";
 import VerifyOtp from "./Screens/VerifyOtp";
 import ForgetPassword from "./Screens/ForgetPassword";
 import UpdatePassword from "./Screens/UpdatePassword";
+import PasswordGoogle from "./Screens/PasswordGoogle";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -81,6 +82,7 @@ const Navigation = () => {
             <Stack.Screen name="VerifyOtp" component={VerifyOtp} />
             <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
             <Stack.Screen name="UpdatePassword" component={UpdatePassword} />
+            <Stack.Screen name="PasswordGoogle" component={PasswordGoogle} />
           </>
         )}
       </Stack.Navigator>
