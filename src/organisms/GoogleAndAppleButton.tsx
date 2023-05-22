@@ -1,16 +1,15 @@
-import { View, Text, SafeAreaView, StyleSheet, Platform } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import GoogleButton from "../molecules/GoogleButton";
+import AppleButton from "../molecules/AppleButton";
+// import AppleButton from "../molecules/AppleButton";
 
 export default function GoogleAndAppleButton() {
-  if (Platform.OS === "ios") {
-    return (
-      <View style={styles.container}>
-        {/* <GoogleButton /> */}
-        {/* <AppleButton /> */}
-      </View>
-    );
-  } else {
-    // return <GoogleButton />;
-  }
+  return (
+    <View style={styles.container}>
+      <GoogleButton />
+      <AppleButton />
+    </View>
+  );
 }
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +21,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "flex-start",
-    marginTop: "2%",
+    // marginTop: "2%",
   },
 });

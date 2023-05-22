@@ -13,8 +13,8 @@ export default function SignUpLoginContainer({ navigation }: any) {
 }
 const styles = StyleSheet.create({
   container: {
-    // borderWidth: 1,
-    // borderColor: "blue",
+    // borderWidth: 2,
+    borderColor: "blue",
     width: "100%",
     height: "17.5%",
     display: "flex",
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     position: "relative",
-    // bottom: "2%",
+    // bottom: "5%",
     // marginTop: "1%",
   },
 });
