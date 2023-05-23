@@ -21,6 +21,7 @@ import VerifyOtp from "./Screens/VerifyOtp";
 import ForgetPassword from "./Screens/ForgetPassword";
 import UpdatePassword from "./Screens/UpdatePassword";
 import PasswordGoogle from "./Screens/PasswordGoogle";
+import Help from "./Screens/Help";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -64,6 +65,7 @@ const Navigation = () => {
               component={TermsAndConditions}
             />
             <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+            <Stack.Screen name="Help" component={Help} />
             <Stack.Screen
               name="BankDetailsScreen"
               component={BankDetailsScreen}

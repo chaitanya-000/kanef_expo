@@ -140,7 +140,7 @@ const SettingsOptionContainer = ({ navigation }: any) => {
           uId={uId}
           showIcon={showIcon}
         />
-        <Help />
+        <Help navigation={navigation} />
         <ContactUs navigation={navigation} />
         <BankAccountDetails navigation={navigation} />
         <Feedback navigation={navigation} />
