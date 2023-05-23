@@ -2,10 +2,11 @@ import { TouchableOpacity, Image, Platform, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Body1 } from "../atoms/Typography";
 import * as Google from "expo-auth-session/providers/google";
+import axios from "axios";
+import { BASE_URL } from "../helperFunctions";
 
 export default function GoogleButton({ navigation }: any) {
   const [accessToken, setAccessToken] = useState<string | any>(null);
-  const [userInfo, setUserInfo] = useState(null);
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId:
       "1026449685475-7mhb7p5j90d1jukj87jp7pdqakr04m29.apps.googleusercontent.com",
@@ -14,35 +15,27 @@ export default function GoogleButton({ navigation }: any) {
     expoClientId:
       "1026449685475-mnqieo55i9db3s60m6h0e5h5c7773jhc.apps.googleusercontent.com",
   });
-  // const sendData = () => {
-  //   axios
-  //     .post("https://kenaf.ie/GoogleAPI", {
-  //       email: userInfo.email,
-  //       firstName: userInfo.given_name,
-  //       lastName: userInfo.family_name,
-  //       google_id: userInfo.id,
-  //     })
-  //     .then(async (response) => {
-  //       console.log(response.data);
-  //       if (response.data) {
-  //         await AsyncStorage.setItem(
-  //           "token",
-  //           JSON.stringify(response.data.user.google_id)
-  //         );
-  //       }
-  //       setIsLoggedIn(true);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
-  useEffect(() => {
-    if (response?.type === "success") {
-      setAccessToken(response.authentication?.accessToken);
-      getUserData();
-    }
-  }, [response]);
+  const handleRegisterWithGoogle = (
+    email: any,
+    firstName: any,
+    lastName: any,
+    googleID: any
+  ) => {
+    axios
+      .post(`https://kenaf.ie/GoogleAPI`, {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        google_id: googleID,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const getUserData = async () => {
     let receivedUserData = await fetch(
@@ -52,11 +45,26 @@ export default function GoogleButton({ navigation }: any) {
       }
     );
     receivedUserData.json().then((data) => {
-      setUserInfo(data);
-      console.log(data.verified_email);
-      data.verified_email && navigation.navigate("PasswordGoogle");
+      console.log(data);
+      if (data.verified_email) {
+        handleRegisterWithGoogle(
+          data.email,
+          data.given_name,
+          data.family_name,
+          data.id
+        );
+      } else {
+        console.log("Verified email x");
+      }
     });
   };
+
+  useEffect(() => {
+    if (response?.type === "success") {
+      setAccessToken(response.authentication?.accessToken);
+      getUserData();
+    }
+  }, [response]);
   return (
     <TouchableOpacity
       style={styles.button}
