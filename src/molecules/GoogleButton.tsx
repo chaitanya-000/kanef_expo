@@ -1,12 +1,15 @@
 import { TouchableOpacity, Image, Platform, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Body1 } from "../atoms/Typography";
 import * as Google from "expo-auth-session/providers/google";
 import axios from "axios";
 import { BASE_URL } from "../helperFunctions";
+import { AuthContext } from "../store";
 
 export default function GoogleButton({ navigation }: any) {
+  const { handleLogin, isLoading } = useContext(AuthContext);
   const [accessToken, setAccessToken] = useState<string | any>(null);
+
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId:
       "1026449685475-7mhb7p5j90d1jukj87jp7pdqakr04m29.apps.googleusercontent.com",
@@ -30,7 +33,7 @@ export default function GoogleButton({ navigation }: any) {
         google_id: googleID,
       })
       .then((response) => {
-        console.log(response);
+        response.data.token && handleLogin(email, googleID);
       })
       .catch((error) => {
         console.log(error);
@@ -38,13 +41,16 @@ export default function GoogleButton({ navigation }: any) {
   };
 
   const getUserData = async () => {
-    let receivedUserData = await fetch(
-      "https://www.googleapis.com/userinfo/v2/me",
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
-    );
-    receivedUserData.json().then((data) => {
+    try {
+      console.log(accessToken);
+      const receivedUserData = await fetch(
+        "https://www.googleapis.com/userinfo/v2/me",
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+
+      const data = await receivedUserData.json();
       console.log(data);
       if (data.verified_email) {
         handleRegisterWithGoogle(
@@ -56,20 +62,25 @@ export default function GoogleButton({ navigation }: any) {
       } else {
         console.log("Verified email x");
       }
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     if (response?.type === "success") {
-      setAccessToken(response.authentication?.accessToken);
-      getUserData();
+      console.log(response);
+      if (response.authentication?.accessToken) {
+        setAccessToken(response.authentication?.accessToken);
+        accessToken && getUserData();
+      }
     }
-  }, [response]);
+  }, [response, accessToken]);
   return (
     <TouchableOpacity
       style={styles.button}
       onPress={() => {
-        promptAsync({ useProxy: true, showInRecents: true });
+        promptAsync();
       }}
     >
       <Image source={require("../../assets/images/GoogleLogo.png")} />
