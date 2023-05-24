@@ -23,6 +23,8 @@ import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from "../store";
 import EmailAddressLogin from "../organisms/EmailAddressLogin";
 import PasswordLogin from "../organisms/PasswordLogin";
+import GoogleButton from "../molecules/GoogleButton";
+import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
 
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
@@ -123,6 +125,20 @@ const Login = ({ navigation }: any) => {
                     Forget password ?
                   </Text>
                 </TouchableOpacity>
+                <View
+                  style={{
+                    alignSelf: "center",
+                    // borderRadius: 1,
+                    height: "35%",
+                    width: "86%",
+                    alignItems: "center",
+                    // marginLeft: "48%",
+                    justifyContent: "center",
+                    // backgroundColor: "orange",
+                  }}
+                >
+                  <GoogleButton />
+                </View>
                 <View style={styles.footer}>
                   <Text style={styles.already_have_an_account}>
                     Don't have an account
@@ -147,7 +163,7 @@ export default Login;
 
 const styles = StyleSheet.create({
   scrollViewContentContainer: {
-    paddingBottom: "28%",
+    paddingBottom: "68%",
     // backgroundColor: "black",
   },
   screenName: {
