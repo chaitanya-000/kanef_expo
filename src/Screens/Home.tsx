@@ -1,13 +1,4 @@
-import {
-  View,
-  Text,
-  Dimensions,
-  StyleSheet,
-  Image,
-  SafeAreaView,
-  ImageBackground,
-  StatusBar,
-} from "react-native";
+import { View, StyleSheet, Image, StatusBar } from "react-native";
 import React, { useContext } from "react";
 import SignUpLoginContainer from "../organisms/SignUpLoginContainer";
 import LineDivider from "../organisms/LineDivider";
@@ -15,12 +6,16 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
-import { AuthContext } from "../store";
 import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
+import Spinner from "react-native-loading-spinner-overlay";
+import { AuthContext } from "../store";
 
 const Home = ({ navigation }: any) => {
+  const { isLoading } = useContext(AuthContext);
+
   return (
     <View style={styles.pageContainer}>
+      <Spinner visible={isLoading} />
       <StatusBar hidden={true} />
       <Image
         source={require("../../assets/images/LoginPageImage.png")}
@@ -29,7 +24,7 @@ const Home = ({ navigation }: any) => {
       <View style={styles.container}>
         <SignUpLoginContainer navigation={navigation} />
         <LineDivider />
-        <GoogleAndAppleButton />
+        <GoogleAndAppleButton navigation={navigation} />
       </View>
     </View>
   );
