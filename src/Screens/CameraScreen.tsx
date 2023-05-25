@@ -14,6 +14,7 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
+  responsiveFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
@@ -312,6 +313,9 @@ export default function CameraScreen({ navigation }: any) {
           />
         )}
         <View style={styles.optionsContainer}>
+          <Text style={styles.optionsContainer_UploadReceiptText}>
+            Upload your paper or e-receipt
+          </Text>
           <View style={styles.uploadAndCameraButtons}>
             <TouchableOpacity
               style={styles.uploadButton}
@@ -415,11 +419,11 @@ const styles = StyleSheet.create({
   optionsContainer: {
     width: responsiveScreenWidth(100),
     height: responsiveScreenHeight(30),
-    // borderWidth: 1,
     alignItems: "center",
-    // backgroundColor: "red",
     justifyContent: "space-between",
     marginBottom: "30%",
+    // borderWidth: 1,
+    // backgroundColor: "red",
   },
   uploadAndCameraButtons: {
     width: responsiveScreenWidth(90),
@@ -429,7 +433,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     // borderWidth: 1,
-    marginTop: responsiveScreenHeight(5),
+    marginTop: responsiveScreenHeight(3),
   },
   scanQRButton: {
     // borderWidth: 1,
@@ -440,5 +444,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: "#e9f2eb",
     borderColor: "gray",
+  },
+  optionsContainer_UploadReceiptText: {
+    fontSize: responsiveFontSize(2.5),
   },
 });
