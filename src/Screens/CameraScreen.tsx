@@ -275,17 +275,19 @@ export default function CameraScreen({ navigation }: any) {
           >
             <AntDesign
               name="qrcode"
-              size={showQRScanningCamera ? 34 : 120}
+              size={showQRScanningCamera ? 24 : 120}
               color="black"
             />
 
             <Heading6
               style={{
-                fontWeight: "100",
-                fontSize: showQRScanningCamera ? 17 : 25,
+                fontWeight: "500",
+                fontSize: 17,
               }}
             >
-              Scan QR code
+              {showQRScanningCamera
+                ? "Tap to turn off camera"
+                : "Tap to Scan QR code"}
             </Heading6>
           </TouchableOpacity>
         </View>
@@ -432,7 +434,7 @@ const styles = StyleSheet.create({
   scanQRButton: {
     // borderWidth: 1,
     width: "50%",
-    height: "100%",
+    height: "90%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
