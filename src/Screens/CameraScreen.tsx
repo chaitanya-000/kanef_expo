@@ -312,6 +312,24 @@ export default function CameraScreen({ navigation }: any) {
           />
         )}
         <View style={styles.optionsContainer}>
+          <View style={styles.uploadAndCameraButtons}>
+            <TouchableOpacity
+              style={styles.uploadButton}
+              onPress={selectImageFromGallery}
+            >
+              <Body2>Upload</Body2>
+              {image ? (
+                <AntDesign name="checkcircleo" size={24} color="black" />
+              ) : (
+                <Entypo name="upload" size={25} color="black" />
+              )}
+            </TouchableOpacity>
+            <Body1>OR</Body1>
+            <TouchableOpacity style={styles.uploadButton} onPress={takePhoto}>
+              <Body2>Camera</Body2>
+              <Entypo name="camera" size={25} color="black" />
+            </TouchableOpacity>
+          </View>
           <View
             style={{
               width: responsiveScreenWidth(84),
@@ -331,24 +349,6 @@ export default function CameraScreen({ navigation }: any) {
             >
               <Ionicons name="ios-add-circle-sharp" size={24} color="black" />
               <Body4>Add a store</Body4>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.uploadAndCameraButtons}>
-            <TouchableOpacity
-              style={styles.uploadButton}
-              onPress={selectImageFromGallery}
-            >
-              <Body2>Upload</Body2>
-              {image ? (
-                <AntDesign name="checkcircleo" size={24} color="black" />
-              ) : (
-                <Entypo name="upload" size={25} color="black" />
-              )}
-            </TouchableOpacity>
-            <Body1>OR</Body1>
-            <TouchableOpacity style={styles.uploadButton} onPress={takePhoto}>
-              <Body2>Camera</Body2>
-              <Entypo name="camera" size={25} color="black" />
             </TouchableOpacity>
           </View>
           <GreenButton
