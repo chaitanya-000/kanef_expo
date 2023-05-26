@@ -5,11 +5,14 @@ import {
   TouchableOpacity,
   View,
   Modal,
+  Dimensions,
 } from "react-native";
 import React, { useState } from "react";
 import Spinner from "react-native-loading-spinner-overlay/lib";
 import { Ionicons } from "@expo/vector-icons";
 import ImageViewer from "react-native-image-zoom-viewer";
+import ImageZoom from "react-native-image-pan-zoom";
+import { height } from "../helperFunctions";
 
 const SeperateInvoice = ({ route, navigation }: any) => {
   const [loading, setLoading] = useState(false);
@@ -28,7 +31,7 @@ const SeperateInvoice = ({ route, navigation }: any) => {
       setLastTap(now);
     }
   };
-
+  const width = "140%";
   console.log("qnjkdqw");
 
   const images = [
@@ -38,52 +41,57 @@ const SeperateInvoice = ({ route, navigation }: any) => {
   ];
   return (
     <SafeAreaView style={{ backgroundColor: "black" }}>
-      <Modal>
-        <Spinner visible={loading} />
-        <ImageViewer
-          imageUrls={images}
-          style={{
-            width: "100%",
-            height: "100%",
-            transform: [{ scale }],
-            backgroundColor: "black",
+      <ImageZoom
+        cropWidth={Dimensions.get("window").width}
+        cropHeight={Dimensions.get("window").height}
+        imageWidth={Dimensions.get("window").width}
+        imageHeight={Dimensions.get("window").height}
+        onClick={() => setShowOptions(!showOptions)}
+        maxOverflow={30}
+      >
+        <Image
+          style={{ width: "100%", height: "100%" }}
+          source={{
+            uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
           }}
+          resizeMode="cover"
         />
-        {showOptions && (
-          <View
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              zIndex: 2454,
-              width: "100%",
-              height: "10%",
-              backgroundColor: "#26ae60ed",
-              opacity: 1,
+      </ImageZoom>
 
+      {showOptions && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            zIndex: 2454,
+            width: "100%",
+            height: "10%",
+            backgroundColor: "#26ae60ed",
+            opacity: 1,
+
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              width: "13%",
+              aspectRatio: 1,
               flexDirection: "row",
+              marginLeft: "5%",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "center",
+              borderRadius: 10,
+              marginRight: "5%",
             }}
+            onPress={() => navigation.navigate("Settings")}
           >
-            <TouchableOpacity
-              style={{
-                width: "13%",
-                aspectRatio: 1,
-                flexDirection: "row",
-                marginLeft: "5%",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: 10,
-                marginRight: "5%",
-              }}
-              onPress={() => navigation.navigate("Settings")}
-            >
-              <Ionicons name="arrow-back" size={50} color="white" />
-            </TouchableOpacity>
-          </View>
-        )}
-      </Modal>
+            <Ionicons name="arrow-back" size={50} color="white" />
+          </TouchableOpacity>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
