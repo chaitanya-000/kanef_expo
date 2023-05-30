@@ -84,7 +84,6 @@ const Navigation = () => {
             <Stack.Screen name="VerifyOtp" component={VerifyOtp} />
             <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
             <Stack.Screen name="UpdatePassword" component={UpdatePassword} />
-            <Stack.Screen name="PasswordGoogle" component={PasswordGoogle} />
           </>
         )}
       </Stack.Navigator>
