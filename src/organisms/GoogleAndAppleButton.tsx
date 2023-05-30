@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet, Platform } from "react-native";
 import GoogleButton from "../molecules/GoogleButton";
 import AppleButton from "../molecules/AppleButton";
 // import AppleButton from "../molecules/AppleButton";
@@ -6,8 +6,14 @@ import AppleButton from "../molecules/AppleButton";
 export default function GoogleAndAppleButton({ navigation }: any) {
   return (
     <View style={styles.container}>
-      <GoogleButton navigation={navigation} />
-      <AppleButton />
+      {Platform.OS === "ios" ? (
+        <>
+          <GoogleButton navigation={navigation} />
+          <AppleButton />
+        </>
+      ) : (
+        <GoogleButton navigation={navigation} />
+      )}
     </View>
   );
 }
