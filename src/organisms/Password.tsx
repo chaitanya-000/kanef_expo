@@ -15,7 +15,7 @@ const Password = ({ setPassword, password }: any) => {
         <Label>
           Password :{" "}
           {password.length < 6
-            ? "must be at44least 6 characters long"
+            ? "must be at least 6 characters long"
             : "Good to go"}
         </Label>
         <TextInput_Styled
