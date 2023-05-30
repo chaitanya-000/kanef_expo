@@ -1,4 +1,11 @@
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  BackHandler,
+} from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import {
   PageContainer,
@@ -102,6 +109,24 @@ const VerifyOtp = ({ route, navigation }: any) => {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    const disableSwipeToGoBack = () => {
+      // Disable swipe-to-go-back functionality
+      return true;
+    };
+
+    // Add event listener for the hardware back button
+    BackHandler.addEventListener("hardwareBackPress", disableSwipeToGoBack);
+
+    // Clean up the event listener on unmount
+    return () => {
+      BackHandler.removeEventListener(
+        "hardwareBackPress",
+        disableSwipeToGoBack
+      );
+    };
+  }, []);
 
   return (
     <PageContainer style={{ backgroundColor: "rgba(38, 174, 96, 1)" }}>

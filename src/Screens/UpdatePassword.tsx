@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, Text, View, BackHandler } from "react-native";
+import React, { useState, useEffect } from "react";
 import {
   PageContainer,
   PageContent,
@@ -58,6 +58,24 @@ const UpdatePassword = ({ navigation, route }: any) => {
       alert("Password and Confirm password cannot be empty");
     }
   };
+
+  useEffect(() => {
+    const disableSwipeToGoBack = () => {
+      // Disable swipe-to-go-back functionality
+      return true;
+    };
+
+    // Add event listener for the hardware back button
+    BackHandler.addEventListener("hardwareBackPress", disableSwipeToGoBack);
+
+    // Clean up the event listener on unmount
+    return () => {
+      BackHandler.removeEventListener(
+        "hardwareBackPress",
+        disableSwipeToGoBack
+      );
+    };
+  }, []);
 
   return (
     <PageContainer style={{ backgroundColor: "rgba(38, 174, 96, 1)" }}>
