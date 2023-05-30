@@ -7,7 +7,7 @@
     "icon": "./assets/images/kenafLogo.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
-    "scheme": "ie.kenaf.kenaf",
+    "scheme": "ie.kenafltd.kenaf",
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
