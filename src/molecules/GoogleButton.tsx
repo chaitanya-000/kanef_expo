@@ -11,10 +11,11 @@ import * as Google from "expo-auth-session/providers/google";
 import axios from "axios";
 import { BASE_URL } from "../helperFunctions";
 import { AuthContext } from "../store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function GoogleButton({ navigation }: any) {
-  const { handleLogin, isLoading } = useContext(AuthContext);
   const [accessToken, setAccessToken] = useState<string | any>(null);
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId:
@@ -39,8 +40,11 @@ export default function GoogleButton({ navigation }: any) {
         google_id: googleID,
       })
       .then((response) => {
+        console.log(response);
         if (response.data.token) {
-          handleLogin(email, googleID);
+          AsyncStorage.setItem("token", JSON.stringify(response.data.token));
+          AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
+          setIsLoggedIn(true);
         } else {
           alert(response.data.message);
         }
