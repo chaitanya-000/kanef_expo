@@ -35,15 +35,12 @@ export const AuthProvider = ({ children }: any) => {
       })
       .then((response) => {
         setIsLoading(false);
-        alert(
-          `User Email and password through Google - ${response.config.data}`
-        );
-        // console.log(response);
-        // if (response.data.token) {
-        //   AsyncStorage.setItem("token", JSON.stringify(response.data.token));
-        //   AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
-        //   setIsLoggedIn(true);
-        // }
+        if (response.data.token) {
+          alert(` if block of handleLogin -${response.data.token} `);
+          AsyncStorage.setItem("token", JSON.stringify(response.data.token));
+          AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
+          // setIsLoggedIn(true);
+        }
       })
       .catch((error) => {
         Alert.alert(error.response.data.message[0]);
