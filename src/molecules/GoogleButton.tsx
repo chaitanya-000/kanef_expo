@@ -42,7 +42,7 @@ export default function GoogleButton({ navigation }: any) {
         if (response.data.token) {
           handleLogin(email, googleID);
         } else {
-          Alert.alert(response.data.message);
+          alert(response.data.message);
         }
       })
       .catch((error) => {
@@ -52,7 +52,6 @@ export default function GoogleButton({ navigation }: any) {
 
   const getUserData = async () => {
     try {
-      console.log(accessToken);
       const receivedUserData = await fetch(
         "https://www.googleapis.com/userinfo/v2/me",
         {
@@ -61,7 +60,6 @@ export default function GoogleButton({ navigation }: any) {
       );
 
       const data = await receivedUserData.json();
-      console.log(data);
       if (data.verified_email) {
         handleRegisterWithGoogle(
           data.email,
@@ -69,8 +67,6 @@ export default function GoogleButton({ navigation }: any) {
           data.family_name,
           data.id
         );
-      } else {
-        console.log("Verified email x");
       }
     } catch (error) {
       console.log(error);
@@ -79,7 +75,6 @@ export default function GoogleButton({ navigation }: any) {
 
   useEffect(() => {
     if (response?.type === "success") {
-      console.log(response);
       if (response.authentication?.accessToken) {
         setAccessToken(response.authentication?.accessToken);
         accessToken && getUserData();
