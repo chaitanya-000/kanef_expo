@@ -80,9 +80,21 @@ const Navigation = () => {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="RegisterPage" component={Register} />
             <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="VerifyOtp" component={VerifyOtp} />
-            <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
-            <Stack.Screen name="UpdatePassword" component={UpdatePassword} />
+            <Stack.Screen
+              name="VerifyOtp"
+              component={VerifyOtp}
+              options={{ gestureEnabled: false }}
+            />
+            <Stack.Screen
+              name="ForgetPassword"
+              component={ForgetPassword}
+              options={{ gestureEnabled: false }}
+            />
+            <Stack.Screen
+              name="UpdatePassword"
+              component={UpdatePassword}
+              options={{ gestureEnabled: false }}
+            />
           </>
         )}
       </Stack.Navigator>
