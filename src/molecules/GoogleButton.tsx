@@ -1,4 +1,10 @@
-import { TouchableOpacity, Image, Platform, StyleSheet } from "react-native";
+import {
+  TouchableOpacity,
+  Image,
+  Platform,
+  StyleSheet,
+  Alert,
+} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { Body1 } from "../atoms/Typography";
 import * as Google from "expo-auth-session/providers/google";
@@ -33,7 +39,11 @@ export default function GoogleButton({ navigation }: any) {
         google_id: googleID,
       })
       .then((response) => {
-        response.data.token && handleLogin(email, googleID);
+        if (response.data.token) {
+          handleLogin(email, googleID);
+        } else {
+          Alert.alert(response.data.message);
+        }
       })
       .catch((error) => {
         console.log(error);
