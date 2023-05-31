@@ -31,7 +31,8 @@
       "ios": {
         "simulator": true
       }
-    }
+    },
+    "testFlight": {}
   },
   "submit": {
     "production": {
