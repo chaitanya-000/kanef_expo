@@ -35,15 +35,18 @@ export const AuthProvider = ({ children }: any) => {
       })
       .then((response) => {
         setIsLoading(false);
-        if (response.data.token) {
-          AsyncStorage.setItem("token", JSON.stringify(response.data.token));
-          AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
-          setIsLoggedIn(true);
-        }
+        alert(
+          `User Email and password through Google - ${response.config.data}`
+        );
+        // console.log(response);
+        // if (response.data.token) {
+        //   AsyncStorage.setItem("token", JSON.stringify(response.data.token));
+        //   AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
+        //   setIsLoggedIn(true);
+        // }
       })
       .catch((error) => {
         Alert.alert(error.response.data.message[0]);
-
         setIsLoading(false);
       });
   };
