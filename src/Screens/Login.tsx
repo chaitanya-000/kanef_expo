@@ -16,15 +16,12 @@ import {
   ScreenName,
 } from "../styledComponents/Register,Login";
 import { height, width } from "../helperFunctions";
-import EmailAddress from "../organisms/EmailAddress";
-import Password from "../organisms/Password";
 import { responsiveScreenFontSize } from "react-native-responsive-dimensions";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from "../store";
 import EmailAddressLogin from "../organisms/EmailAddressLogin";
 import PasswordLogin from "../organisms/PasswordLogin";
 import GoogleButton from "../molecules/GoogleButton";
-import GoogleAndAppleButton from "../organisms/GoogleAndAppleButton";
 
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
@@ -114,7 +111,7 @@ const Login = ({ navigation }: any) => {
                       fontSize: 20,
                     }}
                   >
-                    Sign Up
+                    Login
                   </Text>
                 </SolidGreenButton>
                 <TouchableOpacity
