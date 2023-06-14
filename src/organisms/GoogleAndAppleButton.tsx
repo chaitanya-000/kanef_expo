@@ -1,7 +1,5 @@
 import { View, Text, SafeAreaView, StyleSheet, Platform } from "react-native";
 import GoogleButton from "../molecules/GoogleButton";
-import AppleButton from "../molecules/AppleButton";
-// import AppleButton from "../molecules/AppleButton";
 
 export default function GoogleAndAppleButton({ navigation }: any) {
   return (
@@ -9,7 +7,6 @@ export default function GoogleAndAppleButton({ navigation }: any) {
       {Platform.OS === "ios" ? (
         <>
           <GoogleButton navigation={navigation} />
-          <AppleButton />
         </>
       ) : (
         <GoogleButton navigation={navigation} />
