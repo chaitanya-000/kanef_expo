@@ -54,7 +54,7 @@ const SeperateInvoice = ({ route, navigation }: any) => {
           source={{
             uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
           }}
-          resizeMode="cover"
+          resizeMode="contain"
         />
       </ImageZoom>
 
