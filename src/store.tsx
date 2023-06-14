@@ -36,10 +36,9 @@ export const AuthProvider = ({ children }: any) => {
       .then((response) => {
         setIsLoading(false);
         if (response.data.token) {
-          alert(` if block of handleLogin -${response.data.token} `);
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
           AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
-          // setIsLoggedIn(true);
+          setIsLoggedIn(true);
         }
       })
       .catch((error) => {
