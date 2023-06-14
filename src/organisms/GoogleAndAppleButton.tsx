@@ -16,14 +16,14 @@ export default function GoogleAndAppleButton({ navigation }: any) {
 }
 const styles = StyleSheet.create({
   container: {
-    // borderWidth: 1,
     // borderColor: "blue",
-    height: "17%",
+    height: "8%",
     width: "90%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "flex-start",
+    // borderWidth: 1,
     // marginTop: "2%",
   },
 });

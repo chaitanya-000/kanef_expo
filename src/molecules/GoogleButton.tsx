@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 2,
     width: "42%",
-    height: Platform.OS === "ios" ? "37%" : "36.4%",
+    height: Platform.OS === "ios" ? "77%" : "36.4%",
     backgroundColor: "#EE3A43",
     display: "flex",
     flexDirection: "row",

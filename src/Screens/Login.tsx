@@ -126,8 +126,8 @@ const Login = ({ navigation }: any) => {
                   style={{
                     alignSelf: "center",
                     // borderRadius: 1,
-                    height: "35%",
-                    width: "86%",
+                    height: "20%",
+                    width: "100%",
                     alignItems: "center",
                     // marginLeft: "48%",
                     justifyContent: "center",
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: "center",
-    marginTop: "10%",
+    marginTop: "4%",
     // borderWidth: 1,
   },
   already_have_an_account: {
@@ -185,10 +185,10 @@ const styles = StyleSheet.create({
   forgetPassword: {
     width: "100%",
     height: "10%",
-    // backgroundColor: "red",
-    marginTop: "5%",
+    marginTop: "3%",
     alignItems: "center",
     justifyContent: "center",
+    // backgroundColor: "red",
   },
   forgetPasswordText: {
     fontSize: 20,
