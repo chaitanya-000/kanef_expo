@@ -79,12 +79,12 @@ const TabsNavigator = () => {
             tabBarIcon: ({ focused, color, size }) => (
               <Image
                 style={{
-                  width: responsiveHeight(3),
-                  height: responsiveHeight(3.5),
+                  width: responsiveHeight(4.7),
+                  height: responsiveHeight(3.7),
                 }}
                 source={
                   focused
-                    ? require("../../assets/images/CameraLogo.png")
+                    ? require("../../assets/images/CameraLogoFocused.png")
                     : require("../../assets/images/CameraLogo.png")
                 }
               />
