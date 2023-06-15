@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "ie.kenafltd.kenaf",
-      "buildNumber": "20",
+      "buildNumber": "21",
       "supportedDevices": ["iphone"],
       "infoPlist": {
         "NSCameraUsageDescription": "Kenaf would like to access your camera to scan QR codes at the store and capture the receipt for your purchase. This will allow you to easily keep track of your purchases",
