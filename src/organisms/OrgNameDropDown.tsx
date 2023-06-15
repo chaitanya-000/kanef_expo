@@ -16,7 +16,7 @@ import Spinner from "react-native-loading-spinner-overlay/lib";
 import { Dropdown } from "react-native-element-dropdown";
 import { AuthContext } from "../store";
 
-const OrgNameDropDown = ({ value, setValue, data }: any) => {
+const OrgNameDropDown = ({ value, setValue, data, image }: any) => {
   return (
     data && (
       <KeyboardAvoidingView behavior="height">
@@ -27,11 +27,14 @@ const OrgNameDropDown = ({ value, setValue, data }: any) => {
           searchPlaceholder="Enter store name"
           placeholder="Select Store"
           data={data}
-          style={
+          style={[
             Platform.OS === "android"
               ? styles.dropDownAndroid
-              : styles.dropDownIOS
-          }
+              : styles.dropDownIOS,
+            {
+              borderColor: image ? "green" : "#e9f2eb",
+            },
+          ]}
           labelField="mainOrName"
           valueField="mainOrId"
           containerStyle={styles.dropDownContainer}
@@ -54,7 +57,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: responsiveScreenHeight(6),
     paddingHorizontal: responsiveScreenWidth(2),
-    borderColor: "#e9f2eb",
     borderWidth: 3,
     marginRight: "8%",
   },
@@ -63,9 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: responsiveScreenHeight(6),
     marginRight: "6%",
-
     paddingHorizontal: responsiveScreenWidth(2),
-    borderColor: "#e9f2eb",
     borderWidth: 3,
   },
 
