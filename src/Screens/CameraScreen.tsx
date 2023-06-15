@@ -51,31 +51,6 @@ export default function CameraScreen({ navigation }: any) {
     })();
   };
 
-  //launch the camera. And then set the image to the clicked image
-  const takePhoto = async () => {
-    const { assets } = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: Platform.OS === "android" ? true : false,
-      aspect: [9, 16],
-
-      quality: 0.3,
-    });
-    if (assets[0].uri) {
-      try {
-        const resizedImage = await ImageManipulator.manipulateAsync(
-          assets[0].uri,
-          [{ resize: { width: 700, height: 1600 } }],
-          { compress: 0.8 }
-        );
-        setImage(resizedImage.uri);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      console.log("error in selecting the image");
-    }
-  };
-
   //getting the uid of the logged in user for post request
   const getData = async () => {
     try {
@@ -321,17 +296,12 @@ export default function CameraScreen({ navigation }: any) {
               style={styles.uploadButton}
               onPress={selectImageFromGallery}
             >
-              <Body2>Upload</Body2>
+              <Body2>Upload from Camera Roll</Body2>
               {image ? (
                 <AntDesign name="checkcircleo" size={24} color="black" />
               ) : (
                 <Entypo name="upload" size={25} color="black" />
               )}
-            </TouchableOpacity>
-            <Body1>OR</Body1>
-            <TouchableOpacity style={styles.uploadButton} onPress={takePhoto}>
-              <Body2>Camera</Body2>
-              <Entypo name="camera" size={25} color="black" />
             </TouchableOpacity>
           </View>
           <View
@@ -340,11 +310,14 @@ export default function CameraScreen({ navigation }: any) {
               flexDirection: "row",
               alignItems: "center",
               marginTop: "10%",
-              // justifyContent: "space-around",
-              // borderWidth: 1,
             }}
           >
-            <OrgNameDropDown value={value} setValue={setValue} data={data} />
+            <OrgNameDropDown
+              value={value}
+              setValue={setValue}
+              data={data}
+              image={image}
+            />
             <Body1>OR</Body1>
 
             <TouchableOpacity
@@ -407,13 +380,15 @@ const styles = StyleSheet.create({
     borderColor: "gray",
   },
   uploadButton: {
-    width: responsiveScreenWidth(35),
-    height: responsiveScreenHeight(6),
+    width: responsiveScreenWidth(64),
+    height: responsiveScreenHeight(7),
     backgroundColor: "#e9f2eb",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
+    // justifyContent: "space-around",
+    justifyContent: "space-evenly",
+    // justifyContent: "space-between",
     borderRadius: 15,
   },
   optionsContainer: {
