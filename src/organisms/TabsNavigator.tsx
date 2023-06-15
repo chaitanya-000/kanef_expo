@@ -79,8 +79,8 @@ const TabsNavigator = () => {
             tabBarIcon: ({ focused, color, size }) => (
               <Image
                 style={{
-                  width: responsiveHeight(4.7),
-                  height: responsiveHeight(3.7),
+                  width: responsiveHeight(3.7),
+                  height: responsiveHeight(3.1),
                 }}
                 source={
                   focused
