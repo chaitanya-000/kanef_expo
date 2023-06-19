@@ -12,18 +12,16 @@ import axios from "axios";
 import { BASE_URL } from "../helperFunctions";
 import { AuthContext } from "../store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ANDROID_CLIENT_ID, EXPO_CLIENT_ID, IOS_CLIENT_ID } from "@env";
 
 export default function GoogleButton({ navigation }: any) {
   const [accessToken, setAccessToken] = useState<string | any>(null);
   const { setIsLoggedIn } = useContext(AuthContext);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId:
-      "1026449685475-7mhb7p5j90d1jukj87jp7pdqakr04m29.apps.googleusercontent.com",
-    iosClientId:
-      "1026449685475-0flih1m3bcqemittmllq4ocjbko438iq.apps.googleusercontent.com",
-    expoClientId:
-      "1026449685475-mnqieo55i9db3s60m6h0e5h5c7773jhc.apps.googleusercontent.com",
+    androidClientId: ANDROID_CLIENT_ID,
+    iosClientId: IOS_CLIENT_ID,
+    expoClientId: EXPO_CLIENT_ID,
   });
 
   const handleRegisterWithGoogle = (
@@ -40,7 +38,6 @@ export default function GoogleButton({ navigation }: any) {
         google_id: googleID,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.token) {
           AsyncStorage.setItem("token", JSON.stringify(response.data.token));
           AsyncStorage.setItem("uId", JSON.stringify(response.data.user.uId));
