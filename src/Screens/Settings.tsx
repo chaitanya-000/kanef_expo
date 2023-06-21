@@ -146,8 +146,8 @@ const styles = StyleSheet.create({
     borderRadius: Platform.OS === "ios" && Platform.isPad ? 800 : 80,
   },
   WhiteImageAndOptionsContainer: {
-    borderColor: "green",
     borderWidth: 2.2,
+    borderColor: "white",
     width: "100%",
     height: "78%",
     alignItems: "center",
