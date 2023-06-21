@@ -151,22 +151,43 @@ export default function CameraScreen({ navigation }: any) {
   const selectImageFromGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      quality: 0.3,
+      quality: 1,
       allowsEditing: Platform.OS === "android" ? true : false,
     });
     if (!result.canceled) {
+      console.log(result);
       try {
+        const { width, height } = result.assets[0];
+
+        // Calculate the desired width and height while maintaining the aspect ratio
+        let resizedWidth = width;
+        let resizedHeight = height;
+
+        if (width > height) {
+          // Landscape image
+          if (width > 200) {
+            resizedWidth = 200;
+            resizedHeight = Math.floor((200 / width) * height);
+          }
+        } else {
+          // Portrait or square image
+          if (height > 600) {
+            resizedHeight = 600;
+            resizedWidth = Math.floor((600 / height) * width);
+          }
+        }
+
         const resizedImage = await ImageManipulator.manipulateAsync(
           result.assets[0].uri,
-          [{ resize: { width: 700, height: 1600 } }],
-          { compress: 0.8 }
+          [{ resize: { width: resizedWidth, height: resizedHeight } }],
+          { compress: 1 }
         );
         setImage(resizedImage.uri);
       } catch (error) {
         console.log(error);
       }
     } else {
-      console.log("error in selecting the image");
+      console.log("Error in selecting the image");
     }
   };
 
@@ -192,6 +213,7 @@ export default function CameraScreen({ navigation }: any) {
         })
           .then((response) => response.json())
           .then((data) => {
+            console.log(data);
             setValue("");
             setImage(null);
             setLoading(false);

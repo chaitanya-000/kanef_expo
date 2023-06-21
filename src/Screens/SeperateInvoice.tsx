@@ -1,44 +1,19 @@
 import {
   Image,
-  Pressable,
   SafeAreaView,
   TouchableOpacity,
   View,
-  Modal,
   Dimensions,
 } from "react-native";
 import React, { useState } from "react";
-import Spinner from "react-native-loading-spinner-overlay/lib";
 import { Ionicons } from "@expo/vector-icons";
-import ImageViewer from "react-native-image-zoom-viewer";
 import ImageZoom from "react-native-image-pan-zoom";
-import { height } from "../helperFunctions";
 
 const SeperateInvoice = ({ route, navigation }: any) => {
-  const [loading, setLoading] = useState(false);
   const [showOptions, setShowOptions] = useState(true);
   const [lastTap, setLastTap] = useState(0);
   const [scale, setScale] = useState(1);
 
-  const handleDoubleTap = () => {
-    const now = Date.now();
-    if (lastTap && now - lastTap < 300) {
-      const newScale = scale === 1 ? 2.1 : 1;
-      setScale(newScale);
-      setShowOptions(false);
-    } else {
-      setShowOptions(!showOptions);
-      setLastTap(now);
-    }
-  };
-  const width = "140%";
-  console.log("qnjkdqw");
-
-  const images = [
-    {
-      url: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
-    },
-  ];
   return (
     <SafeAreaView style={{ backgroundColor: "black" }}>
       <ImageZoom
@@ -55,6 +30,7 @@ const SeperateInvoice = ({ route, navigation }: any) => {
             uri: `https://kenaf.ie/OrgInvoice/${route.params.InvoiceLink}`,
           }}
           resizeMode="contain"
+          resizeMethod="scale"
         />
       </ImageZoom>
 
