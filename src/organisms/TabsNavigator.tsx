@@ -20,8 +20,14 @@ const TabsNavigator = () => {
             paddingHorizontal: 17,
             paddingBottom: 10,
             height: responsiveHeight(11),
-            borderTopLeftRadius: 25,
-            borderTopRightRadius: 25,
+            shadowColor: "grey",
+            shadowOffset: {
+              width: 0,
+              height: 6,
+            },
+            shadowOpacity: 0.31,
+            shadowRadius: 6.65,
+            elevation: 9,
           },
           tabBarLabelStyle: {
             fontSize:
